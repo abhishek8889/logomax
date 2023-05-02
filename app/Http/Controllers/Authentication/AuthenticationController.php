@@ -11,7 +11,12 @@ use Illuminate\Http\Request;
 class AuthenticationController extends Controller
 {
     //
-    public function index(Request $request){
+    public function login(){
+
+        return view('authentication.admin_login');
+    }
+    public function loginprocess(Request $request){
+        // dd($request->all());
         $validate = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -19,27 +24,29 @@ class AuthenticationController extends Controller
         
         $data = array(
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         );
 
         if (Auth::attempt($data)){
-            if(Auth::user()->role_id == 1){
-                return redirect('/dashboard')->with('success', 'Welcome to home page');
-            }elseif(Auth::user()->role_id == 2){
-                return redirect('/dashboard')->with('success', 'Welcome to vendor Dashboard');
-            }elseif(Auth::user()->role_id == 3){
-                return redirect('/dashboard')->with('success', 'Welcome to admin Dashboard.');
-            }else{ 
-                return redirect()->back()->with('error', 'Failed to login.');
+            switch (Auth::user()->role_id) {
+                case 1:
+                    return redirect('/h')->with('success', 'Welcome to home page');
+                case 2:
+                    return redirect('/h')->with('success', 'Welcome to vendor Dashboard');
+                case 3:
+                    return redirect('/admin-dashboard')->with('success', 'Welcome '.Auth::user()->name.' to Admin Dashboard.');
+                default:
+                    abort(401, 'Invalid user');
             }
             
         } else {
-            return redirect()->back()->with('error', 'Failed to login.');
+            return redirect()->back()->with('error', 'Invalid email or password');
         }
     }
 
     public function logout(){
         Auth::logout();
-        return redirect('/')->with('success',"You have logged out succesfully");
+        return redirect('/login')->with('success',"You have logged out succesfully");
     }
+
 }

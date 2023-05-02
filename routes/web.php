@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-use App\Http\Controllers\Authentication\AuthenticateController;
-=======
-use App\Http\Controllers\Admin\DashboardController;
->>>>>>> 33ea5a377ed1cc30c8f7508ab107a3a3e65ca808
+use App\Http\Controllers\Authentication\AuthenticationController;
+use App\Http\Controllers\Admin\AdminDashController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,24 +14,21 @@ use App\Http\Controllers\Admin\DashboardController;
 |
 */
 
-<<<<<<< HEAD
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return  'Welcome to your application';
 });
 
 /** Authentocations */
-Route::get('/login', [AuthenticationController::class,'login']);
+Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
-Route::group(['middleware'=>['auth','Admin']],function(){
 
     /** All Admin dashbord data */
+    Route::group(['middleware'=>['auth','Admin']],function(){
+Route::get('/admin-dashboard',[AdminDashController::class,'index']);
+    });
+/** Log-out Route */
+Route::get('/logout', [AuthenticationController::class, 'logout']);
 
- });
-=======
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-Route::get('/admin-dashboard',[DashboardController::class,'index'])->name('/admin-dashboard');
->>>>>>> 33ea5a377ed1cc30c8f7508ab107a3a3e65ca808

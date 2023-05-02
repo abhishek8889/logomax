@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Auth;
 class AdminAuthenticated
 {
     /**
@@ -16,7 +16,7 @@ class AdminAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::user()){
-            if(Auth::user()->role == 3){
+            if(Auth::user()->role_id == 3){
                 return $next($request);
             }else{
                 return abort(404);
@@ -24,5 +24,6 @@ class AdminAuthenticated
         }else{
             return abort(404);
         }
+        return abort(404);
     }
 }
