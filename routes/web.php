@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\Authentication\AuthenticateController;
+=======
+use App\Http\Controllers\Admin\DashboardController;
+>>>>>>> 33ea5a377ed1cc30c8f7508ab107a3a3e65ca808
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,7 @@ use App\Http\Controllers\Authentication\AuthenticateController;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,3 +31,10 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     /** All Admin dashbord data */
 
  });
+=======
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/admin-dashboard',[DashboardController::class,'index'])->name('/admin-dashboard');
+>>>>>>> 33ea5a377ed1cc30c8f7508ab107a3a3e65ca808
