@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Authentication\AuthenticateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/** Authentocations */
+Route::get('/login', [AuthenticationController::class,'login']);
+Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
+
+Route::group(['middleware'=>['auth','Admin']],function(){
+
+    /** All Admin dashbord data */
+
+ });
