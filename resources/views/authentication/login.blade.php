@@ -10,10 +10,13 @@
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <!-- Page Title  -->
-    <title>Admin-Login | Logomax</title>
+    <title>Login | Logomax</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
+<!-- Recaptcha script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body class="nk-body bg-white npc-general pg-auth">
     <div class="nk-app-root">
@@ -61,6 +64,7 @@
                                             <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
                                         <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
@@ -68,6 +72,7 @@
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif
                                     </div>  
+                                
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                                     </div>

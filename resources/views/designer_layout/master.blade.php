@@ -7,21 +7,13 @@
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
-    <title>Admin Dashbaord</title>
-    <!-- add coustam css file here -->
-    <link rel="stylesheet" type="text/css" href="{{asset('css/coustam.css')}}" >
+    <title>Designer Dashbaord</title>
     <!-- StyleSheets  -->
-    
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
-<div class="spinner-container">
-  <div class="spinner"></div>
-</div>
 <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
@@ -45,7 +37,7 @@
                             <ul class="nk-menu">
                                 <!-- Dashboard -->
                                 <li class="nk-menu-heading">
-                                    <h6 class="overline-title text-primary-alt">Dashboard</h6>
+                                    <h6 class="overline-title text-primary-alt">Designer-Dashboard</h6>
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
@@ -68,9 +60,20 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/users-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
+                                            <a href="html/user-list-regular.html" class="nk-menu-link"><span class="nk-menu-text">User List - Regular</span></a>
                                         </li>
-
+                                        <li class="nk-menu-item">
+                                            <a href="html/user-list-compact.html" class="nk-menu-link"><span class="nk-menu-text">User List - Compact</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text">User Details - Regular</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="html/user-profile-regular.html" class="nk-menu-link"><span class="nk-menu-text">User Profile - Regular</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="html/user-card.html" class="nk-menu-link"><span class="nk-menu-text">User Contact - Card</span></a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -230,9 +233,7 @@
                     </div>
                 </div>
                 <!-- content @start -->
-                <div class="nk-content ">
                 @yield('content')
-                </div>
                 <!-- content @end -->
                 <!-- footer @s -->
                 <div class="nk-footer">

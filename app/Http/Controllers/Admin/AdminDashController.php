@@ -9,6 +9,6 @@ class AdminDashController extends Controller
 {
     //
     public function index(Request $request){
-        return view('admin_layout.master');
+        return view('admin.dashboard.index');
     }
 }

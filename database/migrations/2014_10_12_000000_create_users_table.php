@@ -16,7 +16,8 @@ return new class extends Migration
             $table->integer('role_id')->length(11);
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified')->nullable();
+            $table->integer('email_verified')->default(0);
+            $table->integer('is_approved')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
