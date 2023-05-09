@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 /** Authentocations */
-Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+// Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 
 Route::get('/admin-login', function () {
     return view('authentication.admin_login');
