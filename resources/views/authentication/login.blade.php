@@ -77,6 +77,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                                     </div>
+                                    <h6>not an account? please <a href="{{ url('register') }}">register.</a></h6>
                                 </form>
                                 </div>
                             </div>
