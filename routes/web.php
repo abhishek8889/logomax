@@ -18,25 +18,14 @@ use App\Http\Controllers\Front\FrontController;
 |
 */
 
-// Route::get('/', function () {
-//     // return view('welcome');
-//     return  'Welcome to your application';
-// });
-
-////front rotues
-
-Route::get('/',[FrontController::class,'index']);
-Route::get('/about-us',[FrontController::class,'aboutus']);
-Route::get('/review',[FrontController::class,'review']);
-Route::get('/blog',[FrontController::class,'blog']);
+Route::get('/',[HomeController::class,'index'])->name('/');
+Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
+Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
+Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
+Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 
 
-
-
-
-
-
-/** Authentocations */
+/** Authentications */
 // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 
 Route::get('/admin-login', function () {
