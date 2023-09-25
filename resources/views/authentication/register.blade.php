@@ -30,7 +30,7 @@
                                 <img class="logo-light logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
                                 <img class="logo-dark logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                             </a> -->
-                            <h3>LOGOMAX</h3>
+                            <h3> <a href="{{ url('/') }}">LOGOMAX</a> </h3>
                         </div>
 
                         <div class="card card-bordered">

@@ -12,7 +12,6 @@ use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
 use App\Http\Controllers\User\Blog\BlogController;
 
 use App\Http\Controllers\Admin\Categories\CategoriesController;
-use App\Http\Controllers\Front\FrontController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,25 +28,9 @@ Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us')
 Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
 Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
-// Route::get('/', function () {
-//     // return view('welcome');
-//     return  'Welcome to your application';
-// });
-
-////front rotues
-
-// Route::get('/',[FrontController::class,'index']);
-// Route::get('/about-us',[FrontController::class,'aboutus']);
-// Route::get('/review',[FrontController::class,'review']);
-// Route::get('/blog',[FrontController::class,'blog']);
 
 
-
-
-
-
-
-/** Authentocations */
+/** Authentications */
 // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 
 Route::get('/admin-login', function () {
