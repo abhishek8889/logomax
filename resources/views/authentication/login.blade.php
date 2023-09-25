@@ -16,7 +16,8 @@
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
 <!-- Recaptcha script -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+ 
+    
 </head>
 <body class="nk-body bg-white npc-general pg-auth">
     <div class="nk-app-root">
@@ -68,7 +69,7 @@
                                     
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                        <div class="g-recaptcha" data-sitekey="6LeqVXQnAAAAAMUA_Z1BtHq6L9cm59UKTxL5-q6h"></div>
+                                        <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
                                         @if ($errors->has('g-recaptcha-response'))
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif
