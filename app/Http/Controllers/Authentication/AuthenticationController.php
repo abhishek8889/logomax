@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
         // dd($request->all());
         
             $validate = $request->validate([
-                'g-recaptcha-response' => 'required',
+                // 'g-recaptcha-response' => 'required',
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
