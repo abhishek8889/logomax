@@ -112,7 +112,6 @@
                                                         <span class="language-name">English</span>
                                                     </a>
                                                 </li>
-                                                
                                             </ul>
                                         </div>
                                     </li><!-- .dropdown -->

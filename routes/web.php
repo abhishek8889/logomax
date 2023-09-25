@@ -5,6 +5,12 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
+
+// ::::::::::::: User Route ::::::::::::::
+use App\Http\Controllers\User\Home\HomeController;
+use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
+use App\Http\Controllers\User\Blog\BlogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +22,13 @@ use App\Http\Controllers\Admin\Users\UsersController;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return  'Welcome to your application';
-});
+Route::get('/',[HomeController::class,'index'])->name('/');
+Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
+Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
+Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
+Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
+
+
 
 /** Authentocations */
 // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
