@@ -29,9 +29,10 @@
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-4 text-center">
                             <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
+                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('front/img/custom-logo.png') }}" srcset="{{ asset('front/img/custom-logo.png') }}" alt="logo">
+                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('front/img/custom-logo.png') }}" srcset="{{ asset('front/img/custom-logo.png') }}" alt="logo-dark">
                             </a>
+                            <!-- <h3>LOGOMAX</h3> -->
                         </div>
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-lg">
@@ -67,15 +68,17 @@
                                     
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                                        <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
                                         @if ($errors->has('g-recaptcha-response'))
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif
                                     </div>  
+                                    <!-- secret-key = 6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK -->
                                 
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                                     </div>
+                                    <h6>not an account? please <a href="{{ url('register') }}">register.</a></h6>
                                 </form>
                                 </div>
                             </div>

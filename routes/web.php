@@ -5,6 +5,8 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
+use App\Http\Controllers\Admin\Categories\CategoriesController;
+use App\Http\Controllers\Front\FrontController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,13 +18,15 @@ use App\Http\Controllers\Admin\Users\UsersController;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return  'Welcome to your application';
-});
+Route::get('/',[HomeController::class,'index'])->name('/');
+Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
+Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
+Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
+Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 
-/** Authentocations */
-Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+
+/** Authentications */
+// Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 
 Route::get('/admin-login', function () {
     return view('authentication.admin_login');
@@ -39,6 +43,15 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index']);
     Route::get('/admin-dashboard/users-list',[UsersController::class,'index']);
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
+    
+    //categories
+    Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index']);
+    Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories']);
+    Route::post('/admin-dashboard/categories-list/addproc',[CategoriesController::class,'addproc'])->name('add-category');
+    Route::get('/admin-dashboard/categories-list/delete/{id}',[CategoriesController::class,'delete']);
+    Route::get('/admin-dashboard/categories-get',[CategoriesController::class,'getCategories']);
+
+
 });
 
 
