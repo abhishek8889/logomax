@@ -5,6 +5,7 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
+use App\Http\Controllers\Admin\Categories\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,15 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index']);
     Route::get('/admin-dashboard/users-list',[UsersController::class,'index']);
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
+    
+    //categories
+    Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index']);
+    Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories']);
+    Route::post('/admin-dashboard/categories-list/addproc',[CategoriesController::class,'addproc'])->name('add-category');
+    Route::get('/admin-dashboard/categories-list/delete/{id}',[CategoriesController::class,'delete']);
+    Route::get('/admin-dashboard/categories-get',[CategoriesController::class,'getCategories']);
+
+
 });
 
 
