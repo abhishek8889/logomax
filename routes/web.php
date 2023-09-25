@@ -5,7 +5,11 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\Categories\CategoriesController;
+=======
+use App\Http\Controllers\Front\FrontController;
+>>>>>>> 8ecad0ab31a625e455b7120fda5093bca168e756
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +21,23 @@ use App\Http\Controllers\Admin\Categories\CategoriesController;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return  'Welcome to your application';
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return  'Welcome to your application';
+// });
+
+////front rotues
+
+Route::get('/',[FrontController::class,'index']);
+Route::get('/about-us',[FrontController::class,'aboutus']);
+Route::get('/review',[FrontController::class,'review']);
+Route::get('/blog',[FrontController::class,'blog']);
+
+
+
+
+
+
 
 /** Authentocations */
 // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
