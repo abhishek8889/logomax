@@ -91,7 +91,12 @@
             <div class="navbar navbar-expand-lg">
                 <div class="logo">
                     <a href="#">
+                    <?php if(isset($request)){
+                      if($request->url() != url('/')){?>
+                        <img src="{{ asset('/logomax-front-asset/img/custom-logo.png')}}" alt="" />
+                      <?php }else{?>
                         <img src="{{ asset('/logomax-front-asset/img/logo.png')}}" alt="" />
+                      <?php }} ?>
                     </a>
                 </div>
                 <div class="header-btn">
