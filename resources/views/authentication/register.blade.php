@@ -96,6 +96,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block">Sign Up</button>
                                     </div>
+                                    <h6>Already have an account <a href="{{ url('login') }}">Go to login</a></h6>
                                 </form>
                                 </div>
                             </div>
