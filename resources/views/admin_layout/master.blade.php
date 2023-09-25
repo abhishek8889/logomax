@@ -33,11 +33,11 @@
                         <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                     </div>
                     <div class="nk-sidebar-brand">
-                        <!-- <a href="html/index.html" class="logo-link nk-sidebar-logo">
-                            <img class="logo-light logo-img" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                            <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                        </a> -->
-                        <h4><a href="{{ url('admin-dashboard') }}">LOGOMAX</a></h4>
+                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                            <img class="logo-light logo-img" src="{{ asset('front/img/logo.png') }}" srcset="{{ asset('front/img/logo.png') }}" alt="logo">
+                            <img class="logo-dark logo-img" src="{{ asset('front/img/logo.png') }}" srcset="{{ asset('front/img/logo.png') }}" alt="logo-dark">
+                        </a>
+                        <!-- <h4><a href="{{ url('admin-dashboard') }}">LOGOMAX</a></h4> -->
                     </div>
                 </div><!-- .nk-sidebar-element -->
                 <div class="nk-sidebar-element nk-sidebar-body">

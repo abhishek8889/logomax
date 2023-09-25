@@ -26,11 +26,11 @@
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-4 text-center">
-                            <!-- <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                            </a> -->
-                            <h3>LOGOMAX</h3>
+                            <a href="/" class="logo-link">
+                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('front/img/custom-logo.png') }}" srcset="{{ asset('front/img/custom-logo.png') }}" alt="logo">
+                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('front/img/custom-logo.png') }}" srcset="{{ asset('front/img/custom-logo.png') }}" alt="logo-dark">
+                            </a>
+                            <!-- <h3>LOGOMAX</h3> -->
                         </div>
 
                         <div class="card card-bordered">
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                        <div class="g-recaptcha" data-sitekey="6LeqVXQnAAAAAMUA_Z1BtHq6L9cm59UKTxL5-q6h"></div>
+                                        <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
                                         @if ($errors->has('g-recaptcha-response'))
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif

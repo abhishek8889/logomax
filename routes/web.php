@@ -5,11 +5,8 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
-<<<<<<< HEAD
 use App\Http\Controllers\Admin\Categories\CategoriesController;
-=======
 use App\Http\Controllers\Front\FrontController;
->>>>>>> 8ecad0ab31a625e455b7120fda5093bca168e756
 /*
 |--------------------------------------------------------------------------
 | Web Routes
