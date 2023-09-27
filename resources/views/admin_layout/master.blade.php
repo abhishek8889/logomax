@@ -15,13 +15,15 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-
+  
+    @vite(['resources/css/app.css' , 'resources/js/app.js'])
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
 <div class="spinner-container">
   <div class="spinner"></div>
 </div>
+
 <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
@@ -39,6 +41,7 @@
                             <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                         </a> -->
                         <h4><a href="{{ url('admin-dashboard') }}">LOGOMAX</a></h4>
+                   
                     </div>
                 </div><!-- .nk-sidebar-element -->
                 <div class="nk-sidebar-element nk-sidebar-body">
@@ -129,12 +132,14 @@
                                             </ul>
                                         </div>
                                     </li><!-- .dropdown -->
+                                   
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                             <div class="user-toggle">
                                                 <div class="user-avatar sm">
                                                     <em class="icon ni ni-user-alt"></em>
                                                 </div>
+
                                                 <div class="user-info d-none d-md-block">
                                                     <div class="user-status">Administrator</div>
                                                     <div class="user-name dropdown-indicator">{{ Auth::user()->name ?? ''}}</div>

@@ -5,13 +5,14 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
-
+use App\Http\Controllers\TestController;
 // ::::::::::::: User Route ::::::::::::::
 use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
 use App\Http\Controllers\User\Blog\BlogController;
 
 use App\Http\Controllers\Admin\Categories\CategoriesController;
+use App\Events\RegisterNotificationEvent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,9 @@ use App\Http\Controllers\Admin\Categories\CategoriesController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('test-check',[TestController::class,'index']);
+
+
 
 Route::get('/',[HomeController::class,'index'])->name('/');
 Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
