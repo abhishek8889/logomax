@@ -25,6 +25,16 @@ class AuthenticationController extends Controller
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
+             $recaptcha = $_POST['g-recaptcha-response'];
+                    $secret_key = '6LfWkd0mAAAAAGzO6cmejBLvPy4WMBSZUP-CUoR2';
+                    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+                    $response_json = file_get_contents($url);
+                    $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
         
             $data = array(
                 'email' => $request->email,
@@ -63,12 +73,21 @@ class AuthenticationController extends Controller
     public function registerProcess(Request $request){
         $remember_token = Str::random(64);
         $validate = $request->validate([
-            'g-recaptcha-response' => 'required',
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            // 'g-recaptcha-response' => 'required',
+            // 'name' => 'required',
+            // 'email' => 'required|email|unique:users,email',
+            // 'password' => 'required|min:6|confirmed',
         ]);
-
+        $recaptcha = $_POST['g-recaptcha-response'];
+        $secret_key = '6LfWkd0mAAAAAGzO6cmejBLvPy4WMBSZUP-CUoR2';
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+        $response_json = file_get_contents($url);
+        $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
         $user = new User();
         $user->name = $validate['name'];
         $user->email = $validate['email'];

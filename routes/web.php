@@ -5,8 +5,13 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
+
+// ::::::::::::: User Route ::::::::::::::
+use App\Http\Controllers\User\Home\HomeController;
+use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
+use App\Http\Controllers\User\Blog\BlogController;
+
 use App\Http\Controllers\Admin\Categories\CategoriesController;
-use App\Http\Controllers\Front\FrontController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +46,8 @@ Route::get('/register-verify/{token}', [AuthenticationController::class,'registe
 /** All Admin dashbord data */
 Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index']);
-    Route::get('/admin-dashboard/users-list',[UsersController::class,'index']);
+    Route::get('/admin-dashboard/designers-list',[UsersController::class,'index']);
+    Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser']);
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
     
     //categories
