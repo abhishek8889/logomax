@@ -11,11 +11,11 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?khbkhsdfsdghgvgh')}}">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
-
-  
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
   <title>home page </title>
 </head>
 
@@ -86,6 +86,7 @@
             </nav>
         </div>
     </div>
+   
     <div class="main-header">
         <div class="container-fluid">
             <div class="navbar navbar-expand-lg">
@@ -99,10 +100,16 @@
                       <?php }} ?>
                     </a>
                 </div>
+                @if(Auth::user())
+                <div class="header-btn">
+                    <a class="login-btn" href="{{ url('logout') }}">Log Out</a>
+                </div>
+                @else
                 <div class="header-btn">
                     <a class="login-btn cta-btn" data-toggle="modal" data-target="#exampleModal" href="#">Log in</a>
-                    <a class="login-btn" href="#">Sign Up</a>
+                    <a class="login-btn" href="{{ url('register') }}">Sign Up</a>
                 </div>
+                @endif
             </div>
 
             <div class="popup_sec join-logo-sec">
@@ -121,16 +128,31 @@
                                     <div class="login-modal">
                                         <h2>Log in to Logomax</h2>
                                         <div class="modal_form">
-                                            <form>
+                                            <form action="{{ url('/login-process') }}" method="Post">
+                                            @csrf
                                                 <div class="form-group">
-                                                    <input type="Email" class="form-control" placeholder="Email" />
+                                                    <input type="Email" class="form-control" name="email" placeholder="Email" />
+                                                    @error('email')
+                                                     <span class="text text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group password">
-                                                    <input type="Password" class="form-control" placeholder="Password" />
+                                                    <input type="Password" class="form-control" name="password" placeholder="Password" />
+                                                    @error('password')
+                                                     <span class="text text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
+                                                    <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
+                                                    <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
+                                                    @if ($errors->has('g-recaptcha-response'))
+                                                        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                                    @endif
+                                                </div> 
+                                                <div class="form-group">
                                                     <div class="modal-btn">
-                                                        <a href="">Log In</a>
+                                                       <!-- <a href="">Log In</a>  -->
+                                                        <button type="submit">Log In </button>
                                                     </div>
                                                 </div>
                                                 <div class="register-txt">
@@ -229,6 +251,8 @@
     </div>
   </footer>
 
+
+
   <!-- ================= footer section start ====================== -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -241,5 +265,33 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+
+<!-- show login model on email or password error -->
+  @if ($errors->has('email') || $errors->has('password'))
+    <script>
+      console.log('error-accoured');
+      $('#exampleModal').modal('show');
+    </script>
+  @endif
+<!-- end open login model code : -->
+<!-- session error -->
+@if(Session::get('error'))
+<script>
+    iziToast.error({
+        message: "{{ Session::get('error') }}",
+        position: 'topRight' 
+    });
+    </script>
+@endif
+@if(Session::get('success'))
+<script>
+      iziToast.success({
+        message: "{{ Session::get('success') }}",
+        position: 'topRight' 
+    });
+</script>
+@endif
+<!-- session error end : -->
 </body>
 </html>

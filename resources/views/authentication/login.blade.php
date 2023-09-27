@@ -28,15 +28,16 @@
                 <!-- content @s -->
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
-                        <div class="brand-logo pb-4 text-center">
-                            <!-- <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                            </a> -->
-                            <h3> <a href="{{ url('/') }}">LOGOMAX</a> </h3>
-                        </div>
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-lg">
+                                <div class="brand-logo pb-4 text-center">
+                                        <a href="html/index.html" class="logo-link">
+                                            <img class="logo-light logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo">
+                                            <img class="logo-dark logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo-dark">
+                                        </a>
+                                        <!-- <h3> <a href="{{ url('/') }}">LOGOMAX</a> </h3> -->
+                                        <hr>
+                                </div>
                                 <div class="nk-block-head">
                                     <div class="nk-block-head-content">
                                         <h4 class="nk-block-title">Sign-In</h4>

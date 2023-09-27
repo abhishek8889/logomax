@@ -46,7 +46,8 @@ Route::get('/register-verify/{token}', [AuthenticationController::class,'registe
 /** All Admin dashbord data */
 Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index']);
-    Route::get('/admin-dashboard/users-list',[UsersController::class,'index']);
+    Route::get('/admin-dashboard/designers-list',[UsersController::class,'index']);
+    Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser']);
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
     
     //categories

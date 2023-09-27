@@ -25,7 +25,16 @@ class AuthenticationController extends Controller
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
-        
+            $recaptcha = $_POST['g-recaptcha-response'];
+                    $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
+                    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+                    $response_json = file_get_contents($url);
+                    $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
             $data = array(
                 'email' => $request->email,
                 'password' => $request->password,
@@ -68,6 +77,16 @@ class AuthenticationController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
+         $recaptcha = $_POST['g-recaptcha-response'];
+                    $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
+                    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+                    $response_json = file_get_contents($url);
+                    $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
 
         $user = new User();
         $user->name = $validate['name'];
@@ -77,12 +96,17 @@ class AuthenticationController extends Controller
         $user->remember_token = $remember_token;
         $user->save();
 
+            
+            if($user->role_id == 2){
         $mailData = [
             'token' => $remember_token,
             'email' => $validate['email'],
         ];
         $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
         return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
+    }else{
+        return redirect()->back()->with('success','Your account is successfully registered');
+    }
     }
     public function registerVerify(Request $request ,$token){
         if (!$token) {
