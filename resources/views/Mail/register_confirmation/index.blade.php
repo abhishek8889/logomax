@@ -26,8 +26,8 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td class="text-center pb-4">
-                                                                            <!-- <a href="#"><img class="email-logo" src="{{ asset('admin-theme/images/logo-dark2x.png') }}" alt="logo"></a> -->
-                                                                            <!-- <p class="email-title">Register Confirmation Mail</p> -->
+                                                                            <a href="#"><img class="email-logo" src="{{ asset('admin-theme/images/logo-dark2x.png') }}" alt="logo"></a>
+                                                                            <p class="email-title">Register Confirmation Mail</p>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>

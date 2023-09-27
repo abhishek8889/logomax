@@ -59,8 +59,13 @@
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                     <ul class="link-list-plain">
                                                                     <li>
-                                                                        <a href="#" class="is_approve" payment-status="1" data-id="{{$user->id ?? ''}}">
+                                                                        <a href="#" class="is_approve" payment-status="1" data-id="{{$user->id ?? ''}}" action="approve">
                                                                             Approve
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#" class="is_approve" payment-status="1" data-id="{{$user->id ?? ''}}" action="remove">
+                                                                            Remove
                                                                         </a>
                                                                     </li>
                                                                     </ul>
@@ -86,8 +91,9 @@
         $('.is_approve').on('click', function(e){
             toastr.clear();
             e.preventDefault();
-            console.log($(this).attr('payment-status'));
+            var action = $(this).attr('action');
             var payment_status = $(this).attr('payment-status');
+
             var user_id = $(this).attr('data-id');
             if(payment_status == 0){
                 toastr.clear();
@@ -99,6 +105,7 @@
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "user_id": user_id,
+                    "action" : action,
                 },
                 type: "POST",
                 beforeSend: function() {
