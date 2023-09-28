@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
         
         
             $validate = $request->validate([
-                // 'g-recaptcha-response' => 'required',
+                'g-recaptcha-response' => 'required',
                 'login_email' => 'required|email',
                 'login_password' => 'required',
             ]);
@@ -73,7 +73,7 @@ class AuthenticationController extends Controller
        
         $remember_token = Str::random(64);
         $validate = $request->validate([
-            // 'g-recaptcha-response' => 'required',
+            'g-recaptcha-response' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
@@ -101,6 +101,7 @@ class AuthenticationController extends Controller
         $user->address = $validate['address'];
         $user->role_id = 2;
         $user->remember_token = $remember_token;
+        $user->status = 1;
         $user->save();
 
             

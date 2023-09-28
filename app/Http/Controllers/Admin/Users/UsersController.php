@@ -14,6 +14,7 @@ class UsersController extends Controller
         $users = User::where([
             ['role_id', '=', 2],
             ['email_verified', '=', 1],
+            ['status', '=', 1],
         ])->orderBy('created_at','desc')->get();
         return view('admin.users.designers.index',compact('users'));
     }
@@ -41,6 +42,7 @@ class UsersController extends Controller
         $users = User::where([
             ['role_id', '=', 1],
             ['email_verified', '=', 1],
+            ['user', '=', 1],
         ])->get();
 
       return view('admin.users.simpleuser.index',compact('users'));

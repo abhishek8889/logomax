@@ -26,6 +26,7 @@ class GoogleController extends Controller
     }
     public function handleFacebookCallback(){
         $remember_token = Str::random(64);
+    try {
         $metadata = Socialite::driver('facebook')->user();
         $user = User::where('google_id',$metadata->id)->first();
         if($user){ 
@@ -96,6 +97,9 @@ class GoogleController extends Controller
             }
 
         }
+            } catch (\Throwable $th) {
+               return redirect('/')->with('error',$th->getMessage());
+            }
     }
     public function handleGoogleCallback(){
        try {
@@ -171,7 +175,7 @@ class GoogleController extends Controller
             }
         }
 } catch (\Throwable $th) {
-    print_r($th);
+    return redirect('/')->with('error',$th->getMessage());
 }
     }
 

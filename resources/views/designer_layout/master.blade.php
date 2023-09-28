@@ -11,6 +11,7 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -134,9 +135,9 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                                    <li><a href="html/user-profile-setting.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                                    <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                                    <!-- <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li> -->
+                                                    <li><a href="{{ url('/designer-dashboard/setting') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                                    <!-- <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li> -->
                                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                                 </ul>
                                             </div>
@@ -224,10 +225,12 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- content @start -->
                 @yield('content')
                 <!-- content @end -->
                 <!-- footer @s -->
+
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
@@ -240,7 +243,49 @@
             </div>
         </div>
     </div>
+    @if(auth()->user()->address == null || auth()->user()->experience == null || auth()->user()->country == null)
+    @if(isset($request))
+    @if($request->url() != url('designer-dashboard/setting'))
+<script>
+    $(document).ready(function(){
+    Swal.fire({
+        title: 'Your account is not complete for approval please complete your profile !',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#008000',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '{{ url('designer-dashboard/setting') }}';
+        } 
+        });
+    });
+</script>
+
+@endif
+@else
+<script>
+    $(document).ready(function(){
+    Swal.fire({
+        title: 'Your account is not complete for approval please complete your profile !',
+        icon: 'info',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#008000',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '{{ url('designer-dashboard/setting') }}';
+        } 
+        });
+    });
+</script>
+    @endif
+@endif
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
@@ -257,7 +302,7 @@
      NioApp.Toast('{{ Session::get("success") }}', 'info', {position: 'top-right'});
 </script>
 @endif
-   
+
 </body>
 
 </html>

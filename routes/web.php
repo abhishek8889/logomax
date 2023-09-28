@@ -5,6 +5,7 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Authentication\GoogleController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
+use App\Http\Controllers\Designer\AccountSetting;
 use App\Http\Controllers\Admin\Users\UsersController;
 
 // ::::::::::::: User Route ::::::::::::::
@@ -73,6 +74,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 /** All Designer dashbord data */
 Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index']);
+    Route::get('/designer-dashboard/setting',[AccountSetting::class,'index']);
+    Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
+
 });
 
 /** Log-out Route */

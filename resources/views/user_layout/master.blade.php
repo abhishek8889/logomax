@@ -147,7 +147,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                                    <div class="g-recaptcha" data-sitekey="6Ldq6lwoAAAAAB2Md6pUYreMuEe2DAme8Z7-DkZo" data-badge="inline" data-size="invisible" data-callback="setResponse"></div>
+                                                    <div class="g-recaptcha d-none" data-sitekey="6Ldq6lwoAAAAAB2Md6pUYreMuEe2DAme8Z7-DkZo" data-badge="inline" data-size="invisible" data-callback="setResponse"></div>
                                                     
                                                     @if ($errors->has('g-recaptcha-response'))
                                                         <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
