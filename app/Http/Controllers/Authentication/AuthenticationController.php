@@ -18,7 +18,7 @@ class AuthenticationController extends Controller
         return view('authentication.login');
     }
     public function loginprocess(Request $request){
-        // dd($request->all());
+        
         
             $validate = $request->validate([
                 // 'g-recaptcha-response' => 'required',
@@ -26,7 +26,7 @@ class AuthenticationController extends Controller
                 'login_password' => 'required',
             ]);
             $recaptcha = $_POST['g-recaptcha-response'];
-                    $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
+                    $secret_key = '6Ldq6lwoAAAAAJaSwLAIvGvCHlxS0RsaC9ayYzu9';
                     $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
                     $response_json = file_get_contents($url);
                     $response = (array)json_decode($response_json);
@@ -67,13 +67,13 @@ class AuthenticationController extends Controller
     }
     // View for register form
     public function register(Request $request){
-        return view('authentication.register');
+        return view('authentication.register',compact('request'));
     }
     public function registerProcess(Request $request){
        
         $remember_token = Str::random(64);
         $validate = $request->validate([
-            'g-recaptcha-response' => 'required',
+            // 'g-recaptcha-response' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
@@ -137,7 +137,7 @@ class AuthenticationController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect('/login')->with('success',"You have logged out succesfully");
+        return redirect('/')->with('success',"You have logged out succesfully");
     }
 
 }
