@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 use Mail;
 use App\Mail\RegisterConfirmationMail;
 use App\Rules\ReCaptcha;
+use App\Events\RegisterNotificationEvent;
+use App\Models\Notifications;
 
 class GoogleController extends Controller
 {

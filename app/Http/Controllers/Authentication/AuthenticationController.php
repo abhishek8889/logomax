@@ -11,6 +11,9 @@ use Illuminate\Support\Str;
 use Mail;
 use App\Mail\RegisterConfirmationMail;
 use App\Rules\ReCaptcha;
+use App\Events\RegisterNotificationEvent;
+use App\Models\Notifications;
+
 class AuthenticationController extends Controller
 {
     //
@@ -110,12 +113,14 @@ class AuthenticationController extends Controller
             'token' => $remember_token,
             'email' => $validate['email'],
         ];
+
         $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
         return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
     }else{
         return redirect()->back()->with('success','Your account is successfully registered');
     }
     }
+    
     public function registerVerify(Request $request ,$token){
         if (!$token) {
             return abort(404); 
@@ -130,6 +135,21 @@ class AuthenticationController extends Controller
         if (!$user->save()) {
             return abort(404);
         }
+         // Call an notification event to admin : 
+        $notifications = Notifications::create(array(
+            'type' => 'designer-registered',
+            'sender_id' => '0',
+            'reciever_id' => '0',
+            'designer_id' => $user->id,
+            'message' => 'New host is registered!'
+        )); 
+        $eventData = array(
+            'type' => 'designer-registered',
+            'designer_id' => $user->id,
+            'notification_id' => $notifications->id
+        );
+        
+        event(new RegisterNotificationEvent($eventData));
     
         return redirect('/login')->with('success', 'Your account has been verified please login');
     }

@@ -6,11 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use App\Events\RegisterNotificationEvent;
+use App\Models\Notifications;
 
 class AccountSetting extends Controller
 {
    public function index(Request $request){
+  
     $user = User::find(Auth::user()->id);
+      $eventData = array(
+        'type' => 'designer-registered',
+        'designer_id' => $user->id,
+        'notification_id' => 1
+    );
+    
+     event(new RegisterNotificationEvent($eventData));
+    
     return view('designer.setting.accountsetting',compact('request','user'));
    }
    public function update(Request $request){
