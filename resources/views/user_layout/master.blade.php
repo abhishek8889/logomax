@@ -106,6 +106,8 @@
                 </div>
                 @else
                 <div class="header-btn">
+                    <!-- <a class="login-btn cta-btn" data-toggle="modal" data-target="#exampleModal" href="#">Log in</a> -->
+                    <!-- <a class="login-btn" href="{{ url('register') }}">Sign Up</a> -->
                     <a class="login-btn cta-btn" data-toggle="modal" data-target="#exampleloginModal" href="#">Log in</a>
                     <a class="login-btn cta-register" data-toggle="modal" data-target="#exampleModal" href="#">Sign Up</a>
                 </div>
