@@ -33,12 +33,12 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => url('authorized/google/callback'),
+        'redirect' => 'https://sagmetic.site/2023/laravel/logomax/authorized/google/callback',
     ],
     'facebook' => [
         'client_id' => env('META_CLIENT_ID'),
         'client_secret' => env('META_CLIENT_SECRET'),
-        'redirect' => url('authorized/facebook/callback'),
+        'redirect' => 'https://sagmetic.site/2023/laravel/logomax/authorized/facebook/callback',
     ],
     
 ];
