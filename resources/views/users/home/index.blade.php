@@ -1,7 +1,7 @@
 @extends('user_layout.master')
 @section('content')
   <!-- ================= banner section start ====================== -->
-test asdhfkjasdkfahksdf 
+
   <section class="banner-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
     <div class="container-fluid">
       <div class="banner-content">
