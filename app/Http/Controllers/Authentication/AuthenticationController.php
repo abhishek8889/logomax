@@ -22,8 +22,8 @@ class AuthenticationController extends Controller
         
             $validate = $request->validate([
                 // 'g-recaptcha-response' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
+                'login_email' => 'required|email',
+                'login_password' => 'required',
             ]);
             $recaptcha = $_POST['g-recaptcha-response'];
                     $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
@@ -36,8 +36,8 @@ class AuthenticationController extends Controller
                 return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
             }
             $data = array(
-                'email' => $request->email,
-                'password' => $request->password,
+                'email' => $request->login_email,
+                'password' => $request->login_password,
             );
         try {
             if (Auth::attempt($data)) {
@@ -70,12 +70,16 @@ class AuthenticationController extends Controller
         return view('authentication.register');
     }
     public function registerProcess(Request $request){
+       
         $remember_token = Str::random(64);
         $validate = $request->validate([
             'g-recaptcha-response' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
+            'experience' => 'required',
+            'country' => 'required',
+            'address' => 'required',
         ]);
          $recaptcha = $_POST['g-recaptcha-response'];
                     $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
@@ -92,6 +96,9 @@ class AuthenticationController extends Controller
         $user->name = $validate['name'];
         $user->email = $validate['email'];
         $user->password = Hash::make($validate['password']);
+        $user->experience = $validate['experience'];
+        $user->country = $validate['country'];
+        $user->address = $validate['address'];
         $user->role_id = 2;
         $user->remember_token = $remember_token;
         $user->save();

@@ -53,12 +53,12 @@
 		                                    @enderror
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="email" name="email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                                            <input type="email" name="login_email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="password">Password</label>
+                                            <label class="form-label" for="login_password">Password</label>
                                             @error('password')
 				                                <span class="text text-danger">{{ $message }}</span>
 		                                    @enderror

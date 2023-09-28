@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthenticationController;
+use App\Http\Controllers\Authentication\GoogleController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
@@ -38,6 +39,14 @@ Route::get('/admin-login', function () {
 });
 Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
+
+
+//googlelogin
+Route::get('authorized/google',[GoogleController::class,'redirecttogoogle']);
+Route::get('authorized/google/callback',[GoogleController::class,'handleGoogleCallback']);
+
+Route::get('authorized/facebook',[GoogleController::class,'redirecttofacebook']);
+Route::get('authorized/facebook/callback',[GoogleController::class,'handleFacebookCallback']);
 
 Route::get('/register', [AuthenticationController::class,'register']);
 Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
