@@ -2,22 +2,19 @@
 <html lang="zxx" class="js">
 
 <head>
-    <base href="../../../">
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <meta name="description" content="">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <!-- Page Title  -->
-    <title>Login | Logomax</title>
+    <title>Register | Logomax</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
-<!-- Recaptcha script -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
- 
-    
+
 </head>
 <body class="nk-body bg-white npc-general pg-auth">
     <div class="nk-app-root">
@@ -28,37 +25,50 @@
                 <!-- content @s -->
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
+                     
+
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-lg">
-                                <div class="brand-logo pb-4 text-center">
-                                        <a href="html/index.html" class="logo-link">
-                                            <img class="logo-light logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo">
-                                            <img class="logo-dark logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo-dark">
-                                        </a>
-                                        <!-- <h3> <a href="{{ url('/') }}">LOGOMAX</a> </h3> -->
-                                        <hr>
-                                </div>
+                            <div class="brand-logo pb-4 text-center">
+                                <a href="html/index.html" class="logo-link">
+                                    <img class="logo-light logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo">
+                                    <img class="logo-dark logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo-dark">
+                                </a>
+                                <!-- <h3> <a href="{{ url('/') }}">LOGOMAX</a> </h3> -->
+                            </div>
+                            <hr>
                                 <div class="nk-block-head">
                                     <div class="nk-block-head-content">
-                                        <h4 class="nk-block-title">Sign-In</h4>
+                                        <h4 class="nk-block-title">Register your account</h4>
                                     </div>
                                 </div>
-                                <form action="{{ url('/login-process') }}" method="Post">
+                                <form action="{{ url('/register-process') }}" method="Post">
                                     @csrf
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="default-01">Email</label>
+                                            <label class="form-label" for="name">Name</label>
+                                            @error('name')
+				                                <span class="text text-danger">{{ $message }}</span>
+		                                    @enderror
+                                        </div>
+                                        <div class="form-control-wrap">
+                                            <input type="text" name="name" class="form-control form-control-lg" id="name" placeholder="Enter your name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-label-group">
+                                            <label class="form-label" for="email">Email</label>
                                             @error('email')
 				                                <span class="text text-danger">{{ $message }}</span>
 		                                    @enderror
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="email" name="login_email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                                            <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="Enter your email address">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="login_password">Password</label>
+                                            <label class="form-label" for="password">Password</label>
                                             @error('password')
 				                                <span class="text text-danger">{{ $message }}</span>
 		                                    @enderror
@@ -67,7 +77,17 @@
                                             <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
                                         </div>
                                     </div>
-                                    
+                                    <div class="form-group">
+                                        <div class="form-label-group">
+                                            <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                            @error('password_confirmation')
+				                                <span class="text text-danger">{{ $message }}</span>
+		                                    @enderror
+                                        </div>
+                                        <div class="form-control-wrap">
+                                            <input type="password" name="password_confirmation" class="form-control form-control-lg" id="password_confirmation" placeholder="Confirm your password">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
                                         <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
@@ -75,12 +95,10 @@
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif
                                     </div>  
-                                    <!-- secret-key = 6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK -->
-                                
                                     <div class="form-group">
-                                        <button class="btn btn-lg btn-primary btn-block">Login</button>
+                                        <button class="btn btn-lg btn-primary btn-block">Sign Up</button>
                                     </div>
-                                    <h6>not an account? please <a href="{{ url('register') }}">register.</a></h6>
+                                    <h6>Already have an account <a href="{{ url('login') }}">Go to login</a></h6>
                                 </form>
                                 </div>
                             </div>

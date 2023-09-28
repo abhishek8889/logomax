@@ -31,7 +31,7 @@
                                 <label for="parent-category">Parent Category</label>
                                 <div class="from-control-wrap">
                                     <select name="parent_category" class="form-control" id="parent-category">
-                                        <option value="">--SELECT--</option>
+                                        <option value="">--NONE--</option>
                                         @foreach($categories as $cat)
                                         <option value="{{ $cat->id ?? '' }}" @if($edit_category !== null) @if($edit_category->parent_category == $cat->id ) Selected @endif @endif> {{ $cat->name ?? '' }}</option>
                                         @endforeach

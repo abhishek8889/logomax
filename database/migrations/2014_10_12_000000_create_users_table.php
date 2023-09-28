@@ -19,6 +19,12 @@ return new class extends Migration
             $table->integer('email_verified')->default(0);
             $table->integer('is_approved')->default(0);
             $table->string('password');
+            $table->string('experience')->nullable();
+            $table->string('country')->nullable();
+            $table->string('address')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
+            $table->integer('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -49,8 +49,11 @@
                     </div>
                     
                     <div class="nk-sidebar-brand">
-                        <h4><a href="{{ url('admin-dashboard') }}" style="color:white;">LOGOMAX</a></h4>
-                        
+                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                            <img class="logo-light logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo">
+                            <img class="logo-dark logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo-dark">
+                        </a>
+                        <!-- <h4><a href="{{ url('admin-dashboard') }}">LOGOMAX</a></h4> -->
                     </div>
                 </div><!-- .nk-sidebar-element -->
                 <div class="nk-sidebar-element nk-sidebar-body">
@@ -68,10 +71,10 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -82,9 +85,11 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/users-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
+                                            <a href="{{url('/admin-dashboard/designers-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
                                         </li>
-
+                                        <li class="nk-menu-item">
+                                            <a href="{{url('/admin-dashboard/guests-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="nk-menu-item has-sub">
@@ -123,7 +128,7 @@
                             </div>
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
-                                    <li class="dropdown language-dropdown d-none d-sm-block me-n1">
+                                    <!-- <li class="dropdown language-dropdown d-none d-sm-block me-n1">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                                             <div class="quick-icon border border-light">
                                                 <img class="icon" src="{{ asset('admin-theme/images/flags/english-sq.png') }}" alt="">
@@ -140,7 +145,7 @@
                                                 
                                             </ul>
                                         </div>
-                                    </li><!-- .dropdown -->
+                                    </li> .dropdown -->
                                    
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
@@ -226,7 +231,7 @@
                                                 <a href="#">View All</a>
                                             </div> -->
                                         </div>
-                                    </li>
+                                    </li> 
                                 </ul>
                             </div>
                         </div>

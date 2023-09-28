@@ -11,6 +11,7 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -25,11 +26,11 @@
                         <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                     </div>
                     <div class="nk-sidebar-brand">
-                        <!-- <a href="html/index.html" class="logo-link nk-sidebar-logo">
-                            <img class="logo-light logo-img" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                            <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                        </a> -->
-                        <h4><a href="{{ url('designer-dashboard') }}">LOGOMAX</a></h4>
+                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                            <img class="logo-light logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo">
+                            <img class="logo-dark logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo-dark">
+                        </a>
+                        <!-- <h4><a href="{{ url('designer-dashboard') }}">LOGOMAX</a></h4> -->
                     </div>
                 </div><!-- .nk-sidebar-element -->
                 <div class="nk-sidebar-element nk-sidebar-body">
@@ -47,10 +48,10 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -82,15 +83,15 @@
                             <div class="nk-menu-trigger d-xl-none ms-n1">
                                 <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                             </div>
-                            <div class="nk-header-brand d-xl-none">
+                            <!-- <div class="nk-header-brand d-xl-none">
                                 <a href="html/index.html" class="logo-link">
                                     <img class="logo-light logo-img" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
                                     <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
-                                    <li class="dropdown language-dropdown d-none d-sm-block me-n1">
+                                    <!-- <li class="dropdown language-dropdown d-none d-sm-block me-n1">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                                             <div class="quick-icon border border-light">
                                                 <img class="icon" src="{{ asset('admin-theme/images/flags/english-sq.png') }}" alt="">
@@ -106,7 +107,8 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </li><!-- .dropdown -->
+                                    </li> -->
+                                    <!-- .dropdown -->
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                             <div class="user-toggle">
@@ -133,9 +135,9 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                                    <li><a href="html/user-profile-setting.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                                    <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                                    <!-- <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li> -->
+                                                    <li><a href="{{ url('/designer-dashboard/setting') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                                    <!-- <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li> -->
                                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                                 </ul>
                                             </div>
@@ -146,7 +148,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="dropdown notification-dropdown me-n1">
+                                    <!-- <li class="dropdown notification-dropdown me-n1">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                                             <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
                                         </a>
@@ -217,16 +219,18 @@
                                                 <a href="#">View All</a>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- content @start -->
                 @yield('content')
                 <!-- content @end -->
                 <!-- footer @s -->
+
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
@@ -239,7 +243,49 @@
             </div>
         </div>
     </div>
+    @if(auth()->user()->address == null || auth()->user()->experience == null || auth()->user()->country == null)
+    @if(isset($request))
+    @if($request->url() != url('designer-dashboard/setting'))
+<script>
+    $(document).ready(function(){
+    Swal.fire({
+        title: 'Your account is not complete for approval please complete your profile !',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#008000',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '{{ url('designer-dashboard/setting') }}';
+        } 
+        });
+    });
+</script>
+
+@endif
+@else
+<script>
+    $(document).ready(function(){
+    Swal.fire({
+        title: 'Your account is not complete for approval please complete your profile !',
+        icon: 'info',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#008000',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '{{ url('designer-dashboard/setting') }}';
+        } 
+        });
+    });
+</script>
+    @endif
+@endif
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
@@ -256,7 +302,7 @@
      NioApp.Toast('{{ Session::get("success") }}', 'info', {position: 'top-right'});
 </script>
 @endif
-   
+
 </body>
 
 </html>

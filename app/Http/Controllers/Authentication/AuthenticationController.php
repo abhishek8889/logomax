@@ -21,17 +21,26 @@ class AuthenticationController extends Controller
         return view('authentication.login');
     }
     public function loginprocess(Request $request){
-        // dd($request->all());
+        
         
             $validate = $request->validate([
-                // 'g-recaptcha-response' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
+                'g-recaptcha-response' => 'required',
+                'login_email' => 'required|email',
+                'login_password' => 'required',
             ]);
-        
+            $recaptcha = $_POST['g-recaptcha-response'];
+                    $secret_key = '6Ldq6lwoAAAAAJaSwLAIvGvCHlxS0RsaC9ayYzu9';
+                    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+                    $response_json = file_get_contents($url);
+                    $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
             $data = array(
-                'email' => $request->email,
-                'password' => $request->password,
+                'email' => $request->login_email,
+                'password' => $request->login_password,
             );
         try {
             if (Auth::attempt($data)) {
@@ -61,25 +70,45 @@ class AuthenticationController extends Controller
     }
     // View for register form
     public function register(Request $request){
-        return view('authentication.register');
+        return view('authentication.register',compact('request'));
     }
     public function registerProcess(Request $request){
+       
         $remember_token = Str::random(64);
         $validate = $request->validate([
             'g-recaptcha-response' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
+            'experience' => 'required',
+            'country' => 'required',
+            'address' => 'required',
         ]);
+         $recaptcha = $_POST['g-recaptcha-response'];
+                    $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
+                    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+                    $response_json = file_get_contents($url);
+                    $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
 
         $user = new User();
         $user->name = $validate['name'];
         $user->email = $validate['email'];
         $user->password = Hash::make($validate['password']);
+        $user->experience = $validate['experience'];
+        $user->country = $validate['country'];
+        $user->address = $validate['address'];
         $user->role_id = 2;
         $user->remember_token = $remember_token;
+        $user->status = 1;
         $user->save();
 
+            
+            if($user->role_id == 2){
         $mailData = [
             'token' => $remember_token,
             'email' => $validate['email'],
@@ -87,6 +116,9 @@ class AuthenticationController extends Controller
 
         $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
         return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
+    }else{
+        return redirect()->back()->with('success','Your account is successfully registered');
+    }
     }
     
     public function registerVerify(Request $request ,$token){
@@ -126,7 +158,7 @@ class AuthenticationController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect('/login')->with('success',"You have logged out succesfully");
+        return redirect('/')->with('success',"You have logged out succesfully");
     }
 
 }

@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthenticationController;
+use App\Http\Controllers\Authentication\GoogleController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
+use App\Http\Controllers\Designer\AccountSetting;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\TestController;
 // ::::::::::::: User Route ::::::::::::::
@@ -43,6 +45,14 @@ Route::get('/admin-login', function () {
 Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
+
+//googlelogin
+Route::get('authorized/google',[GoogleController::class,'redirecttogoogle']);
+Route::get('authorized/google/callback',[GoogleController::class,'handleGoogleCallback']);
+
+Route::get('authorized/facebook',[GoogleController::class,'redirecttofacebook']);
+Route::get('authorized/facebook/callback',[GoogleController::class,'handleFacebookCallback']);
+
 Route::get('/register', [AuthenticationController::class,'register']);
 Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
 Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
@@ -50,7 +60,8 @@ Route::get('/register-verify/{token}', [AuthenticationController::class,'registe
 /** All Admin dashbord data */
 Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index']);
-    Route::get('/admin-dashboard/users-list',[UsersController::class,'index']);
+    Route::get('/admin-dashboard/designers-list',[UsersController::class,'index']);
+    Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser']);
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
     Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
     //categories
@@ -67,6 +78,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 /** All Designer dashbord data */
 Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index']);
+    Route::get('/designer-dashboard/setting',[AccountSetting::class,'index']);
+    Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
+
 });
 
 /** Log-out Route */
