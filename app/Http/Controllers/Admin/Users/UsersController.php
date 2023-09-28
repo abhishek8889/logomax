@@ -42,7 +42,7 @@ class UsersController extends Controller
         $users = User::where([
             ['role_id', '=', 1],
             ['email_verified', '=', 1],
-            ['user', '=', 1],
+            ['status', '=', 1],
         ])->get();
 
       return view('admin.users.simpleuser.index',compact('users'));
