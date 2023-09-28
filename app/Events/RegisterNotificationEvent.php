@@ -40,10 +40,10 @@ class RegisterNotificationEvent implements ShouldBroadcast
     // }
     public function broadcastOn()
     {
-        return new Channel('chat');
+        return new Channel('register');
     }
     public function broadcastAs()
     {
-        return 'message';
+        return 'register-notification';
     }
 }

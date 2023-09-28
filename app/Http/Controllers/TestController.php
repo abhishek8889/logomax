@@ -10,8 +10,12 @@ class TestController extends Controller
 {
     public function index(){
        
-       
-        $eventData = 'hello';
-        broadcast(new RegisterNotificationEvent($eventData));
+        $eventData = array(
+            'type' => 'designer-registered',
+            'designer_id' => 1,
+            'notification_id' => 241
+        );
+        
+        event(new RegisterNotificationEvent($eventData));
     }
 }

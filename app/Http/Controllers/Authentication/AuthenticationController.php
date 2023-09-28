@@ -12,6 +12,8 @@ use Mail;
 use App\Mail\RegisterConfirmationMail;
 use App\Rules\ReCaptcha;
 use App\Events\RegisterNotificationEvent;
+use App\Models\Notifications;
+
 class AuthenticationController extends Controller
 {
     //
@@ -62,40 +64,29 @@ class AuthenticationController extends Controller
         return view('authentication.register');
     }
     public function registerProcess(Request $request){
+        $remember_token = Str::random(64);
+        $validate = $request->validate([
+            'g-recaptcha-response' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
 
-        
-        $eventData = 'hello';
-        event(new RegisterNotificationEvent($eventData));
+        $user = new User();
+        $user->name = $validate['name'];
+        $user->email = $validate['email'];
+        $user->password = Hash::make($validate['password']);
+        $user->role_id = 2;
+        $user->remember_token = $remember_token;
+        $user->save();
 
-        // $remember_token = Str::random(64);
-        // $validate = $request->validate([
-        //     'g-recaptcha-response' => 'required',
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users,email',
-        //     'password' => 'required|min:6|confirmed',
-        // ]);
+        $mailData = [
+            'token' => $remember_token,
+            'email' => $validate['email'],
+        ];
 
-        // $user = new User();
-        // $user->name = $validate['name'];
-        // $user->email = $validate['email'];
-        // $user->password = Hash::make($validate['password']);
-        // $user->role_id = 2;
-        // $user->remember_token = $remember_token;
-        // $user->save();
-
-        // $mailData = [
-        //     'token' => $remember_token,
-        //     'email' => $validate['email'],
-        // ];
-        // // Call an notification event to admin : 
-        // // $eventData = array(
-        // //     'type' => 'designer-registered',
-        // //     'designer_id' => $user->id
-        // // );
-        // // event(new RegisterNotificationEvent($eventData));
-
-        // $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
-        // return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
+        $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
+        return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
     }
     
     public function registerVerify(Request $request ,$token){
@@ -112,6 +103,21 @@ class AuthenticationController extends Controller
         if (!$user->save()) {
             return abort(404);
         }
+         // Call an notification event to admin : 
+        $notifications = Notifications::create(array(
+            'type' => 'designer-registered',
+            'sender_id' => '0',
+            'reciever_id' => '0',
+            'designer_id' => $user->id,
+            'message' => 'New host is registered!'
+        )); 
+        $eventData = array(
+            'type' => 'designer-registered',
+            'designer_id' => $user->id,
+            'notification_id' => $notifications->id
+        );
+        
+        event(new RegisterNotificationEvent($eventData));
     
         return redirect('/login')->with('success', 'Your account has been verified please login');
     }

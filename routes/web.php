@@ -52,7 +52,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index']);
     Route::get('/admin-dashboard/users-list',[UsersController::class,'index']);
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
-    
+    Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
     //categories
     Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index']);
     Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories']);

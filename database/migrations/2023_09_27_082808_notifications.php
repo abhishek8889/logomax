@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('notifications',function(Blueprint $table){
             $table->id();
             $table->integer('is_read')->default(0);
+            $table->string('type');
             $table->string('sender_id')->default(0);
-            $table->string('reciever_id');
+            $table->string('reciever_id')->default(0);
+            $table->string('designer_id');
             $table->string('message');
+            $table->timestamps();
         });
     }
     /**
