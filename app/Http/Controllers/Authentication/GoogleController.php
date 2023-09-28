@@ -24,10 +24,10 @@ class GoogleController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
     public function handleFacebookCallback(){
-        $metadata = Socialite::driver('google')->user();
-        echo '<pre>';
-        print($metadata);
-        echo '</pre>';
+        // $metadata = Socialite::driver('facebook')->user();
+        // echo '<pre>';
+        // print($metadata);
+        // echo '</pre>';
     }
     public function handleGoogleCallback(){
     //    try {
