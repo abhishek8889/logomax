@@ -64,7 +64,7 @@
 		                                    @enderror
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
+                                            <input type="password" name="login_password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
                                         </div>
                                     </div>
                                     

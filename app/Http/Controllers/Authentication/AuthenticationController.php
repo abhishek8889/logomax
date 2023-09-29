@@ -22,7 +22,6 @@ class AuthenticationController extends Controller
     }
     public function loginprocess(Request $request){
         
-        
             $validate = $request->validate([
                 'g-recaptcha-response' => 'required',
                 'login_email' => 'required|email',
