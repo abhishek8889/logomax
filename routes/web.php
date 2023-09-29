@@ -6,6 +6,7 @@ use App\Http\Controllers\Authentication\GoogleController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Designer\AccountSetting;
+use App\Http\Controllers\Designer\Logo\DesginerLogoController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\TestController;
 // ::::::::::::: User Route ::::::::::::::
@@ -14,6 +15,7 @@ use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
 use App\Http\Controllers\User\Blog\BlogController;
 
 use App\Http\Controllers\Admin\Categories\CategoriesController;
+use App\Http\Controllers\Admin\Tags\TagsController;
 use App\Events\RegisterNotificationEvent;
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +73,12 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/categories-list/delete/{id}',[CategoriesController::class,'delete']);
     Route::get('/admin-dashboard/categories-get',[CategoriesController::class,'getCategories']);
 
+    //admintags
+    Route::get('admin-dashboard/tags',[TagsController::class,'addtags']);
+    Route::post('admin-dashboard/addtags/submitprocc',[TagsController::class,'submitProc']);
+    Route::get('admin-dashboard/tags/delete/{id}',[TagsController::class,'delete']);
+
+
 
 });
 
@@ -80,6 +88,13 @@ Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index']);
     Route::get('/designer-dashboard/setting',[AccountSetting::class,'index']);
     Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
+
+    Route::get('designer-dashboard/mylogos',[DesginerLogoController::class,'index']);
+    Route::get('designer-dashboard/uploadlogo',[DesginerLogoController::class,'upload']);
+    Route::post('designer-dashboard/uploadprocc',[DesginerLogoController::class,'uploadProc']);
+
+    Route::post('designer-dashboard/addtag',[DesginerLogoController::class,'addtag']);
+    Route::post('designer-dashboard/deleteimage',[DesginerLogoController::class,'deleteimage']);
 
 });
 

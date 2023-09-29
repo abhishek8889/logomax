@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  
-     @vite(['resources/css/app.css' , 'resources/js/app.js'])
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+     <!-- vite(['resources/css/app.css' , 'resources/js/app.js']) -->
 </head>
 <style>
     .icon-active {
@@ -103,6 +103,18 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/categories-list/add-new') }}" class="nk-menu-link"><span class="nk-menu-text">Add Categories</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Tags</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/tags') }}" class="nk-menu-link"><span class="nk-menu-text">Tags list</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>

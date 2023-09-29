@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <title>Designer Dashbaord</title>
     <!-- StyleSheets  -->
@@ -44,14 +45,14 @@
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Projects</span>
+                                        <span class="nk-menu-text">Logos</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+                                            <a href="{{ url('designer-dashboard/mylogos') }}" class="nk-menu-link"><span class="nk-menu-text">My Logos</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                            <a href="{{ url('designer-dashboard/uploadlogo') }}" class="nk-menu-link"><span class="nk-menu-text">Upload Logo</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -302,6 +303,30 @@
      NioApp.Toast('{{ Session::get("success") }}', 'info', {position: 'top-right'});
 </script>
 @endif
+
+<script>
+     NioApp.Dropzone.init = function () {
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        NioApp.Dropzone('.upload-zone', { 
+            url: "{{ url('designer-dashboard/uploadprocc') }}" ,
+            headers: {
+            'X-CSRF-TOKEN': csrfToken
+        },
+        success:function(file, response){
+            html = '<div class="deletebuttondiv"><input type="hidden" name="media_id" value="'+response.id+'"><button type="button" class="btn btn-danger deleteimage" data-id="'+response.id+'" image-name="'+response.image_name+'">Delete</button></div>';
+            $('.upload-zone').append(html);
+           
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            html = '<div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span><button type="button" class="btn btn-primary">SELECT</button></div>';
+            $('.upload-zone').html(html);
+            // $(".upload-zone").load(location.href + " .upload-zone");
+            $('.upload-zone').removeClass('dz-started');
+            NioApp.Toast('This format is not compatible for upload please uplaod png or AI format!', 'info', {position: 'top-right'});
+            }
+        });
+    };
+</script>
 
 </body>
 
