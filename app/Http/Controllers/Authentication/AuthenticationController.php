@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
                 'login_password' => 'required',
             ]);
             $recaptcha = $_POST['g-recaptcha-response'];
-                    $secret_key = '6Ldq6lwoAAAAAJaSwLAIvGvCHlxS0RsaC9ayYzu9';
+                    $secret_key = env('GCAPTCHA_SECRET_KEY');
                     $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
                     $response_json = file_get_contents($url);
                     $response = (array)json_decode($response_json);
@@ -85,7 +85,7 @@ class AuthenticationController extends Controller
             'address' => 'required',
         ]);
          $recaptcha = $_POST['g-recaptcha-response'];
-                    $secret_key = '6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK';
+                    $secret_key = env('GCAPTCHA_SECRET_KEY');
                     $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
                     $response_json = file_get_contents($url);
                     $response = (array)json_decode($response_json);

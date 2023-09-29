@@ -5,8 +5,16 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-503c50d9.js",
+    "file": "assets/app-74343074.js",
+    "imports": [
+      "resources/js/bootstrap.js"
+    ],
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-93e32d00.js",
+    "isEntry": true,
+    "src": "resources/js/bootstrap.js"
   }
 }
