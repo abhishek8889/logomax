@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('sender_id')->default(0);
             $table->string('reciever_id')->default(0);
             $table->string('designer_id');
+            $table->integer('logo_id')->nullable();
             $table->string('message');
             $table->timestamps();
         });

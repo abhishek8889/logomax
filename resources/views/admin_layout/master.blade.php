@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
-    <script type="module" src="{{ asset('/build/assets/app-74343074.js') }}"></script>
+    <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    <script type="module" src="{{ asset('/build/assets/app-74343074.js') }}"></script> -->
   <!-- <script type="module" src="{{ asset('build/assets/app-4ed993c7.js') }}"></script> -->
-    <!-- vite(['resources/css/app.css' , 'resources/js/app.js']) -->
+    @vite(['resources/css/app.css' , 'resources/js/app.js'])
 </head>
 <style>
     .icon-active {
@@ -234,7 +234,7 @@
                                                             <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
                                                         </div>
                                                         <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">New host is <span>Registered</span> <span> <a href="{{ url('read-notification/'.$notification->id) }}"> see user list </a></span></div>
+                                                            <div class="nk-notification-text"><?php  echo $notification->message; ?><span> <a href="{{ url('read-notification/'.$notification->id) }}"> see </a></span></div>
                                                             <div class="nk-notification-time">2 hrs ago</div>
                                                         </div>
                                                     </div>

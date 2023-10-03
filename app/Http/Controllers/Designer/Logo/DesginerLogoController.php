@@ -8,6 +8,8 @@ use App\Models\Tag;
 use App\Models\Media;
 use App\Models\Categories;
 use App\Models\Logo;
+use App\Events\RegisterNotificationEvent;
+use App\Models\Notifications;
 use File;
 use Auth;
 
@@ -24,66 +26,82 @@ class DesginerLogoController extends Controller
     return view('designer.logos.addlogos',compact('categories','tags'));
    }
    
-   public function uploadProc(Request $request){
-    
-    if($request->hasFile('file')){
-        $request->validate([
-            'file' => 'required|mimes:ai,png'
-        ]);
-        $file = $request->file('file');
-        $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
-        $file->move(public_path().'/logos/', $name);
+    public function uploadProc(Request $request){
 
-        $media = new Media;
-        $media->image_name = $name;
-        $media->image_path = '/logos/'.$name;
-        $media->save();
-        return response()->json($media);
-    }else{
-        $request->validate([
-            'logo_name' => 'required',
-            'logo_slug' => 'required|unique:logos',
-            'categories' => 'required',
-            'tags' => 'required',
-            'media_id' => 'required',
-        ]);
+        if($request->hasFile('file')){
+            $request->validate([
+                'file' => 'required|mimes:ai,png'
+            ]);
+            $file = $request->file('file');
+            $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
+            $file->move(public_path().'/logos/', $name);
 
-        $logos = new Logo;
-        $logos->logo_name = $request->logo_name;
-        $logos->logo_slug = $request->logo_slug;
-        $logos->media_id = $request->media_id;
-        $logos->tags = json_encode($request->tags);
-        $logos->category_id = $request->categories;
-        $logos->approved_status = 0;
-        $logos->status = 1;
-        $logos->designer_id = Auth::user()->id;
-        $logos->save();
-        return redirect()->back()->with('success','successfully saved data');
+            $media = new Media;
+            $media->image_name = $name;
+            $media->image_path = '/logos/'.$name;
+            $media->save();
+            return response()->json($media);
+        }else{
+            $request->validate([
+                'logo_name' => 'required',
+                'logo_slug' => 'required|unique:logos',
+                'categories' => 'required',
+                'tags' => 'required',
+                'media_id' => 'required',
+            ]);
 
+            $logos = new Logo;
+            $logos->logo_name = $request->logo_name;
+            $logos->logo_slug = $request->logo_slug;
+            $logos->media_id = $request->media_id;
+            $logos->tags = json_encode($request->tags);
+            $logos->category_id = $request->categories;
+            $logos->approved_status = 0;
+            $logos->status = 1;
+            $logos->designer_id = Auth::user()->id;
+            $logos->save();
 
+            // Send notification to admin ::::::::: 
 
+            $notifications = Notifications::create(array(
+                'type' => 'logo-added',
+                'sender_id' => '0',
+                'reciever_id' => '0',
+                'designer_id' => 1,
+                'logo_id' => $logos->id,
+                'message' => 'New logo is <span>Added !</span>'
+            )); 
+            $eventData = array(
+                'type' => 'logo-added',
+                'designer_id' => 2,
+                'notification_id' => 1,
+                'logo_id' =>$logos->id,
+                'message' => 'New logo is <span>Added !</span>'
+            );
+        
+        event(new RegisterNotificationEvent($eventData));
 
+            return redirect()->back()->with('success','successfully saved data');
+        }
 
+        // return $request->file;
     }
-
-    // return $request->file;
-}
-   public function addtag(Request $request){
-    $tags = new Tag;
-    $tags->name = $request->name;
-    $tags->slug = $request->slug;
-    $tags->status = 1;
-    $tags->save();
-    return response()->json($tags);
-   }
-   public function deleteimage(Request $request){
-    $media = Media::find($request->mediaid);
-    if($media){
-        $media->delete();
-        return response()->json('deleted');
-    }else{
-        return reponse()->json('something went worng');
+    public function addtag(Request $request){
+        $tags = new Tag;
+        $tags->name = $request->name;
+        $tags->slug = $request->slug;
+        $tags->status = 1;
+        $tags->save();
+        return response()->json($tags);
     }
-   }
+    public function deleteimage(Request $request){
+        $media = Media::find($request->mediaid);
+        if($media){
+            $media->delete();
+            return response()->json('deleted');
+        }else{
+            return reponse()->json('something went worng');
+        }
+    }
 
 }

@@ -140,12 +140,13 @@ class AuthenticationController extends Controller
             'sender_id' => '0',
             'reciever_id' => '0',
             'designer_id' => $user->id,
-            'message' => 'New host is registered!'
+            'message' => 'New host is <span>Registered</span>'
         )); 
         $eventData = array(
             'type' => 'designer-registered',
             'designer_id' => $user->id,
-            'notification_id' => $notifications->id
+            'notification_id' => $notifications->id,
+            'message' => 'New host is <span>Registered !</span>'
         );
         
         event(new RegisterNotificationEvent($eventData));
