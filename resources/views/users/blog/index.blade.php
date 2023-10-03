@@ -60,24 +60,30 @@
       </div>
       <div class="recent-blog-box">
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-content">
-                <div class="recent-blog-img">
-                    <img src="{{asset('/logomax-front-asset/img/blog1.png') }}" alt="">
-                </div>
-                <div class="recent-text">
-                    <div class="lorem-text">
-                    <p>By Loren Max <span>| April 20, 2023</span> </p>
+        @if($blogs->IsNotEmpty())
+            @foreach ($blogs as $blog)
+                <div class="col-lg-4 col-md-6">
+                  <div class="blog-content">
+                    <div class="recent-blog-img">
+                      <!-- <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt=""> -->
+                      <img src="{{ asset('front/img/blog1.png')}}" alt="">
                     </div>
-                    <div class="simply-text">
-                    <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text.</p>
+                    <div class="recent-text">
+                      <div class="lorem-text">
+                        <p>By {{ $blog->user->name ?? '' }} <span>| {{ $blog->user->created_at ?? '' }}</span> </p>
+                      </div>
+                      <div class="simply-text">
+                        <h6>{{ $blog->title ?? '' }}</h6>
+                        <p>{{ $blog->sub_title ?? '' }}</p>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                </div>
-            </div>
-          <div class="col-lg-4 col-md-6">
+            @endforeach
+          @else
+              <span>No blog found !</span>
+          @endif
+          <!-- <div class="col-lg-4 col-md-6">
             <div class="blog-content">
               <div class="recent-blog-img">
                 <img src="{{asset('/logomax-front-asset/img/blog2.png') }}" alt="">
@@ -212,11 +218,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div class="blog-btn">
+        <!-- <div class="blog-btn">
           <a href="#" class="blog-cta">Load More</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

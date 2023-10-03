@@ -74,12 +74,12 @@
 
       <div class="tab-wrapper">
         <div class="grid-wrapp">
-        @if ($categories)
+        @if ($categories->IsNotEmpty())
           @foreach ($categories as $category)
             <div class="img__wrapper_boxs">
                   <div class="img_logs">
-                    <img src="{{ asset('logomax-front-asset/img/logs3.png') }}" alt="">
-                    <!-- <img src="{{ asset('logomax-front-asset/img/logs3.png') }}{{ $category->cat_img ?? '' }}" alt=""> -->
+                    <!-- <img src="{{ asset('logomax-front-asset/img/logs3.png') }}" alt=""> -->
+                    <img src="{{ asset('category_images') }}/{{ $category->image ?? '' }}" alt="">
                   </div>
                   <div class="img__wrapper_boxs_text">
                     <h5>{{ $category->name }}</h5>
@@ -241,7 +241,7 @@
       <div class="popular-btn-box">
         <div class="popular-btn">
           <ul>
-            @if($tags)
+            @if($tags->IsNotEmpty())
               @foreach ($tags as $tag)
                 <li>
                   <a href="#">{{ $tag->name ?? '' }}</a>
