@@ -17,6 +17,7 @@ use App\Http\Controllers\User\Blog\BlogController;
 use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Tags\TagsController;
 use App\Http\Controllers\Admin\Logo\LogosController;
+use App\Http\Controllers\Admin\Blog\AdminBlogController;
 
 use App\Events\RegisterNotificationEvent;
 /*
@@ -83,8 +84,12 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     //adminlogos
     Route::get('admin-dashboard/logos-list',[LogosController::class,'index']);
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos']);
-
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
+
+    //adminblogs
+    Route::get('admin-dashboard/blog-list',[AdminBlogController::class,'index']);
+    Route::get('admin-dashboard/blogs/add',[AdminBlogController::class,'add']);
+    Route::post('admin-dashboard/blogs/addProcc',[AdminBlogController::class,'addProcc']);
 
 });
 

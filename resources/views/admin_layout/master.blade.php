@@ -120,6 +120,21 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Blog</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/blog-list') }}" class="nk-menu-link"><span class="nk-menu-text">Blog list</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/blogs/add') }}" class="nk-menu-link"><span class="nk-menu-text">Add Blog</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
                             </ul>
                         </div>
                     </div>
