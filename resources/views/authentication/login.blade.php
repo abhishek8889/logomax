@@ -16,7 +16,8 @@
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
 <!-- Recaptcha script -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+ 
+    
 </head>
 <body class="nk-body bg-white npc-general pg-auth">
     <div class="nk-app-root">
@@ -27,15 +28,16 @@
                 <!-- content @s -->
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
-                        <div class="brand-logo pb-4 text-center">
-                            <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('front/img/custom-logo.png') }}" srcset="{{ asset('front/img/custom-logo.png') }}" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('front/img/custom-logo.png') }}" srcset="{{ asset('front/img/custom-logo.png') }}" alt="logo-dark">
-                            </a>
-                            <!-- <h3>LOGOMAX</h3> -->
-                        </div>
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-lg">
+                                <div class="brand-logo pb-4 text-center">
+                                        <a href="html/index.html" class="logo-link">
+                                            <img class="logo-light logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo">
+                                            <img class="logo-dark logo-img logo-img-lg" src="{{ asset('logomax-front-asset/img/custom-logo.png') }}" srcset="{{ asset('logomax-front-asset/img/custom-logo.png') }}" alt="logo-dark">
+                                        </a>
+                                        <!-- <h3> <a href="{{ url('/') }}">LOGOMAX</a> </h3> -->
+                                        <hr>
+                                </div>
                                 <div class="nk-block-head">
                                     <div class="nk-block-head-content">
                                         <h4 class="nk-block-title">Sign-In</h4>
@@ -51,24 +53,24 @@
 		                                    @enderror
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="email" name="email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                                            <input type="email" name="login_email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="password">Password</label>
+                                            <label class="form-label" for="login_password">Password</label>
                                             @error('password')
 				                                <span class="text text-danger">{{ $message }}</span>
 		                                    @enderror
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
+                                            <input type="password" name="login_password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                        <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
+                                        <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div>
                                         @if ($errors->has('g-recaptcha-response'))
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif

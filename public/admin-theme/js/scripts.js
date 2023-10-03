@@ -376,9 +376,9 @@
     };
 
     // Dropzone Init @v1.0
-    NioApp.Dropzone.init = function () {
-        NioApp.Dropzone('.upload-zone', { url: "/images" });
-    };
+    // NioApp.Dropzone.init = function () {
+    //     NioApp.Dropzone('.upload-zone', { url: "/images" });
+    // };
 
     // Wizard @v1.0
     NioApp.Wizard = function () {

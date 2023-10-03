@@ -22,16 +22,16 @@
                                                 <table class="email-wraper">
                                                     <tbody><tr>
                                                         <td class="py-5">
-                                                            <table class="email-header">
+                                                            <!-- <table class="email-header">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-center pb-4">
-                                                                            <!-- <a href="#"><img class="email-logo" src="{{ asset('admin-theme/images/logo-dark2x.png') }}" alt="logo"></a> -->
-                                                                            <!-- <p class="email-title">Register Confirmation Mail</p> -->
-                                                                        </td>
+                                                                        <td class="text-center pb-4"> 
+                                                                             <a href="#"><img class="email-logo" src="{{ asset('admin-theme/images/logo-dark2x.png') }}" alt="logo"></a>
+                                                                             <p class="email-title">Register Confirmation Mail</p> 
+                                                                       </td> 
                                                                     </tr>
                                                                 </tbody>
-                                                            </table>
+                                                            </table> -->
                                                             <table class="email-body text-center">
                                                                 <tbody>
                                                                     <tr>
