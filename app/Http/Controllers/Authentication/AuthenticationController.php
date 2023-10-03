@@ -22,14 +22,13 @@ class AuthenticationController extends Controller
     }
     public function loginprocess(Request $request){
         
-        
             $validate = $request->validate([
                 'g-recaptcha-response' => 'required',
                 'login_email' => 'required|email',
                 'login_password' => 'required',
             ]);
             $recaptcha = $_POST['g-recaptcha-response'];
-                     $secret_key = env('GCAPTCHA_SECRET_KEY');
+                    $secret_key = env('GCAPTCHA_SECRET_KEY');
                     $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
                     $response_json = file_get_contents($url);
                     $response = (array)json_decode($response_json);
@@ -85,7 +84,7 @@ class AuthenticationController extends Controller
             'address' => 'required',
         ]);
          $recaptcha = $_POST['g-recaptcha-response'];
-                     $secret_key = env('GCAPTCHA_SECRET_KEY');
+                    $secret_key = env('GCAPTCHA_SECRET_KEY');
                     $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
                     $response_json = file_get_contents($url);
                     $response = (array)json_decode($response_json);

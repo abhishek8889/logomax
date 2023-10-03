@@ -64,13 +64,13 @@
 		                                    @enderror
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
+                                            <input type="password" name="login_password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                        <div class="g-recaptcha" data-sitekey="6Le4mnImAAAAAJ4zsBLSenHpYgbUqfD6PkTOkzLd"></div>
+                                        <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div>
                                         @if ($errors->has('g-recaptcha-response'))
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif

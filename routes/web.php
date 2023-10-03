@@ -16,6 +16,8 @@ use App\Http\Controllers\User\Blog\BlogController;
 
 use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Tags\TagsController;
+use App\Http\Controllers\Admin\Logo\LogosController;
+
 use App\Events\RegisterNotificationEvent;
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +80,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('admin-dashboard/addtags/submitprocc',[TagsController::class,'submitProc']);
     Route::get('admin-dashboard/tags/delete/{id}',[TagsController::class,'delete']);
 
+    //adminlogos
+    Route::get('admin-dashboard/logosrequest',[LogosController::class,'index']);
+    Route::get('admin-dashboard/approvedlogos',[LogosController::class,'approvedLogos']);
 
 
 });

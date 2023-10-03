@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?khbkhsdfsdghgvgh')}}">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
-  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
   <title>home page </title>
 </head>
@@ -148,6 +148,7 @@
                                                 <div class="form-group">
                                                     <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
                                                     <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div>
+                                                    
                                                     @if ($errors->has('g-recaptcha-response'))
                                                         <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                                     @endif

@@ -67,14 +67,14 @@
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Projects</span>
+                                        <span class="nk-menu-text">Logos</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+                                            <a href="{{ url('admin-dashboard/logosrequest') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                            <a href="{{ url('admin-dashboard/approvedlogos') }}" class="nk-menu-link"><span class="nk-menu-text">Approved Logos</span></a>
                                         </li>
                                     </ul>
                                 </li>
