@@ -73,10 +73,10 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/logosrequest') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
+                                            <a href="{{ url('admin-dashboard/logos-list') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/approvedlogos') }}" class="nk-menu-link"><span class="nk-menu-text">Approved Logos</span></a>
+                                            <a href="{{ url('admin-dashboard/approved-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Approved Logos</span></a>
                                         </li>
                                     </ul>
                                 </li>

@@ -20,9 +20,9 @@
 		                          @enderror
                              </div>
                              <div class="form-group">
-                                 <label class="form-label" for="slug">Slug</label>
+                                 <!-- <label class="form-label" for="slug">Slug</label> -->
                                  <div class="form-control-wrap">
-                                     <input type="text" name="slug" class="form-control" id="slug" value="">
+                                     <input type="hidden" name="slug" class="form-control" id="slug" value="">
                                  </div>
                                  @error('slug')
 				                                <span class="text text-danger">{{ $message }}</span>
@@ -58,11 +58,11 @@
                                    <span>Name</span>
                                </span>
                            </th>
-                           <th class="tb-tnx-info text-center">
+                           <!-- <th class="tb-tnx-info text-center">
                                <span class="tb-tnx-desc d-none d-sm-inline-block">
                                    <span>Slug</span>
                                </span>
-                           </th>
+                           </th> -->
                           
                            <th class="tb-tnx-action text-center">
                                <span>Action</span>
@@ -81,11 +81,11 @@
                                    <span class="title">{{ $t->name ?? '' }}</span>
                                </div>
                            </td>
-                           <td class="tb-tnx-info text-center">
+                           <!-- <td class="tb-tnx-info text-center">
                                <div class="tb-tnx-desc">
                                    <span class="title">{{ $t->slug ?? '' }}</span>
                                </div>
-                           </td>
+                           </td> -->
                            <td class="tb-tnx-amount is-alt text-center">
                          
                             <div class="dropdown">

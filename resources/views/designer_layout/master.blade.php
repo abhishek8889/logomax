@@ -42,6 +42,7 @@
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt"><a href="{{ url('designer-dashboard') }}">Designer-Dashboard</a></h6>
                                 </li>
+                               @if(auth()->user()->status == 1)
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
@@ -56,6 +57,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                @endif
                                 <!-- <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
