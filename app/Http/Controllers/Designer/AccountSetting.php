@@ -23,7 +23,25 @@ class AccountSetting extends Controller
         'country' => 'required',
         'address' => 'required'
     ]);
+
     $user = User::find(Auth::user()->id);
+    if($user->status == 0){
+          // Call an notification event to admin : 
+            $notifications = Notifications::create(array(
+                'type' => 'designer-registered',
+                'sender_id' => '0',
+                'reciever_id' => '0',
+                'designer_id' => $user->id,
+                'message' => 'New host is <span>Registered</span>'
+            )); 
+            $eventData = array(
+                'type' => 'designer-registered',
+                'designer_id' => $user->id,
+                'notification_id' => $notifications->id,
+                'message' => 'New host is <span>Registered !</span>'
+            );
+            event(new RegisterNotificationEvent($eventData));    
+    }
     $user->experience = $request->experience;
     $user->country = $request->country;
     $user->address = $request->address;
