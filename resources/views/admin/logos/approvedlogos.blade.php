@@ -7,7 +7,7 @@
                                 <div class="nk-block-head nk-block-head-sm">
                                     <div class="nk-block-between g-3">
                                         <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title page-title">Logos Requests</h3>
+                                            <h3 class="nk-block-title page-title">Logos list</h3>
                                         </div>
                                         
                                     </div>
@@ -25,7 +25,7 @@
                                                     <div class="user-card">
                                                         <div class="user-avatar">
                                                             
-                                                            <!-- <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt=""> -->
+                                                            <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt="">
                                                         </div>
                                                         <div class="user-info" >
                                                             <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>
@@ -66,7 +66,13 @@
                           Email: {{ $logo->userdata['email'] ?? '' }} <br>
                           Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
                           Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
-                          Uploaded on: {{ $logo->created_at ?? '' }}
+                          Uploaded on: {{ $logo->created_at ?? '' }}<br><br>
+
+                          Logo_size: {{ $logo->media['image_size'] }}<br>
+                          Dimensions: {{ $logo->media['image_dimensions'] }}<br>
+                          Image Format : {{ $logo->media['image_format'] }}
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -77,4 +83,6 @@
                 @empty
                 <p>No approved logos found</p>
                 @endforelse
+
+                
 @endsection

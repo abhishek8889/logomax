@@ -25,7 +25,7 @@
                                                     <div class="user-card">
                                                         <div class="user-avatar">
                                                             
-                                                            <!-- <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt=""> -->
+                                                            <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt="">
                                                         </div>
                                                         <div class="user-info" >
                                                             <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>
@@ -63,11 +63,10 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <h5>Designer Detail</h5>
-                          Name: {{ $logo->userdata['name'] ?? '' }} <br>
-                          Email: {{ $logo->userdata['email'] ?? '' }} <br>
-                          Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
-                          Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
+                        Designer Name: {{ $logo->userdata['name'] ?? '' }} <br>
+                        Designer Email: {{ $logo->userdata['email'] ?? '' }} <br>
+                        Designer Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
+                        Designer Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
                           Uploaded on: {{ $logo->created_at ?? '' }}]<br>
                           Category: {{ $logo->category['name'] }}<br>
                           Tags: @if(isset($logo->tags)) 
@@ -75,11 +74,16 @@
                                     @foreach($tags as $tag)
                                     @php
                                     $data = App\Models\Tag::find($tag);
-                                    print_r($data);
-
                                     @endphp
+                                    @if(isset($data))
+                                        {{ $data->name ?? '' }},
+                                    @endif 
                                     @endforeach
-                                @endif                         
+                                @endif  
+                                <br> 
+                                Logo_size: {{ $logo->media['image_size'] }}<br>
+                          Dimensions: {{ $logo->media['image_dimensions'] }}<br>
+                          Image Format : {{ $logo->media['image_format'] }}                      
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
