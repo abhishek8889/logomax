@@ -36,7 +36,7 @@ class LogosController extends Controller
         }else{
             $logos = Logo::find($request->logo_id);
             $logos->approved_status = 2;
-            $logos->review = $request->review;
+            $logos->admin_review = $request->review;
             $logos->update();
             $designer_detail = User::find($logos->designer_id);
             $mailData = [

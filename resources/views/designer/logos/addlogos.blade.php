@@ -81,7 +81,7 @@
                                                                 </div>
                                                             </div>
                                                             @error('media_id')
-                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                                <span class="text text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
