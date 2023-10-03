@@ -52,7 +52,7 @@
                     </div>
                 </div>
                   <!-- logo deatil  modal-->
-                  @foreach($logos as $logo)
+                  @forelse($logos as $logo)
                 <div class="modal fade" id="exampleviewModal{{ $logo->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -74,5 +74,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <p>No approved logos found</p>
+                @endforelse
 @endsection

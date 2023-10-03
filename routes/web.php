@@ -81,8 +81,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/tags/delete/{id}',[TagsController::class,'delete']);
 
     //adminlogos
-    Route::get('admin-dashboard/logosrequest',[LogosController::class,'index']);
-    Route::get('admin-dashboard/approvedlogos',[LogosController::class,'approvedLogos']);
+    Route::get('admin-dashboard/logos-list',[LogosController::class,'index']);
+    Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos']);
 
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
 

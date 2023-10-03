@@ -54,7 +54,7 @@
                 <!-- Button trigger modal -->
 
                 <!-- logo deatil  modal-->
-                @foreach($logos as $logo)
+                @forelse($logos as $logo)
                 <div class="modal fade" id="exampleviewModal{{ $logo->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -76,7 +76,9 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+               <p>No requests Pending</p>
+                @endforelse
                 <!-- logos review modal -->
                 <!-- Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
