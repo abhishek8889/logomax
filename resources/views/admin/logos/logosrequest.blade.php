@@ -68,7 +68,18 @@
                           Email: {{ $logo->userdata['email'] ?? '' }} <br>
                           Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
                           Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
-                          Uploaded on: {{ $logo->created_at ?? '' }}
+                          Uploaded on: {{ $logo->created_at ?? '' }}]<br>
+                          Category: {{ $logo->category['name'] }}<br>
+                          Tags: @if(isset($logo->tags)) 
+                          <?php $tags = json_decode($logo->tags);  ?>
+                                    @foreach($tags as $tag)
+                                    @php
+                                    $data = App\Models\Tag::find($tag);
+                                    print_r($data);
+
+                                    @endphp
+                                    @endforeach
+                                @endif                         
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

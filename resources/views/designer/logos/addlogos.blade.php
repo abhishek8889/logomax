@@ -58,8 +58,8 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Tags</label>
                                                             <div class="form-control-wrap">
-                                                                <select class="form-select js-select2 tagsslectbox" multiple="multiple" name="tags[]" data-placeholder="Select Multiple Tags">
-                                                                    <option value="default_option">Default Option</option>
+                                                                <select class="form-select js-select2 tagsslectbox" multiple="multiple" name="tags[]" data-placeholder="Type here to add new tag">
+                                                                    <!-- <option value="default_option">Default Option</option> -->
                                                                     @foreach($tags as $t)
                                                                     <option value="{{ $t->id ?? '' }}">{{ $t->name ?? '' }}</option>
                                                                     @endforeach
@@ -128,7 +128,7 @@
                 e.preventDefault();
                 mediaid = $(this).attr('data-id');
                 imagename = $(this).attr('image-name');
-            console.log(imagename);
+            // console.log(imagename);
                 $.ajax({
                     method: 'post',
                     url: '{{ url('designer-dashboard/deleteimage') }}',

@@ -33,13 +33,17 @@ class DesginerLogoController extends Controller
         $file = $request->file('file');
         $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
         $filesize = getimagesize($file);
-        return $filesize;
-        // $file->move(public_path().'/logos/', $name);
-
-        // $media = new Media;
-        // $media->image_name = $name;
-        // $media->image_path = '/logos/'.$name;
-        // $media->save();
+        $filesizekb = filesize($file);
+        // return ($filesizekb/1000).' KB';
+        $file->move(public_path().'/logos/', $name);
+// die();
+        $media = new Media;
+        $media->image_name = $name;
+        $media->image_path = '/logos/'.$name;
+        $media->image_size = ($filesizekb/1000).' KB';
+        $media->image_dimensions = $filesize[3];
+        $media->image_format = $filesize['mime'];
+        $media->save();
         return response()->json($media);
     }else{
         $request->validate([
