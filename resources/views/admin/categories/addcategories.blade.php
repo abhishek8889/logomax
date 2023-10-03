@@ -6,7 +6,7 @@
                          <div class="card-head">
                              <h5 class="card-title">Add Categories</h5>
                          </div>
-                         <form action="{{ route('add-category') }}" method="POST">
+                         <form action="{{ route('add-category') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name ="id" value="{{$edit_category->id ?? ''}}">
                              <div class="form-group">
@@ -24,6 +24,15 @@
                                      <input type="text" name="slug" class="form-control" id="slug" value="{{ $edit_category->slug ?? '' }}">
                                  </div>
                                  @error('slug')
+				                                <span class="text text-danger">{{ $message }}</span>
+		                          @enderror
+                             </div>
+                             <div class="form-group">
+                             <label class="form-label" for="cat_img">Category Image</label>
+                                 <div class="form-control-wrap">
+                                     <input type="file" name="category_image" class="form-control" id="cat_img" >
+                                 </div>
+                                 @error('category_image')
 				                                <span class="text text-danger">{{ $message }}</span>
 		                          @enderror
                              </div>
