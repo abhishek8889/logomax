@@ -14,7 +14,7 @@ use Auth;
 class DesginerLogoController extends Controller
 {
    public function index(){
-        $logos = Logo::with('category','media')->get();
+        $logos = Logo::where('designer_id',Auth::user()->id)->with('category','media')->get();
     //   dd($logos);
         return view('designer.logos.index',compact('logos'));
    }
@@ -32,12 +32,14 @@ class DesginerLogoController extends Controller
         ]);
         $file = $request->file('file');
         $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
-        $file->move(public_path().'/logos/', $name);
+        $filesize = getimagesize($file);
+        return $filesize;
+        // $file->move(public_path().'/logos/', $name);
 
-        $media = new Media;
-        $media->image_name = $name;
-        $media->image_path = '/logos/'.$name;
-        $media->save();
+        // $media = new Media;
+        // $media->image_name = $name;
+        // $media->image_path = '/logos/'.$name;
+        // $media->save();
         return response()->json($media);
     }else{
         $request->validate([
@@ -46,6 +48,12 @@ class DesginerLogoController extends Controller
             'categories' => 'required',
             'tags' => 'required',
             'media_id' => 'required',
+        ],[
+            'logo_name.required' => 'logo name is required',
+            'logo_slug.required' => 'logo slug is required',
+            'categories.required' => 'logo category is required',
+            'tags.required' => 'tag is required',
+            'media_id.required' => 'Please upload your logo',
         ]);
 
         $logos = new Logo;

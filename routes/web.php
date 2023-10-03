@@ -84,6 +84,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/logosrequest',[LogosController::class,'index']);
     Route::get('admin-dashboard/approvedlogos',[LogosController::class,'approvedLogos']);
 
+    Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
 
 });
 

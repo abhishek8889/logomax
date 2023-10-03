@@ -22,6 +22,9 @@
                                                                     <input type="text" class="form-control" name="logo_name" id="name">
                                                                 </div>
                                                             </div>
+                                                            @error('logo_name')
+                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
@@ -30,6 +33,9 @@
                                                                     <input type="text" class="form-control" name="logo_slug" id="slug">
                                                                 </div>
                                                             </div>
+                                                            @error('logo_slug')
+                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
@@ -42,6 +48,9 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                            @error('categories')
+                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                             </div>
                                                         </div>
@@ -56,6 +65,9 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                            @error('tags')
+                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         </div>
                                                         </div>
@@ -68,6 +80,9 @@
                                                                     <button type="button" class="btn btn-primary">SELECT</button>
                                                                 </div>
                                                             </div>
+                                                            @error('media_id')
+                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 mt-3">

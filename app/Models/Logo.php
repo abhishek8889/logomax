@@ -15,5 +15,7 @@ class Logo extends Model
     public function media(){
         return $this->hasOne(Media::class,'id','media_id');
       }
-  
+  public function userdata(){
+    return $this->hasOne(User::class,'id','designer_id');
+  }
 }

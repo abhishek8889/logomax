@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('category_id');
             $table->integer('approved_status')->default(0);
             $table->integer('status')->default(1);
-            $table->text('review')->nullable();
+            $table->text('admin_review')->nullable();
             $table->timestamps();
         });
     }

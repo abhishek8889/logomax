@@ -14,13 +14,6 @@ class AccountSetting extends Controller
    public function index(Request $request){
   
     $user = User::find(Auth::user()->id);
-      $eventData = array(
-        'type' => 'designer-registered',
-        'designer_id' => $user->id,
-        'notification_id' => 1
-    );
-    
-     event(new RegisterNotificationEvent($eventData));
     
     return view('designer.setting.accountsetting',compact('request','user'));
    }

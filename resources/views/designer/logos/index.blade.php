@@ -17,21 +17,24 @@
                                         @foreach($logos as $logo)
                                         <div class="col-sm-6 col-lg-4 col-xxl-3">
                                             <div class="gallery card card-bordered">
-                                                <a class="gallery-image popup-image" href="{{ asset('admin-theme/images/stock/a.jpg') }}">
-                                                    <img class="w-100 rounded-top" src="{{ asset('admin-theme/images/stock/a.jpg') }}" alt="">
+                                                <a class="gallery-image popup-image" href="{{ asset($logo->media['image_path']) }}">
+                                                    <img class="w-100 rounded-top" src="{{ asset($logo->media['image_path']) }}" alt="">
                                                 </a>
                                                 <div class="gallery-body card-inner align-center justify-between flex-wrap g-2">
                                                     <div class="user-card">
                                                         <div class="user-avatar">
-                                                            <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt="">
+                                                            
+                                                            <!-- <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt=""> -->
                                                         </div>
                                                         <div class="user-info">
-                                                            <span class="lead-text">Dustin Mock</span>
-                                                            <span class="sub-text">mock@softnio.com</span>
+                                                            <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>
+                                                            <span class="sub-text">{{ $logo->userdata['email'] ?? '' }}</span>
+
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <button class="btn btn-p-0 btn-nofocus"><em class="icon ni ni-heart"></em><span>34</span></button>
+                                                    <div class="">
+                                                         <button class="btn btn-primary"> @if($logo->approved_status == 0) Pending @elseif($logo->approved_status == 1) Approved @elseif($logo->approved_status == 2) disapproved @endif</button>
+                                                      <!--  <button class="btn btn-danger">Delete</button> -->
                                                     </div>
                                                 </div>
                                             </div>
