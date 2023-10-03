@@ -11,31 +11,25 @@ use App\Models\Notifications;
 
 class AccountSetting extends Controller
 {
-   public function index(Request $request){
-  
-    $user = User::find(Auth::user()->id);
-      $eventData = array(
-        'type' => 'designer-registered',
-        'designer_id' => $user->id,
-        'notification_id' => 1
-    );
-    
-     event(new RegisterNotificationEvent($eventData));
-    
-    return view('designer.setting.accountsetting',compact('request','user'));
-   }
-   public function update(Request $request){
-    $request->validate([
-        'experience' => 'required',
-        'country' => 'required',
-        'address' => 'required'
-    ]);
-    $user = User::find(Auth::user()->id);
-    $user->experience = $request->experience;
-    $user->country = $request->country;
-    $user->address = $request->address;
-    $user->status = 1;
-    $user->save();
-    return redirect()->back()->with('success','successfully updated profile');
-   }
+    public function index(Request $request){
+        $user = User::find(Auth::user()->id);
+        return view('designer.setting.accountsetting',compact('request','user'));
+    }
+    public function update(Request $request){
+        $request->validate([
+            'experience' => 'required',
+            'country' => 'required',
+            'address' => 'required'
+        ]);
+        $user = User::find(Auth::user()->id);
+
+        if($user->status == 0){
+            $user->experience = $request->experience;
+            $user->country = $request->country;
+            $user->address = $request->address;
+            $user->status = 1;
+            $user->save();
+        }
+        return redirect()->back()->with('success','successfully updated profile');
+    }
 }

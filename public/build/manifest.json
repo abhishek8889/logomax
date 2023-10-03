@@ -8,5 +8,10 @@
     "file": "assets/app-ca52d1cb.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-93e32d00.js",
+    "isEntry": true,
+    "src": "resources/js/bootstrap.js"
   }
 }
