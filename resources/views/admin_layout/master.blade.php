@@ -71,14 +71,14 @@
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
-                               <!-- <ul class="nk-menu-sub">
+                               <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/logos-list') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/approved-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Approved Logos</span></a>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
