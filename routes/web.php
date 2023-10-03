@@ -7,6 +7,10 @@ use App\Http\Controllers\Designer\DesignerDashController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Front\FrontController;
+
+use App\Http\Controllers\User\Home\HomeController;
+use App\Http\Controllers\User\Blog\BlogController;
+use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
