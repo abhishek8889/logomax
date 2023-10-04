@@ -59,165 +59,48 @@
         <h2>Recent Blog</h2>
       </div>
       <div class="recent-blog-box">
+      @if($blogs->IsNotEmpty())
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-content">
-                <div class="recent-blog-img">
-                    <img src="{{asset('/logomax-front-asset/img/blog1.png') }}" alt="">
-                </div>
-                <div class="recent-text">
-                    <div class="lorem-text">
-                    <p>By Loren Max <span>| April 20, 2023</span> </p>
+          <?php $showMore = 'd-none'; ?>
+            @foreach ($blogs as $k => $blog)
+                <div class="col-lg-4 col-md-6 {{ $k >= 9 ? 'blogs-data d-none' : '' }}">
+                  <div class="blog-content">
+                    <div class="recent-blog-img">
+                    <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}"><img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt=""></a> 
                     </div>
-                    <div class="simply-text">
-                    <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text.</p>
+                    <div class="recent-text">
+                      <div class="lorem-text">
+                        <p>By {{ $blog->user->name ?? '' }} <span>| {{ $blog->created_at->format('F d, Y') ?? '' }}</span></p>
+                      </div>
+                      <div class="simply-text">
+                      <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}"><h6>{{ $blog->title ?? '' }}</h6></a>  
+                        <p>{{ $blog->sub_title ?? '' }}</p>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                </div>
-            </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog2.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog3.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog4.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog5.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog6.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog7.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog8.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content">
-              <div class="recent-blog-img">
-                <img src="{{asset('/logomax-front-asset/img/blog9.png') }}" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+                
+            @endforeach
         </div>
-        <div class="blog-btn">
-          <a href="#" class="blog-cta">Load More</a>
-        </div>
+          <div class="blog-btn {{ count($blogs) >= 9 ? '' : 'd-none' }}">
+            <a href="#" class="blog-cta" data-for="showmore">Load More</a>
+          </div>
+        @else
+              <span>No blog found !</span>
+          @endif
       </div>
     </div>
   </section>
+
+  <script>
+$(document).ready(function() {
+  $('.blog-cta').on('click', function(e) {
+    e.preventDefault();
+    var dataFor = $(this).attr('data-for');
+    $('.blogs-data').toggleClass('d-none');
+    $(this).html(dataFor === 'showmore' ? 'Load Less' : 'Load More').attr('data-for', dataFor === 'showmore' ? 'showless' : 'showmore');
+  });
+});
+
+  </script>
 @endsection

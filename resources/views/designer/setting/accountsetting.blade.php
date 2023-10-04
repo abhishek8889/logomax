@@ -2,9 +2,12 @@
 @section('content')
 <div class="nk-content ">
             <div class="nk-block nk-block-lg p-4">
-                                        <div class="nk-block-head">
+                                        <div class="nk-block-head d-flex justify-content-between">
                                             <div class="nk-block-head-content">
                                                 <h4 class="title nk-block-title">Account Setting</h4>
+                                            </div>
+                                            <div>
+                                                {{ Breadcrumbs::render('account-setting') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">

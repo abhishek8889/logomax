@@ -1,9 +1,12 @@
 @extends('admin_layout.master')
 @section('content')
 <div class="nk-block nk-block-lg">
-                                        <div class="nk-block-head">
+                                        <div class="nk-block-head d-flex justify-content-between">
                                             <div class="nk-block-head-content">
                                                 <h4 class="nk-block-title">Designers List - </h4>
+                                            </div>
+                                            <div>
+                                                {{ Breadcrumbs::render('desingers-list') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
@@ -82,6 +85,10 @@
 
                                                 </tbody>
                                             </table>
+                                            @if(!($users->isNotEmpty()))
+
+                                           <h5 class="text-center">No designers found</h5>
+                                            @endif
                                         </div>
                                     </div>
                                     

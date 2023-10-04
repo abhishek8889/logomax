@@ -6,13 +6,16 @@
         <div class="nk-content-inner">
             <div class="nk-content-body">
                 <div class="nk-block-head nk-block-head-sm">
-                    <div class="nk-block-between">
+                    <div class="nk-block-between d-flex justify-content-between">
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title"> <a href="{{ url('designer-dashboard') }}">Designer Dashboard </a></h3>
                             <div class="nk-block-des text-soft">
                                 <p>Welcome to Designer dashboard</p>
                             </div>
                         </div><!-- .nk-block-head-content -->
+                        <div>
+                            {{ Breadcrumbs::render('designer-dashboard') }}
+                        </div>
                     </div><!-- .nk-block-between -->
                 </div><!-- .nk-block-head -->
                 <div class="nk-block">
