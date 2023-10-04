@@ -63,27 +63,34 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        Designer Name: {{ $logo->userdata['name'] ?? '' }} <br>
-                        Designer Email: {{ $logo->userdata['email'] ?? '' }} <br>
-                        Designer Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
-                        Designer Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
-                          Uploaded on: {{ $logo->created_at ?? '' }}]<br>
-                          Category: {{ $logo->category['name'] }}<br>
-                          Tags: @if(isset($logo->tags)) 
-                          <?php $tags = json_decode($logo->tags);  ?>
-                                    @foreach($tags as $tag)
-                                    @php
-                                    $data = App\Models\Tag::find($tag);
-                                    @endphp
-                                    @if(isset($data))
-                                        {{ $data->name ?? '' }},
-                                    @endif 
-                                    @endforeach
-                                @endif  
-                                <br> 
-                                Logo_size: {{ $logo->media['image_size'] }}<br>
+                          <h5>Designer Detail</h5>
+                          Name: {{ $logo->userdata['name'] ?? '' }} <br>
+                          Email: {{ $logo->userdata['email'] ?? '' }} <br>
+                          Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
+                          Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
+                          Uploaded on: {{ $logo->created_at ?? '' }}<br><br>
+
+                          Logo_size: {{ $logo->media['image_size'] }}<br>
                           Dimensions: {{ $logo->media['image_dimensions'] }}<br>
-                          Image Format : {{ $logo->media['image_format'] }}                      
+                          Image Format : {{ $logo->media['image_format'] }}<br><br>
+
+                          Category: {{ $logo->category['name'] ?? '' }}<br>
+
+                        @if($logo->tags !== null)
+                        Tags: 
+                        <?php
+                        $tags = json_decode($logo->tags);
+                        foreach($tags as $t){
+                        $tagmodel =  App\Models\Tag::class;
+                                        $tag = $tagmodel::find($t);
+                               if($tag){
+                                echo '#'.$tag->name.',';
+                               }
+                        }
+                        ?>
+                        @endif
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -70,7 +70,25 @@
 
                           Logo_size: {{ $logo->media['image_size'] }}<br>
                           Dimensions: {{ $logo->media['image_dimensions'] }}<br>
-                          Image Format : {{ $logo->media['image_format'] }}
+                          Image Format : {{ $logo->media['image_format'] }}<br><br>
+
+                          Category: {{ $logo->category['name'] ?? '' }}<br>
+
+                        @if($logo->tags !== null)
+                        Tags: 
+                        <?php
+                        $tags = json_decode($logo->tags);
+                        foreach($tags as $t){
+                        $tagmodel =  App\Models\Tag::class;
+                                        $tag = $tagmodel::find($t);
+                               if($tag){
+                                echo '#'.$tag->name.',';
+                               }
+                        }
+                        ?>
+                        @endif
+
+
 
 
                         </div>
