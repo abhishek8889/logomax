@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Tags\TagsController;
 use App\Http\Controllers\Admin\Logo\LogosController;
 use App\Http\Controllers\Admin\Blog\AdminBlogController;
+use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 
 use App\Events\RegisterNotificationEvent;
 /*
@@ -79,17 +80,26 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     //admintags
     Route::get('admin-dashboard/tags',[TagsController::class,'addtags']);
     Route::post('admin-dashboard/addtags/submitprocc',[TagsController::class,'submitProc']);
-    Route::get('admin-dashboard/tags/delete/{id}',[TagsController::class,'delete']);
+    
+    Route::post('admin-dashboard/addtags/addProcc',[TagsController::class,'addtagProcc']); //for input add
+    Route::get('admin-dashboard/tags/delete/{id}',[TagsController::class,'delete']); 
 
     //adminlogos
     Route::get('admin-dashboard/logos-list',[LogosController::class,'index']);
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos']);
+    Route::get('admin-dashboard/disapproved-logos',[LogosController::class,'disapprovedLogos']);
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
 
     //adminblogs
+    Route::get('admin-dashboard/blogs/category',[BlogCategoryController::class,'index']);
+    Route::post('admin-dashboard/blogs/categoryadd',[BlogCategoryController::class,'addprocc']);
+    Route::get('admin-dashboard/blogs/categiory/delete/{id}',[BlogCategoryController::class,'delete']);
+
     Route::get('admin-dashboard/blog-list',[AdminBlogController::class,'index']);
     Route::get('admin-dashboard/blogs/add',[AdminBlogController::class,'add']);
+    Route::get('admin-dashboard/blogs/edit/{slug}',[AdminBlogController::class,'edit']);
     Route::post('admin-dashboard/blogs/addProcc',[AdminBlogController::class,'addProcc']);
+    Route::get('admin-dashboard/blogs/delete/{id}',[AdminBlogController::class,'delete']);
 
 });
 

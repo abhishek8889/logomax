@@ -49,4 +49,12 @@ class TagsController extends Controller
         }
         
     }
+    public function addtagProcc(Request $request){
+        $tags = new Tag;
+        $tags->name = $request->name;
+        $tags->slug = $request->slug;
+        $tags->status = 1;
+        $tags->save();
+        return response()->json($tags);
+    }
 }
