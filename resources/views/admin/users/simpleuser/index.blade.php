@@ -58,6 +58,10 @@
 
                                                 </tbody>
                                             </table>
+                                            @if(!($users->isNotEmpty()))
+
+                                           <h5 class="text-center">No guests found</h5>
+                                            @endif
                                         </div>
                                     </div>
                                     
