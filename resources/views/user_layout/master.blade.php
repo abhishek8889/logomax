@@ -94,7 +94,7 @@
         <div class="container-fluid">
             <div class="navbar navbar-expand-lg">
                 <div class="logo">
-                    <a href="#">
+                    <a href="{{ url('/') ?? '' }}">
                     <?php if(isset($request)){
                       if($request->url() != url('/')){?>
                         <img src="{{ asset('/logomax-front-asset/img/custom-logo.png')}}" alt="" />
