@@ -26,72 +26,76 @@ class DesginerLogoController extends Controller
         return view('designer.logos.addlogos',compact('categories','tags'));
     }
    
-   public function uploadProc(Request $request){
-    if($request->hasFile('file')){
-        $request->validate([
-            'file' => 'required|mimes:ai,png'
-        ]);
-        $file = $request->file('file');
-        $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
-        $filesize = getimagesize($file);
-        $filesizekb = filesize($file);
-        // return ($filesizekb/1000).' KB';
-        $file->move(public_path().'/logos/', $name);
-        $media = new Media;
-        $media->image_name = $name;
-        $media->image_path = '/logos/'.$name;
-        $media->image_size = ($filesizekb/1000).' KB';
-        $media->image_dimensions = $filesize[3];
-        $media->image_format = $filesize['mime'];
-        $media->save();
-        return response()->json($media);
-    }else{
-        $request->validate([
-            'logo_name' => 'required',
-            'logo_slug' => 'required|unique:logos',
-            'categories' => 'required',
-            'tags' => 'required',
-            'media_id' => 'required',
-        ],[
-            'logo_name.required' => 'logo name is required',
-            'logo_slug.required' => 'logo slug is required',
-            'categories.required' => 'logo category is required',
-            'tags.required' => 'tag is required',
-            'media_id.required' => 'Please upload your logo',
-        ]);
+    public function uploadProc(Request $request){
+        if(auth()->user()->is_approved !== 0){
+            if($request->hasFile('file')){
+                $request->validate([
+                    'file' => 'required|mimes:ai,png'
+                ]);
+                $file = $request->file('file');
+                $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
+                $filesize = getimagesize($file);
+                $filesizekb = filesize($file);
+                // return ($filesizekb/1000).' KB';
+                $file->move(public_path().'/logos/', $name);
+                $media = new Media;
+                $media->image_name = $name;
+                $media->image_path = '/logos/'.$name;
+                $media->image_size = ($filesizekb/1000).' KB';
+                $media->image_dimensions = $filesize[3];
+                $media->image_format = $filesize['mime'];
+                $media->save();
+                return response()->json($media);
+            }else{
+                $request->validate([
+                    'logo_name' => 'required',
+                    'logo_slug' => 'required|unique:logos',
+                    'categories' => 'required',
+                    'tags' => 'required',
+                    'media_id' => 'required',
+                ],[
+                    'logo_name.required' => 'logo name is required',
+                    'logo_slug.required' => 'logo slug is required',
+                    'categories.required' => 'logo category is required',
+                    'tags.required' => 'tag is required',
+                    'media_id.required' => 'Please upload your logo',
+                ]);
 
-            $logos = new Logo;
-            $logos->logo_name = $request->logo_name;
-            $logos->logo_slug = $request->logo_slug;
-            $logos->media_id = $request->media_id;
-            $logos->tags = json_encode($request->tags);
-            $logos->category_id = $request->categories;
-            $logos->approved_status = 0;
-            $logos->status = 1;
-            $logos->designer_id = Auth::user()->id;
-            $logos->save();
+                    $logos = new Logo;
+                    $logos->logo_name = $request->logo_name;
+                    $logos->logo_slug = $request->logo_slug;
+                    $logos->media_id = $request->media_id;
+                    $logos->tags = json_encode($request->tags);
+                    $logos->category_id = $request->categories;
+                    $logos->approved_status = 0;
+                    $logos->status = 1;
+                    $logos->designer_id = Auth::user()->id;
+                    $logos->save();
 
-            // Send notification to admin ::::::::: 
+                    // Send notification to admin ::::::::: 
 
-            $notifications = Notifications::create(array(
-                'type' => 'logo-added',
-                'sender_id' => '0',
-                'reciever_id' => '0',
-                'designer_id' => 1,
-                'logo_id' => $logos->id,
-                'message' => 'New logo is <span>Added !</span>'
-            )); 
-            $eventData = array(
-                'type' => 'logo-added',
-                'designer_id' => 2,
-                'notification_id' => 1,
-                'logo_id' =>$logos->id,
-                'message' => 'New logo is <span>Added !</span>'
-            );
-        
-            event(new RegisterNotificationEvent($eventData));
+                    $notifications = Notifications::create(array(
+                        'type' => 'logo-added',
+                        'sender_id' => '0',
+                        'reciever_id' => '0',
+                        'designer_id' => Auth::user()->id,
+                        'logo_id' => $logos->id,
+                        'message' => 'New logo is <span>Added !</span>'
+                    )); 
+                    $eventData = array(
+                        'type' => 'logo-added',
+                        'designer_id' => Auth::user()->id,
+                        'notification_id' => $notifications->id,
+                        'logo_id' =>$logos->id,
+                        'message' => 'New logo is <span>Added !</span>'
+                    );
+                
+                event(new RegisterNotificationEvent($eventData));
 
-            return redirect()->back()->with('success','successfully saved data');
+                return redirect()->back()->with('success','You have succesfully uploaded the logo !');
+            }
+        }else{
+            return redirect()->back()->with('error','You are not able to upload any logo until your account is not approved !');
         }
     }
 

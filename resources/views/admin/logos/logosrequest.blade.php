@@ -23,22 +23,16 @@
                                                 </a>
                                                 <div class="gallery-body card-inner align-center justify-between flex-wrap g-2">
                                                     <div class="user-card">
-                                                        <div class="user-avatar">
-                                                            
-                                                            <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt="">
-                                                        </div>
                                                         <div class="user-info" >
-                                                            <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>
-                                                            <span class="sub-text">{{ $logo->userdata['email'] ?? '' }}</span>
-                                                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}">
+                                                            <span class="lead-text">{{ $logo->logo_name ?? '' }}</span>
+                                                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}" style="padding:0px;">
                                                                View More
-                                                                </button>
-
+                                                            </button>
                                                         </div>
                                                     </div>
                                                     <div class="">
-                                                         <a status="{{ $logo->approved_status ?? '' }}" action="approved" data-id="{{ $logo->id ?? '' }}"  class="btn btn-primary statusbutton">Approved</a>
-                                                       <button status="{{ $logo->approved_status ?? '' }}" action="deapproved" data-id="{{ $logo->id ?? '' }}" class="btn btn-danger statusbutton">disapproved</button>
+                                                        <button status="{{ $logo->approved_status ?? '' }}" action="approved" data-id="{{ $logo->id ?? '' }}"  class="btn btn-primary statusbutton">Approved</button>
+                                                        <button status="{{ $logo->approved_status ?? '' }}" action="deapproved" data-id="{{ $logo->id ?? '' }}" class="btn btn-danger statusbutton">Disapproved</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,7 +59,7 @@
                         <div class="modal-body">
                         Designer Name: {{ $logo->userdata['name'] ?? '' }} <br>
                         Designer Email: {{ $logo->userdata['email'] ?? '' }} <br>
-                        Designer Experience: {{ $logo->userdata['experience'] ?? '' }} <br>
+                        Designer Experience: {{ $logo->userdata['experience'] ?? '0' }} years <br>
                         Designer Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
                           Uploaded on: {{ $logo->created_at ?? '' }}]<br>
                           Category: {{ $logo->category['name'] }}<br>
@@ -102,7 +96,7 @@
                             <form action="{{ url('admin-dashboard/updatestatus') }}" method="post">
                                 @csrf
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Deapprove Reason</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Reason for disapproval ?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -139,7 +133,7 @@
                                     success: function(response){
                                         NioApp.Toast(response, 'info', {position: 'top-right'}); 
                                         setTimeout(() => {
-                                            location.reload();
+                                            // location.reload();
                                         }, 1000);    
                                     }
                                 });
