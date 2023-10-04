@@ -27,6 +27,9 @@ class DesginerLogoController extends Controller
     }
    
    public function uploadProc(Request $request){
+    if(Auth::user()->is_approved == 0){
+        return redirect()->back()->with('error','Your account is not approved so you are not currently able to upload logo');
+    }
     if($request->hasFile('file')){
         $request->validate([
             'file' => 'required|mimes:ai,png'

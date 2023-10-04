@@ -51,6 +51,7 @@ class AdminBlogController extends Controller
                 $file->move(public_path().'/blog_images/', $filename);
                 $blogs->banner_img = $filename;
             }
+            $blogs->description = $request->description;
             $blogs->created_by = Auth::user()->id;
             $blogs->category_id = $request->category;
             $blogs->tags = json_encode($request->tags);

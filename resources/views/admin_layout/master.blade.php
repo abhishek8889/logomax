@@ -73,7 +73,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
                                <ul class="nk-menu-sub">
@@ -104,7 +104,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-circled"></em></span>
                                         <span class="nk-menu-text">Categories</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
@@ -118,7 +118,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-puzzle"></em></span>
                                         <span class="nk-menu-text">Tags</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
