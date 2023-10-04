@@ -11,7 +11,6 @@ class BlogController extends Controller
 {
     public function index(Request $request){
         $blogs = Blog::orderBy('created_at', 'desc')->with('user')->get();
-
         return view('users.blog.index',compact('request','blogs'));
     }
     public function blogDetail(Request $request, $slug)
