@@ -2,9 +2,12 @@
 @section('content')
 
 <div class="nk-block nk-block-lg">
-                                        <div class="nk-block-head">
+                                        <div class="nk-block-head d-flex justify-content-between">
                                             <div class="nk-block-head-content">
                                                 <h4 class="nk-block-title">Blogs List </h4>
+                                             </div>
+                                             <div>
+                                                {{ Breadcrumbs::render('blog-list') }}
                                              </div>
                                         </div>
                                         <div class="card card-bordered card-preview">

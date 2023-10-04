@@ -5,11 +5,13 @@
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
                                 <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between g-3">
+                                    <div class="nk-block-between g-3 d-flex justify-content-between">
                                         <div class="nk-block-head-content">
                                             <h3 class="nk-block-title page-title">Disapproved Logos</h3>
                                         </div>
-                                        
+                                        <div>
+                                           {{ Breadcrumbs::render('disapproved-logos') }}
+                                        </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
                                 <div class="nk-block">
@@ -97,7 +99,7 @@
                     </div>
                 </div>
                 @empty
-                <p>No approved logos found</p>
+                <h4 class="text-center">No disapproved logos found</h4>
                 @endforelse
 
                 

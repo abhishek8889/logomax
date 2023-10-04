@@ -1,9 +1,12 @@
 @extends('admin_layout/master')
 @section('content')
 <div class="nk-block nk-block-lg">
-                                        <div class="nk-block-head">
+                                        <div class="nk-block-head d-flex justify-content-between">
                                             <div class="nk-block-head-content">
                                                 <h4 class="title nk-block-title">Edit Blog</h4>
+                                            </div>
+                                            <div>
+                                                {{ Breadcrumbs::render('blog-update',$blogs->slug) }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
@@ -104,7 +107,7 @@
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group mt-4">
-                                                                <button type="submit" class="btn btn-primary">Post</button>
+                                                                <button type="submit" class="btn btn-primary">Update</button>
                                                             </div>
                                                         </div>
                                                     </form>

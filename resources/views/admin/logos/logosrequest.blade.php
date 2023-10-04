@@ -5,10 +5,11 @@
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
                                 <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between g-3">
+                                    <div class="nk-block-between g-3 d-flex justify-content-between">
                                         <div class="nk-block-head-content">
                                             <h3 class="nk-block-title page-title">Logos Requests</h3>
                                         </div>
+                                        <div>{{ Breadcrumbs::render('logos-request') }}</div>
                                         
                                     </div>
                                 </div><!-- .nk-block-head -->
@@ -99,7 +100,7 @@
                     </div>
                 </div>
                 @empty
-               <p>No requests Pending</p>
+               <h4 class="text-center">No requests Pending</h4>
                 @endforelse
                 <!-- logos review modal -->
                 <!-- Modal -->
@@ -130,6 +131,7 @@
                     </div>
                 <script>
                     $(document).ready(function(){
+                        $('.spinner-container').hide();
                         $('.statusbutton').on('click',function(e){
                             e.preventDefault();
                             action = $(this).attr('action');
@@ -159,6 +161,6 @@
                 <script>
                     $('.close').click(function(){
                         $('#exampleModalCenter').modal("hide");
-                    })
+                    });
                 </script>
 @endsection
