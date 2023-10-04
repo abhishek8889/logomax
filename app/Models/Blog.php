@@ -11,4 +11,5 @@ class Blog extends Model
     public function user(){
         return $this->hasOne(User::class,'id','created_by');
     }
+
 }
