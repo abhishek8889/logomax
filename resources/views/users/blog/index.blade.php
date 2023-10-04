@@ -20,34 +20,25 @@
       </div>
       <div class="blog-img-box">
         <div class="row">
-          <div class="col-md-8">
-            <div class="blog-img">
-              <img src="{{asset('/logomax-front-asset/img/blog-img.png') }}" alt="">
-              <div class="content">
-                <div class="blog-dummy-text">
-                  <h2>Lorem Ipsum is simply dummy text</h2>
-                  <div class="Read-More-btn">
-                    <a href="#" class="read-btn">Read More</a>
+          @if($blogs)
+            @foreach ($blogs as $n => $b)
+              @if($n <= 3)
+                <div class="col-md-{{ $n == 0 ? '8' : '4' }}">
+                   <div class="blog-img">
+                      <img src="{{ asset('blog_images') }}/{{ $b->banner_img ?? '' }}" alt="">
+                      <div class="content">
+                        <div class="blog-dummy-text">
+                         <a href="{{ url('blogs-details/' . ($b->slug ?? '')) }}"><h2>{{ $b->title ?? '' }}</h2></a> 
+                          <div class="Read-More-btn {{ $n == 0 ? '' : 'd-none' }}">
+                            <a href="{{ url('blogs-details/' . ($b->slug ?? '')) }}" class="read-btn">Read More</a>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="group-img-1">
-              <img src="{{asset('/logomax-front-asset/img/blog-img1.png') }}" alt="">
-              <div class="passage-text">
-                <p>The standard Lorem Ipsum passage, used since.</p>
-              </div>
-            </div>
-
-            <div class="group-img-2">
-              <img src="{{asset('/logomax-front-asset/img/blog-img2.png') }}" alt="">
-              <div class="star-text">
-                <p>The standard Lorem Ipsum passage, used since.</p>
-              </div>
-            </div>
-          </div>
+                @endif
+            @endforeach
+          @endif
         </div>
       </div>
     </div>
