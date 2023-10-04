@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//only for testing purposes
+// Route::any('/try', function(Request $request){
+//      return response()->json(['success' => 'Laravel response working....'],200);
+// });
