@@ -80,9 +80,11 @@
                                                                 <div class="form-control-wrap">
                                                                     <select class="form-select js-select2 tagsslectbox" multiple="multiple" name="tags[]" data-placeholder="Type here to add new tag">
                                                                         <!-- <option value="default_option">Default Option</option> -->
-                                                                        @foreach($tags as $t)
-                                                                        <option value="{{ $t->id ?? '' }}" <?php if(in_array($t->id,$tagss)){ echo 'selected'; } ?>>{{ $t->name ?? '' }}</option>
-                                                                        @endforeach
+                                                                       
+                                                                            @foreach($tags as $t)
+                                                                            <option value="{{ $t->id ?? '' }}"  @if($tagss) <?php if(in_array($t->id,$tagss)){ echo 'selected'; } ?> @endif>{{ $t->name ?? '' }}</option>
+                                                                            @endforeach
+                                                                       
                                                                     </select>
                                                                 </div>
                                                                 @error('tags')
