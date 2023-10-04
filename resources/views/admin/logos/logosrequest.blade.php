@@ -102,7 +102,7 @@
                             <form action="{{ url('admin-dashboard/updatestatus') }}" method="post">
                                 @csrf
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Deapprove Reason</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Disapprove Reason</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -132,6 +132,7 @@
                                 $('input#logo_id').val(id);
                                 $('#exampleModalCenter').modal("show","true");
                             }else{
+                                $('.spinner-container').show();
                                 $.ajax({
                                     method: 'post',
                                     url: '{{ url('admin-dashboard/updatestatus') }}',
