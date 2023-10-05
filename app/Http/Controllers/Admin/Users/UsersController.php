@@ -30,15 +30,9 @@ class UsersController extends Controller
        return view('admin.users.designers.designerview',compact('designer','logos'));
     }
     public function approveUser(Request $request){
-<<<<<<< HEAD
-        
-    if ($request->has('user_id')) {
-            if($request->is_approved == 0 || $request->is_approved == 2){
-=======
        
         if ($request->has('user_id')) {
             if($request->is_approved == 0 || $request->is_approved == 2){ // approved = 0 => Pending , 2 => disapprove , 1 => approved
->>>>>>> 77f9263a69e9e26c638d2b90f98ee7c60cffbf5c
                 User::where('id', $request->user_id)->update(['is_approved' => 1]); 
                 $mailtitle =  'DESIGNER ACCOUNT APPROVED';
             }elseif($request->is_approved == 1){
