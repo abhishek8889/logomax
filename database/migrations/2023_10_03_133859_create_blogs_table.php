@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('banner_img');
             $table->text('description');
             $table->integer('category_id');
-            $table->integer('tags');
+            $table->string('tags');
             $table->integer('created_by');
             $table->integer('status')->default(1);
             $table->timestamps();

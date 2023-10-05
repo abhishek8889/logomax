@@ -10,5 +10,4 @@ class DesignerDashController extends Controller
     public function index(Request $request){
         return view('designer.dashboard.index');
     }
-    
 }

@@ -73,7 +73,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
                                <ul class="nk-menu-sub">
@@ -104,7 +104,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-circled"></em></span>
                                         <span class="nk-menu-text">Categories</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
@@ -118,7 +118,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-puzzle"></em></span>
                                         <span class="nk-menu-text">Tags</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
@@ -229,11 +229,10 @@
                                     </li>
                                     <?php
                                         $notifictations =  App\Models\Notifications::class;
-                                        $newNotifications = $notifictations::where('is_read',0)->get();
-                                    
+                                        $newNotifications = $notifictations::where([['is_read','=',0],['reciever_id','=',0]])->get();
                                     ?>
                                     <li class="dropdown notification-dropdown me-n1">
-                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" id="check-notification" data-bs-toggle="dropdown">
                                             <div class="icon-status icon-status-info" id="admin-icon-status">
                                                 <?php if(isset($newNotifications) && count($newNotifications) > 0){ ?>   
                                                     <em class="icon ni ni-bell"></em> <span class="icon-active"></span>
@@ -245,12 +244,11 @@
                                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                                             <div class="dropdown-head">
                                                 <span class="sub-title nk-dropdown-title">Notifications</span>
-                                                <a href="#">Mark All as Read</a>
+                                                <a href="{{ url('read-notification/all-read') }}" id="mark-all-read">Mark All as Read</a>
                                             </div>
                                             <div class="dropdown-body">
                                                 <div class="nk-notification " id="admin-notification">
                                                     <!-- Notification list -->
-                                                    
                                                     <?php 
                                                     if(count($newNotifications) > 0){
                                                        foreach($newNotifications as $notification){ 
@@ -267,9 +265,6 @@
                                                     <?php }} ?>
                                                 </div>
                                             </div>
-                                            <!-- <div class="dropdown-foot center">
-                                                <a href="#">View All</a>
-                                            </div> -->
                                         </div>
                                     </li> 
                                 </ul>
@@ -312,6 +307,12 @@
      NioApp.Toast('{{ Session::get("success") }}', 'info', {position: 'top-right'});
 </script>
 @endif
+<script>
+    $("#check-notification").on('click',function(e){
+        e.preventDefault();
+        console.log('hello');
+    });
+</script>
    
 </body>
 

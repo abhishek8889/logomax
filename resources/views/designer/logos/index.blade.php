@@ -5,9 +5,12 @@
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
                                 <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between g-3">
+                                    <div class="nk-block-between g-3 d-flex justify-content-between">
                                         <div class="nk-block-head-content">
                                             <h3 class="nk-block-title page-title">My Logos</h3>
+                                        </div>
+                                        <div>
+                                            {{ Breadcrumbs::render('logos') }}
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
@@ -41,11 +44,33 @@
                                                                     ?>
                                                                         <span class="badge bg-success">Approved</span>
                                                                     <?php }else{?>
-                                                                        <span class="badge bg-danger">Not Approved</span>
+                                                                        <span class="btn badge bg-danger" data-bs-toggle="modal" data-bs-target="#reasonForDisapproval-{{ $logo->id }}">Not Approved</span>
                                                                     <?php }
                                                                     ?>
                                                                 </div>
                                                             </div>
+                                                            <!-- Disaaproval reason  -->
+                                                            <div class="modal fade" id="reasonForDisapproval-{{ $logo->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Disapproval reason</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                    <?php
+                                                                    if(isset($logo->admin_review) && !empty($logo->admin_review)){
+                                                                        echo "<p> $logo->admin_review </p>";
+                                                                    }
+                                                                    ?>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
                                                             <div class="card-tag">
                                                                 <?php 
                                                                     $tagsString = $logo->tags;

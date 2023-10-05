@@ -5,9 +5,12 @@
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
                                 <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between g-3">
+                                    <div class="nk-block-between g-3 d-flex justify-content-between">
                                         <div class="nk-block-head-content">
                                             <h3 class="nk-block-title page-title">Approved Logos</h3>
+                                        </div>
+                                        <div>
+                                           {{ Breadcrumbs::render('approved-logos') }}
                                         </div>
                                         
                                     </div>
@@ -70,7 +73,25 @@
 
                           Logo_size: {{ $logo->media['image_size'] }}<br>
                           Dimensions: {{ $logo->media['image_dimensions'] }}<br>
-                          Image Format : {{ $logo->media['image_format'] }}
+                          Image Format : {{ $logo->media['image_format'] }}<br><br>
+
+                          Category: {{ $logo->category['name'] ?? '' }}<br>
+
+                        @if($logo->tags !== null)
+                        Tags: 
+                        <?php
+                        $tags = json_decode($logo->tags);
+                        foreach($tags as $t){
+                        $tagmodel =  App\Models\Tag::class;
+                                        $tag = $tagmodel::find($t);
+                               if($tag){
+                                echo '#'.$tag->name.',';
+                               }
+                        }
+                        ?>
+                        @endif
+
+
 
 
                         </div>
@@ -81,7 +102,7 @@
                     </div>
                 </div>
                 @empty
-                <p>No approved logos found</p>
+                <h4 class="text-center">No approved logos found</h4>
                 @endforelse
 
                 

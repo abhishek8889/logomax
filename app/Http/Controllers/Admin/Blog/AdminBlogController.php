@@ -77,6 +77,7 @@ class AdminBlogController extends Controller
         $blogs->category_id = $request->category;
         $blogs->tags = json_encode($request->tags);
         $blogs->save();
+        
         return redirect()->back()->with('success','successfully posted blog');
         }
        }

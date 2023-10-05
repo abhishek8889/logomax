@@ -1,5 +1,8 @@
 @extends('admin_layout/master')
 @section('content')
+<div class="d-flex justify-content-end">
+     {{ Breadcrumbs::render('categories-add') }}
+</div>
         <div class="col-lg-6">
                  <div class="card card-bordered h-100">
                      <div class="card-inner">
