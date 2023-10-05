@@ -19,6 +19,14 @@ class LogosController extends Controller
 
         return view('admin.logos.logosrequest',compact('logos'));
     }
+    public function logodetail($slug){
+        $logos = Logo::where('logo_slug',$slug)->first();
+        if(empty($logos)){
+            abort(404);
+        }
+       
+        return view('admin.logos.logodetail',compact('logos'));
+    }
     public function approvedLogos(){
         $logos = Logo::where([['status',1],['approved_status',1]])->get();
         return view('admin.logos.approvedlogos',compact('logos'));

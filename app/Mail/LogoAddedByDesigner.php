@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterConfirmationMail extends Mailable
+class LogoAddedByDesigner extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,6 @@ class RegisterConfirmationMail extends Mailable
     protected $mailData;
     public function __construct($mailData)
     {
-        //
         $this->mailData = $mailData;
     }
 
@@ -29,7 +28,7 @@ class RegisterConfirmationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->mailData['title'],
+            subject: 'Logo Added By Designer',
         );
     }
 
@@ -39,10 +38,10 @@ class RegisterConfirmationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'Mail.register_confirmation.index',
+            view: 'Mail.Logos_status.logo_uploaded_by_designer',
             with: [
-                    'mailData' => $this->mailData,
-                    ],
+                'mailData' => $this->mailData,
+            ]
         );
     }
 

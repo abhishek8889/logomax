@@ -15,6 +15,10 @@ Breadcrumbs::for('logos-request', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('LOGOS-REQUESTS', route('logos-requests'));
 });
+Breadcrumbs::for('logos-detail', function (BreadcrumbTrail $trail, $slug) {
+    $trail->parent('logos-request');
+    $trail->push($slug, route('logos-requests',['slug'=>$slug]));
+});
 Breadcrumbs::for('approved-logos', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('APPROVED-LOGOS', route('approved-logos'));
@@ -26,6 +30,10 @@ Breadcrumbs::for('disapproved-logos', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('desingers-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('DESIGNERS-LIST', route('designer-list'));
+});
+Breadcrumbs::for('designer-view', function (BreadcrumbTrail $trail,$name) {
+    $trail->parent('desingers-list');
+    $trail->push($name, route('designer-view',['id'=>$name]));
 });
 Breadcrumbs::for('guests-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');

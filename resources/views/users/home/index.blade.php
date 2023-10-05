@@ -1,4 +1,4 @@
-@extends('user_layout.master')
+@extends('user_layout/master')
 @section('content')
   <!-- ================= banner section start ====================== -->
 
@@ -242,16 +242,16 @@
         <div class="popular-btn">
           <ul>
             @if($tags->IsNotEmpty())
-              @foreach ($tags as $tag)
-                <li>
+              @foreach ($tags as $t => $tag)
+                <li class="{{ $t >= 10 ? 'tags-data d-none' : '' }}">
                   <a href="#">{{ $tag->name ?? '' }}</a>
                 </li>
               @endforeach
             @else
             <span>No tag found !</span>
             @endif
-            <li class="show-more">
-              <a class="show-btn d-none" href="#">Show More</a>
+            <li class="show-more {{ count($tags) > 10 ? '' : 'd-none' }}">
+              <a class="show-btn" data-for="showmore" href="#">Show More</a>
             </li>
           </ul>
         </div>
@@ -385,4 +385,16 @@
   </section>
 
   <!-- ================= slider section end ====================== -->
+
+
+<script>
+  $(document).ready(function() {
+      $('.show-btn').on('click', function(e) {
+        e.preventDefault();
+        var dataFor = $(this).attr('data-for');
+        $('.tags-data').toggleClass('d-none');
+        $(this).html(dataFor === 'showmore' ? 'Show Less' : 'Show More').attr('data-for', dataFor === 'showmore' ? 'showless' : 'showmore');
+      });
+  });
+</script>
   @endsection

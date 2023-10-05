@@ -12,6 +12,8 @@ use App\Events\RegisterNotificationEvent;
 use App\Models\Notifications;
 use File;
 use Auth;
+use App\Mail\LogoAddedByDesigner;
+use Mail;
 
 class DesginerLogoController extends Controller
 {
@@ -27,7 +29,7 @@ class DesginerLogoController extends Controller
     }
    
     public function uploadProc(Request $request){
-        if(auth()->user()->is_approved !== 0){
+        if(auth()->user()->is_approved !== 0 && auth()->user()->is_approved !== 2){
             if($request->hasFile('file')){
                 $request->validate([
                     'file' => 'required|mimes:ai,png'
@@ -71,7 +73,6 @@ class DesginerLogoController extends Controller
                     $logos->status = 1;
                     $logos->designer_id = Auth::user()->id;
                     $logos->save();
-
                     // Send notification to admin ::::::::: 
 
                     $notifications = Notifications::create(array(
@@ -91,6 +92,10 @@ class DesginerLogoController extends Controller
                     );
                 
                 event(new RegisterNotificationEvent($eventData));
+                $mailData = array(
+                    'data' => ''
+                );
+                $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoAddedByDesigner($mailData));
 
                 return redirect()->back()->with('success','You have succesfully uploaded the logo !');
             }

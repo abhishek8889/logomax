@@ -26,9 +26,10 @@
                                                     <div class="user-card">
                                                         <div class="user-info" >
                                                             <span class="lead-text">{{ $logo->logo_name ?? '' }}</span>
-                                                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}" style="padding:0px;">
+                                                            <!-- <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}" style="padding:0px;">
                                                                View More
-                                                            </button>
+                                                            </button> -->
+                                                            <a href="{{ url('admin-dashboard/logo-detail/'.$logo->logo_slug) }}">View More</a>
                                                         </div>
                                                     </div>
                                                     <div class="">
@@ -62,12 +63,12 @@
                           Name: {{ $logo->userdata['name'] ?? '' }} <br>
                           Email: {{ $logo->userdata['email'] ?? '' }} <br>
                           Experience: {{ $logo->userdata['experience'] ?? 0 }} years <br>
-                          Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
+                          Address: {{ $logo->userdata['address'] ?? '' }} , {{ $logo->userdata['country'] ?? '' }} <br>
                           Uploaded on: {{ $logo->created_at ?? '' }}<br><br>
 
-                          Logo_size: {{ $logo->media['image_size'] }}<br>
-                          Dimensions: {{ $logo->media['image_dimensions'] }}<br>
-                          Image Format : {{ $logo->media['image_format'] }}<br><br>
+                          Logo_size: {{ $logo->media['image_size'] ?? '' }}<br>
+                          Dimensions: {{ $logo->media['image_dimensions'] ?? '' }}<br>
+                          Image Format : {{ $logo->media['image_format'] ?? '' }}<br><br>
 
                           Category: {{ $logo->category['name'] ?? '' }}<br>
 
@@ -142,7 +143,7 @@
                                     success: function(response){
                                         NioApp.Toast(response, 'info', {position: 'top-right'}); 
                                         setTimeout(() => {
-                                            // location.reload();
+                                            location.reload();
                                         }, 1000);    
                                     }
                                 });
