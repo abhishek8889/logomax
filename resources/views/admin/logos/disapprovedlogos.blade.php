@@ -32,9 +32,13 @@
                                                         <div class="user-info" >
                                                             <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>
                                                             <span class="sub-text">{{ $logo->userdata['email'] ?? '' }}</span>
-                                                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}">
-                                                               View More
-                                                                </button>
+                                                                <div class="user-info" >
+                                                                        <span class="lead-text">{{ $logo->logo_name ?? '' }}</span>
+                                                                        <!-- <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}" style="padding:0px;">
+                                                                        View More
+                                                                        </button> -->
+                                                                        <a href="{{ url('admin-dashboard/logo-detail/'.$logo->logo_slug) }}">View More</a>
+                                                                </div>
 
                                                         </div>
                                                     </div>

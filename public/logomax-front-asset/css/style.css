@@ -2083,8 +2083,15 @@ input.form-control:focus {
     position: relative;
 }
 
-.form-group.password::after {
+a.password::before {
     content: '\f06e';
+    position: absolute;
+    font-family: 'Font Awesome 6 Free';
+    top: 13px;
+    right: 20px;
+}
+a.login.password::after {
+    content: '\f070';
     position: absolute;
     font-family: 'Font Awesome 6 Free';
     top: 13px;

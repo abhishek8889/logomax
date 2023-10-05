@@ -29,7 +29,7 @@ class RegisterConfirmationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Register Confirmation Mail',
+            subject: $this->mailData['title'],
         );
     }
 
