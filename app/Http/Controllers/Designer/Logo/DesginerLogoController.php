@@ -73,7 +73,6 @@ class DesginerLogoController extends Controller
                     $logos->status = 1;
                     $logos->designer_id = Auth::user()->id;
                     $logos->save();
-
                     // Send notification to admin ::::::::: 
 
                     $notifications = Notifications::create(array(

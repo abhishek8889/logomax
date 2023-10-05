@@ -50,6 +50,9 @@ Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 Route::get('/admin-login', function () {
     return view('authentication.admin_login');
 });
+
+
+
 Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
@@ -111,6 +114,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index'])->name('designer-dashboard');
     Route::get('/designer-dashboard/setting',[AccountSetting::class,'index'])->name('account-setting');
+    Route::get('/designer-dashboard/change-password',[AuthenticationController::class,'changePassword']);
+    
     Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
 
     Route::get('designer-dashboard/mylogos',[DesginerLogoController::class,'index'])->name('my-logos');
