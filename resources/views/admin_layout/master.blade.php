@@ -13,12 +13,13 @@
     <!-- StyleSheets  -->
     
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
     <script type="module" src="{{ asset('/build/assets/app-bcbd3862.js') }}"></script> 
-  <!-- <script type="module" src="{{ asset('build/assets/app-4ed993c7.js') }}"></script>
-     vite(['resources/css/app.css' , 'resources/js/app.js']) -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <!-- vite(['resources/css/app.css' , 'resources/js/app.js']) -->
 </head>
 <style>
     .icon-active {
@@ -32,6 +33,9 @@
 }
 .icon-status:after{
     display: none;
+}
+.ck{
+    height:200px;
 }
 </style>
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -68,15 +72,18 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
-                                    <ul class="nk-menu-sub">
+                               <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/logos-list') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/approved-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Approved Logos</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/disapproved-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Disapproved Logos</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -96,7 +103,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-circled"></em></span>
                                         <span class="nk-menu-text">Categories</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
@@ -110,13 +117,31 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-puzzle"></em></span>
                                         <span class="nk-menu-text">Tags</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
                                         
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/tags') }}" class="nk-menu-link"><span class="nk-menu-text">Tags list</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Blog</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/blog-list') }}" class="nk-menu-link"><span class="nk-menu-text">Blog list</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/blogs/add') }}" class="nk-menu-link"><span class="nk-menu-text">Add Blog</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/blogs/category') }}" class="nk-menu-link"><span class="nk-menu-text">Blog Category</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
@@ -203,11 +228,10 @@
                                     </li>
                                     <?php
                                         $notifictations =  App\Models\Notifications::class;
-                                        $newNotifications = $notifictations::where('is_read',0)->get();
-                                    
+                                        $newNotifications = $notifictations::where([['is_read','=',0],['reciever_id','=',0]])->get();
                                     ?>
                                     <li class="dropdown notification-dropdown me-n1">
-                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" id="check-notification" data-bs-toggle="dropdown">
                                             <div class="icon-status icon-status-info" id="admin-icon-status">
                                                 <?php if(isset($newNotifications) && count($newNotifications) > 0){ ?>   
                                                     <em class="icon ni ni-bell"></em> <span class="icon-active"></span>
@@ -219,12 +243,11 @@
                                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                                             <div class="dropdown-head">
                                                 <span class="sub-title nk-dropdown-title">Notifications</span>
-                                                <a href="#">Mark All as Read</a>
+                                                <a href="{{ url('read-notification/all-read') }}" id="mark-all-read">Mark All as Read</a>
                                             </div>
                                             <div class="dropdown-body">
                                                 <div class="nk-notification " id="admin-notification">
                                                     <!-- Notification list -->
-                                                    
                                                     <?php 
                                                     if(count($newNotifications) > 0){
                                                        foreach($newNotifications as $notification){ 
@@ -241,9 +264,6 @@
                                                     <?php }} ?>
                                                 </div>
                                             </div>
-                                            <!-- <div class="dropdown-foot center">
-                                                <a href="#">View All</a>
-                                            </div> -->
                                         </div>
                                     </li> 
                                 </ul>
@@ -286,6 +306,12 @@
      NioApp.Toast('{{ Session::get("success") }}', 'info', {position: 'top-right'});
 </script>
 @endif
+<script>
+    $("#check-notification").on('click',function(e){
+        e.preventDefault();
+        console.log('hello');
+    });
+</script>
    
 </body>
 

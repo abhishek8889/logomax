@@ -25,25 +25,42 @@ class CategoriesController extends Controller
     return view('admin.categories.addcategories',compact('categories','edit_category'));
    }
    public function addproc(Request $request){
+    
     if($request->id){
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories,id,'.$request->id,
         ]);
         $category = Categories::find($request->id);
+        if($request->hasFile('category_image')){
+            $file = $request->file('category_image');
+            $filename = $category->slug.rand(0,100).'.'.$file->extension();
+            $file->move(public_path().'/category_images/', $filename);
+        $category->image = $filename;
+        }
+   
         $category->name = $request->name;
         $category->slug = $request->slug;
         $category->parent_category = $request->parent_category;
+        
         $category->update();
         return redirect()->back()->with('success','successfully updated categories');  
     }else{
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories',
+            'category_image' => 'required'
         ]);
+        if($request->hasFile('category_image')){
+          
+            $file = $request->file('category_image');
+            $filename = $request->slug.rand(0,100).'.'.$file->extension();
+            $file->move(public_path().'/category_images/', $filename);
+        }
         $category = new Categories();
         $category->name = $request->name;
         $category->slug = $request->slug;
+        $category->image = $filename;
         $category->parent_category = $request->parent_category;
         $category->save();
         return redirect()->back()->with('success','successfully saved categories');

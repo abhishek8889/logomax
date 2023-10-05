@@ -13,9 +13,28 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js']) -->
+    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    <script type="module" src="{{ asset('/build/assets/bootstrap-93e32d00.js') }}"></script> 
+
 </head>
+<style>
+    .icon-active {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #1ee1c8;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+}
+.icon-status:after{
+    display: none;
+}
+</style>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
+    <input type="hidden" id="page_id" value="{{ auth()->user()->id }}">
 <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
@@ -42,7 +61,7 @@
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt"><a href="{{ url('designer-dashboard') }}">Designer-Dashboard</a></h6>
                                 </li>
-                               @if(auth()->user()->status == 1)
+                               @if(auth()->user()->is_approved == 1)
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
@@ -151,9 +170,21 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <!-- <li class="dropdown notification-dropdown me-n1">
+                                    <!-- notifications -->
+
+                                    <?php
+                                        $notifictations =  App\Models\Notifications::class;
+                                        $newNotifications = $notifictations::where([['is_read','=',0],['reciever_id','=',auth()->user()->id]])->get();
+                                    ?>
+                                    <li class="dropdown notification-dropdown me-n1">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                                            <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
+                                            <div class="icon-status icon-status-info" id="admin-icon-status">
+                                                <?php if(isset($newNotifications) && count($newNotifications) > 0){ ?>   
+                                                    <em class="icon ni ni-bell"></em> <span class="icon-active"></span>
+                                                <?php }else{?>
+                                                    <em class="icon ni ni-bell"></em> <span class="icon-active" style="display:none;"></span>
+                                                <?php } ?>
+                                            </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                                             <div class="dropdown-head">
@@ -161,68 +192,28 @@
                                                 <a href="#">Mark All as Read</a>
                                             </div>
                                             <div class="dropdown-body">
-                                                <div class="nk-notification">
+                                                <div class="nk-notification " id="host-notification">
+                                                    <!-- Notification list -->
+                                                    <?php 
+                                                    if(count($newNotifications) > 0){
+                                                       foreach($newNotifications as $notification){ 
+                                                    ?>
                                                     <div class="nk-notification-item dropdown-inner">
                                                         <div class="nk-notification-icon">
                                                             <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
                                                         </div>
                                                         <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
+                                                            <div class="nk-notification-text"><?php  echo $notification->message; ?><span> <a href="{{ url('read-notification/'.$notification->id) }}"> see </a></span></div>
                                                             <div class="nk-notification-time">2 hrs ago</div>
                                                         </div>
                                                     </div>
-                                                    <div class="nk-notification-item dropdown-inner">
-                                                        <div class="nk-notification-icon">
-                                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                                        </div>
-                                                        <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nk-notification-item dropdown-inner">
-                                                        <div class="nk-notification-icon">
-                                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                                        </div>
-                                                        <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nk-notification-item dropdown-inner">
-                                                        <div class="nk-notification-icon">
-                                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                                        </div>
-                                                        <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nk-notification-item dropdown-inner">
-                                                        <div class="nk-notification-icon">
-                                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                                        </div>
-                                                        <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nk-notification-item dropdown-inner">
-                                                        <div class="nk-notification-icon">
-                                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                                        </div>
-                                                        <div class="nk-notification-content">
-                                                            <div class="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
-                                                        </div>
-                                                    </div>
+                                                    <?php }} ?>
                                                 </div>
                                             </div>
-                                            <div class="dropdown-foot center">
-                                                <a href="#">View All</a>
-                                            </div>
                                         </div>
-                                    </li> -->
+                                    </li> 
+
+                                    <!-- notifications end  -->
                                 </ul>
                             </div>
                         </div>
@@ -286,6 +277,21 @@
     });
 </script>
     @endif
+    @elseif(auth()->user()->is_approved == 0)
+    <script>
+    $(document).ready(function(){
+    Swal.fire({
+        title: 'Your account is not approved wait for approval, Currently you are not able to upload logos !',
+        icon: 'info',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#008000',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+        });
+    });
+</script>
 @endif
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -74,16 +74,23 @@
 
       <div class="tab-wrapper">
         <div class="grid-wrapp">
-          <div class="img__wrapper_boxs">
-            <div class="img_logs">
-              <img src="{{ asset('logomax-front-asset/img/logs1.png') }}" alt="">
+        @if ($categories->IsNotEmpty())
+          @foreach ($categories as $category)
+            <div class="img__wrapper_boxs">
+                  <div class="img_logs">
+                    <!-- <img src="{{ asset('logomax-front-asset/img/logs3.png') }}" alt=""> -->
+                    <img src="{{ asset('category_images') }}/{{ $category->image ?? '' }}" alt="">
+                  </div>
+                  <div class="img__wrapper_boxs_text">
+                    <h5>{{ $category->name }}</h5>
+                  </div>
+            </div>
+          @endforeach
+        @else
+          <p>No categories found!</p>
+        @endif
 
-            </div>
-            <div class="img__wrapper_boxs_text">
-              <h5>Category Name 01</h5>
-            </div>
-          </div>
-          <div class="img__wrapper_boxs">
+          <!-- <div class="img__wrapper_boxs">
             <div class="img_logs">
               <img src="{{ asset('logomax-front-asset/img/logs2.png') }}" alt="">
 
@@ -181,7 +188,7 @@
             <div class="img__wrapper_boxs_text">
               <h5>Category Name 07</h5>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -205,14 +212,14 @@
           <h6>Register to download Logos
             from Logomax.</h6>
           <div class="join-btn">
-            <a class="g-btn" href="#"><i class="fa-solid fa-g"></i>Register with <strong>Google</strong> </a>
+            <a class="g-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i>Register with <strong>Google</strong> </a>
           </div>
           <div class="join-btn">
-            <a class="fb-btn" href="#"> <i class="fa-brands fa-facebook"></i>Register with <strong>Facebook</strong>
+            <a class="fb-btn" href="{{ url('authorized/facebook') }}"> <i class="fa-brands fa-facebook"></i>Register with <strong>Facebook</strong>
             </a>
           </div>
           <div class="join-btn">
-            <a class="email-btn" href="#"><i class="fa-solid fa-envelope"></i>Register by email</a>
+            <a class="email-btn" href="{{ url('/register') ?? '' }}"><i class="fa-solid fa-envelope"></i>Register by email</a>
           </div>
           <p>By clicking "Create Account" or registering using Facebook or
             Google, you agree to the Membership Agreement *</p>
@@ -234,68 +241,17 @@
       <div class="popular-btn-box">
         <div class="popular-btn">
           <ul>
-            <li>
-              <a href="#">Agriculture</a>
-            </li>
-            <li>
-              <a href="#">Airline</a>
-            </li>
-            <li>
-              <a href="#">Animals</a>
-            </li>
-            <li>
-              <a href="#">App</a>
-            </li>
-            <li>
-              <a href="#">Bakery</a>
-            </li>
-            <li>
-              <a href="#">Barber shop</a>
-            </li>
-            <li>
-              <a href="#">Beauty</a>
-            </li>
-            <li>
-              <a href="#">Solar Energy</a>
-            </li>
-            <li>
-              <a href="#">Interior design</a>
-            </li>
-            <li>
-              <a href="#">Logistics</a>
-            </li>
-            <li>
-              <a href="#">Makeup</a>
-            </li>
-            <li>
-              <a href="#">Marketing</a>
-            </li>
-            <li>
-              <a href="#">Travel</a>
-            </li>
-            <li>
-              <a href="#">Dental</a>
-            </li>
-            <li>
-              <a href="#">Education</a>
-            </li>
-            <li>
-              <a href="#">Lawn care</a>
-            </li>
-            <li>
-              <a href="#">Trendy logo</a>
-            </li>
-            <li>
-              <a href="#">Wedding</a>
-            </li>
-            <li>
-              <a href="#">Insurance</a>
-            </li>
-            <li>
-              <a href="#">Digital</a>
-            </li>
+            @if($tags->IsNotEmpty())
+              @foreach ($tags as $tag)
+                <li>
+                  <a href="#">{{ $tag->name ?? '' }}</a>
+                </li>
+              @endforeach
+            @else
+            <span>No tag found !</span>
+            @endif
             <li class="show-more">
-              <a class="show-btn" href="#">Show More</a>
+              <a class="show-btn d-none" href="#">Show More</a>
             </li>
           </ul>
         </div>

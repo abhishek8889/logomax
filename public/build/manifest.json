@@ -16,5 +16,13 @@
     "file": "assets/bootstrap-93e32d00.js",
     "isEntry": true,
     "src": "resources/js/bootstrap.js"
+  },
+  "resources/js/designer_notification.js": {
+    "file": "assets/designer_notification-ba565845.js",
+    "imports": [
+      "resources/js/bootstrap.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/designer_notification.js"
   }
 }

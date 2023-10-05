@@ -6,19 +6,14 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb blog_breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="{{ url('/') ?? '' }}">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="#">Blog</a>
+              <a href="{{ url('blogs') ?? '' }}">Blog</a>
+              
             </li>
             <li class="breadcrumb-item">
-              <a href="#">Lorem Ipsum is simply dummy text Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="#">Blog</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="#">Lorem Ipsum is simply dummy text </a>
+              <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">{{ $blog->title ?? '' }}</a>
             </li>
           </ol>
         </nav>
@@ -27,26 +22,21 @@
         </div>
         <div class="detail-text">
           <div class="lorem-text">
-            <p>By Loren Max <span>| April 20, 2023</span>
+            <p>By {{ $blog->user->name ?? '' }} <span>| {{ $blog->created_at->format('F d, Y') ?? '' }}</span>
             </p>
           </div>
           <div class="text-wrapper">
-            <h2>Lorem Ipsum is simply dummy text</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-              of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-              like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using 'Content here, content here', making it look like readable English. Many
-              desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
-              search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved
-              over the years, sometimes by accident, sometimes on purpose</p>
+            <h2>{{ $blog->title ?? '' }}</h2>
+            <p>{{ $blog->sub_title ?? '' }}</p>
           </div>
         </div>
+        <div class="post-img">
+          <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
+        </div>
         <div class="logo-detail-text">
+            <?php echo $blog->description; ?>
+        </div>
+        <!-- <div class="logo-detail-text">
           <div class="lorem-text">
             <h6>Where does it come from?</h6>
           </div>
@@ -77,11 +67,9 @@
               Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
             </p>
           </div>
-        </div>
-        <div class="post-img">
-          <img src="img/blog-detail.png" alt="">
-        </div>
-        <div class="logo-detail-text">
+        </div> -->
+     
+        <!-- <div class="logo-detail-text">
           <div class="lorem-text">
             <h6>The standard Lorem Ipsum passage, used since the 1500s</h6>
           </div>
@@ -106,7 +94,7 @@
               Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
               versions of Lorem Ipsum</p>
           </div>
-        </div>
+        </div> -->
         <div class="share-content">
           <div class="share-post-text">
             <h6>Share This Post</h6>
@@ -131,59 +119,33 @@
         <h2>Related Posts</h2>
       </div>
       <div class="recent-blog-box">
+      @if($relatedBlog->IsNotEmpty())
         <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content max">
-              <div class="recent-blog-img">
-                <img src="img/blog1.png" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
+          @foreach ($relatedBlog as $related)
+            
+            <div class="col-lg-4 col-md-6">
+              <div class="blog-content max">
+                <div class="recent-blog-img">
+                <!-- <img src="{{asset('/logomax-front-asset/img/blog1.png') }}" alt=""> -->
+                  <a href="{{ url('blogs-details/' . ($related->slug ?? '')) }}"><img src="{{ asset('blog_images') }}/{{ $related->banner_img ?? '' }}" alt=""></a> 
                 </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content max">
-              <div class="recent-blog-img">
-                <img src="img/blog2.png" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
+                <div class="recent-text">
+                  <div class="lorem-text">
+                    <p>By {{ $related->user->name ?? '' }} <span>| {{ $related->created_at->format('F d, Y') ?? '' }}</span> </p>
+                  </div>
+                  <div class="simply-text">
+                    <a href="{{ url('blogs-details/' . ($related->slug ?? '')) }}"><h6>{{ $related->title ?? '' }}</h6></a> 
+                    <p>{{ $related->sub_title ?? '' }}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="blog-content max">
-              <div class="recent-blog-img">
-                <img src="img/blog3.png" alt="">
-              </div>
-              <div class="recent-text">
-                <div class="lorem-text">
-                  <p>By Loren Max <span>| April 20, 2023</span> </p>
-                </div>
-                <div class="simply-text">
-                  <h6>The standard Lorem Ipsum <br> passage, used since.</h6>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          @endforeach
         </div>
+        @else
+        <span>Related Posts Not Available ! </span>
+        @endif
       </div>
     </div>
   </section>
