@@ -33,12 +33,12 @@
                                                             Name: {{ $logos->userdata['name'] ?? '' }} <br>
                                                             Email: {{ $logos->userdata['email'] ?? '' }} <br>
                                                             Experience: {{ $logos->userdata['experience'] ?? 0 }} years <br>
-                                                            Address: {{ $logos->userdata['address'] }} , {{ $logos->userdata['country'] }} <br><br>
+                                                            Address: {{ $logos->userdata['address'] ?? '' }} , {{ $logos->userdata['country'] ?? '' }} <br><br>
                                                             
                                                         <h5>Logo Details</h5>
-                                                            Logo_size: {{ $logos->media['image_size'] }}<br>
-                                                            Dimensions: {{ $logos->media['image_dimensions'] }}<br>
-                                                            Image Format : {{ $logos->media['image_format'] }}<br>
+                                                            Logo_size: {{ $logos->media['image_size'] ?? '' }}<br>
+                                                            Dimensions: {{ $logos->media['image_dimensions'] ?? '' }}<br>
+                                                            Image Format : {{ $logos->media['image_format'] ?? '' }}<br>
                                                             Uploaded on: {{ $logos->created_at ?? '' }}<br>
                                                             Category: {{ $logos->category['name'] ?? '' }}<br>
 

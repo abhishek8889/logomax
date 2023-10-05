@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Logo;
 use Mail;
 use App\Mail\DesiginerVerifiedMail;
 class UsersController extends Controller
@@ -18,11 +19,17 @@ class UsersController extends Controller
         ])->orderBy('created_at','desc')->get();
         return view('admin.users.designers.index',compact('users'));
     }
+    public function designerview($id){
+       $designer = User::find($id);
+        if(!($designer)){
+          abort(404);
+        }
+        $logos = Logo::where('designer_id',$designer->id)->get();
+       return view('admin.users.designers.designerview',compact('designer','logos'));
+    }
     public function approveUser(Request $request){
         
     if ($request->has('user_id')) {
-        
-        if($request->action == "approve"){
             if($request->is_approved == 0 || $request->is_approved == 2){
                 User::where('id', $request->user_id)->update(['is_approved' => 1]); 
                 $mailtitle =  'DESIGNER ACCOUNT APPROVED';
@@ -43,10 +50,6 @@ class UsersController extends Controller
             }elseif($request->is_approved == 1){
                 return response()->json(['success'=> $user->name.' has been disapproved']);
             } 
-        }elseif($request->action == "remove"){
-            $user = User::find($request->user_id)->delete();
-            return response()->json(['success'=>'This request is successfully removed']);
-        }
         } else {
             return response()->json(['error' => 'Failed to find user']);
         }

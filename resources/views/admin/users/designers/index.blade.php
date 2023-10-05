@@ -79,8 +79,13 @@
                                                                         @endif
                                                                     </li>
                                                                     <li>
-                                                                        <a href="#" class="remove" is-approved="{{ $user->is_approved }}" link="{{ url('admin-dahboard/designers-list/delete/'.$user->id) }}" action="remove">
+                                                                        <a href="#" class="remove" is-approved="{{ $user->is_approved }}" link="{{ url('admin-dashboard/designers-list/delete/'.$user->id) }}" action="remove">
                                                                             Remove
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="{{ url('/admin-dashboard/designers-view/'.$user->id) }}" action="remove">
+                                                                            View
                                                                         </a>
                                                                     </li>
                                                                     </ul>
@@ -151,8 +156,6 @@
     $('body').delegate('.remove','click',function(e){
         e.preventDefault();
         link = $(this).attr('link');
-        console.log(link);
-        $(document).ready(function(){
                 Swal.fire({
                     title: 'Do you want to delete this designer permanently ?',
                     icon: 'info',
@@ -169,6 +172,5 @@
                     });
                 });
 
-    })
 </script>
 @endsection

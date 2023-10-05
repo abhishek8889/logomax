@@ -63,12 +63,12 @@
                           Name: {{ $logo->userdata['name'] ?? '' }} <br>
                           Email: {{ $logo->userdata['email'] ?? '' }} <br>
                           Experience: {{ $logo->userdata['experience'] ?? 0 }} years <br>
-                          Address: {{ $logo->userdata['address'] }} , {{ $logo->userdata['country'] }} <br>
+                          Address: {{ $logo->userdata['address'] ?? '' }} , {{ $logo->userdata['country'] ?? '' }} <br>
                           Uploaded on: {{ $logo->created_at ?? '' }}<br><br>
 
-                          Logo_size: {{ $logo->media['image_size'] }}<br>
-                          Dimensions: {{ $logo->media['image_dimensions'] }}<br>
-                          Image Format : {{ $logo->media['image_format'] }}<br><br>
+                          Logo_size: {{ $logo->media['image_size'] ?? '' }}<br>
+                          Dimensions: {{ $logo->media['image_dimensions'] ?? '' }}<br>
+                          Image Format : {{ $logo->media['image_format'] ?? '' }}<br><br>
 
                           Category: {{ $logo->category['name'] ?? '' }}<br>
 

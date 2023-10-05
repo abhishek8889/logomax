@@ -67,10 +67,11 @@ Route::get('/register-verify/{token}', [AuthenticationController::class,'registe
 Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index'])->name('admin-dashboard');
     Route::get('/admin-dashboard/designers-list',[UsersController::class,'index'])->name('designer-list');
+    Route::get('/admin-dashboard/designers-view/{id}',[UsersController::class,'designerview'])->name('designer-view');
     Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser'])->name('guest-list');
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
     Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
-    Route::get('admin-dahboard/designers-list/delete/{id}',[UsersController::class,'delete']);
+    Route::get('admin-dashboard/designers-list/delete/{id}',[UsersController::class,'delete']);
     //categories
     Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index'])->name('categories');
     Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories'])->name('add-categories');
