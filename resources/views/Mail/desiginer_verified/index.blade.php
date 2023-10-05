@@ -18,7 +18,7 @@
     <div class="nk-block container col-lg-6 ">
             <div class="card card-bordered">
                 <div class="card-inner">
-                    <h4 class="title text-soft mb-4 overline-title">Notification - Designer Account Approved</h4>
+                    <h4 class="title text-soft mb-4 overline-title">Notification - {{ $mailData['title'] ?? '' }}</h4>
                     <table class="email-wraper">
                         <tbody><tr>
                             <td class="py-5">
@@ -26,7 +26,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-center pb-4">
-                                                <a href="#"><img class="email-logo" src="{{ asset('admin-theme/images/logo-dark2x.png') }}" alt="logo"></a>
+                                                <!-- <a href="#"><img class="email-logo" src="{{ asset('admin-theme/images/logo-dark2x.png') }}" alt="logo"></a> -->
                                             </td>
                                         </tr>
                                     </tbody>
@@ -39,10 +39,17 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            @if($mailData['is_approved'] == 1)
                                             <td class="px-3 px-sm-5 pb-3 pb-sm-5">
-                                                <h5 class="text-success mb-3">Your Desiginer Account Verified.</h5>
+                                                <h5 class="text-success mb-3">Your Designer Account Verified.</h5>
                                                 <p>Hi,<span class="text-success mb-3">{{ $mailData['name']}} </span> One fo our team verified your indentity. You are now ready for upload logo on logomax.</p>
                                             </td>
+                                            @elseif($mailData['is_approved'] == 2)
+                                            <td class="px-3 px-sm-5 pb-3 pb-sm-5">
+                                                <h5 class="text-success mb-3">Your Designer Account Is Disapproved By Admin.</h5>
+                                                <p>Hi,<span class="text-success mb-3">{{ $mailData['name']}} </span> One fo our team verified your indentity. You are not capable for upload logo on logomax.</p>
+                                            </td>
+                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>

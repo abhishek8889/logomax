@@ -29,7 +29,7 @@ class DesginerLogoController extends Controller
     }
    
     public function uploadProc(Request $request){
-        if(auth()->user()->is_approved !== 0){
+        if(auth()->user()->is_approved !== 0 && auth()->user()->is_approved !== 2){
             if($request->hasFile('file')){
                 $request->validate([
                     'file' => 'required|mimes:ai,png'

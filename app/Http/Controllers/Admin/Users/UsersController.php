@@ -21,39 +21,51 @@ class UsersController extends Controller
         return view('admin.users.designers.index',compact('users'));
     }
     public function approveUser(Request $request){
-    if ($request->has('user_id')) {
-        if($request->action == "approve"){
-            User::where('id', $request->user_id)->update(['is_approved' => 1]);
+       
+        if ($request->has('user_id')) {
+            if($request->is_approved == 0 || $request->is_approved == 2){ // approved = 0 => Pending , 2 => disapprove , 1 => approved
+                User::where('id', $request->user_id)->update(['is_approved' => 1]); 
+                $mailtitle =  'DESIGNER ACCOUNT APPROVED';
+            }elseif($request->is_approved == 1){
+                User::where('id', $request->user_id)->update(['is_approved' => 2]);
+                $mailtitle =  'DESIGNER ACCOUNT DISAPPROVED';
+            }            
             $user = User::find($request->user_id);
             $mailData = [
                 'name' => $user->name,
                 'email' => $user->email,
+                'is_approved' => $user->is_approved,
+                'title' => $mailtitle,
             ];
             $mail = Mail::to($user->email)->send(new DesiginerVerifiedMail($mailData));
-
-            $notifications = Notifications::create(array(
-                'type' => 'designer-approve',
-                'sender_id' => '0',
-                'reciever_id' => $user['id'],
-                'designer_id' => $user['id'],
-                'message' => 'Congratulations ! Your account has been <span>Approved !</span>'
-            )); 
-            // $eventData = array(
-            //     'type' => 'designer-approve',
-            //     'designer_id' => $user['id'],
-            //     'notification_id' => $notifications->id,
-            //     'message' => 'Congratulations ! Your account has been <span>Approved !</span>'
-            // );
-            // event(new DesignerNotification($eventData));
-
-            return response()->json(['success'=> $user->name.' has been approved']);
-        }elseif($request->action == "remove"){
-            $user = User::find($request->user_id)->delete();
-            return response()->json(['success'=>'This request is successfully removed']);
-        }
+           
+            if($request->is_approved == 0 || $request->is_approved == 2){
+                $notifications = Notifications::create(array(
+                    'type' => 'designer-approve',
+                    'sender_id' => '0',
+                    'reciever_id' => $user['id'],
+                    'designer_id' => $user['id'],
+                    'message' => 'Congratulations ! Your account has been <span>Approved !</span>'
+                )); 
+                return response()->json(['success'=> $user->name.' has been approved']);
+            }elseif($request->is_approved == 1){
+                $notifications = Notifications::create(array(
+                    'type' => 'designer-disapprove',
+                    'sender_id' => '0',
+                    'reciever_id' => $user['id'],
+                    'designer_id' => $user['id'],
+                    'message' => 'OOPS ! Your account has been <span>Disapproved !</span>'
+                )); 
+                return response()->json(['success'=> $user->name.' has been disapproved']);
+            } 
         } else {
             return response()->json(['error' => 'Failed to find user']);
         }
+    }
+
+    public function delete($id){
+        $user = User::find($id)->delete();
+        return redirect()->back()->with('success','This request is successfully removed');
     }
 
     public function simpleuser(){

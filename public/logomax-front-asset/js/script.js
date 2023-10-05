@@ -893,3 +893,47 @@ jQuery(document).ready(function (e) {
   e.preventDefault();
 
 }) 
+
+// =======
+
+
+$('a#login_password').click(function(){
+  input = $('input[name="login_password"]');
+  // console.log(input);
+  type = input.attr('type');
+  if(type === "password"){
+      input.attr("type","text");
+      $(this).addClass('login');
+  }else{
+    input.attr("type","password");
+    $(this).removeClass('login');
+  }
+  
+});
+
+$('a#registerpassword').click(function(){
+  input = $('input[name="password"]');
+  // console.log(input);
+  type = input.attr('type');
+  if(type === "password"){
+      input.attr("type","text");
+      $(this).addClass('login');
+  }else{
+    input.attr("type","password");
+    $(this).removeClass('login');
+  }
+  
+});
+$('a#confirm-password').click(function(){
+  input = $('input[name="password_confirmation"]');
+  // console.log(input);
+  type = input.attr('type');
+  if(type === "password"){
+      input.attr("type","text");
+      $(this).addClass('login');
+  }else{
+    input.attr("type","password");
+    $(this).removeClass('login');
+  }
+  
+});

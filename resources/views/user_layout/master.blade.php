@@ -143,7 +143,8 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group password">
-                                                    <input type="Password" class="form-control" name="login_password" placeholder="Password" />
+                                                    <input type="Password" class="form-control" name="login_password" id="login_password" placeholder="Password" />
+                                                  <a class="password" id="login_password"></a>
                                                     @error('login_password')
                                                      <span class="text text-danger">{{ $message }}</span>
                                                     @enderror

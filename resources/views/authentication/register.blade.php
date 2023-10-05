@@ -42,12 +42,14 @@
                                                 </div>
                                                 <div class="form-group password">
                                                     <input type="Password" class="form-control" name="password" placeholder="Password" />
+                                                    <a class="password" id="registerpassword"></a>
                                                     @error('password')
                                                      <span class="text text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group password">
                                                     <input type="Password" class="form-control" name="password_confirmation" placeholder="Confirm Password" />
+                                                    <a class="password" id="confirm-password"></a>
                                                     @error('password_confirmation')
                                                      <span class="text text-danger">{{ $message }}</span>
                                                     @enderror

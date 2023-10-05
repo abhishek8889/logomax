@@ -71,6 +71,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/designers-list',[UsersController::class,'index'])->name('designer-list');
     Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser'])->name('guest-list');
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
+    Route::get('admin-dahboard/designers-list/delete/{id}',[UsersController::class,'delete']);
     //categories
     Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index'])->name('categories');
     Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories'])->name('add-categories');
@@ -87,6 +88,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
     //adminlogos
     Route::get('admin-dashboard/logos-list',[LogosController::class,'index'])->name('logos-requests');
+    Route::get('admin-dashboard/logo-detail/{slug}',[LogosController::class,'logodetail'])->name('logo-detail');
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos'])->name('approved-logos');
     Route::get('admin-dashboard/disapproved-logos',[LogosController::class,'disapprovedLogos'])->name('disapproved-logos');
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
