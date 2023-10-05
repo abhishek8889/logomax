@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\Logo\LogosController;
 use App\Http\Controllers\Admin\Blog\AdminBlogController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 
+use App\Http\Controllers\BasicController;
+
 use App\Events\RegisterNotificationEvent;
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +35,8 @@ use App\Events\RegisterNotificationEvent;
 |
 */
 Route::get('test-check',[TestController::class,'index']);
-
-
+//  :::::::::::::::::::::  Basic Controller ::::::::::::::::::::::::: 
+Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 
 Route::get('/',[HomeController::class,'index'])->name('/');
 Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
@@ -50,6 +52,9 @@ Route::get('/logos-search',[FrontLogoController::class,'index']);
 Route::get('/admin-login', function () {
     return view('authentication.admin_login');
 });
+
+
+
 Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
@@ -113,6 +118,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index'])->name('designer-dashboard');
     Route::get('/designer-dashboard/setting',[AccountSetting::class,'index'])->name('account-setting');
+    Route::get('/designer-dashboard/change-password',[AuthenticationController::class,'changePassword']);
+    
     Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
 
     Route::get('designer-dashboard/mylogos',[DesginerLogoController::class,'index'])->name('my-logos');
