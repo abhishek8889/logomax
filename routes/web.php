@@ -13,6 +13,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
 use App\Http\Controllers\User\Blog\BlogController;
+use App\Http\Controllers\User\Logo\FrontLogoController;
 
 use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Tags\TagsController;
@@ -40,6 +41,7 @@ Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us')
 Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
 Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
+Route::get('/logos-search',[FrontLogoController::class,'index']);
 
 
 /** Authentications */
