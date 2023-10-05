@@ -12,6 +12,8 @@ use App\Events\RegisterNotificationEvent;
 use App\Models\Notifications;
 use File;
 use Auth;
+use App\Mail\LogoAddedByDesigner;
+use Mail;
 
 class DesginerLogoController extends Controller
 {
@@ -91,6 +93,10 @@ class DesginerLogoController extends Controller
                     );
                 
                 event(new RegisterNotificationEvent($eventData));
+                $mailData = array(
+                    'data' => ''
+                );
+                $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoAddedByDesigner($mailData));
 
                 return redirect()->back()->with('success','You have succesfully uploaded the logo !');
             }

@@ -187,7 +187,7 @@
                                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                                             <div class="dropdown-head">
                                                 <span class="sub-title nk-dropdown-title">Notifications</span>
-                                                <a href="#">Mark All as Read</a>
+                                                <a href="{{ url('read-notification/all-read') }}">Mark All as Read</a>
                                             </div>
                                             <div class="dropdown-body">
                                                 <div class="nk-notification " id="host-notification">
@@ -235,6 +235,31 @@
             </div>
         </div>
     </div>
+    <?php 
+        $notifications = App\Models\Notifications::class::where([['reciever_id','=',auth()->user()->id],['type','=','designer-approve'],['is_read','=',0]])->first();
+        if($notifications){?>
+        <script>
+            $(document).ready(function(){
+            Swal.fire({
+                title: 'Congratulations Your account is approved by admin !',
+                icon: 'info',
+                showCancelButton: false,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#008000',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ url('designer-dashboard') }}';
+                } 
+                });
+            });
+        </script>
+    <?php 
+        $notifications->is_read = 1;
+        $notifications->update();
+          }
+    ?>
     @if(auth()->user()->address == null || auth()->user()->experience == null || auth()->user()->country == null)
     @if(isset($request))
     @if($request->url() != url('designer-dashboard/setting'))
@@ -250,7 +275,7 @@
         }).then((result) => {
         if (result.isConfirmed) {
             window.location.href = '{{ url('designer-dashboard/setting') }}';
-        } 
+        }
         });
     });
 </script>

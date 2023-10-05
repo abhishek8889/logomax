@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\Logo\LogosController;
 use App\Http\Controllers\Admin\Blog\AdminBlogController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 
+use App\Http\Controllers\BasicController;
+
 use App\Events\RegisterNotificationEvent;
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +34,8 @@ use App\Events\RegisterNotificationEvent;
 |
 */
 Route::get('test-check',[TestController::class,'index']);
-
-
+//  :::::::::::::::::::::  Basic Controller ::::::::::::::::::::::::: 
+Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 
 Route::get('/',[HomeController::class,'index'])->name('/');
 Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
@@ -69,7 +71,6 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/designers-list',[UsersController::class,'index'])->name('designer-list');
     Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser'])->name('guest-list');
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
-    Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
     //categories
     Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index'])->name('categories');
     Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories'])->name('add-categories');

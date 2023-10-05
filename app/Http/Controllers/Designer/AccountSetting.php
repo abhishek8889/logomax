@@ -40,7 +40,7 @@ class AccountSetting extends Controller
                 'notification_id' => $notifications->id,
                 'message' => 'New host is <span>Registered !</span>'
             );
-            event(new RegisterNotificationEvent($eventData));    
+        event(new RegisterNotificationEvent($eventData)); 
     }
     $user->experience = $request->experience;
     $user->country = $request->country;
