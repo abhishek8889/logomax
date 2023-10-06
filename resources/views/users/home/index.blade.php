@@ -397,4 +397,19 @@
       });
   });
 </script>
+<script>
+  $(document).ready(function(){
+    $('#button-addon5').on('click',function(e){
+      e.preventDefault();
+      searchvalue = $('input[type="search"]').val();
+      if(searchvalue == null || searchvalue == ""){
+        return false;
+      }
+      url = '{{ url('logos-search?search=') }}'+searchvalue;
+      location.href = url;
+
+    })
+
+  })
+</script>
   @endsection

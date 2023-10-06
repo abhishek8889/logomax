@@ -104,11 +104,29 @@
                       <?php }} ?>
                     </a>
                 </div>
+                <?php if(isset($request)){
+                      if($request->url() == url('/logos-search')){?>
+                <div class="banner-content">
+                            <div class="Select-text">
+                                <div class="all-select">
+                                    <div class="search">
+                                        <input type="search" class="form-control" value="{{ $request->search ?? '' }}" placeholder="Search for logo...">
+                                    </div>
+                                </div>
+                                <div class="Search-bar">
+                                    <button id="button-addon5" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                </div>
+                <?php } }?>
                 @if(Auth::user())
                 <div class="header-btn">
                     <a class="login-btn" href="{{ url('logout') }}">Log Out</a>
                 </div>
                 @else
+                
                 <div class="header-btn">
                     <!-- <a class="login-btn cta-btn" data-toggle="modal" data-target="#exampleModal" href="#">Log in</a> -->
                     <!-- <a class="login-btn" href="{{ url('register') }}">Sign Up</a> -->
@@ -270,17 +288,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="https://alexandrebuffet.fr/codepen/slider/slick-animation.min.js"></script>
-  <script
+  <!-- <script
             src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
             integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
-        ></script>
-  <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+        ></script> -->
   
+  <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+  <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>
 
 <!-- show login model on email or password error -->
   @if ($errors->has('email') || $errors->has('password') || $errors->has('name') || $errors->has('experience') || $errors->has('country') || $errors->has('address') || $errors->has('g-recaptcha-response'))

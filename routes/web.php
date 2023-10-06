@@ -44,6 +44,8 @@ Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
 Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 Route::get('/logos-search',[FrontLogoController::class,'index']);
+Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
+Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
 
 /** Authentications */
