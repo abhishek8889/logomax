@@ -77,7 +77,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/designers-view/{id}',[UsersController::class,'designerview'])->name('designer-view');
     Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser'])->name('guest-list');
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
-    Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
+    // Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
     Route::get('admin-dashboard/designers-list/delete/{id}',[UsersController::class,'delete']);
     //categories
     Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index'])->name('categories');
