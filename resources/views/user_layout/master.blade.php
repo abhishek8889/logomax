@@ -272,7 +272,10 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+<!-- faceboof -->
+<!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=642514924634681" nonce="5345345"></script> -->
 
+<!-- facebook code : -->
 <!-- show login model on email or password error -->
   @if ($errors->has('email') || $errors->has('password') || $errors->has('name') || $errors->has('experience') || $errors->has('country') || $errors->has('address') || $errors->has('g-recaptcha-response'))
     <script>

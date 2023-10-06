@@ -101,14 +101,11 @@
 
           </div>
           <div class="share-icon">
-            <a href="#"> <i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="shareOnFacebook" share-img="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" share-url="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" share-title="{{ $blog->title ?? '' }}"><i class="fa-brands fa-facebook-f"></i></a>
+            <!-- <a href="#" class="shareOnFaceboof"><i class="fa-brands fa-facebook-f"></i></a> -->
             <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
             <a href="#"> <i class="fa-brands fa-instagram"></i></a>
             <a href="#"> <i class="fa-brands fa-linkedin-in"></i></a>
-
-
-
-
           </div>
         </div>
       </div>
@@ -149,4 +146,20 @@
       </div>
     </div>
   </section>
+<script>
+    $(document).ready(function() {
+        $('.shareOnFacebook').click(function(event) {
+            event.preventDefault();
+            
+            const shareImg = $(this).attr('share-img');
+            const shareUrl = $(this).attr('share-url');
+            const shareTitle = $(this).attr('share-title');
+            // const shareTitle = "https://sagmetic.site/2023/laravel/logomax/";
+            
+            const facebookShareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareTitle)}&t=${encodeURIComponent(shareTitle)}&picture=${encodeURIComponent(shareTitle)}`;
+            window.open(facebookShareURL, '_blank', 'width=600,height=400');
+            // const facebookShareURL = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&media=${encodeURIComponent(shareImg)}&description=${encodeURIComponent(shareTitle)}`;
+        });
+    });
+</script>
 @endsection
