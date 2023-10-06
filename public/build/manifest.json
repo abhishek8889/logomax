@@ -18,7 +18,7 @@
     "src": "resources/js/bootstrap.js"
   },
   "resources/js/designer_notification.js": {
-    "file": "assets/designer_notification-ba565845.js",
+    "file": "assets/designer_notification-8e67a84a.js",
     "imports": [
       "resources/js/bootstrap.js"
     ],

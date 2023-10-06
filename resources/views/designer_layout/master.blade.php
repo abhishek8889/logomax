@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js']) -->
     <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
-    <script type="module" src="{{ asset('/build/assets/bootstrap-93e32d00.js') }}"></script> 
+    <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script> 
 
 </head>
 <style>

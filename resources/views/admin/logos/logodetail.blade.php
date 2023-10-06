@@ -176,7 +176,7 @@
                                     success: function(response){
                                         NioApp.Toast(response, 'info', {position: 'top-right'}); 
                                         setTimeout(() => {
-                                            // location.reload();
+                                            location.reload();
                                         }, 1000);    
                                     }
                                 });
