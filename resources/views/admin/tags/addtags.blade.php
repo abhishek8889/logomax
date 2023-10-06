@@ -27,9 +27,9 @@
                                  <div class="form-control-wrap">
                                      <input type="hidden" name="slug" class="form-control" id="slug" value="">
                                  </div>
-                                 @error('slug')
+                                 <!-- @error('slug')
 				                                <span class="text text-danger">{{ $message }}</span>
-		                          @enderror
+		                          @enderror -->
                              </div>
                             
                              <div class="form-group">
@@ -107,7 +107,19 @@
                </table>
            </div>
   </div>
-
+  @error('name')
+  <script>
+   $('div#add-section').removeClass('d-none');
+  </script>
+  @enderror
+  @error('slug')
+  <script>
+    $(document).ready(function(){
+        $('div#add-section').removeClass('d-none');
+        NioApp.Toast('Name must be unique and required !', 'info', {position: 'top-right'});
+    });
+  </script>
+  @enderror
         <script>
              function convertToSlug(str){
                 str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ')

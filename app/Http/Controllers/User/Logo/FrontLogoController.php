@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Tag;
 use App\Models\Logo;
+use App\Models\Style;
 
 class FrontLogoController extends Controller
 {
     public function index(Request $request){
         $categories = Categories::all();
         $tags = Tag::all();
+        $styles = Style::where('status',1)->get();
         if($request->search){
             $search_lower = strtolower(str_replace(" ","-",$request->search));
         $logos = Logo::where([['approved_status',1],['status',1],['logo_slug','like',$search_lower.'%']])->paginate(20);
@@ -20,7 +22,7 @@ class FrontLogoController extends Controller
         $logos = Logo::where([['approved_status',1],['status',1]])->paginate(20);
         }
 
-        return view('users.logos.index',compact('request','categories','tags','logos'));
+        return view('users.logos.index',compact('request','categories','tags','logos','styles'));
     }
     public function logodetail(Request $request, $slug){
         $logo = Logo::where([['logo_slug',$slug],['approved_status',1],['status',1]])->first();
@@ -31,6 +33,6 @@ class FrontLogoController extends Controller
         return view('users.logos.logodetails',compact('request','logo','similar_logos'));
     }
     public function download_page(){
-        
+
     }
 }

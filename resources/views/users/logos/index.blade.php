@@ -6,12 +6,12 @@
                 <div class="filter-content">
                     <div class="filter-title">
                         <div class="filter-img">
-                            <img src="img/filtter-img.png" alt="" />
+                            <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="" />
                             <p>Filters</p>
                         </div>
                         <div class="filtter-button">
                             <button>
-                                <img src="img/Vector (14).png" alt="" />
+                                <img src="{{ asset('logomax-front-asset/img/Vector (14).png') }}" alt="" />
                             </button>
                         </div>
                     </div>
@@ -20,16 +20,20 @@
                             <div class="slider-box">
                                 <div class="fillter-slider">
                                     @foreach($tags as $tag)
-                                    <div class="filtr_box" >
-                                        <a href="{{ url('logos-search?search='.$tag->name) }}" value="{{ $tag->id ?? '' }}"><i class="fa-sharp fa-light fa-magnifying-glass"></i>{{ $tag->name ?? '' }}</a>
-                                    </div>
+                                       <label for="{{ $tag->slug ?? '' }}">
+                                            <div class="filtr_box" >
+                                                <a id="test" value="{{ $tag->id ?? '' }}"><i class="fa-sharp fa-light fa-magnifying-glass"></i>{{ $tag->name ?? '' }}</a>
+                                            </div>
+                                        </label>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                @foreach($tags as $tag)
+                    <input type="checkbox" name="tags" id="{{ $tag->slug ?? '' }}" class="tags" value="{{ $tag->slug ?? '' }}" style="display:none;">
+                    @endforeach
                 <div class="search_sec">
                     <div class="work_data">
                         <div class="search_style_wrapp">
@@ -39,42 +43,12 @@
                             </div>
                             <div class="search_content">
                                 <form>
+                                    @foreach($styles as $style)
                                     <div class="custom_check">
-                                        <label>Wordmarks</label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
+                                        <label for="style{{ $style->slug ?? '' }}">{{ $style->name ?? '' }}</label>
+                                        <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles" type="checkbox" value="{{ $style->slug ?? '' }}" />
                                     </div>
-                                    <div class="custom_check">
-                                        <label>Leterform </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Monogram </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Logo Symbols </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Abstract </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Mascots </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Emblems </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Combination Marks </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
-                                    <div class="custom_check">
-                                        <label>Dynamic Marks </label>
-                                        <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    </div>
+                                    @endforeach
                                 </form>
                             </div>
                         </div>
@@ -88,8 +62,8 @@
                                 <form>
                                     @foreach($categories as $category)
                                     <div class="custom_check">
-                                        <label for="{{ $category->slug ?? '' }}">{{ $category->name ?? '' }}</label>
-                                        <input id="{{ $category->slug ?? '' }}" name="categories" type="checkbox" value="{{ $category->id ?? '' }}" />
+                                        <label for="category{{ $category->slug ?? '' }}">{{ $category->name ?? '' }}</label>
+                                        <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" value="{{ $category->slug ?? '' }}" />
                                     </div>
                                     @endforeach
                                 </form>
@@ -186,5 +160,68 @@
                     location.href = url;
                 });
             })
-        </script>
+
+      
+        $(document).ready(function(){
+            categories = [];
+            styles = [];
+            tags = [];
+            $('input.category').on('change',function(){
+                val = $(this).val();
+                if($(this).prop('checked') == true){
+                    categories.push(val);
+                }else{
+                    categories = jQuery.grep(categories, function(value) {
+                            return value != val;
+                            }); 
+                }
+                let stateObj = { id: "100" }; 
+                let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                let stylestring = encodeURIComponent(JSON.stringify(styles));
+                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+            window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?categories="+categoriesString+"&tags="+stylestring+"&styles="+tagsstring);
+            });
+            $('input.styles').on('change',function(){
+                styleval = $(this).val();
+                if($(this).prop('checked') == true){
+                    styles.push(styleval);  
+                }else{
+                    styles = jQuery.grep(styles, function(value) {
+                            return value != styleval;
+                    });  
+                }
+                let stateObj = { id: "100" }; 
+                let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                let stylestring = encodeURIComponent(JSON.stringify(styles));
+                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+            window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?categories="+categoriesString+"&tags="+stylestring+"&styles="+tagsstring);
+           
+            });
+            $('input.tags').on('change',function(){
+                tagvalue = $(this).val();
+                 if($(this).prop('checked') == true){
+                    tags.push(tagvalue);  
+                 }else{
+                    tags = jQuery.grep(tags, function(value) {
+                            return value != tagvalue;
+                    }); 
+                 }
+                 let stateObj = { id: "100" }; 
+                let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                let stylestring = encodeURIComponent(JSON.stringify(styles));
+                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+            window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?categories="+categoriesString+"&tags="+stylestring+"&styles="+tagsstring);
+            });
+        });
+      
+//  $(document).ready(function(){
+//             let stateObj = { id: "100" }; 
+//             window.history.replaceState(stateObj, 
+//                         "Page 3", "/page3.html"); 
+//  });
+      
+    </script> 
 @endsection

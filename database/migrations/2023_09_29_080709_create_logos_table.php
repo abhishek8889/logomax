@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('media_id');
             $table->string('tags');
             $table->string('category_id');
+            $table->string('style_id');
             $table->integer('approved_status')->default(0);
             $table->integer('status')->default(1);
             $table->text('admin_review')->nullable();

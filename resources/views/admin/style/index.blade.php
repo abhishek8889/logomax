@@ -1,18 +1,20 @@
 @extends('admin_layout/master')
 @section('content')
-<div class="d-flex justify-content-end"> {{ Breadcrumbs::render('blog-category') }} </div>
+<div class="d-flex justify-content-end my-4"> 
+    {{ Breadcrumbs::render('styles') }}
+</div>
         <div class="col-lg-6 d-none" id="add-section">
                  <div class="card card-bordered h-100">
                      <div class="card-inner">
                          <div class="card-head d-flex justify-content-between">
-                             <h5 class="card-title">Add Category</h5>
+                             <h5 class="card-title">Add Styles</h5>
                              <button class="remove btn btn-link" ><i class="fas fa-times"></i></button>
                          </div>
-                         <form action="{{ url('admin-dashboard/blogs/categoryadd') }}" method="POST">
+                         <form action="{{ url('admin-dashboard/styles/addProcc') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="">
                              <div class="form-group">
-                                 <label class="form-label" for="name">Category Name</label>
+                                 <label class="form-label" for="name">Style Name</label>
                                  <div class="form-control-wrap">
                                      <input type="text" name="name"  onload="convertToSlug(this.value)" onkeyup="convertToSlug(this.value)"  class="form-control" id="name" value="">
                                  </div>
@@ -45,7 +47,7 @@
         <div class="nk-block nk-block-lg">
                     <div class="nk-block-head">
                         <div class="nk-block-head-content d-flex justify-content-between">
-                            <h4 class="nk-block-title">Category List</h4>
+                            <h4 class="nk-block-title">Styles List</h4>
                             <button class="btn btn-primary" id="addnewsecitonbutton">Add new</button>
                         </div>
                     </div>
@@ -72,19 +74,19 @@
                    </thead>
                    <tbody>
                     <?php $count = 1 ?>
-                    @foreach($category as $c)
+                    @foreach($styles as $style)
                        <tr class="tb-tnx-item">
                            <td class="tb-tnx-id text-center">
                                <a href="#"><span>{{ $count++ }}</span></a>
                            </td>
                            <td class="tb-tnx-info text-center">
                                <div class="tb-tnx-desc">
-                                   <span class="title">{{ $c->category_name ?? '' }}</span>
+                                   <span class="title">{{ $style->name ?? '' }}</span>
                                </div>
                            </td>
                            <!-- <td class="tb-tnx-info text-center">
                                <div class="tb-tnx-desc">
-                                   <span class="title">{{ $c->slug ?? '' }}</span>
+                                   <span class="title">{{ $t->slug ?? '' }}</span>
                                </div>
                            </td> -->
                            <td class="tb-tnx-amount is-alt text-center">
@@ -93,32 +95,34 @@
                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" data-offset="-8,0"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                     <ul class="link-list-plain">
-                                        <li><a class="edit-btn" tag-name="{{ $c->category_name ?? '' }}" tag-slug="{{ $c->slug ?? '' }}" tag-id="{{ $c->id ?? '' }}">Edit</a></li>
-                                        <li><a href="{{ url('admin-dashboard/blogs/categiory/delete/') }}/{{ $c->id ?? '' }}">delete</a></li>
+                                        <li><a class="edit-btn" tag-name="{{ $style->name ?? '' }}" tag-slug="{{ $style->slug ?? '' }}" tag-id="{{ $style->id ?? '' }}" href="{{ url('/admin-dashboard/categories-list/add-new/') }}/{{ $style->slug ?? '' }}">Edit</a></li>
+                                        <li><a href="{{ url('/admin-dashboard/styles/delete') }}/{{ $style->id ?? '' }}">delete</a></li>
                                     </ul>
                                 </div>
                             </div>
                            </td>
                        </tr>
-                       @endforeach
+                    @endforeach
                    </tbody>
                </table>
+               @if($styles->isEmpty())
+               <div class="p-3"><h5 class="text-center">No styles found</h5></div>
+               @endif
            </div>
   </div>
-            @error('name')
-                <script>
-                    $('div#add-section').removeClass('d-none');
-                </script>
-            @enderror
-            @error('slug')
-                <script>
-                    $(document).ready(function(){
-                        $('div#add-section').removeClass('d-none');
-                        NioApp.Toast('Name must be unique and required !', 'info', {position: 'top-right'});
-                    });
-                </script>
-            @enderror
-
+        @error('name')
+            <script>
+                $('div#add-section').removeClass('d-none');
+            </script>
+        @enderror
+        @error('slug')
+        <script>
+            $(document).ready(function(){
+                $('div#add-section').removeClass('d-none');
+                NioApp.Toast('Name must be unique and required !', 'info', {position: 'top-right'});
+            });
+        </script>
+        @enderror
         <script>
              function convertToSlug(str){
                 str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ')
@@ -162,4 +166,3 @@
             })
         </script>
 @endsection
-

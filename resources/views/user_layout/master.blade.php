@@ -105,7 +105,7 @@
                     </a>
                 </div>
                 <?php if(isset($request)){
-                      if($request->url() == url('/logos-search')){?>
+                      if($request->url() != url('/')){?>
                 <div class="banner-content">
                             <div class="Select-text">
                                 <div class="all-select">

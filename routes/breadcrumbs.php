@@ -68,7 +68,10 @@ Breadcrumbs::for('blog-category', function (BreadcrumbTrail $trail) {
     $trail->parent('blog-list');
     $trail->push('CATEGORIES', route('blog-category'));
 });
-
+Breadcrumbs::for('styles', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('STYLES', route('styles'));
+});
 
 /////// Desinger breadcrumbs 
 Breadcrumbs::for('designer-dashboard', function (BreadcrumbTrail $trail) {
