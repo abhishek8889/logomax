@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Tags\TagsController;
 use App\Http\Controllers\Admin\Logo\LogosController;
 use App\Http\Controllers\Admin\Blog\AdminBlogController;
+use App\Http\Controllers\Admin\Style\AdminStyleController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 
 use App\Http\Controllers\BasicController;
@@ -44,6 +45,8 @@ Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
 Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 Route::get('/logos-search',[FrontLogoController::class,'index']);
+Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
+Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
 
 /** Authentications */
@@ -110,6 +113,11 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/blogs/edit/{slug}',[AdminBlogController::class,'edit'])->name('edit-blogs');
     Route::post('admin-dashboard/blogs/addProcc',[AdminBlogController::class,'addProcc']);
     Route::get('admin-dashboard/blogs/delete/{id}',[AdminBlogController::class,'delete']);
+
+    //Styles
+    Route::get('admin-dashboard/styles',[AdminStyleController::class,'index'])->name('styles');
+    Route::post('admin-dashboard/styles/addProcc',[AdminStyleController::class,'addProcc']);
+    Route::get('admin-dashboard/styles/delete/{id}',[AdminStyleController::class,'delete']);
 
 });
 

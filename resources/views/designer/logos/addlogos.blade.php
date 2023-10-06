@@ -41,7 +41,6 @@
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
-                                                            <div class="form-group">
                                                             <label class="form-label">Logo Category</label>
                                                             <div class="form-control-wrap">
                                                                 <select class="form-select js-select2" name="categories">
@@ -53,7 +52,6 @@
                                                             @error('categories')
                                                                             <span class="text text-danger">{{ $message }}</span>
                                                             @enderror
-                                                        </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -67,12 +65,27 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                            @error('tags')
+                                                                @error('tags')
+                                                                                <span class="text text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                            <label class="form-label">Logo Style</label>
+                                                            <div class="form-control-wrap">
+                                                                <select class="form-select js-select2" name="style">
+                                                                    @foreach($styles as $style)
+                                                                    <option value="{{ $style->id ?? '' }}">{{ $style->name ?? '' }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            @error('style')
                                                                             <span class="text text-danger">{{ $message }}</span>
                                                             @enderror
+                                                            </div>
                                                         </div>
-                                                        </div>
-                                                        </div>
+                                                    </div>
                                                         <div class="col-sm-6" id="logodiv">
                                                             <label class="form-label">Upload Logo</label>
                                                             <div class="upload-zone" id="upload-zone">

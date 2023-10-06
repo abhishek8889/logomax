@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Media;
 use App\Models\Categories;
 use App\Models\Logo;
+use App\Models\Style;
 use App\Events\RegisterNotificationEvent;
 use App\Models\Notifications;
 use File;
@@ -25,7 +26,9 @@ class DesginerLogoController extends Controller
     public function upload(Request $request){
         $categories = Categories::all();
         $tags = Tag::where('status',1)->get();
-        return view('designer.logos.addlogos',compact('categories','tags'));
+        $styles = Style::where('status',1)->get();
+
+        return view('designer.logos.addlogos',compact('categories','tags','styles'));
     }
    
     public function uploadProc(Request $request){
@@ -54,14 +57,18 @@ class DesginerLogoController extends Controller
                     'logo_slug' => 'required|unique:logos',
                     'categories' => 'required',
                     'tags' => 'required',
+                    'style' => 'required',
                     'media_id' => 'required',
                 ],[
                     'logo_name.required' => 'logo name is required',
                     'logo_slug.required' => 'logo slug is required',
                     'categories.required' => 'logo category is required',
                     'tags.required' => 'tag is required',
+                    'style.required' => 'style is required',
                     'media_id.required' => 'Please upload your logo',
                 ]);
+
+                echo 'done';
 
                     $logos = new Logo;
                     $logos->logo_name = $request->logo_name;
@@ -69,6 +76,7 @@ class DesginerLogoController extends Controller
                     $logos->media_id = $request->media_id;
                     $logos->tags = json_encode($request->tags);
                     $logos->category_id = $request->categories;
+                    $logos->style_id = $request->style;
                     $logos->approved_status = 0;
                     $logos->status = 1;
                     $logos->designer_id = Auth::user()->id;
