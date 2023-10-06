@@ -37,6 +37,7 @@ class LogosController extends Controller
         return view('admin.logos.disapprovedlogos',compact('logos'));
     }
     public function updateStatus(Request $request){
+     
         if($request->action == 'approved'){
             $logos = Logo::find($request->id);
             $logos->approved_status = 1;
@@ -63,6 +64,7 @@ class LogosController extends Controller
                 'designer_id' => $designer_detail['id'],
                 'notification_id' => $notifications->id,
                 'logo_id' => $request->id,
+                'read_url' => url('read-notification/'.$notifications->id),
                 'message' => 'Congratulations ! Your logo is <span>Approved !</span>'
             );
             event(new DesignerNotification($eventData));
@@ -95,6 +97,7 @@ class LogosController extends Controller
                     'designer_id' => $designer_detail['id'],
                     'notification_id' => $notifications->id,
                     'logo_id' => $request->id,
+                    'read_url' => url('read-notification/'.$notifications->id),
                     'message' => 'Oops ! Your logo is <span>Disapproved !</span>'
                 );
                 event(new DesignerNotification($eventData));

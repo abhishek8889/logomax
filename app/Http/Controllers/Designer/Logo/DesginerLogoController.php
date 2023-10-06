@@ -74,20 +74,20 @@ class DesginerLogoController extends Controller
                     $logos->designer_id = Auth::user()->id;
                     $logos->save();
                     // Send notification to admin ::::::::: 
-
+                    $logo_id = $logos->id ; 
                     $notifications = Notifications::create(array(
                         'type' => 'logo-added',
                         'sender_id' => '0',
                         'reciever_id' => '0',
                         'designer_id' => Auth::user()->id,
-                        'logo_id' => $logos->id,
+                        'logo_id' => $logo_id,
                         'message' => 'New logo is <span>Added !</span>'
                     )); 
                     $eventData = array(
                         'type' => 'logo-added',
                         'designer_id' => Auth::user()->id,
                         'notification_id' => $notifications->id,
-                        'logo_id' =>$logos->id,
+                        'logo_id' => $logo_id,
                         'message' => 'New logo is <span>Added !</span>'
                     );
                 

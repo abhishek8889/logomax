@@ -1,11 +1,14 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-04ce59f5.css",
+    "file": "assets/app-4ed993c7.js",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-ca52d1cb.js",
+    "file": "assets/app-bcbd3862.js",
+    "imports": [
+      "resources/js/bootstrap.js"
+    ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -13,5 +16,13 @@
     "file": "assets/bootstrap-93e32d00.js",
     "isEntry": true,
     "src": "resources/js/bootstrap.js"
+  },
+  "resources/js/designer_notification.js": {
+    "file": "assets/designer_notification-8e67a84a.js",
+    "imports": [
+      "resources/js/bootstrap.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/designer_notification.js"
   }
 }

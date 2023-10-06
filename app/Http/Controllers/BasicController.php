@@ -12,7 +12,7 @@ class BasicController extends Controller
     public function readNotification(Request $req){
         
         $notification_id = $req->notification_id;
-        dd($notification_id);
+        // dd($notification_id);
         if(auth()->user()->role_id == 3){  // All Admin read notification function are here :::::::::::::
             if($notification_id == 'all-read' ){
                 $admin_notifications = Notifications::where([['is_read' ,'=' , 0],['reciever_id','=',0]])->update(['is_read'=>1]);
