@@ -161,4 +161,8 @@ class AuthenticationController extends Controller
         return redirect('/')->with('success',"You have logged out succesfully");
     }
 
+    public function changePassword(Request $req){
+        return view('designer.setting.change_password');
+    }
+
 }

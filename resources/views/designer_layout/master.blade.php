@@ -75,17 +75,31 @@
                                     </ul>
                                 </li>
                                 @endif
-                                <!-- <li class="nk-menu-item has-sub">
+                                <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                                        <span class="nk-menu-text">User Manage</span>
+                                        <span class="nk-menu-text">Setting</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="html/user-list-regular.html" class="nk-menu-link"><span class="nk-menu-text">User List - Regular</span></a>
+                                            <a href="{{ url('/designer-dashboard/setting') }}" class="nk-menu-link"><span class="nk-menu-text">Account setting</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/user-list-compact.html" class="nk-menu-link"><span class="nk-menu-text">User List - Compact</span></a>
+                                            <a href="{{ url('/designer-dashboard/change-password') }}" class="nk-menu-link"><span class="nk-menu-text">Change password</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                                        <span class="nk-menu-text">Setting</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="" class="nk-menu-link"><span class="nk-menu-text">Account setting</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="" class="nk-menu-link"><span class="nk-menu-text">Change password</span></a>
                                         </li>
                                     </ul>
                                 </li> -->
@@ -260,62 +274,77 @@
         $notifications->update();
           }
     ?>
-    @if(auth()->user()->address == null || auth()->user()->experience == null || auth()->user()->country == null)
-    @if(isset($request))
-    @if($request->url() != url('designer-dashboard/setting'))
-<script>
-    $(document).ready(function(){
-    Swal.fire({
-        title: 'Your account is not complete for approval please complete your profile !',
-        showCancelButton: false,
-        confirmButtonText: 'Ok',
-        confirmButtonColor: '#008000',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-        }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = '{{ url('designer-dashboard/setting') }}';
-        }
-        });
-    });
-</script>
+    @if(auth()->user()->address == null || auth()->user()->experience == null || auth()->user()->country == null )
+        @if(isset($request))
+            @if($request->url() != url('designer-dashboard/setting'))
+                <script>
+                    $(document).ready(function(){
+                    Swal.fire({
+                        title: 'Your account is not complete for approval please complete your profile !',
+                        showCancelButton: false,
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#008000',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '{{ url('designer-dashboard/setting') }}';
+                        }
+                        });
+                    });
+                </script>
 
-@endif
-@else
-<script>
-    $(document).ready(function(){
-    Swal.fire({
-        title: 'Your account is not complete for approval please complete your profile !',
-        icon: 'info',
-        showCancelButton: false,
-        confirmButtonText: 'Ok',
-        confirmButtonColor: '#008000',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-        }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = '{{ url('designer-dashboard/setting') }}';
-        } 
-        });
-    });
-</script>
+            @endif
+        @else
+            <script>
+                $(document).ready(function(){
+                Swal.fire({
+                    title: 'Your account is not complete for approval please complete your profile !',
+                    icon: 'info',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#008000',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '{{ url('designer-dashboard/setting') }}';
+                    } 
+                    });
+                });
+            </script>
+        @endif
+    @elseif(auth()->user()->is_approved == 0) <!-- Account is not approved still pending  -->
+        <script>
+            $(document).ready(function(){
+            Swal.fire({
+                title: 'Your account is not approved wait for approval, Currently you are not able to upload logos !',
+                icon: 'info',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#008000',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+                });
+            });
+        </script>
+    @elseif(auth()->user()->is_approved == 2)  <!-- Disapproved by admin  -->
+        <script>
+            $(document).ready(function(){
+            Swal.fire({
+                title: 'Your account is disapproved by admin, Currently you are not able to upload logos !',
+                icon: 'Warning',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#008000',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+                });
+            });
+        </script>
     @endif
-    @elseif(auth()->user()->is_approved == 0)
-    <script>
-    $(document).ready(function(){
-    Swal.fire({
-        title: 'Your account is not approved wait for approval, Currently you are not able to upload logos !',
-        icon: 'info',
-        showCancelButton: false,
-        showConfirmButton: true,
-        confirmButtonText: 'Ok',
-        confirmButtonColor: '#008000',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-        });
-    });
-</script>
-@endif
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
@@ -323,10 +352,10 @@
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
     @if(Session::get('error'))
-<script>
-    toastr.clear();
-    NioApp.Toast('{{ Session::get("error") }}', 'error', {position: 'top-right'});
-</script>
+    <script>
+        toastr.clear();
+        NioApp.Toast('{{ Session::get("error") }}', 'error', {position: 'top-right'});
+    </script>
 @endif
 @if(Session::get('success'))
 <script>

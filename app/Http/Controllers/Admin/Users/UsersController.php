@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Logo;
 use Mail;
 use App\Mail\DesiginerVerifiedMail;
 use App\Events\DesignerNotification;
@@ -19,6 +20,14 @@ class UsersController extends Controller
             ['status', '=', 1],
         ])->orderBy('created_at','desc')->get();
         return view('admin.users.designers.index',compact('users'));
+    }
+    public function designerview($id){
+       $designer = User::find($id);
+        if(!($designer)){
+          abort(404);
+        }
+        $logos = Logo::where('designer_id',$designer->id)->get();
+       return view('admin.users.designers.designerview',compact('designer','logos'));
     }
     public function approveUser(Request $request){
        

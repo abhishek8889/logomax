@@ -1,4 +1,4 @@
-@extends('user_layout.master')
+@extends('user_layout/master')
 @section('content')
   <section class="blog-sec ">
     <div class="container">

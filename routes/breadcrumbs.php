@@ -31,6 +31,10 @@ Breadcrumbs::for('desingers-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('DESIGNERS-LIST', route('designer-list'));
 });
+Breadcrumbs::for('designer-view', function (BreadcrumbTrail $trail,$name) {
+    $trail->parent('desingers-list');
+    $trail->push($name, route('designer-view',['id'=>$name]));
+});
 Breadcrumbs::for('guests-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('GUESTS-LIST', route('guest-list'));

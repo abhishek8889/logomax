@@ -13,6 +13,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\User\SiteMetaPages\MetaPagesController;
 use App\Http\Controllers\User\Blog\BlogController;
+use App\Http\Controllers\User\Logo\FrontLogoController;
 
 use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Tags\TagsController;
@@ -42,6 +43,7 @@ Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us')
 Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
 Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
+Route::get('/logos-search',[FrontLogoController::class,'index']);
 
 
 /** Authentications */
@@ -50,6 +52,9 @@ Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 Route::get('/admin-login', function () {
     return view('authentication.admin_login');
 });
+
+
+
 Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
@@ -69,9 +74,11 @@ Route::get('/register-verify/{token}', [AuthenticationController::class,'registe
 Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index'])->name('admin-dashboard');
     Route::get('/admin-dashboard/designers-list',[UsersController::class,'index'])->name('designer-list');
+    Route::get('/admin-dashboard/designers-view/{id}',[UsersController::class,'designerview'])->name('designer-view');
     Route::get('/admin-dashboard/guests-list',[UsersController::class,'simpleuser'])->name('guest-list');
     Route::post('/admin-dashboard/users-list/approve-user',[UsersController::class,'approveUser']);
-    Route::get('admin-dahboard/designers-list/delete/{id}',[UsersController::class,'delete']);
+    Route::get('read-notification/{notification_id}',[AdminDashController::class,'readNotification']);
+    Route::get('admin-dashboard/designers-list/delete/{id}',[UsersController::class,'delete']);
     //categories
     Route::get('/admin-dashboard/categories-list',[CategoriesController::class,'index'])->name('categories');
     Route::get('/admin-dashboard/categories-list/add-new/{id?}',[CategoriesController::class,'addCategories'])->name('add-categories');
@@ -111,6 +118,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index'])->name('designer-dashboard');
     Route::get('/designer-dashboard/setting',[AccountSetting::class,'index'])->name('account-setting');
+    Route::get('/designer-dashboard/change-password',[AuthenticationController::class,'changePassword']);
+    
     Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
 
     Route::get('designer-dashboard/mylogos',[DesginerLogoController::class,'index'])->name('my-logos');

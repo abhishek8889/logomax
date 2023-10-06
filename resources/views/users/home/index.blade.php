@@ -1,4 +1,4 @@
-@extends('user_layout.master')
+@extends('user_layout/master')
 @section('content')
   <!-- ================= banner section start ====================== -->
 
