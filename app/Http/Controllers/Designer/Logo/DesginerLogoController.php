@@ -88,6 +88,7 @@ class DesginerLogoController extends Controller
                         'designer_id' => Auth::user()->id,
                         'notification_id' => $notifications->id,
                         'logo_id' => $logo_id,
+                        'read_url' => url('read-notification/'.$notifications->id),
                         'message' => 'New logo is <span>Added !</span>'
                     );
                 
