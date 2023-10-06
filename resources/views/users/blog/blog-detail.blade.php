@@ -101,11 +101,14 @@
 
           </div>
           <div class="share-icon">
-          <a href="#" class="shareOnFacebook" share-img="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" share-url="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" share-title="{{ $blog->title ?? '' }}"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="shareOn" share-to="facebook" share-img="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" share-url="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" share-title="{{ $blog->title ?? '' }}"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="shareOn" share-to="pinterest" share-img="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" share-url="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" share-title="{{ $blog->title ?? '' }}"><i class="fa-brands fa-pinterest-p"></i></a>
+          <a href="#" class="shareOn" share-to="instagram" share-img="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" share-url="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" share-title="{{ $blog->title ?? '' }}"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="shareOn" share-to="linkedin" share-img="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" share-url="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" share-title="{{ $blog->title ?? '' }}"><i class="fa-brands fa-linkedin-in"></i></a>
             <!-- <a href="#" class="shareOnFaceboof"><i class="fa-brands fa-facebook-f"></i></a> -->
-            <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+            <!-- <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
             <a href="#"> <i class="fa-brands fa-instagram"></i></a>
-            <a href="#"> <i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"> <i class="fa-brands fa-linkedin-in"></i></a> -->
           </div>
         </div>
       </div>
@@ -147,19 +150,41 @@
     </div>
   </section>
 <script>
-    $(document).ready(function() {
-        $('.shareOnFacebook').click(function(event) {
-            event.preventDefault();
-            
-            const shareImg = $(this).attr('share-img');
-            const shareUrl = $(this).attr('share-url');
-            const shareTitle = $(this).attr('share-title');
-            // const shareTitle = "https://sagmetic.site/2023/laravel/logomax/";
-            
-            const facebookShareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareTitle)}&t=${encodeURIComponent(shareTitle)}&picture=${encodeURIComponent(shareTitle)}`;
-            window.open(facebookShareURL, '_blank', 'width=600,height=400');
-            // const facebookShareURL = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&media=${encodeURIComponent(shareImg)}&description=${encodeURIComponent(shareTitle)}`;
-        });
+$(document).ready(function() {
+    $('.shareOn').click(function(event) {
+        event.preventDefault();
+
+        // const shareImg = $(this).attr('share-img');
+        // const shareUrl = $(this).attr('share-url');
+        // const shareTitle = $(this).attr('share-title');
+        const shareImg = `http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg`;
+        const shareUrl =`http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html`;
+        const shareTitle = `welcome to my site`;
+        var shareOn = $(this).attr('share-to');
+        var ShareURL = '';
+
+        
+        $('meta[property="og:image"]').attr('content', shareImg);
+        $('meta[property="og:url"]').attr('content', shareUrl);
+        $('meta[property="og:title"]').attr('content', shareTitle);
+
+
+        if (shareOn == 'facebook') {
+            ShareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        }
+        if (shareOn == 'pinterest') {
+            ShareURL = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&media=${encodeURIComponent(shareImg)}&description=${encodeURIComponent(shareTitle)}`;
+        }
+        if (shareOn == 'linkedin') { 
+            ShareURL = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+        }
+        if (shareOn == 'instagram') {
+            ShareURL = `https://www.instagram.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+        }
+
+        window.open(ShareURL, '_blank', 'width=600,height=400');
     });
+});
+
 </script>
 @endsection
