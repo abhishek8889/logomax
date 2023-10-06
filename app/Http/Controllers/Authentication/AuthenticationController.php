@@ -164,5 +164,23 @@ class AuthenticationController extends Controller
     public function changePassword(Request $req){
         return view('designer.setting.change_password');
     }
+    public function changePasswordProcc(Request $req){
+        
+        // $validate = $req->validate([
+        //     'confirm_pass' => 'required|min:6|confirmed:new_pass',
+        // ]);
+        if ($req->new_pass === $req->confirm_pass) {
+            $new_pass = $req->confirm_pass;
+
+            $user = User::find(auth()->user()->id);
+            $user->password = hash::make($new_pass);
+            $user->update();
+
+            return redirect()->back()->with('success','You have succesfully update your password');
+        }else{
+            return redirect()->back()->with('error','Your confirm password is not matched.');
+        }
+        
+    }
 
 }

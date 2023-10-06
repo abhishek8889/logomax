@@ -78,6 +78,12 @@ Breadcrumbs::for('account-setting', function (BreadcrumbTrail $trail) {
     $trail->parent('designer-dashboard');
     $trail->push('ACCOUNT-SETTING', route('account-setting'));
 });
+
+Breadcrumbs::for('change-password', function (BreadcrumbTrail $trail) {
+    $trail->parent('designer-dashboard');
+    $trail->push('CHANGE-PASSWORD', url('/designer-dashboard/change-password'));
+});
+
 Breadcrumbs::for('logos', function (BreadcrumbTrail $trail) {
     $trail->parent('designer-dashboard');
     $trail->push('LOGOS', route('my-logos'));
@@ -86,6 +92,7 @@ Breadcrumbs::for('logos-upload', function (BreadcrumbTrail $trail) {
     $trail->parent('logos');
     $trail->push('UPLOAD', route('upload-logo'));
 });
+
 
 
 ?>

@@ -119,6 +119,7 @@ Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index'])->name('designer-dashboard');
     Route::get('/designer-dashboard/setting',[AccountSetting::class,'index'])->name('account-setting');
     Route::get('/designer-dashboard/change-password',[AuthenticationController::class,'changePassword']);
+    Route::post('/designer-dashboard/change-password-procc',[AuthenticationController::class,'changePasswordProcc']);
     
     Route::post('/designer-dashboard/setting/submitProc',[AccountSetting::class,'update']);
 
