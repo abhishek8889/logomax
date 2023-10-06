@@ -19,6 +19,13 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
+    <!-- meta for fb : -->
+    <meta property="og:url"        content="{{ url()->current() ?? '' }}" />
+    <meta property="og:type"       content="article" />
+    <meta property="og:title"      content="Logo max" />
+    <meta property="og:description"content="How much does culture influence creative thinking?" />
+    <meta property="og:image"      content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+    <!-- end meta fb -->
   <title>home page </title>
 </head>
 
