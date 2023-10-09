@@ -25,7 +25,9 @@
     <meta property="og:type"       content="article" />
     <meta property="og:title"      content="Logo max" />
     <meta property="og:description"content="How much does culture influence creative thinking?" />
-    <meta property="og:image"      content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+    @if (isset($blog) && isset($blog->banner_img))
+    <meta property="og:image" content="{{ asset('blog_images/' . $blog->banner_img) }}" />
+    @endif
     <!-- end meta fb -->
   <title>home page </title>
 </head>

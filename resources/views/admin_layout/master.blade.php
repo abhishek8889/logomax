@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
-    <script type="module" src="{{ asset('/build/assets/app-df470c34.js') }}"></script>  -->
+    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    <script type="module" src="{{ asset('/build/assets/app-df470c34.js') }}"></script> 
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
-    @vite(['resources/css/app.css' , 'resources/js/app.js'])
+    <!-- vite(['resources/css/app.css' , 'resources/js/app.js']) -->
 </head>
 <style>
     .icon-active {
@@ -55,7 +55,7 @@
                     </div>
                     
                     <div class="nk-sidebar-brand">
-                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                        <a href="{{ url('/admin-dashboard') }}" class="logo-link nk-sidebar-logo">
                             <img class="logo-light logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo">
                             <img class="logo-dark logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo-dark">
                         </a>

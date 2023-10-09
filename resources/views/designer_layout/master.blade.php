@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css' ,'resources/js/designer_notification.js'])
-    <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
-    <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script>  -->
+    <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js']) -->
+    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script> 
 
 </head>
 <style>
@@ -46,7 +46,7 @@
                         <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                     </div>
                     <div class="nk-sidebar-brand">
-                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                        <a href="{{ url('designer-dashboard') ?? '' }}" class="logo-link nk-sidebar-logo">
                             <img class="logo-light logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo">
                             <img class="logo-dark logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo-dark">
                         </a>
