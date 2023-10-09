@@ -407,9 +407,9 @@
       }
       url = '{{ url('logos-search?search=') }}'+searchvalue;
       location.href = url;
+    });
+    
+  });
 
-    })
-
-  })
 </script>
   @endsection

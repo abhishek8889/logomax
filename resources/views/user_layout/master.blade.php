@@ -16,10 +16,8 @@
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
     <!-- meta for fb : -->
     <meta property="og:url"        content="{{ url()->current() ?? '' }}" />
     <meta property="og:type"       content="article" />
@@ -124,7 +122,7 @@
                             <div class="Select-text">
                                 <div class="all-select">
                                     <div class="search">
-                                        <input type="search" class="form-control" value="{{ $request->search ?? '' }}" placeholder="Search for logo...">
+                                        <input type="search" name="search_field" class="form-control" value="{{ $request->search ?? '' }}" placeholder="Search for logo...">
                                     </div>
                                 </div>
                                 <div class="Search-bar">
@@ -291,7 +289,16 @@
       </div>
     </div>
   </footer>
-
+<script>
+    $(document).ready(function(){
+                
+                $('#button-addon5').click(function(){
+                    val = $('input[type="search"]').val();
+                    url = '{{ url('logos-search?search=') }}'+val;
+                    location.href = url;
+                });
+            })
+</script>
 
 
   <!-- ================= footer section start ====================== -->

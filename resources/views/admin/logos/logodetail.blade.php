@@ -102,10 +102,10 @@
                                                         @if($logos->approved_status == 0)
                                                             <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
                                                                 <li class="w-140px">
-                                                                <button status="{{ $logos->approved_status ?? '' }}" action="approved" data-id="{{ $logos->id ?? '' }}"  class="btn btn-primary statusbutton">Approved</button>
+                                                                <button status="{{ $logos->approved_status ?? '' }}" action="approved" data-id="{{ $logos->id ?? '' }}"  class="btn btn-primary statusbutton">Approve</button>
                                                                 </li>
                                                                 <li>
-                                                                <button status="{{ $logos->approved_status ?? '' }}" action="deapproved" data-id="{{ $logos->id ?? '' }}" class="btn btn-danger statusbutton">Disapproved</button>
+                                                                <button status="{{ $logos->approved_status ?? '' }}" action="deapproved" data-id="{{ $logos->id ?? '' }}" class="btn btn-danger statusbutton">Disapprove</button>
                                                                 </li>
                                                             </ul>
                                                         @else
@@ -155,7 +155,40 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <!-- Set price for customers and Designers -->
+                <div class="modal fade" id="setPrice" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form action="{{ url('admin-dashboard/updatestatus') }}" method="post">
+                                @csrf
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Reason for disapproval ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- <input type="hidden" name="logo_id" id="logo_id" value=""> -->
+                                    <div class="form-control-wrap">
+                                        <label class="" for="for-customer">For customer : </label>
+                                        <input class="form-control no-resize" name="for-customer" id="for-customer" type="number" />
+                                    </div>
+                                    <hr>
+                                    <div class="form-control-wrap">
+                                        <label class="" for="for-designer">For designer : </label>
+                                        <input class="form-control no-resize" name="for-designer" id="for-designer" type="number" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button> -->
+                                    <button type="submit" id="approve-submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                </div>
+                <!-- End -->
                 <script>
                     $(document).ready(function(){
                         $('.spinner-container').hide();
@@ -168,18 +201,27 @@
                                 $('input#logo_id').val(id);
                                 $('#exampleModalCenter').modal("show","true");
                             }else{
-                                $('.spinner-container').show();
-                                $.ajax({
-                                    method: 'post',
-                                    url: '{{ url('admin-dashboard/updatestatus') }}',
-                                    data: { id:id,action:action,approved_status:status,_token:'{{ csrf_token() }}' },
-                                    success: function(response){
-                                        NioApp.Toast(response, 'info', {position: 'top-right'}); 
-                                        setTimeout(() => {
-                                            location.reload();
-                                        }, 1000);    
-                                    }
+                                $('input#logo_id').val(id);
+                                $('#setPrice').modal("show","true");
+                                $("#approve-submit").on('click',function(e){
+                                    e.preventDefault();
+                                    let customer_price = $("#for-customer").val();
+                                    let designer_price = $("#for-designer").val();
+                                    // console.log(customer_price + ' => ' + designer_price);
+                                    $('.spinner-container').show();
+                                    $.ajax({
+                                        method: 'post',
+                                        url: '{{ url('admin-dashboard/updatestatus') }}',
+                                        data: { id:id,action:action,customer_price:customer_price,designer_price:designer_price,approved_status:status,_token:'{{ csrf_token() }}' },
+                                        success: function(response){
+                                            NioApp.Toast(response, 'info', {position: 'top-right'}); 
+                                            setTimeout(() => {
+                                                location.reload();
+                                            }, 1000);    
+                                        }
+                                    });
                                 });
+                                
                             }
 
                         });
