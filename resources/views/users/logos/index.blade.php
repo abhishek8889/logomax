@@ -1,5 +1,35 @@
 @extends('user_layout/master')
 @section('content')
+            <?php 
+            if(isset($_GET['categories'])){
+
+                $filterCategories = $_GET['categories'];
+
+            }else{
+                $filterCategories = json_encode([]);
+            }
+
+            if(isset($_GET['styles'])){
+                $filterStyles = $_GET['styles'];
+            }else{
+                $filterStyles = json_encode([]);
+            }
+
+            if(isset($_GET['tags'])){
+                
+
+                $filterTags = $_GET['tags'];
+
+            }else{
+                $filterTags = json_encode([]);
+            }
+            if(isset($_GET['search'])){
+                $filterSearch = $_GET['search'];
+            }else{
+                $filterSearch = '';
+            }
+          
+            ?>
 
 <section class="filter-sec">
             <div class="container-fluid">
@@ -19,9 +49,18 @@
                         <div class="slider-content">
                             <div class="slider-box">
                                 <div class="fillter-slider">
+                                    <?php $selctedtag = json_decode($filterTags);
+                                    
+                                    ?>
                                     @foreach($tags as $tag)
                                        <label for="{{ $tag->slug ?? '' }}">
-                                            <div class="filtr_box" >
+                                            <div class="filtr_box <?php  echo 'filter-box'.$tag->slug;
+                                            if(in_array($tag->slug,$selctedtag)){
+                                                echo ' selected';
+                                            }else{
+
+                                            }
+                                            ?>">
                                                 <a id="test" value="{{ $tag->id ?? '' }}"><i class="fa-sharp fa-light fa-magnifying-glass"></i>{{ $tag->name ?? '' }}</a>
                                             </div>
                                         </label>
@@ -31,8 +70,11 @@
                         </div>
                     </div>
                 </div>
-                @foreach($tags as $tag)
-                    <input type="checkbox" name="tags" id="{{ $tag->slug ?? '' }}" class="tags" value="{{ $tag->slug ?? '' }}" style="display:none;">
+                    @foreach($tags as $tag)
+                         <input type="checkbox" name="tags" id="{{ $tag->slug ?? '' }}" class="tags" value="{{ $tag->slug ?? '' }}" style="display:none;" <?php
+                                            if(in_array($tag->slug,$selctedtag)){
+                                                echo 'checked';
+                                            } ?>>
                     @endforeach
                 <div class="search_sec">
                     <div class="work_data">
@@ -42,11 +84,11 @@
                                 <i class="fa-solid fa-angle-down"></i>
                             </div>
                             <div class="search_content">
-                                <form>
+                                <form><?php $styleSelected = json_decode($filterStyles); ?>
                                     @foreach($styles as $style)
                                     <div class="custom_check">
                                         <label for="style{{ $style->slug ?? '' }}">{{ $style->name ?? '' }}</label>
-                                        <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles" type="checkbox" value="{{ $style->slug ?? '' }}" />
+                                        <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles[]" type="checkbox" value="{{ $style->slug ?? '' }}" <?php if(in_array($style->slug,$styleSelected)){ echo 'checked'; } ?> />
                                     </div>
                                     @endforeach
                                 </form>
@@ -60,10 +102,11 @@
                             </div>
                             <div class="search_content">
                                 <form>
+                                    <?php $categoriesSlected = json_decode($filterCategories) ?>
                                     @foreach($categories as $category)
                                     <div class="custom_check">
                                         <label for="category{{ $category->slug ?? '' }}">{{ $category->name ?? '' }}</label>
-                                        <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" value="{{ $category->slug ?? '' }}" />
+                                        <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" value="{{ $category->slug ?? '' }}" <?php if(in_array($category->slug,$categoriesSlected)){ echo 'checked'; } ?>  />
                                     </div>
                                     @endforeach
                                 </form>
@@ -97,7 +140,7 @@
                             </div>
                         </div>
                         <div class="filter-btn">
-                            <button>Clear Filters</button>
+                            <button><a href="{{ url('logos-search') }}">Clear Filters</a></button>
                         </div>
                     </div>
 
@@ -105,7 +148,7 @@
                         <div class="logo_head">
                             <h2>Showing All for logo</h2>
                         </div>
-                        <div class="row">
+                        <div class="row" id="logo_html_row">
                             @foreach($logos as $logo)
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="logo_img">
@@ -118,21 +161,32 @@
                             @endforeach
                         </div>
                        
-                        @if ($logos->hasPages())
+                       <?php
+                       $filterSearchEncoded = urlencode($filterSearch);
+                       $filterCategoriesEncoded = urlencode($filterCategories);
+                       $filterTagsEncoded = urlencode($filterTags);
+                       $filterStyleEncoded = urlencode($filterStyles);
+                      
+                       ?>
                         <div class="next-button">
+                        @if ($logos->hasPages())
                             <div class="page-btn">
                            
-                                <div class="arrow-bt">
+                                
                                 @if ($logos->onFirstPage())
+                                <div class="arrow-bt">
                                     <a><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
                                 @else
-                                    <a href="{{ $logos->previousPageUrl() }}"><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
+                                <div class="arrow-bt black">
+                                    <a href="{{ url('/logos-search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()-1 }}"><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
                                 @endif
                                 </div>
-                                <div class="arrow-bt black">
+                                
                                 @if ($logos->hasMorePages())
-                                    <a href="{{ $logos->nextPageUrl() }}">Next Page <i class="fa-solid fa-arrow-right"></i></a>
+                                <div class="arrow-bt black">
+                                    <a href="{{ url('/logos-search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()+1 }}">Next Page <i class="fa-solid fa-arrow-right"></i></a>
                                 @else
+                                <div class="arrow-bt">
                                     <a>Next Page <i class="fa-solid fa-arrow-right"></i></a>
                                 @endif
                                 </div>
@@ -146,26 +200,33 @@
                                     </ul>
                                 </nav>
                             </div>
+                            @endif
                         </div>
-                        @endif
+                      
                     </div>
                 </div>
             </div>
         </section>
-        <script>
-            $(document).ready(function(){
-                $('#button-addon5').click(function(){
-                    val = $('input[type="search"]').val();
-                    url = '{{ url('logos-search?search=') }}'+val;
-                    location.href = url;
-                });
-            })
+          
 
+        <script>
       
         $(document).ready(function(){
-            categories = [];
-            styles = [];
-            tags = [];
+            categories = <?php print_r($filterCategories); ?>;
+            styles = <?php print_r($filterStyles); ?>;
+            tags = <?php print_r($filterTags); ?>;
+            searchvalue = $('input[name="search_field"]').val();
+            $('input[name="search_field"]').on('keyup',function(){
+                searchvalue = $(this).val();
+                // console.log(value);
+                let stateObj = { id: "100" }; 
+                let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                let stylestring = encodeURIComponent(JSON.stringify(styles));
+                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+                window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        search = ajaxRequest(searchvalue,categories,styles,tags);
+            });
             $('input.category').on('change',function(){
                 val = $(this).val();
                 if($(this).prop('checked') == true){
@@ -179,10 +240,14 @@
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
-            window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?categories="+categoriesString+"&tags="+stylestring+"&styles="+tagsstring);
+                window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                ajaxReque = ajaxRequest(searchvalue,categories,styles,tags);
+               
+            
             });
             $('input.styles').on('change',function(){
+                // console.log($('input[name="styles[]"]').val());
                 styleval = $(this).val();
                 if($(this).prop('checked') == true){
                     styles.push(styleval);  
@@ -195,33 +260,72 @@
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
-            window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?categories="+categoriesString+"&tags="+stylestring+"&styles="+tagsstring);
+                window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                ajaxReques = ajaxRequest(searchvalue,categories,styles,tags);
+
+            
            
             });
             $('input.tags').on('change',function(){
                 tagvalue = $(this).val();
                  if($(this).prop('checked') == true){
                     tags.push(tagvalue);  
+                    $('.filter-box'+tagvalue).addClass('selected');
                  }else{
                     tags = jQuery.grep(tags, function(value) {
                             return value != tagvalue;
-                    }); 
+                    });
+                    $('.filter-box'+tagvalue).removeClass('selected');
+
                  }
                  let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
-            window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?categories="+categoriesString+"&tags="+stylestring+"&styles="+tagsstring);
+
+                    window.history.replaceState(stateObj, 
+                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+
+                ajax = ajaxRequest(searchvalue,categories,styles,tags);
+
+            
             });
         });
-      
-//  $(document).ready(function(){
-//             let stateObj = { id: "100" }; 
-//             window.history.replaceState(stateObj, 
-//                         "Page 3", "/page3.html"); 
-//  });
-      
+
+    function ajaxRequest(searchvalue,categories,styles,tags){
+        let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                let stylestring = encodeURIComponent(JSON.stringify(styles));
+                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+
+        $.ajax({
+                    method: 'post',
+                    url: '{{ url('logo-filter') }}',
+                    data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
+                    success: function(response){
+                        // console.table(response);
+                        // console.table(response[0]['media']);
+
+                        append_html = [];
+                        $.each(response['data'], function(key,value){
+                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logos-detail/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon"><i class="fa-regular fa-heart"></i></div></div></div>';
+                            append_html.push(html);
+                        })
+                        $('#logo_html_row').html(append_html);
+
+                        if(response['last_page'] > 1){
+                            paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos-search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
+                            $('.next-button').html(paginationhtml);
+                        }else{
+                            $('.next-button').html('');
+                        }
+                        
+                        // console.log(re);
+                    }
+        });
+        
+
+    }      
+
     </script> 
 @endsection
