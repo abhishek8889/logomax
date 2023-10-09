@@ -48,6 +48,8 @@ Route::get('/logos-search',[FrontLogoController::class,'index']);
 Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
 Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
+Route::post('logo-filter',[FrontLogoController::class,'logoFilter']);
+
 
 /** Authentications */
 // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
