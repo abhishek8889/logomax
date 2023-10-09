@@ -23,11 +23,16 @@
     <!-- meta for fb : -->
     <meta property="og:url"        content="{{ url()->current() ?? '' }}" />
     <meta property="og:type"       content="article" />
-    <meta property="og:title"      content="Logo max" />
-    <meta property="og:description"content="How much does culture influence creative thinking?" />
+    @if (isset($blog) && isset($blog->title))
+    <meta property="og:image" content="{{ $blog->title ?? '' }}" />
+    @endif
+    @if (isset($blog) && isset($blog->sub_title))
+    <meta property="og:image" content="{{ $blog->sub_title ?? '' }}" />
+    @endif
     @if (isset($blog) && isset($blog->banner_img))
     <meta property="og:image" content="{{ asset('blog_images/' . $blog->banner_img) }}" />
     @endif
+
     <!-- end meta fb -->
   <title>home page </title>
 </head>
