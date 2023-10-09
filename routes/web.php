@@ -21,10 +21,12 @@ use App\Http\Controllers\Admin\Logo\LogosController;
 use App\Http\Controllers\Admin\Blog\AdminBlogController;
 use App\Http\Controllers\Admin\Style\AdminStyleController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
+use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
 
 use App\Http\Controllers\BasicController;
 
 use App\Events\RegisterNotificationEvent;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -119,6 +121,10 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('admin-dashboard/styles/addProcc',[AdminStyleController::class,'addProcc']);
     Route::get('admin-dashboard/styles/delete/{id}',[AdminStyleController::class,'delete']);
 
+    // Special Designer 
+    Route::get('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesigner']);
+    Route::post('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesignerProcess']);
+    Route::get('/admin-dashboard/special-designer-list',[SpecialDesignerController::class,'specialDesignerList']);
 });
 
 

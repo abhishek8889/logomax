@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('tags');
             $table->string('category_id');
             $table->string('style_id');
+            $table->float('price_for_customer')->default(199);
+            $table->float('price_for_designer')->default(50);
+            $table->string('currency')->default('usd');
             $table->integer('approved_status')->default(0);
             $table->integer('status')->default(1);
             $table->text('admin_review')->nullable();
