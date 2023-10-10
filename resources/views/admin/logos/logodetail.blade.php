@@ -5,14 +5,14 @@
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
                                 <div class="nk-block-head nk-block-head-sm">
-                                    <div class="nk-block-between g-3">
+                                    <div class="nk-block-between g-3 d-flex justify-content-between">
                                         <div class="nk-block-head-content">
                                             <h3 class="nk-block-title page-title">Logo Details</h3>
                                             <div class="nk-block-des text-soft">
                                                 <p>{{ $logos->logo_name ?? '' }}</p>
                                             </div>
                                         </div>
-                                        <div class="nk-block-head-content">
+                                        <div class="nk-block-head-content text-center">
                                             {{ Breadcrumbs::render('logos-detail',$logos->logo_slug) }}
                                         </div>
                                     </div>
@@ -113,6 +113,15 @@
                                                                 <li class="w-140px">
                                                                     @if($logos->approved_status == 1)<span class="badge bg-success">approved</span>@elseif($logos->approved_status == 2) <span class="badge bg-danger">Disapproved </span> @endif
                                                                 </li>
+                                                                @if($logos->approved_status == 2)
+                                                                <li class="w-140px">
+                                                                <button status="{{ $logos->approved_status ?? '' }}" action="approved" data-id="{{ $logos->id ?? '' }}"  class="btn btn-primary statusbutton">Approve</button>
+                                                                </li>
+                                                                @elseif($logos->approved_status == 1)
+                                                                <li>
+                                                                <button status="{{ $logos->approved_status ?? '' }}" action="deapproved" data-id="{{ $logos->id ?? '' }}" class="btn btn-danger statusbutton">Disapprove</button>
+                                                                </li>
+                                                                @endif
                                                         </ul>
                                                         @endif
                                                         </div><!-- .product-meta -->
@@ -163,8 +172,8 @@
                             <form action="{{ url('admin-dashboard/updatestatus') }}" method="post">
                                 @csrf
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Reason for disapproval ?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Price for logo ?</h5>
+                                    <button type="button" class="close" data-dismiss="setPrice" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -230,6 +239,7 @@
                 <script>
                     $('.close').click(function(){
                         $('#exampleModalCenter').modal("hide");
+                        $('#setPrice').modal("hide");
                     });
                 </script>
 @endsection

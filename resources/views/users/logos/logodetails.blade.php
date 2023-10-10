@@ -42,7 +42,16 @@
                             </div>
 
                             <div class="num">
-                                <h2>$199</h2>
+                                <h2>$
+                                @if(auth()->check()) 
+                                  @if(auth()->user()->role_id == 2)
+                                    {{ $logo->price_for_designer ?? '' }}
+                                  @else
+                                    {{ $logo->price_for_customer ?? '' }}
+                                  @endif
+                                @else
+                                  {{ $logo->price_for_customer ?? '' }}
+                                @endif</h2>
                             </div>
 
                             <div class="dropdown_data">

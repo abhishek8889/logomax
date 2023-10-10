@@ -17,7 +17,7 @@ Breadcrumbs::for('logos-request', function (BreadcrumbTrail $trail) {
 });
 Breadcrumbs::for('logos-detail', function (BreadcrumbTrail $trail, $slug) {
     $trail->parent('logos-request');
-    $trail->push($slug, route('logos-requests',['slug'=>$slug]));
+    $trail->push('DETAIL-PAGE', route('logos-requests',['slug'=>$slug]));
 });
 Breadcrumbs::for('approved-logos', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
@@ -71,6 +71,14 @@ Breadcrumbs::for('blog-category', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('styles', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('STYLES', route('styles'));
+});
+Breadcrumbs::for('special-desingers', function(BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('SPECIAL-DESINGER-LIST', route('special-desinger-list'));
+});
+Breadcrumbs::for('add-special-desinger', function(BreadcrumbTrail $trail) {
+    $trail->parent('special-desingers');
+    $trail->push('ADD', route('add-special-desinger'));
 });
 
 /////// Desinger breadcrumbs 

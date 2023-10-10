@@ -33,5 +33,11 @@ class BlogController extends Controller
     
         return view('users.blog.blog-detail', compact('request', 'blog','relatedBlog'));
     }
+    public function blogsearch(Request $request){
+        // return $request->all();
+        $searchvalue = strtolower(str_replace(" ","-",$request->searchvalue));
+        $blogs = Blog::where([['status',1],['slug','like',$searchvalue.'%']])->with('user')->get();
+        return $blogs;
+    }
     
 }

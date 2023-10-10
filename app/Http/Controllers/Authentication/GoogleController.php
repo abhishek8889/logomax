@@ -29,7 +29,7 @@ class GoogleController extends Controller
         $remember_token = Str::random(64);
     try {
         $metadata = Socialite::driver('facebook')->user();
-        $user = User::where('google_id',$metadata->id)->first();
+        $user = User::where('facebook_id',$metadata->id)->first();
         if($user){ 
             $data = array(
                 'email' => $user->email,
@@ -66,7 +66,7 @@ class GoogleController extends Controller
             $user->password = Hash::make($metadata->id);
             $user->role_id = 2;
             $user->email_verified = 1;
-            $user->google_id = $metadata->id;
+            $user->facebook_id = $metadata->id;
             $user->remember_token = $remember_token;
             $user->save();
             if($user->save()){

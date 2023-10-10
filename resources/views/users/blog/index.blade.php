@@ -10,10 +10,10 @@
       </nav>
       <div class="Select-text">
         <div class="search">
-          <input type="search" class="form-control" placeholder="Search our blog...">
+          <input type="search" class="form-control" id="blog-search" placeholder="Search our blog...">
         </div>
         <div class="Search-bar">
-          <button id="button-addon5" type="submit">
+          <button id="button-addon5" class="blog-search" type="submit">
             <i class="fa fa-search"></i>
           </button>
         </div>
@@ -46,12 +46,12 @@
 
   <section class="recent-blog-sec p-110">
     <div class="container">
-      <div class="recent-blog-text">
-        <h2>Recent Blog</h2>
+      <div class="recent-blog-text" id="recent-blog-text">
+        <h2 class="blog-text">Recent Blog</h2>
       </div>
       <div class="recent-blog-box">
       @if($blogs->IsNotEmpty())
-        <div class="row">
+        <div class="row" id="blogs-list">
           <?php $showMore = 'd-none'; ?>
             @foreach ($blogs as $k => $blog)
                 <div class="col-lg-4 col-md-6 {{ $k >= 9 ? 'blogs-data d-none' : '' }}">
@@ -73,6 +73,9 @@
                 
             @endforeach
         </div>
+        <div class="row d-none" id="blogs-list-append">
+
+        </div>
           <div class="blog-btn {{ count($blogs) >= 9 ? '' : 'd-none' }}">
             <a href="#" class="blog-cta" data-for="showmore">Load More</a>
           </div>
@@ -93,5 +96,42 @@ $(document).ready(function() {
   });
 });
 
+$('.blog-search').on('click',function(e){
+  e.preventDefault();
+  document.getElementById('recent-blog-text').scrollIntoView(true);
+  // console.log(innerdiv);
+  blogsearchvalue = $('input#blog-search').val();
+  if(blogsearchvalue == null || blogsearchvalue == ""){
+    // $('.blog-img-box').removeClass('d-none');
+    $('.blog-text').html('Recent Blogs');
+    $('#blogs-list').removeClass('d-none');
+    $('#blogs-list-append').addClass('d-none');
+    return false;
+  }
+  $.ajax({
+    method: 'post',
+    url: '{{ url('blog-search') }}',
+    data: { searchvalue:blogsearchvalue,_token:'{{ csrf_token() }}' },
+    success: function(response){
+      $('#blogs-list').addClass('d-none');
+      $('#blogs-list-append').removeClass('d-none');
+      $('.blog-text').html('Search Blogs');
+      if(response.length > 0){
+      appendhtml = [];
+      $.each(response, function(key,value){
+
+        date = moment(value.created_at).format("MMMM DD,Y");
+        
+        html = '<div class="col-lg-4 col-md-6"><div class="blog-content"><div class="recent-blog-img"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><img src="{{ asset('blog_images') }}/'+value.banner_img+'" alt=""></a></div><div class="recent-text"><div class="lorem-text"><p>By '+value.user.name+' <span>| '+date+'</span></p></div><div class="simply-text"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><h6>'+value.title+'</h6></a><p>'+value.sub_title+'</p></div></div></div></div>';
+        appendhtml.push(html);
+      });
+      $('#blogs-list-append').html(appendhtml);
+        }else{
+          $('#blogs-list-append').html('<div class="col-lg-12 text-center"><h2 class="text-center">No Data Found</h2></div>');
+        }
+    }
+  })
+
+})
   </script>
 @endsection

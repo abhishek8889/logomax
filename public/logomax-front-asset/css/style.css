@@ -4137,5 +4137,55 @@ form#progress-form [data-complete="true"] .box_studio {
     border: 1px solid red;
 }
 
+.join-btn a {
+    margin: 0 !important;
+    padding: 15px 20px !important;
+    border-radius: 5px !important;
+    border: 1px solid #E3E9ED !important;
+    background: #fff !important;
+    color: #000 !important;
+    transition: 0.4s;
+    display: block;
+    text-align: center;
+}
+
+.join-btn {
+    margin-top: 20px;
+}
+
+
+.join-btn a:hover {    background-color: #000000 !important;
+    color: #fff !important;}
+
+
+.Search-bar button {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+
+.Select-text {
+    position: relative;
+}
+
+.banner-content input.form-control {
+    padding-right: 30px;
+}
+
+.custom-header .Select-text {
+    display: block !important;
+}
+
+.banner-sec .Select-text {
+    display: block;
+}
+
+.banner-sec .all-select {
+    display: block;
+}
+
+.banner-sec .banner-content input.form-control {
+    padding-right: 100px;
+}
 
 /*  */
