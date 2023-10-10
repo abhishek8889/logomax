@@ -33,8 +33,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="">
-                                                        <button status="{{ $logo->approved_status ?? '' }}" action="approved" data-id="{{ $logo->id ?? '' }}"  class="btn btn-primary statusbutton">Approved</button>
-                                                        <button status="{{ $logo->approved_status ?? '' }}" action="deapproved" data-id="{{ $logo->id ?? '' }}" class="btn btn-danger statusbutton">Disapproved</button>
+                                                        <button status="{{ $logo->approved_status ?? '' }}" action="approved" data-id="{{ $logo->id ?? '' }}"  class="btn btn-primary statusbutton">Approve</button>
+                                                        <button status="{{ $logo->approved_status ?? '' }}" action="deapproved" data-id="{{ $logo->id ?? '' }}" class="btn btn-danger statusbutton">Disapprove</button>
                                                     </div>
                                                 </div>
                                             </div>

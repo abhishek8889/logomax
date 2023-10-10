@@ -37,10 +37,18 @@ class LogosController extends Controller
         return view('admin.logos.disapprovedlogos',compact('logos'));
     }
     public function updateStatus(Request $request){
-     
+        // dd($request);
+        // return $request->all();
+        
         if($request->action == 'approved'){
             $logos = Logo::find($request->id);
             $logos->approved_status = 1;
+            if(!empty($request->customer_price)){
+                $logos->price_for_customer = $request->customer_price;
+            }
+            if(!empty($request->designer_price)){
+                $logos->price_for_designer = $request->designer_price;
+            }
             $logos->update(); 
             $designer_detail = User::find($logos->designer_id);
             $mailData = [

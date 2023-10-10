@@ -55,7 +55,7 @@
                     </div>
                     
                     <div class="nk-sidebar-brand">
-                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                        <a href="{{ url('/admin-dashboard') }}" class="logo-link nk-sidebar-logo">
                             <img class="logo-light logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo">
                             <img class="logo-dark logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo-dark">
                         </a>
@@ -98,6 +98,9 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{url('/admin-dashboard/guests-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/special-designer-list') }}" class="nk-menu-link"><span class="nk-menu-text">User List - Special Designer</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -157,6 +160,19 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                <!-- special designer -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">In-House Designer</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/add-special-designer') }}" class="nk-menu-link"><span class="nk-menu-text">Add Designer</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!-- end  -->
                             </ul>
                         </div>
                     </div>

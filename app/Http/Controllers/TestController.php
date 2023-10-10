@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Events\RegisterNotificationEvent;
-
+use App\Mail\RegisterConfirmationMail;
+use Mail;
 class TestController extends Controller
 {
     public function index(){
@@ -25,5 +26,12 @@ class TestController extends Controller
         );
         
         event(new RegisterNotificationEvent($eventData));
+        // $mailData = array(
+        //     'title' => 'Special Designer Registered',
+        //     'name' => 'Abhishek',
+        //     'user_role' => 'Special Designer',
+        // );
+        // $mail = Mail::to('abhishek@sagmetic.com')->send(new RegisterConfirmationMail($mailData));
+
     }
 }
