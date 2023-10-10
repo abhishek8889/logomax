@@ -45,6 +45,10 @@
                         <div class="bars bar3"></div>
                     </div>
                 </button>
+                <?php $categories = App\Models\Categories::all();
+                    $styles = App\Models\Style::where('status',1)->get();
+                    
+                ?>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
@@ -52,8 +56,11 @@
                                 Categories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+                              @if($categories->isNotEmpty())
+                                @foreach($categories as $cat)
+                                <a class="dropdown-item" href="{{ url('logos-search?categories=%5B"'.$cat->slug.'"%5D') }}">{{ $cat->name ?? '' }}</a>
+                                @endforeach
+                              @endif
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -71,8 +78,11 @@
                                 Styles
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+                              @if($styles->isNotEmpty())
+                                @foreach($styles as $style)
+                                  <a class="dropdown-item" href="{{ url('logos-search?styles=%5B"'.$style->slug.'"%5D') }}">{{ $style->name ?? '' }}</a>
+                                @endforeach
+                              @endif
                             </div>
                         </li>
                     </ul>
