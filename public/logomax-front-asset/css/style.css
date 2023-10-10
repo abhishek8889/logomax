@@ -4133,7 +4133,9 @@ form#progress-form [data-complete="true"] .box_studio {
 }
 
 
-
+.filtr_box.selected {
+    border: 1px solid red;
+}
 
 
 /*  */

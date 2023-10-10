@@ -890,7 +890,6 @@ jQuery(document).ready(function (e) {
     $(this).next(".card_detail").slideToggle();
     $(this).toggleClass("clicked");
   })
-  e.preventDefault();
 
 }) 
 
