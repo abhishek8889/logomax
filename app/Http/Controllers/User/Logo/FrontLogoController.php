@@ -64,10 +64,6 @@ class FrontLogoController extends Controller
             });
         }
         }
-        // echo '<pre>';
-        // print_r($logos->get());
-        // echo '<pre>';
-        // die();
         $logos = $query->paginate(20);
 
         return view('users.logos.index',compact('request','categories','tags','logos','styles'));
@@ -128,9 +124,6 @@ class FrontLogoController extends Controller
             }
         });
        }
-       
-       return $query->paginate(20);
-
-
+       return response()->json($query->paginate(20));
     }
 }

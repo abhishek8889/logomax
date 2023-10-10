@@ -210,10 +210,11 @@
                             <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
                         </div>
                         @endforeach
+                        @if(count($similar_logos) == 4)
                         <div class="similar_img_box white">
                             <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
-
                         </div>
+                        @endif
 
                     </div>
 
