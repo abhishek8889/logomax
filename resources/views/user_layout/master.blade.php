@@ -17,15 +17,24 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
   
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- meta for fb : -->
     <meta property="og:url"        content="{{ url()->current() ?? '' }}" />
     <meta property="og:type"       content="article" />
-    <meta property="og:title"      content="Logo max" />
-    <meta property="og:description"content="How much does culture influence creative thinking?" />
-    <meta property="og:image"      content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+    @if (isset($blog) && isset($blog->title))
+    <meta property="og:image" content="{{ $blog->title ?? '' }}" />
+    @endif
+    @if (isset($blog) && isset($blog->sub_title))
+    <meta property="og:image" content="{{ $blog->sub_title ?? '' }}" />
+    @endif
+    @if (isset($blog) && isset($blog->banner_img))
+    <meta property="og:image" content="{{ asset('blog_images/' . $blog->banner_img) }}" />
+    @endif
+
+    <!-- <meta property="og:image"      content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
     <!-- end meta fb -->
   <title>home page </title>
 </head>

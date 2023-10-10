@@ -154,12 +154,12 @@ $(document).ready(function() {
     $('.shareOn').click(function(event) {
         event.preventDefault();
 
-        // const shareImg = $(this).attr('share-img');
-        // const shareUrl = $(this).attr('share-url');
-        // const shareTitle = $(this).attr('share-title');
-        const shareImg = `http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg`;
-        const shareUrl =`http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html`;
-        const shareTitle = `welcome to my site`;
+        const shareImg = $(this).attr('share-img');
+        const shareUrl = $(this).attr('share-url');
+        const shareTitle = $(this).attr('share-title');
+        // const shareImg = `http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg`;
+        // const shareUrl =`http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html`;
+        // const shareTitle = `welcome to my site`;
         var shareOn = $(this).attr('share-to');
         var ShareURL = '';
 
