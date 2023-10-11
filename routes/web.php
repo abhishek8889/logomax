@@ -52,6 +52,7 @@ Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
 Route::post('logo-filter',[FrontLogoController::class,'logoFilter']);
 
+Route::post('blog-search',[BlogController::class,'blogsearch']);
 
 /** Authentications */
 // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
@@ -124,9 +125,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/styles/delete/{id}',[AdminStyleController::class,'delete']);
 
     // Special Designer 
-    Route::get('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesigner']);
+    Route::get('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesigner'])->name('add-special-desinger');
     Route::post('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesignerProcess']);
-    Route::get('/admin-dashboard/special-designer-list',[SpecialDesignerController::class,'specialDesignerList']);
+    Route::get('/admin-dashboard/special-designer-list',[SpecialDesignerController::class,'specialDesignerList'])->name('special-desinger-list');
 });
 
 

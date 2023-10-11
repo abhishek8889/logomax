@@ -6,7 +6,7 @@
                                                 <h4 class="nk-block-title">Special Designers List - </h4>
                                             </div>
                                             <div>
-                                                {{ Breadcrumbs::render('desingers-list') }}
+                                                {{ Breadcrumbs::render('special-desingers') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">

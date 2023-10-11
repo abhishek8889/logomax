@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?khbkhsdfsdghgvgh')}}">
-  <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}">
+  <!-- <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}"> -->
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
@@ -55,6 +55,10 @@
                         <div class="bars bar3"></div>
                     </div>
                 </button>
+                <?php $categories = App\Models\Categories::all();
+                    $styles = App\Models\Style::where('status',1)->get();
+                    
+                ?>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
@@ -62,8 +66,11 @@
                                 Categories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+                              @if($categories->isNotEmpty())
+                                @foreach($categories as $cat)
+                                <a class="dropdown-item" href="{{ url('logos-search?categories=%5B"'.$cat->slug.'"%5D') }}">{{ $cat->name ?? '' }}</a>
+                                @endforeach
+                              @endif
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -81,8 +88,11 @@
                                 Styles
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+                              @if($styles->isNotEmpty())
+                                @foreach($styles as $style)
+                                  <a class="dropdown-item" href="{{ url('logos-search?styles=%5B"'.$style->slug.'"%5D') }}">{{ $style->name ?? '' }}</a>
+                                @endforeach
+                              @endif
                             </div>
                         </li>
                     </ul>
@@ -316,12 +326,13 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="https://alexandrebuffet.fr/codepen/slider/slick-animation.min.js"></script>
-  <!-- <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
-            integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  // <script
+  //           src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+  //           integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+  //           crossorigin="anonymous"
+  //           referrerpolicy="no-referrer"
+  //       ></script>
   
   <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
   <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>

@@ -170,7 +170,7 @@ ready(function () {
 
   const progressForm = document.getElementById("progress-form");
 
-  const tabItems = progressForm.querySelectorAll('[role="tab"]'),
+  const tabItems = progressForm.querySelectorAll('[role="tab"]');
     tabPanels = progressForm.querySelectorAll('[role="tabpanel"]');
 
   let currentStep = 0;

@@ -37,9 +37,8 @@ class LogosController extends Controller
         return view('admin.logos.disapprovedlogos',compact('logos'));
     }
     public function updateStatus(Request $request){
-        // dd($request);
-        // return $request->all();
-        
+      
+
         if($request->action == 'approved'){
             $logos = Logo::find($request->id);
             $logos->approved_status = 1;

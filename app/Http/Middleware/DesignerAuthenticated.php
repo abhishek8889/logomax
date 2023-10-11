@@ -16,7 +16,7 @@ class DesignerAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::user()){
-            if(Auth::user()->role_id == 2){
+            if(Auth::user()->role_id == 2 || Auth::user()->role_id == 4){
                 return $next($request);
             }else{
                 return abort(404);
