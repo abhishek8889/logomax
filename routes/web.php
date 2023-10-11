@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\Blog\AdminBlogController;
 use App\Http\Controllers\Admin\Style\AdminStyleController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
+use App\Http\Controllers\User\Checkout\CheckoutController;
 
 use App\Http\Controllers\BasicController;
 
@@ -48,6 +49,10 @@ Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 Route::get('/logos-search',[FrontLogoController::class,'index']);
 Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
+
+Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
+Route::post('logo-checkout',[CheckoutController::class,'checkoutProcess']);
+
 Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
 Route::post('logo-filter',[FrontLogoController::class,'logoFilter']);
@@ -107,6 +112,16 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos'])->name('approved-logos');
     Route::get('admin-dashboard/disapproved-logos',[LogosController::class,'disapprovedLogos'])->name('disapproved-logos');
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
+    
+    // Logo Facilities :
+    Route::get('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilities']);
+    Route::post('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilitiesAdd']);
+    Route::get('admin-dashboard/logo-options/{id?}',[LogosController::class,'additionalOptions']);
+    Route::post('admin-dashboard/logo-optionssave',[LogosController::class,'additionalOptionsSave']);
+
+    
+    
+    
 
     //adminblogs
     Route::get('admin-dashboard/blogs/category',[BlogCategoryController::class,'index'])->name('blog-category');

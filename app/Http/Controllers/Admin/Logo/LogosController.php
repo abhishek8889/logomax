@@ -11,6 +11,8 @@ use App\Mail\DeapproveLogoMail;
 use Mail;
 use App\Events\DesignerNotification;
 use App\Models\Notifications;
+use App\Models\LogoFacilities;
+use App\Models\AdditionalOptions;
 
 class LogosController extends Controller
 {
@@ -111,5 +113,69 @@ class LogosController extends Controller
             
             return redirect()->back()->with('success','You have disapproved this logo.');
         }
+    }
+    public function logoFacilities(Request $req){
+        $logoFacilities  = LogoFacilities::all();
+        return view('admin.logos.logo_facilities',compact('logoFacilities'));
+    }
+    public function logoFacilitiesAdd(Request $req){
+        // return $req->all();
+        $id = $req->id;
+        if(!empty($id)){
+            $facility = LogoFacilities::find($id);
+            if(!empty($facility)){
+                $facility->facilities_name	 = $req->name;
+                $facility->description = $req->description;
+                $facility->update();
+                return redirect()->back()->with('success','Facility is successfully updated !');
+            }else{
+                $facility = new LogoFacilities;
+                $facility->facilities_name	 = $req->name;
+                $facility->description = $req->description;
+                $facility->status = 1;
+                $facility->save();
+                return redirect()->back()->with('success','Facility is successfully added !');
+            }
+        }else{
+            $facility = new LogoFacilities;
+            $facility->facilities_name	 = $req->name;
+            $facility->description = $req->description;
+            $facility->status = 1;
+            $facility->save();
+            return redirect()->back()->with('success','Facility is successfully added !');
+        }
+    }
+    public function additionalOptions(Request $req){
+        $addtionaloption = AdditionalOptions::where('status',1)->get();
+        $editoption = AdditionalOptions::find($req->id);
+
+        return view('admin.logos.additional-options',compact('addtionaloption','editoption'));
+    }
+    public function additionalOptionsSave(Request $request){
+        $request->validate([
+            'text' => 'required',
+            'duration' => 'required',
+            'amount' => 'required',
+        ]);
+        if(!$request->id){
+            $options = new AdditionalOptions;
+            $options->option_text = $request->text;
+            $options->duration = $request->duration;
+            $options->amount = $request->amount;
+            $options->currency = $request->currency;
+            $options->save();
+            return redirect()->back()->with('success','successfully saved additional option');
+        }else{
+            $options = AdditionalOptions::find($request->id);
+            $options->option_text = $request->text;
+            $options->duration = $request->duration;
+            $options->amount = $request->amount;
+            $options->currency = $request->currency;
+            $options->save();
+            return redirect()->back()->with('success','successfully updated additional option');
+        }
+
+        
+
     }
 }

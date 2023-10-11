@@ -151,7 +151,7 @@ $(function () {
 
 
 // form
-console.clear();
+// console.clear();
 
 function ready(fn) {
   if (
