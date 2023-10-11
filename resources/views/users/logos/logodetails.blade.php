@@ -2,7 +2,7 @@
 @section('content')
 
 <section class="logo-detail-sec">
-        <div class="container">
+          <div class="container">
             <div class="brand-logo">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -10,25 +10,19 @@
                         <li class="breadcrumb-item"><a href="{{ url('logos-search') }}">Logos Search</a></li>
                         <li class="breadcrumb-item"><a > {{ $logo->logo_slug ?? '' }}</a>
                         </li>
-
                     </ol>
                 </nav>
-
-
             </div>
-
+            
             <div class="logo_wrapper">
                 <div class="row custom-align">
                     <div class="col-lg-6 col-md-12">
                         @if(isset($logo->media['image_name']))
                         <div class="vita-img">
                             <img src="{{ asset('logos/'.$logo->media['image_name']) }}" alt="">
-
                         </div>
                         @endif
-
                     </div>
-
                     <div class="col-lg-6 col-md-12">
                         <div class="brand-text">
                             <h4>{{ $logo->logo_name ?? '' }}</h4>
@@ -42,7 +36,7 @@
                             </div>
 
                             <div class="num">
-                                <h2>$199</h2>
+                                <h2>${{ $logo->price_for_customer }}</h2>
                             </div>
 
                             <div class="dropdown_data">
@@ -54,14 +48,14 @@
                                         </div>
                                         <div id="collapse-1" class="collapse " data-parent="#accordion">
                                             <div class="card-body">
-                                                Download your logo files instantly upon purchase. Need adjustments? Our
-                                                complimentary customizaon
-                                                service delivers changes within 1 business day. Enjoy up to 3 revisions,
-                                                covering brand name, colors, and
-                                                fonts to ensure your logo perfectly suits your vision. </div>
+                                              Download your logo files instantly upon purchase. Need adjustments? Our
+                                              complimentary customizaon
+                                              service delivers changes within 1 business day. Enjoy up to 3 revisions,
+                                              covering brand name, colors, and
+                                              fonts to ensure your logo perfectly suits your vision. 
+                                            </div>
                                         </div>
                                     </div>
-
                                     <div class="card">
                                         <div class="card-header pointer" data-toggle="collapse"
                                             data-target="#collapse-2">
@@ -76,7 +70,6 @@
                                                 that truly represents your business. </div>
                                         </div>
                                     </div>
-
                                     <div class="card">
                                         <div class="card-header pointer" data-toggle="collapse"
                                             data-target="#collapse-3">
@@ -112,9 +105,9 @@
                                             <div class="card-body">
                                                 Building a brand doesn't have to break the bank. Our logos offer a
                                                 cost-effecve soluon for businesses
-                                                looking to establish a strong visual identy. </div>
+                                                looking to establish a strong visual identy. 
+                                            </div>
                                         </div>
-
                                     </div>
                                     <div class="card">
                                         <div class="card-header pointer" data-toggle="collapse"
@@ -122,21 +115,17 @@
                                             <h5>Unrestricted License: Your Brand, Your Terms</h5>
                                         </div>
                                         <div id="collapse-6" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Our licensing agreement grants you exclusive ownership of the logo. Feel
-                                                free to ulize it in any manner
-                                                you prefer, without the need to acknowledge us. Shape your brand identy
-                                                on your terms. </div>
+                                          <div class="card-body">
+                                            Our licensing agreement grants you exclusive ownership of the logo. Feel
+                                            free to ulize it in any manner
+                                            you prefer, without the need to acknowledge us. Shape your brand identy
+                                            on your terms. 
+                                          </div>
                                         </div>
-
                                     </div>
-
-
                                 </div>
-
                                 <div class="cta-btn">
-                                    <a href="" class="now-btn">Buy Now</a>
-
+                                  <a href="{{ url('/logos/checkout/'.$logo->logo_slug) }}" class="now-btn">Buy Now</a>
                                 </div>
                             </div>
                         </div>
