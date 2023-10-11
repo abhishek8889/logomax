@@ -98,7 +98,7 @@ $(document).ready(function() {
 
 $('.blog-search').on('click',function(e){
   e.preventDefault();
-  document.getElementById('recent-blog-text').scrollIntoView(true);
+document.getElementById('recent-blog-text').scrollIntoView({ behavior: 'smooth', block: 'center' });
   // console.log(innerdiv);
   blogsearchvalue = $('input#blog-search').val();
   if(blogsearchvalue == null || blogsearchvalue == ""){
@@ -125,13 +125,15 @@ $('.blog-search').on('click',function(e){
         html = '<div class="col-lg-4 col-md-6"><div class="blog-content"><div class="recent-blog-img"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><img src="{{ asset('blog_images') }}/'+value.banner_img+'" alt=""></a></div><div class="recent-text"><div class="lorem-text"><p>By '+value.user.name+' <span>| '+date+'</span></p></div><div class="simply-text"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><h6>'+value.title+'</h6></a><p>'+value.sub_title+'</p></div></div></div></div>';
         appendhtml.push(html);
       });
+
       $('#blogs-list-append').html(appendhtml);
         }else{
           $('#blogs-list-append').html('<div class="col-lg-12 text-center"><h2 class="text-center">No Data Found</h2></div>');
         }
+        
     }
-  })
+  });
 
-})
+});
   </script>
 @endsection

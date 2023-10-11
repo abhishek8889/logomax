@@ -93,8 +93,6 @@
                         </div>
                     </div>
                 </div>
-                @empty
-               <h4 class="text-center">No requests Pending</h4>
                 @endforelse
                 <!-- logos review modal -->
                 <!-- Modal -->

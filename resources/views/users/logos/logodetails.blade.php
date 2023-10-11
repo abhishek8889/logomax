@@ -121,7 +121,8 @@
                                             <div class="card-body">
                                                 Building a brand doesn't have to break the bank. Our logos offer a
                                                 cost-effecve soluon for businesses
-                                                looking to establish a strong visual identy. </div>
+                                                looking to establish a strong visual identy. 
+                                            </div>
                                         </div>
 
                                     </div>
@@ -215,14 +216,18 @@
                     </div>
                     <div class="similar_wrapper">
                         @foreach($similar_logos as $similar)
-                        <div class="similar_img_box">
-                            <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
-                        </div>
+                        <a href="{{ url('logos-detail/'.$similar->logo_slug) }}">
+                          <div class="similar_img_box">
+                              <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
+                          </div>
+                        </a>
                         @endforeach
                         @if(count($similar_logos) == 4)
-                        <div class="similar_img_box white">
-                            <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
-                        </div>
+                        <a href="{{ url('/logos-search?categories=%5B"'.$category_slug.'"%5D') }}">
+                          <div class="similar_img_box white">
+                              <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
+                          </div>
+                        </a>
                         @endif
 
                     </div>

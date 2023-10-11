@@ -70,11 +70,12 @@ class FrontLogoController extends Controller
     }
     public function logodetail(Request $request, $slug){
         $logo = Logo::where([['logo_slug',$slug],['approved_status',1],['status',1]])->first();
+        $category_slug = Categories::find($logo->category_id)->slug;
         if(empty($logo)){
             abort(404);
         }
         $similar_logos = Logo::where([['category_id',$logo->category_id],['approved_status',1],['status',1],['id','!=',$logo->id]])->take(4)->get();
-        return view('users.logos.logodetails',compact('request','logo','similar_logos'));
+        return view('users.logos.logodetails',compact('request','logo','similar_logos','category_slug'));
     }
     public function download_page(Request $request){
 
