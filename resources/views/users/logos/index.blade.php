@@ -1,6 +1,7 @@
 @extends('user_layout/master')
 @section('content')
             <?php 
+           
             if(isset($_GET['categories'])){
 
                 $filterCategories = $_GET['categories'];
@@ -139,8 +140,10 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="filter-btn">
-                            <button><a href="{{ url('logos-search') }}">Clear Filters</a></button>
+                        <div class="filter-btn <?php  if(!$_GET){
+               echo 'd-none';
+            } ?>">
+                            <a href="{{ url('logos-search') }}"><button>Clear Filters</button></a>
                         </div>
                     </div>
 
@@ -305,6 +308,7 @@
                     success: function(response){
                         // console.table(response);
                         // console.table(response[0]['media']);
+                        $('.filter-btn').removeClass('d-none');
 
                         append_html = [];
                         $.each(response['data'], function(key,value){
