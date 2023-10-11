@@ -130,6 +130,22 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                <!-- ##########################  -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-puzzle"></em></span>
+                                        <span class="nk-menu-text">Logo Facilities</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/logo-facilities') }}" class="nk-menu-link"><span class="nk-menu-text">Add Facilities</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/logo-options') }}" class="nk-menu-link"><span class="nk-menu-text">Additional Options</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!-- ##########################  -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                     <span class="nk-menu-icon"><em class="icon ni ni-text-rich"></em></span>

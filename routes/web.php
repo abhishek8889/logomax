@@ -112,6 +112,15 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos'])->name('approved-logos');
     Route::get('admin-dashboard/disapproved-logos',[LogosController::class,'disapprovedLogos'])->name('disapproved-logos');
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
+    
+    // Logo Facilities :
+    Route::get('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilities']);
+    Route::post('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilitiesAdd']);
+    Route::get('admin-dashboard/logo-options',[LogosController::class,'additionalOptions']);
+
+    
+    
+    
 
     //adminblogs
     Route::get('admin-dashboard/blogs/category',[BlogCategoryController::class,'index'])->name('blog-category');

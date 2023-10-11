@@ -11,6 +11,7 @@ use App\Mail\DeapproveLogoMail;
 use Mail;
 use App\Events\DesignerNotification;
 use App\Models\Notifications;
+use App\Models\LogoFacilities;
 
 class LogosController extends Controller
 {
@@ -111,5 +112,39 @@ class LogosController extends Controller
             
             return redirect()->back()->with('success','You have disapproved this logo.');
         }
+    }
+    public function logoFacilities(Request $req){
+        $logoFacilities  = LogoFacilities::all();
+        return view('admin.logos.logo_facilities',compact('logoFacilities'));
+    }
+    public function logoFacilitiesAdd(Request $req){
+        // return $req->all();
+        $id = $req->id;
+        if(!empty($id)){
+            $facility = LogoFacilities::find($id);
+            if(!empty($facility)){
+                $facility->facilities_name	 = $req->name;
+                $facility->description = $req->description;
+                $facility->update();
+                return redirect()->back()->with('success','Facility is successfully updated !');
+            }else{
+                $facility = new LogoFacilities;
+                $facility->facilities_name	 = $req->name;
+                $facility->description = $req->description;
+                $facility->status = 1;
+                $facility->save();
+                return redirect()->back()->with('success','Facility is successfully added !');
+            }
+        }else{
+            $facility = new LogoFacilities;
+            $facility->facilities_name	 = $req->name;
+            $facility->description = $req->description;
+            $facility->status = 1;
+            $facility->save();
+            return redirect()->back()->with('success','Facility is successfully added !');
+        }
+    }
+    public function additionalOptions(Request $req){
+        return view('admin.logos.additional-options');
     }
 }

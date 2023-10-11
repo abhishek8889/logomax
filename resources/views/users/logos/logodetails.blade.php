@@ -36,106 +36,24 @@
                             </div>
 
                             <div class="num">
-<<<<<<< HEAD
                                 <h2>${{ $logo->price_for_customer }}</h2>
-=======
-                                <h2>$
-                                @if(auth()->check()) 
-                                  @if(auth()->user()->role_id == 2)
-                                    {{ $logo->price_for_designer ?? '' }}
-                                  @else
-                                    {{ $logo->price_for_customer ?? '' }}
-                                  @endif
-                                @else
-                                  {{ $logo->price_for_customer ?? '' }}
-                                @endif</h2>
->>>>>>> 24ab6ac9e797293788da7947fe7c39f1da0c7d3f
                             </div>
 
                             <div class="dropdown_data">
                                 <div id="accordion">
-                                    <div class="card">
-                                        <div class="card-header pointer" data-toggle="collapse"
-                                            data-target="#collapse-1">
-                                            <h5>Rapid, Free Customization</h5>
-                                        </div>
-                                        <div id="collapse-1" class="collapse " data-parent="#accordion">
-                                            <div class="card-body">
-                                              Download your logo files instantly upon purchase. Need adjustments? Our
-                                              complimentary customizaon
-                                              service delivers changes within 1 business day. Enjoy up to 3 revisions,
-                                              covering brand name, colors, and
-                                              fonts to ensure your logo perfectly suits your vision. 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header pointer" data-toggle="collapse"
-                                            data-target="#collapse-2">
-                                            <h5>Exclusivity Guaranteed</h5>
-                                        </div>
-                                        <div id="collapse-2" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Each logo is designed to be one-of-a-kind and will only be sold to a
-                                                single customer. This means your
-                                                brand will have a unique identy that stands out from competors, and you
-                                                can be confident in a logo
-                                                that truly represents your business. </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header pointer" data-toggle="collapse"
-                                            data-target="#collapse-3">
-                                            <h5>Immediate Use</h5>
-                                        </div>
-                                        <div id="collapse-3" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                As predesigned logos, they're ready to be used right away. No waing for
-                                                designers to create something
-                                                from scratch – you can start building your brand immediately. </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header pointer" data-toggle="collapse"
-                                            data-target="#collapse-4">
-                                            <h5>Brand Registraon Allowed</h5>
-                                        </div>
-                                        <div id="collapse-4" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                We allow brand registraon, ensuring that your chosen logo is legally
-                                                protected. This helps you establish
-                                                your brand's authencity and safeguards it from potenal infringements.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card">
-                                        <div class="card-header pointer" data-toggle="collapse"
-                                            data-target="#collapse-5">
-                                            <h5>Affordable Pricing</h5>
-                                        </div>
-                                        <div id="collapse-5" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Building a brand doesn't have to break the bank. Our logos offer a
-                                                cost-effecve soluon for businesses
-                                                looking to establish a strong visual identy. 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header pointer" data-toggle="collapse"
-                                            data-target="#collapse-6">
-                                            <h5>Unrestricted License: Your Brand, Your Terms</h5>
-                                        </div>
-                                        <div id="collapse-6" class="collapse" data-parent="#accordion">
+                                  @foreach($logoFacilities as $facility)
+                                  <div class="card">
+                                      <div class="card-header pointer" data-toggle="collapse"
+                                          data-target="#collapse-{{ $facility->id }}">
+                                          <h5>{{ $facility->facilities_name ?? '' }}</h5>
+                                      </div>
+                                      <div id="collapse-{{ $facility->id }}" class="collapse " data-parent="#accordion">
                                           <div class="card-body">
-                                            Our licensing agreement grants you exclusive ownership of the logo. Feel
-                                            free to ulize it in any manner
-                                            you prefer, without the need to acknowledge us. Shape your brand identy
-                                            on your terms. 
+                                            {{ $facility->description ?? '' }}
                                           </div>
-                                        </div>
-                                    </div>
+                                      </div>
+                                  </div>
+                                  @endforeach
                                 </div>
                                 <div class="cta-btn">
                                   <a href="{{ url('/logos/checkout/'.$logo->logo_slug) }}" class="now-btn">Buy Now</a>
