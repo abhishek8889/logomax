@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\Blog\AdminBlogController;
 use App\Http\Controllers\Admin\Style\AdminStyleController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
+use App\Http\Controllers\User\Checkout\CheckoutController;
 
 use App\Http\Controllers\BasicController;
 
@@ -48,6 +49,10 @@ Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
 Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
 Route::get('/logos-search',[FrontLogoController::class,'index']);
 Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
+
+Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
+Route::get('logo-checkout',[CheckoutController::class,'checkoutProcess']);
+
 Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
 Route::post('logo-filter',[FrontLogoController::class,'logoFilter']);
