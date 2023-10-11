@@ -15,6 +15,11 @@ class SpecialDesignerController extends Controller
         return view('admin.special-designer.add');
     }
     public function addSpecialDesignerProcess(Request $req){
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+        ]);
         $user = new User;
         $user->name = $req->name;
         $user->email = $req->email;

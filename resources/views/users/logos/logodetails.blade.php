@@ -36,7 +36,20 @@
                             </div>
 
                             <div class="num">
+<<<<<<< HEAD
                                 <h2>${{ $logo->price_for_customer }}</h2>
+=======
+                                <h2>$
+                                @if(auth()->check()) 
+                                  @if(auth()->user()->role_id == 2)
+                                    {{ $logo->price_for_designer ?? '' }}
+                                  @else
+                                    {{ $logo->price_for_customer ?? '' }}
+                                  @endif
+                                @else
+                                  {{ $logo->price_for_customer ?? '' }}
+                                @endif</h2>
+>>>>>>> 24ab6ac9e797293788da7947fe7c39f1da0c7d3f
                             </div>
 
                             <div class="dropdown_data">
@@ -195,14 +208,19 @@
                     </div>
                     <div class="similar_wrapper">
                         @foreach($similar_logos as $similar)
-                        <div class="similar_img_box">
-                            <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
-                        </div>
+                        <a href="{{ url('logos-detail/'.$similar->logo_slug) }}">
+                          <div class="similar_img_box">
+                              <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
+                          </div>
+                        </a>
                         @endforeach
-                        <div class="similar_img_box white">
-                            <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
-
-                        </div>
+                        @if(count($similar_logos) == 4)
+                        <a href="{{ url('/logos-search?categories=%5B"'.$category_slug.'"%5D') }}">
+                          <div class="similar_img_box white">
+                              <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
+                          </div>
+                        </a>
+                        @endif
 
                     </div>
 

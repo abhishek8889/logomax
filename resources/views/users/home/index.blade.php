@@ -21,24 +21,16 @@
           <div class="trending-btn">
             <ul>
               <li class="simple"> Trending:</li>
-              <li>
-                <a class="design-btn" href="#">Interior design</a>
-              </li>
-              <li>
-                <a class="design-btn" href="#">Marketing</a>
-              </li>
-              <li>
-                <a class="design-btn" href="#">Education</a>
-              </li>
-              <li>
-                <a class="design-btn" href="#">Dental</a>
-              </li>
-              <li>
-                <a class="design-btn" href="#">Insurance</a>
-              </li>
-              <li>
-                <a class="design-btn" href="#">Makeup</a>
-              </li>
+            @if($tags->IsNotEmpty())
+              @foreach ($tags as $t => $tag)
+              @if($t < 6)
+                <li>
+                  <a class="design-btn" href="{{ url('logos-search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
+                </li>
+              @endif
+              @endforeach
+            @endif
+            
             </ul>
           </div>
         </div>
@@ -244,7 +236,7 @@
             @if($tags->IsNotEmpty())
               @foreach ($tags as $t => $tag)
                 <li class="{{ $t >= 10 ? 'tags-data d-none' : '' }}">
-                  <a href="#">{{ $tag->name ?? '' }}</a>
+                  <a href="{{ url('logos-search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
                 </li>
               @endforeach
             @else

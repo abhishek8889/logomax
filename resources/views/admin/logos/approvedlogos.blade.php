@@ -28,7 +28,7 @@
                                                     <div class="user-card">
                                                         <div class="user-avatar">
                                                             
-                                                            <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt="">
+                                                            <!-- <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt=""> -->
                                                         </div>
                                                         <div class="user-info" >
                                                             <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>

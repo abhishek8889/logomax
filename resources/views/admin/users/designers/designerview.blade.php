@@ -24,14 +24,24 @@
                                                                 <span class="sub-text">Desginer Email:</span>
                                                                 <span>{{ $designer->email ?? '' }}</span>
                                                             </div>
+                                                            @if(isset($designer->address))
                                                             <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-spaced">
                                                                 <span class="sub-text">Designer Address:</span>
                                                                 <span>{{ $designer->address ?? '' }}</span>
                                                             </div>
+                                                            @endif
+                                                            @if(isset($designer->country))
                                                             <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-spaced">
                                                                 <span class="sub-text">Region:</span>
                                                                 <span>{{ $designer->country ?? '' }}</span>
                                                             </div>
+                                                            @endif
+                                                            @if(isset($designer->experience))
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-spaced">
+                                                                <span class="sub-text">Experience:</span>
+                                                                <span>{{ $designer->experience ?? '' }} years</span>
+                                                            </div>
+                                                            @endif
                                                             <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-spaced">
                                                                 <span class="sub-text">Register On:</span>
                                                                 <span>{{ $designer->created_at ?? '' }}</span>
@@ -42,11 +52,14 @@
                                                 </div>
                                             </div>
                             </div>
+                         @if($logos->isNotEmpty())
                             <div class="nk-block nk-block-lg">
                                     <div class="nk-block-head">
                                         <div class="nk-block-between g-3">
                                             <div class="nk-block-head-content">
-                                                <h3 class="nk-block-title page-title">{{ $designer->name ?? '' }}  Logos</h3>
+                                               
+                                                <h3 class="nk-block-title page-title">{{ $designer->name ?? '' }}'s  Logos</h3>
+                                               
                                             </div>
                                         </div>
                                     </div><!-- .nk-block-head -->
@@ -81,6 +94,7 @@
                                     @endforeach
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -51,6 +51,8 @@ class AuthenticationController extends Controller
                             return redirect('/designer-dashboard')->with('success', 'Welcome ' . Auth::user()->name . ' to Designer Dashboard');
                         case 3:
                             return redirect('/admin-dashboard')->with('success', 'Welcome ' . Auth::user()->name . ' to Admin Dashboard.');
+                        case 4:
+                            return redirect('/designer-dashboard')->with('success', 'Welcome ' . Auth::user()->name . ' to Designer Dashboard');
                         default:
                             Auth::logout();
                             abort(401, 'Invalid user');
