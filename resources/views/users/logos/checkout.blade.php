@@ -54,7 +54,7 @@
                         <div class="step_form_content">
                             <h5>Billing address</h5>
                             <div class="form-group">
-                            <select name="country">
+                            <select name="country" id="country">
                                 @foreach($countries as $k => $v)
                                 <option value="{{$k}}">{{ $v }}</option>
                                 @endforeach
@@ -65,19 +65,19 @@
                             <label for="last-name">
                             <span  aria-hidden="true"></span>
                             </label>
-                            <input  type="text" name="Address-1" placeholder="Address Line 1" />
+                            <input id="address_1" type="text" name="address_1" placeholder="Address Line 1" />
                         </div>
                         <div class="mt-3 sm:mt-0 form__field">
                             <label for="last-name">
                             <span aria-hidden="true"></span>
                             </label>
-                            <input  type="text" name="Address-2"  placeholder="Address Line 2" />
+                            <input id="address_2" type="text" name="address_2"  placeholder="Address Line 2"  />
                         </div>
                         <div class="mt-3 form__field">
                             <label for="city-address">
                             <span  aria-hidden="true"></span>
                             </label>
-                            <input id="city-address" type="text" name="city" placeholder="City" />
+                            <input id="city-address" type="text" name="city" placeholder="City"/>
                         </div>
                         <div class="mt-3 form__field">
                             <label for="state-address">
@@ -92,7 +92,7 @@
                             <input id="zip" type="text" name="zip-code" placeholder="Zip / Postal Code" />
                         </div>
                         <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
-                            <button type="button" data-action="next" class="continue_btn">
+                            <button type="button" data-action="next" class="continue_btn" id="add_billing_address">
                                 Continue
                             </button>
                         </div>
@@ -172,9 +172,9 @@
                             </div>
                             <div class="card_detail">
                                 <div class='form-row row'>
-                                    <div class='col-xs-12 form-group'>
+                                    <div class='col-lg-12 form-group'>
                                         <label class='control-label'>Name on Card</label>
-                                         <input class='form-control' id="name_on_card" type='text'>
+                                         <input class='form-control' id="name_on_card" name="name_on_card" type='text'>
                                     </div>
                                 </div>
                                 <!-- ################### Show Card ######################### -->
@@ -278,16 +278,16 @@
                     <h5>Order Confirmation</h5>
                     <div class="billing_content">
                         <div class="billing_wrapper">
-                        <div class="billing_text">
-                            <h6>Billing Address</h6>
-                            <p>80191 Blaise Street Apt. 110 Boganland, Arkansas USA 893804</p>
+                        <div class="billing_text" id="billing_address_box">
+                            <!-- <h6>Billing Address</h6>
+                            <p>80191 Blaise Street Apt. 110 Boganland, Arkansas USA 893804</p> -->
                         </div>
                         <div class="bill-icon">
                             <i class="fa-solid fa-pen"></i>
                         </div>
                         </div>
                         <div class="billing_wrapper">
-                        <div class="billing_text">
+                        <div class="billing_text" id="payment_method_box">
                             <h6>Payment Method</h6>
                             <div class="img_visa">
                             <img src="{{ asset('logomax-front-asset/img/visa.png') }}" alt="" />
@@ -306,7 +306,7 @@
                             <!-- <a href="logo-download-page.html" class="continue_btn">
                             Continue & Download
                             </a> -->
-                            <button type="button" class="formSubmitBtn" id="card-button" data-secret="{{ $intent->client_secret }}">Continue & Download</button>
+                            <button type="button" class="formSubmitBtn continue_btn" id="card-button" data-secret="{{ $intent->client_secret }}">Continue & Download</button>
                         </div>
                         </div>
                     </div>
@@ -372,56 +372,74 @@
     </div>
   </section>
   
-  <script src="https://js.stripe.com/v3/"></script>
-
+<script src="https://js.stripe.com/v3/"></script>
 <script>
-    // const stripe = Stripe('pk_test_51LuGMOSDpE15tSXhImFeqEyel9KwmSjXmUZDa1LT1CaQtB1vWggDBkokzRcRa2bsAGsAfD7k4l58TneH1zl4DEGW00gMxC2VvN');
-    // const elements= stripe.elements();
-    // const cardElement= elements.create('card');
-    // cardElement.mount('#card-elements');
-    // console.log(stripe);
-    // // const form = document.getElementById('progress-form');
+    $("#add_billing_address").on('click',function(){
+        let address_1 = $("#address_1").val() ;    
+        let address_2 = $("#address_2").val() ;
+        let city_address = $("#city-address").val();
+        let country = $("#country").val();
+        let state = $("#state").val() ; 
+        let zip = $("#zip").val();
+        
+        $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address_1} ${address_2} ,${city_address} ${state} ${zip},${country}</p>`);
+
+    });
+</script>
+<script>
+    const stripe = Stripe('{{ env("STRIPE_PUB_KEY") }}');
+    const elements= stripe.elements();
+    const cardElement= elements.create('card');
+    cardElement.mount('#card-elements');
+ 
+    // const form = document.getElementById('progress-form');
     
-    // const formSubmitBtn = document.querySelector('.formSubmitBtn');
-
-    // formSubmitBtn.addEventListener('click', async (e) => {
-
-    //     console.log('hello');
-           
-    //     const form = document.getElementById('progress-form');
-
-    //     const cardBtn = document.getElementById('card-button');
-
-    //     const cardHolderName = document.getElementById('name_on_card'); 
-    //         e.preventDefault()
-    //         if($('input#agreement1').is(':checked')){
-            
-    //         }else{
-    //         return false;
-    //         }
-    //         const { setupIntent, error } = await stripe.confirmCardSetup(
-    //             cardBtn.dataset.secret, {
-    //                 payment_method: {
-    //                     card: cardElement,
-    //                     billing_details: {
-    //                         name: cardHolderName.value
-    //                     }   
-    //                 }
-    //             }
-    //         ) 
-    //         if(error) {
-    //             cardBtn.disable = false
-    //             if(error.message != ''){
-    //                 $("#card-error-message").html(error.message);
-    //             }
-    //         } else {
-    //             let token = document.createElement('input')
-    //             token.setAttribute('type', 'hidden')
-    //             token.setAttribute('name', 'token')
-    //             token.setAttribute('value', setupIntent.payment_method)
-    //             form.appendChild(token)
-    //             form.submit();
-    //         }
+    const formSubmitBtn = document.querySelector('.formSubmitBtn');
+    // let brand = '';
+    // let postalCode = '';
+    // cardElement.on('change', function(event) {
+    //     const card = event.brand === 'Unknown' ? event.complete ? event : null : event;
+    //     if (card) {
+    //         brand = card.brand;
+    //         postalCode = card.value.postalCode;
+    //         console.log(brand + ' _>' + postalCode);
+    //     }
     // });
+    
+
+    formSubmitBtn.addEventListener('click', async (e) => {
+           
+        const form = document.getElementById('progress-form');
+
+        const cardBtn = document.getElementById('card-button');
+
+        const cardHolderName = document.getElementById('name_on_card'); 
+        e.preventDefault()
+        const { setupIntent, error } = await stripe.confirmCardSetup(
+            cardBtn.dataset.secret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: cardHolderName.value
+                    }   
+                }
+            }
+        ) 
+        console.log(cardElement);
+        if(error){
+            cardBtn.disable = false
+            if(error.message != ''){
+                $("#card-error-message").html(error.message);
+            }
+        }else{
+            let token = document.createElement('input')
+            token.setAttribute('type', 'hidden')
+            token.setAttribute('name', 'token')
+            token.setAttribute('value', setupIntent.payment_method)
+            form.appendChild(token)
+            form.submit();
+            // console.log(setupIntent);
+        }
+    });
 </script>
 @endsection

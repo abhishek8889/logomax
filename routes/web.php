@@ -51,7 +51,7 @@ Route::get('/logos-search',[FrontLogoController::class,'index']);
 Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
 
 Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
-Route::get('logo-checkout',[CheckoutController::class,'checkoutProcess']);
+Route::post('logo-checkout',[CheckoutController::class,'checkoutProcess']);
 
 Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
