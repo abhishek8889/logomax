@@ -5,7 +5,7 @@
             <div class="card-inner">
                 <div class="card-head d-flex justify-content-between">
                     <h5 class="card-title">Additional options for logos</h5>
-                    <button class="remove btn btn-link" ><i class="fas fa-times"></i></button>
+                    <!-- <button class="remove btn btn-link" ><i class="fas fa-times"></i></button> -->
                 </div>
                 <form action="{{ url('admin-dashboard/logo-optionssave') }}" method="POST">
                 @csrf
@@ -54,7 +54,13 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    @if($editoption)
+                    <button type="submit" class="btn btn-lg btn-primary savebtn">Update</button>
+                    <a href="{{ url('admin-dashboard/logo-options/') }}" class="btn btn-lg btn-primary">Add New</a>
+                    @else
                     <button type="submit" class="btn btn-lg btn-primary savebtn">Save</button>
+                    @endif
+                   
                    
                 </div>
                 </div>
@@ -62,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="nk-block nk-block-lg">
+    <div class="nk-block nk-block-lg mt-4">
         <div class="nk-block-head">
             <div class="nk-block-head-content d-flex justify-content-between">
                 <h4 class="nk-block-title">Additional Options List</h4>
