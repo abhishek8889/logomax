@@ -174,8 +174,15 @@ class LogosController extends Controller
             $options->save();
             return redirect()->back()->with('success','successfully updated additional option');
         }
+    }
+    public function deleteAdditionlaOption($id){
+        $addtionaloption = AdditionalOptions::find($id);
+        if($addtionaloption){
+            $addtionaloption->delete();
+            return redirect()->back()->with('success','successfully deleted options');
+        }else{
+            return redirect()->back()->with('error','Failed! Something went wrong');
 
-        
-
+        }
     }
 }

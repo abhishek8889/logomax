@@ -1,6 +1,6 @@
 @extends('admin_layout/master')
 @section('content')
-    <div class="col-lg-6 " id="add-section">
+    <div class="col-lg-12 " id="add-section">
         <div class="card card-bordered h-100">
             <div class="card-inner">
                 <div class="card-head d-flex justify-content-between">
@@ -10,6 +10,7 @@
                 <form action="{{ url('admin-dashboard/logo-optionssave') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ $editoption->id ?? ''  }}"/>
+                <div class="col-lg-6">
                 <div class="form-group">
                     <label class="form-label" for="text">Option Text</label>
                     <div class="form-control-wrap">
@@ -55,6 +56,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-lg btn-primary savebtn">Save</button>
                    
+                </div>
                 </div>
                 </form>
             </div>
@@ -130,7 +132,7 @@
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                 <ul class="link-list-plain">
                                     <li><a class="edit-btn" href="{{ url('/admin-dashboard/logo-options/'.$option->id) }}">Edit</a></li>
-                                    <li><a href="">delete</a></li>
+                                    <li><a href="{{ url('admin-dashboard/delete-options/'.$option->id) }}">delete</a></li>
                                 </ul>
                             </div>
                         </div>

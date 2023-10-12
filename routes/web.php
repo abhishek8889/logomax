@@ -118,6 +118,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilitiesAdd']);
     Route::get('admin-dashboard/logo-options/{id?}',[LogosController::class,'additionalOptions']);
     Route::post('admin-dashboard/logo-optionssave',[LogosController::class,'additionalOptionsSave']);
+    Route::get('admin-dashboard/delete-options/{id}',[LogosController::class,'deleteAdditionlaOption']);
 
     
     
