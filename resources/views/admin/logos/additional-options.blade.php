@@ -109,11 +109,11 @@
                     <?php $count = 1 ?>
                     <!-- ############################################### -->
                     @foreach($addtionaloption as $option)
-                    <tr class="tb-tnx-item">
+                    <tr class="">
                         <td class="tb-tnx-id text-center">
                             <a href="#"><span>{{ $count++ }}</span></a>
                         </td>
-                        <td class="tb-tnx-info text-center">
+                        <td class="text-center">
                             <div class="tb-tnx-desc">
                                 <span class="title">{{ $option->option_text ?? '' }}</span>
                             </div>
