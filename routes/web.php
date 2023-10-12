@@ -114,9 +114,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
     
     // Logo Facilities :
-    Route::get('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilities']);
+    Route::get('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilities'])->name('logo-facilities');
     Route::post('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilitiesAdd']);
-    Route::get('admin-dashboard/logo-options/{id?}',[LogosController::class,'additionalOptions']);
+    Route::get('admin-dashboard/logo-options/{id?}',[LogosController::class,'additionalOptions'])->name('additional-options');
     Route::post('admin-dashboard/logo-optionssave',[LogosController::class,'additionalOptionsSave']);
     Route::get('admin-dashboard/delete-options/{id}',[LogosController::class,'deleteAdditionlaOption']);
 
