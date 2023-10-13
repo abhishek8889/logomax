@@ -152,15 +152,17 @@ class LogosController extends Controller
         return view('admin.logos.additional-options',compact('addtionaloption','editoption'));
     }
     public function additionalOptionsSave(Request $request){
-        $request->validate([
-            'text' => 'required',
-            'duration' => 'required',
-            'amount' => 'required',
-        ]);
+        // $request->validate([
+        //     'text' => 'required',
+        //     'duration' => 'required',
+        //     'amount' => 'required',
+        // ]);
         if(!$request->id){
             $options = new AdditionalOptions;
             $options->option_text = $request->text;
-            $options->duration = $request->duration;
+            $options->option_type = $request->option_type;
+            $options->pricing_duration = $request->duration;
+            $options->percentage = $request->percentage;
             $options->amount = $request->amount;
             $options->currency = $request->currency;
             $options->save();
@@ -168,10 +170,12 @@ class LogosController extends Controller
         }else{
             $options = AdditionalOptions::find($request->id);
             $options->option_text = $request->text;
-            $options->duration = $request->duration;
+            $options->option_type = $request->option_type;
+            $options->pricing_duration = $request->duration;
+            $options->percentage = $request->percentage;
             $options->amount = $request->amount;
             $options->currency = $request->currency;
-            $options->save();
+            $options->update();
             return redirect()->back()->with('success','successfully updated additional option');
         }
     }

@@ -1,5 +1,13 @@
 @extends('admin_layout/master')
 @section('content')
+<?php 
+$option_type_arr = array( 
+                    'save-logo-for-future',
+                    'taxes',
+                    'get-favicon'
+                );
+
+?>
     <div class="col-lg-12 " id="add-section">
         <div class="card card-bordered h-100">
             <div class="card-inner">
@@ -21,8 +29,22 @@
                         <span class="text text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                
                 <div class="form-group">
-                    <label class="form-label" for="duration">Option Duration</label>
+                    <label class="form-label" for="option_type">Option Type</label>
+                    <div class="form-control-wrap">
+                         <select class="form-control" name="option_type" id="option_type">
+                            @foreach($option_type_arr as $option)
+                            <option value="{{ $option }}" <?php if(isset($editoption->option_type)){if($option == $editoption->option_type ){ echo 'selected';}}?>>{{ $option }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('name')
+                        <span class="text text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="duration">Pricing Duration</label>
                     <div class="form-control-wrap">
                         <select class="form-control" name="duration" id="duration">
                             <option @if(isset($editoption->duration)) @if($editoption->duration == 'fixed') selected @endif @endif value="fixed">Fixed</option>
@@ -40,6 +62,16 @@
                          placeholder="Enter Amount For Additional Option" value="{{ $editoption->amount ?? '' }}"/>
                     </div>
                     @error('amount')
+                        <span class="text text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="percentage">Option Percentage</label>
+                    <div class="form-control-wrap">
+                        <input type="number" name="percentage" class="form-control" id="percentage"
+                         placeholder="Enter percentage For Additional Option" value=""/>
+                    </div>
+                    @error('percentage')
                         <span class="text text-danger">{{ $message }}</span>
                     @enderror
                 </div>

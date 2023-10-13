@@ -1,11 +1,23 @@
 @extends('user_layout/master')
 @section('content')
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+<style>
+    .add_btn {
+        position: relative;
+    }
+
+    .add_btn input[type="checkbox"] {
+        position: absolute;
+        width: 0;
+    }
+
+</style>
 <?php 
     $countries = [
         'America' => "USA",
     ];
 ?>
+
 <section class="banner-sec checkout_banner" style="background-image: url('{{ asset('logomax-front-asset/img/check_banner.png') }}');">
     <div class="container-fluid"></div>
   </section>
@@ -13,6 +25,7 @@
     <div class="container">
         <form id="progress-form" action="{{ url('logo-checkout') }}" method="post">
             @csrf
+            <input type="hidden" name="logo_id" value="{{ $logo->id }}"/>
             <div class="step_form_head" role="tablist">
                 <div class="box_step">
                     <button id="progress-form__tab-1" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-1" aria-selected="true">
@@ -53,26 +66,28 @@
                     <div class="step_form">
                         <div class="step_form_content">
                             <h5>Billing address</h5>
-                            <div class="form-group">
-                            <select name="country" id="country">
-                                @foreach($countries as $k => $v)
-                                <option value="{{$k}}">{{ $v }}</option>
-                                @endforeach
-                            </select>
-                            </div>
                         </div>
+                        <!-- Email -->
                         <div class="mt-3 sm:mt-0 form__field">
-                            <label for="last-name">
-                            <span  aria-hidden="true"></span>
-                            </label>
-                            <input id="address_1" type="text" name="address_1" placeholder="Address Line 1" />
-                        </div>
-                        <div class="mt-3 sm:mt-0 form__field">
-                            <label for="last-name">
+                            <label for="name">
                             <span aria-hidden="true"></span>
                             </label>
-                            <input id="address_2" type="text" name="address_2"  placeholder="Address Line 2"  />
+                            <input id="name" type="text" name="name"  placeholder="Enter your name"  />
                         </div>
+                        <div class="mt-3 sm:mt-0 form__field">
+                            <label for="email">
+                            <span aria-hidden="true"></span>
+                            </label>
+                            <input id="email" type="text" name="email"  placeholder="Enter your email"  />
+                        </div>
+                        <!--  -->
+                        <div class="mt-3 sm:mt-0 form__field">
+                            <label for="address">
+                                <span  aria-hidden="true"></span>
+                            </label>
+                            <input id="address" type="text" name="address" placeholder="Address Line" />
+                        </div>
+                        
                         <div class="mt-3 form__field">
                             <label for="city-address">
                             <span  aria-hidden="true"></span>
@@ -89,7 +104,14 @@
                             <label for="zip">
                             <span aria-hidden="true"></span>
                             </label>
-                            <input id="zip" type="text" name="zip-code" placeholder="Zip / Postal Code" />
+                            <input id="zip" type="text" name="zip_code" placeholder="Zip / Postal Code" />
+                        </div>
+                        <div class="form-group">
+                            <select name="country" id="country">
+                                @foreach($countries as $k => $v)
+                                <option value="{{$k}}">{{ $v }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
                             <button type="button" data-action="next" class="continue_btn" id="add_billing_address">
@@ -99,59 +121,103 @@
                     </div>
 
                     <div class="checkout_summary">
-                    <h5>Order summary</h5>
-                    <div class="templete_wrapper">
-                        <div class="summary_wrapp">
-                        <div class="img">
-                            <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                        <h5>Order summary</h5>
+                        <div class="templete_wrapper">
+                            <div class="summary_wrapp">
+                            <div class="img">
+                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                            </div>
+                            <div class="drawn_data">
+                                <p>{{ $logo->logo_name }}</p>
+                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                            </div>
+                            </div>
+                            <div class="additional_content">
+                            <h6>Additional options:</h6>
+                            </div>
+                            <!--  -->
+                            <?php 
+                            $additional_options = App\Models\AdditionalOptions::class::all();
+                            ?>
+                            <?php
+                                $gst_prcnt = 12;
+                            ?>
+                            @foreach($additional_options as $option)
+                                <?php 
+                                    if($option->option_type == 'taxes'){
+                                        $gst_prcnt = $option->percentage;
+                                    }
+                                ?>
+                                @if($option->option_type == 'save-logo-for-future')
+                                <div class="add_account_wrapp">
+                                    <div class="save_data">
+                                        <p>{{ $option->option_text }}</p>
+                                        @if($option->pricing_duration == 'monthly')
+                                        <span><b>${{ $option->amount }} /month</b></span>
+                                        @else
+                                        <span><b>${{ $option->amount }}</b></span>
+                                        @endif
+                                    </div>
+                                    <div class="add_btn">
+                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
+                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
+                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
+                                    </div>
+                                </div>
+                                @endif
+                                @if($option->option_type == 'get-favicon')
+                                <div class="add_account_wrapp">
+                                    <div class="save_data">
+                                        <p>{{ $option->option_text }}</p>
+                                        @if($option->pricing_duration == 'monthly')
+                                        <span><b>${{ $option->amount }} /month</b></span>
+                                        @else
+                                        <span><b>${{ $option->amount }}</b></span>
+                                        @endif
+                                    </div>
+                                    <div class="add_btn">
+                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
+                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
+                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                            <?php 
+                                $logo_price = (float)$logo->price_for_customer;
+                                $gst_cut = ($logo_price * $gst_prcnt) / 100;
+                                $total_price = $logo_price + $gst_cut;
+                            ?>
+                            <!-- price -->
+                            <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
+                            <input type="hidden" name="taxes" value="{{ $gst_cut }}" />
+                            <input type="hidden" name="taxe_percent" value="{{ $gst_prcnt }}" />
+                            <input type="hidden" name="total_price" value="{{ $total_price }}" />
+                            <!-- End -->
+                            <div class="table_data">
+                            <div class="total_data">
+                                <p>Subtotal</p>
+                                <p>${{ $logo->price_for_customer }}</p>
+                            </div>
+                            <div class="total_data">
+                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
+                                <p>${{ $gst_cut }}</p>
+                            </div>
+                            <!-- Selected additional options value are here  -->
+                            <div class="total_data save-logo-future-box">
+                                
+                            </div>
+                            <div class="total_data favicon-logo-box">
+                                
+                            </div>
+                            <!-- END -->
+                            <div class="total_data num total_price_box">
+                                <p><b>Total</b></p>
+                                <p><b>${{ $total_price }}</b></p>
+                            </div>
+                            <!--  -->
+                            </div>
                         </div>
-                        <div class="drawn_data">
-                            <p>{{ $logo->logo_name }}</p>
-                            <span><b>${{ $logo->price_for_customer }}</b></span>
-                        </div>
-                        </div>
-                        <div class="additional_content">
-                        <h6>Additional options:</h6>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Save your logo for later in account.</p>
-                            <span><b>$5 /month</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Get favicon of logo</p>
-                            <span><b>$29</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <?php 
-                            $logo_price = (float)$logo->price_for_customer;
-                            $gst_prcnt = 18;
-                            $gst_cut = ($logo_price * 18) / 100;
-                            $total_price = $logo_price + $gst_cut;
-                        ?>
-                        <div class="table_data">
-                        <div class="total_data">
-                            <p>Subtotal</p>
-                            <p>${{ $logo->price_for_customer }}</p>
-                        </div>
-                        <div class="total_data">
-                            <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                            <p>${{ $gst_cut }}</p>
-                        </div>
-                        <div class="total_data num">
-                            <p><b>Total</b></p>
-                            <p><b>${{ $total_price }}</b></p>
-                        </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </section>
@@ -216,59 +282,103 @@
                     </div>
                     </div>
                     <div class="checkout_summary">
-                    <h5>Order summary</h5>
-                    <div class="templete_wrapper">
-                        <div class="summary_wrapp">
-                        <div class="img">
-                            <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                        <h5>Order summary</h5>
+                        <div class="templete_wrapper">
+                            <div class="summary_wrapp">
+                            <div class="img">
+                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                            </div>
+                            <div class="drawn_data">
+                                <p>{{ $logo->logo_name }}</p>
+                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                            </div>
+                            </div>
+                            <div class="additional_content">
+                            <h6>Additional options:</h6>
+                            </div>
+                            <!--  -->
+                            <?php 
+                            $additional_options = App\Models\AdditionalOptions::class::all();
+                            ?>
+                            <?php
+                                $gst_prcnt = 12;
+                            ?>
+                            @foreach($additional_options as $option)
+                                <?php 
+                                    if($option->option_type == 'taxes'){
+                                        $gst_prcnt = $option->percentage;
+                                    }
+                                ?>
+                                @if($option->option_type == 'save-logo-for-future')
+                                <div class="add_account_wrapp">
+                                    <div class="save_data">
+                                        <p>{{ $option->option_text }}</p>
+                                        @if($option->pricing_duration == 'monthly')
+                                        <span><b>${{ $option->amount }} /month</b></span>
+                                        @else
+                                        <span><b>${{ $option->amount }}</b></span>
+                                        @endif
+                                    </div>
+                                    <div class="add_btn">
+                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
+                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
+                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
+                                    </div>
+                                </div>
+                                @endif
+                                @if($option->option_type == 'get-favicon')
+                                <div class="add_account_wrapp">
+                                    <div class="save_data">
+                                        <p>{{ $option->option_text }}</p>
+                                        @if($option->pricing_duration == 'monthly')
+                                        <span><b>${{ $option->amount }} /month</b></span>
+                                        @else
+                                        <span><b>${{ $option->amount }}</b></span>
+                                        @endif
+                                    </div>
+                                    <div class="add_btn">
+                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
+                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
+                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                            <?php 
+                                $logo_price = (float)$logo->price_for_customer;
+                                $gst_cut = ($logo_price * $gst_prcnt) / 100;
+                                $total_price = $logo_price + $gst_cut;
+                            ?>
+                            <!-- price -->
+                            <!-- <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
+                            <input type="hidden" name="taxes" value="{{ $gst_cut }}" />
+                            <input type="hidden" name="taxe_percent" value="{{ $gst_prcnt }}" />
+                            <input type="hidden" name="total_price" value="{{ $total_price }}" /> -->
+                            <!-- End -->
+                            <div class="table_data">
+                            <div class="total_data">
+                                <p>Subtotal</p>
+                                <p>${{ $logo->price_for_customer }}</p>
+                            </div>
+                            <div class="total_data">
+                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
+                                <p>${{ $gst_cut }}</p>
+                            </div>
+                            <!-- Selected additional options value are here  -->
+                            <div class="total_data save-logo-future-box">
+                                
+                            </div>
+                            <div class="total_data favicon-logo-box">
+                                
+                            </div>
+                            <!-- END -->
+                            <div class="total_data num total_price_box">
+                                <p><b>Total</b></p>
+                                <p><b>${{ $total_price }}</b></p>
+                            </div>
+                            <!--  -->
+                            </div>
                         </div>
-                        <div class="drawn_data">
-                            <p>{{ $logo->logo_name }}</p>
-                            <span><b>${{ $logo->price_for_customer }}</b></span>
-                        </div>
-                        </div>
-                        <div class="additional_content">
-                        <h6>Additional options:</h6>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Save your logo for later in account.</p>
-                            <span><b>$5 /month</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Get favicon of logo</p>
-                            <span><b>$29</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <?php 
-                            $logo_price = (float)$logo->price_for_customer;
-                            $gst_prcnt = 18;
-                            $gst_cut = ($logo_price * 18) / 100;
-                            $total_price = $logo_price + $gst_cut;
-                        ?>
-                        <div class="table_data">
-                        <div class="total_data">
-                            <p>Subtotal</p>
-                            <p>${{ $logo->price_for_customer }}</p>
-                        </div>
-                        <div class="total_data">
-                            <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                            <p>${{ $gst_cut }}</p>
-                        </div>
-                        <div class="total_data num">
-                            <p><b>Total</b></p>
-                            <p><b>${{ $total_price }}</b></p>
-                        </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </section>
@@ -312,59 +422,103 @@
                     </div>
                     </div>
                     <div class="checkout_summary">
-                    <h5>Order summary</h5>
-                    <div class="templete_wrapper">
-                        <div class="summary_wrapp">
-                        <div class="img">
-                            <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                        <h5>Order summary</h5>
+                        <div class="templete_wrapper">
+                            <div class="summary_wrapp">
+                            <div class="img">
+                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                            </div>
+                            <div class="drawn_data">
+                                <p>{{ $logo->logo_name }}</p>
+                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                            </div>
+                            </div>
+                            <div class="additional_content">
+                            <h6>Additional options:</h6>
+                            </div>
+                            <!--  -->
+                            <?php 
+                            $additional_options = App\Models\AdditionalOptions::class::all();
+                            ?>
+                            <?php
+                                $gst_prcnt = 12;
+                            ?>
+                            @foreach($additional_options as $option)
+                                <?php 
+                                    if($option->option_type == 'taxes'){
+                                        $gst_prcnt = $option->percentage;
+                                    }
+                                ?>
+                                @if($option->option_type == 'save-logo-for-future')
+                                <div class="add_account_wrapp">
+                                    <div class="save_data">
+                                        <p>{{ $option->option_text }}</p>
+                                        @if($option->pricing_duration == 'monthly')
+                                        <span><b>${{ $option->amount }} /month</b></span>
+                                        @else
+                                        <span><b>${{ $option->amount }}</b></span>
+                                        @endif
+                                    </div>
+                                    <div class="add_btn">
+                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
+                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
+                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
+                                    </div>
+                                </div>
+                                @endif
+                                @if($option->option_type == 'get-favicon')
+                                <div class="add_account_wrapp">
+                                    <div class="save_data">
+                                        <p>{{ $option->option_text }}</p>
+                                        @if($option->pricing_duration == 'monthly')
+                                        <span><b>${{ $option->amount }} /month</b></span>
+                                        @else
+                                        <span><b>${{ $option->amount }}</b></span>
+                                        @endif
+                                    </div>
+                                    <div class="add_btn">
+                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
+                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
+                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                            <?php 
+                                $logo_price = (float)$logo->price_for_customer;
+                                $gst_cut = ($logo_price * $gst_prcnt) / 100;
+                                $total_price = $logo_price + $gst_cut;
+                            ?>
+                            <!-- price -->
+                            <!-- <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
+                            <input type="hidden" name="taxes" value="{{ $gst_cut }}" />
+                            <input type="hidden" name="taxe_percent" value="{{ $gst_prcnt }}" />
+                            <input type="hidden" name="total_price" value="{{ $total_price }}" /> -->
+                            <!-- End -->
+                            <div class="table_data">
+                            <div class="total_data">
+                                <p>Subtotal</p>
+                                <p>${{ $logo->price_for_customer }}</p>
+                            </div>
+                            <div class="total_data">
+                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
+                                <p>${{ $gst_cut }}</p>
+                            </div>
+                            <!-- Selected additional options value are here  -->
+                            <div class="total_data save-logo-future-box">
+                                
+                            </div>
+                            <div class="total_data favicon-logo-box">
+                                
+                            </div>
+                            <!-- END -->
+                            <div class="total_data num total_price_box">
+                                <p><b>Total</b></p>
+                                <p><b>${{ $total_price }}</b></p>
+                            </div>
+                            <!--  -->
+                            </div>
                         </div>
-                        <div class="drawn_data">
-                            <p>{{ $logo->logo_name }}</p>
-                            <span><b>${{ $logo->price_for_customer }}</b></span>
-                        </div>
-                        </div>
-                        <div class="additional_content">
-                        <h6>Additional options:</h6>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Save your logo for later in account.</p>
-                            <span><b>$5 /month</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Get favicon of logo</p>
-                            <span><b>$29</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <?php 
-                            $logo_price = (float)$logo->price_for_customer;
-                            $gst_prcnt = 18;
-                            $gst_cut = ($logo_price * 18) / 100;
-                            $total_price = $logo_price + $gst_cut;
-                        ?>
-                        <div class="table_data">
-                        <div class="total_data">
-                            <p>Subtotal</p>
-                            <p>${{ $logo->price_for_customer }}</p>
-                        </div>
-                        <div class="total_data">
-                            <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                            <p>${{ $gst_cut }}</p>
-                        </div>
-                        <div class="total_data num">
-                            <p><b>Total</b></p>
-                            <p><b>${{ $total_price }}</b></p>
-                        </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </section>
@@ -375,14 +529,14 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     $("#add_billing_address").on('click',function(){
-        let address_1 = $("#address_1").val() ;    
-        let address_2 = $("#address_2").val() ;
+        let address = $("#address").val() ;    
+        let email = $("#email").val();
         let city_address = $("#city-address").val();
         let country = $("#country").val();
         let state = $("#state").val() ; 
         let zip = $("#zip").val();
         
-        $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address_1} ${address_2} ,${city_address} ${state} ${zip},${country}</p>`);
+        $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city_address} ${state} ${zip},${country}</p><p>${email}</p>`);
 
     });
 </script>
@@ -441,5 +595,87 @@
             // console.log(setupIntent);
         }
     });
+
+    $(".save-logo-for-future-btn").on('click',function(e){
+        e.preventDefault();
+        let price = parseFloat($(this).attr('data-price'));
+        let data_enabled = $(this).attr('data-enabled');
+        let total_price = parseFloat(<?php echo $total_price; ?>);
+        let favicon_enabled_status = $(".get-favicon-btn").attr('data-enabled');
+        let favicon_enabled_price = parseFloat($(".get-favicon-btn").attr('data-price'));
+        console.log('favicon_enabled_status'  + favicon_enabled_status);
+        console.log('favicon_enabled_price'  + favicon_enabled_price);
+       
+        // get-favicon-check save-logo-check
+
+        if(data_enabled == 'false'){
+            let new_total = 0;
+            if(favicon_enabled_status == 'false'){
+                new_total = total_price + price;
+            }else{
+                new_total = total_price + price + favicon_enabled_price;
+            }
+            console.log('new_total'+new_total);
+            $('.save-logo-for-future-btn').attr('data-enabled','true');
+            $(".save-logo-future-box").html(`<p>Price for saving logo for future use</p><p>$${price}</p>`);
+            $('.save-logo-for-future-btn').html('Remove');
+            $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
+            $(".save-logo-check").attr('checked','checked');
+          
+        }else{
+            let new_total = 0;
+            if(favicon_enabled_status == 'false'){
+                new_total = total_price;
+            }else{
+                new_total = total_price + favicon_enabled_price;
+            }
+            $('.save-logo-for-future-btn').attr('data-enabled','false');
+            $(".save-logo-future-box").html('');
+            $('.save-logo-for-future-btn').html('Add');
+            $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
+            $(".save-logo-check").removeAttr('checked');
+
+        }
+    });
+    $(".get-favicon-btn").on('click',function(e){
+        e.preventDefault();
+        let price = parseFloat($(this).attr('data-price'));
+        let data_enabled = $(this).attr('data-enabled');
+        let total_price = parseFloat(<?php echo $total_price; ?>);
+        let logo_future_enabled_status = $(".save-logo-for-future-btn").attr('data-enabled');
+        let logo_future_enabled_price = parseFloat($(".save-logo-for-future-btn").attr('data-price'));
+
+
+        if(data_enabled == 'false'){
+            let new_total = 0;
+            if(logo_future_enabled_status == 'false'){
+                new_total = total_price + price;
+            }else{
+                new_total = total_price + price + logo_future_enabled_price;
+            }
+            $('.get-favicon-btn').attr('data-enabled','true');
+            $(".favicon-logo-box").html(`<p>Favicon logo price</p><p>$${price}</p>`);
+            $('.get-favicon-btn').html('Remove');
+            $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
+
+            $(".get-favicon-check").attr('checked','checked');
+
+        }else{
+            let new_total = 0;
+            if(logo_future_enabled_status == 'false'){
+                new_total = total_price ;
+            }else{
+                new_total = total_price + logo_future_enabled_price;
+            }
+            $('.get-favicon-btn').attr('data-enabled','false');
+            $(".favicon-logo-box").html(``);
+            $('.get-favicon-btn').html('Add');
+            $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
+
+            $(".get-favicon-check").removeAttr('checked');
+
+        }
+    });
+    
 </script>
 @endsection

@@ -32,13 +32,15 @@
                                         </tr>
                                         <?php 
                                         if(!empty($mailData)){
-                                                if($mailData['user_role'] == 'Special Designer'){?>
+                                                if(isset($mailData['user_role']) ){
+                                                    if($mailData['user_role']== 'Special Designer'){
+                                                ?>
                                                 <tr>
                                                     <td class="px-3 px-sm-5 pb-3 pb-sm-5">
                                                         <h5 class="text-primary mb-3">Congratulations ! {{ $mailData['name'] ?? '' }} You are registered as special designer in logomax.</h5>
                                                     </td>
                                                 </tr>
-                                        <?php    }else{ ?>
+                                        <?php    }}else{ ?>
                                             <tr>
                                                 <td class="px-3 px-sm-5 pb-3 pb-sm-5">
                                                     <h5 class="text-primary mb-3">Your application under varification process.</h5>

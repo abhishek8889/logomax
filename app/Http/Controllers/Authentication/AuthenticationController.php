@@ -111,6 +111,7 @@ class AuthenticationController extends Controller
             
             if($user->role_id == 2){
         $mailData = [
+            'title' => 'User Registration',
             'token' => $remember_token,
             'email' => $validate['email'],
         ];

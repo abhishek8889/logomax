@@ -102,39 +102,65 @@
                     <h5>Order summary</h5>
                     <div class="templete_wrapper">
                         <div class="summary_wrapp">
-                        <div class="img">
-                            <img src="{{ asset($logo->media->image_path) }}" alt="" />
-                        </div>
-                        <div class="drawn_data">
-                            <p>{{ $logo->logo_name }}</p>
-                            <span><b>${{ $logo->price_for_customer }}</b></span>
-                        </div>
+                            <div class="img">
+                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                            </div>
+                            <div class="drawn_data">
+                                <p>{{ $logo->logo_name }}</p>
+                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                            </div>
                         </div>
                         <div class="additional_content">
-                        <h6>Additional options:</h6>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Save your logo for later in account.</p>
-                            <span><b>$5 /month</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
-                        </div>
-                        <div class="add_account_wrapp">
-                        <div class="save_data">
-                            <p>Get favicon of logo</p>
-                            <span><b>$29</b></span>
-                        </div>
-                        <div class="add_btn">
-                            <a href="" class="add_btn">Add</a>
-                        </div>
+                            <h6>Additional options:</h6>
                         </div>
                         <?php 
+                        $additional_options = App\Models\AdditionalOptions::class::all();
+                        ?>
+                        <?php
+                            $gst_prcnt = 12;
+                        ?>
+                        @foreach($additional_options as $option)
+                            <?php 
+                            $gst_prcnt = '';
+                                if($option->option_type == 'gst-tax'){
+                                    $gst_prcnt = $option->percentage;
+                                }
+                            ?>
+                            @if($option->option_type == 'save-logo-for-future')
+                            <div class="add_account_wrapp">
+                                <div class="save_data">
+                                    <p>{{ $option->option_text }}</p>
+                                    @if($option->pricing_duration == 'monthly')
+                                    <span><b>${{ $option->amount }} /month</b></span>
+                                    @else
+                                    <span><b>${{ $option->amount }}</b></span>
+                                    @endif
+                                </div>
+                                <div class="add_btn">
+                                    <a href="" data-id="option-{{ $option->id }}" class="add_btn">Add</a>
+                                </div>
+                            </div>
+                            @endif
+                            @if($option->option_type == 'get-favicon')
+                            <div class="add_account_wrapp">
+                                <div class="save_data">
+                                    <p>{{ $option->option_text }}</p>
+                                    @if($option->pricing_duration == 'monthly')
+                                    <span><b>${{ $option->amount }} /month</b></span>
+                                    @else
+                                    <span><b>${{ $option->amount }}</b></span>
+                                    @endif
+                                </div>
+                                <div class="add_btn">
+                                    <a href=""  data-id="option-{{ $option->id }}" class="add_btn">Add</a>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                        <?php 
+                            dd($gst_prcnt);
                             $logo_price = (float)$logo->price_for_customer;
-                            $gst_prcnt = 18;
-                            $gst_cut = ($logo_price * 18) / 100;
+                            $gst_cut = ($logo_price * $gst_prcnt) / 100;
                             $total_price = $logo_price + $gst_cut;
                         ?>
                         <div class="table_data">

@@ -143,7 +143,11 @@
                             </div>
                 </div>
                 <?php } }?>
+                
                 @if(Auth::user())
+                <div class="header-btn mr-1">
+                    <a class="login-btn" href="{{ url('/user-orders') }}">Orders</a>
+                </div>
                 <div class="header-btn">
                     <a class="login-btn" href="{{ url('logout') }}">Log Out</a>
                 </div>
