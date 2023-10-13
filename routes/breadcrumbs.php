@@ -80,6 +80,14 @@ Breadcrumbs::for('add-special-desinger', function(BreadcrumbTrail $trail) {
     $trail->parent('special-desingers');
     $trail->push('ADD', route('add-special-desinger'));
 });
+Breadcrumbs::for('facilities', function(BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('LOGO-FACILITIES',route('logo-facilities'));
+});
+Breadcrumbs::for('additional-options', function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('LOGO-ADDITIONAL-OPTION',route('additional-options'));
+});
 
 /////// Desinger breadcrumbs 
 Breadcrumbs::for('designer-dashboard', function (BreadcrumbTrail $trail) {

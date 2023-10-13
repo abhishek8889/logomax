@@ -39,7 +39,7 @@
                     <?php $count = 1 ?>
                     @foreach($categories as $cat)
                     
-                       <tr class="tb-tnx-item">
+                       <tr class="">
                            <td class="tb-tnx-id text-center">
                                <a href="#"><span>{{ $count++ }}</span></a>
                            </td>
