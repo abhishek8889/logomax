@@ -45,7 +45,6 @@ use App\Events\RegisterNotificationEvent;
 Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('test-check',[TestController::class,'index']);
     //  :::::::::::::::::::::  Basic Controller ::::::::::::::::::::::::: 
-    Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 
     Route::get('/',[HomeController::class,'index'])->name('/');
     Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
@@ -186,3 +185,4 @@ Route::get('/logout', [AuthenticationController::class, 'logout']);
 Route::get('/mail', function () {
     return view('Mail.register_confirmation.index');
 });
+Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);

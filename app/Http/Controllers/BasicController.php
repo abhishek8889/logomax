@@ -18,6 +18,7 @@ class BasicController extends Controller
                 $admin_notifications = Notifications::where([['is_read' ,'=' , 0],['reciever_id','=',0]])->update(['is_read'=>1]);
                 return redirect()->back();
             }else{
+                // dd($notification_id);
                 $notification = Notifications::find($notification_id);
 
                 if($notification->type == 'logo-added'){ // :: new logo is added by designer :::::::::::::
