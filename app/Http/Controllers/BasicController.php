@@ -10,7 +10,7 @@ use App\Models\Logo;
 class BasicController extends Controller
 {
     public function readNotification(Request $req){
-        
+        dd('hello');
         $notification_id = $req->notification_id;
         // dd($notification_id);
         if(auth()->user()->role_id == 3){  // All Admin read notification function are here :::::::::::::
@@ -19,6 +19,7 @@ class BasicController extends Controller
                 return redirect()->back();
             }else{
                 $notification = Notifications::find($notification_id);
+
                 if($notification->type == 'logo-added'){ // :: new logo is added by designer :::::::::::::
                     $logo = Logo::find($notification->logo_id);
                     $logo_slug = $logo->logo_slug;
