@@ -50,7 +50,7 @@
                 <!-- Button trigger modal -->
 
                 <!-- logo deatil  modal-->
-                @forelse($logos as $logo)
+                @foreach($logos as $logo)
                 <div class="modal fade" id="exampleviewModal{{ $logo->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                @endforelse
+                @endforeach
                 <!-- logos review modal -->
                 <!-- Modal -->
                 <!-- Dissapproval modal -->
