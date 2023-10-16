@@ -145,6 +145,12 @@ class LogosController extends Controller
             return redirect()->back()->with('success','Facility is successfully added !');
         }
     }
+
+    public function logoFacilitiesDelete(Request $req){
+        $facility = LogoFacilities::find($req->id);
+        $facility->delete();
+        return redirect()->back()->with('success','You have succesfully deleted one item.');
+    }
     public function additionalOptions(Request $req){
         $addtionaloption = AdditionalOptions::where('status',1)->get();
         $editoption = AdditionalOptions::find($req->id);
