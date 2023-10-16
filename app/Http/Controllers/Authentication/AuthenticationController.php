@@ -43,7 +43,8 @@ class AuthenticationController extends Controller
             );
         try {
             if (Auth::attempt($data)) {
-                if (Auth::user()->email_verified == 1) {
+
+                if ((Auth::user()->role_id == 2 || Auth::user()->role_id == 3) && Auth::user()->email_verified == 1) {
                     switch (Auth::user()->role_id) {
                         case 1:
                             return redirect('/home')->with('success', 'Welcome ' . Auth::user()->name . ' to home page');
@@ -58,8 +59,7 @@ class AuthenticationController extends Controller
                             abort(401, 'Invalid user');
                     }
                 } else {
-                    Auth::logout();
-                    return redirect()->back()->with('error', 'You need to verify your email');
+                    return redirect('/')->with('success', Auth::user()->name . ' you are logged in succesfully !');
                 }
             } else {
                 return redirect()->back()->with('error', 'Invalid email or password');

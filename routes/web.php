@@ -86,7 +86,8 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
 
     ///// User Dashboard route :::::::
-    Route::get('/user-orders', [UserDashboardController::class,'userOrders'])->name('dashboard');
+    Route::get('/user-orders', [UserDashboardController::class,'userOrders']);
+    Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail']);
 
     
 });
