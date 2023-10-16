@@ -70,15 +70,15 @@
                         <!-- Email -->
                         <div class="mt-3 sm:mt-0 form__field">
                             <label for="name">
-                            <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
                             </label>
-                            <input id="name" type="text" name="name"  placeholder="Enter your name"  />
+                            <input id="name" type="text" name="name" value="{{ auth()->user()->name ?? ''; }}" placeholder="Enter your name" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <div class="mt-3 sm:mt-0 form__field">
                             <label for="email">
-                            <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
                             </label>
-                            <input id="email" type="text" name="email"  placeholder="Enter your email"  />
+                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Enter your email" <?php if((auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <!--  -->
                         <div class="mt-3 sm:mt-0 form__field">

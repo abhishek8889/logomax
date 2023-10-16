@@ -75,7 +75,7 @@
                                     <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
-                               <ul class="nk-menu-sub">
+                                    <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/logos-list') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
@@ -87,6 +87,25 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <!-- Logo Revision request  -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
+                                        <span class="nk-menu-text">Logos for revision</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/revision-request') }}" class="nk-menu-link"><span class="nk-menu-text">Revision Request</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">On Revision</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>

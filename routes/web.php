@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
 use App\Http\Controllers\User\Checkout\CheckoutController;
 use App\Http\Controllers\User\Dashboard\UserDashboardController;
-
+use App\Http\Controllers\Admin\Revision\RevisionController;
 
 use App\Http\Controllers\BasicController;
 
@@ -88,7 +88,8 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     ///// User Dashboard route :::::::
     Route::get('/user-orders', [UserDashboardController::class,'userOrders']);
     Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail']);
-
+    Route::get('/download-logo/{order_num}', [UserDashboardController::class,'downloadLogo']);
+    Route::get('/request-for-revision/{order_num}', [UserDashboardController::class,'requestForRevision']);
     
 });
 
@@ -154,6 +155,12 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesigner'])->name('add-special-desinger');
     Route::post('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesignerProcess']);
     Route::get('/admin-dashboard/special-designer-list',[SpecialDesignerController::class,'specialDesignerList'])->name('special-desinger-list');
+
+    // Logo Revision Routes :
+    Route::get('admin-dashboard/revision-request',[RevisionController::class,'revisionRequest']);
+
+    
+
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////
 

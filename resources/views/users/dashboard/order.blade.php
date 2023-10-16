@@ -17,10 +17,10 @@
             <th scope="col">Logo Name</th>
             <th scope="col">Price</th>
             <th scope="col"></th>
+            <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            
             @if($orderDetail)
             <?php 
             $count = 0;
@@ -41,6 +41,7 @@
                 <td>{{ $order->logodetail->logo_name }}</td>
                 <td>${{ $order->price }}</td>
                 <td><a class="btn btn-warning" href="{{ url('/order-details/'.$order->order_num) }}">View Order</a></td>
+                <td><a class="btn btn-primary" href="{{ url('/download-logo/'.$order->order_num) }}">View Logo</a></td>
             </tr>
             @endforeach
             @endif

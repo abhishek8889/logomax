@@ -118,7 +118,16 @@ class CheckoutController extends Controller
         ////////////// GET FAVICON STATUS END /////////////////////////
         $order->total_payment_amount = $total_price;
         $order->save();
-        return redirect()->back()->with('success','Congratulations You have succesfully buy a logo !');
+        // Update logo status 1 to 3 
+        //  status = 1 => For sale
+        //  status = 2 => On rivision
+        //  status = 3 => sold 
+        
+        $logo = Logo::find($req->logo_id);
+        $logo->status = 3;
+        $logo->update();
+        
+        return redirect()->url('/download-logo/'.$orderNum)->with('success','Congratulations You have succesfully buy a logo !');
     }
 
     public function random_strings($length_of_string){
