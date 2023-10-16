@@ -11,12 +11,19 @@ class UserDashboardController extends Controller
 {
     public function userOrders(Request $request){
         if(Auth::check()){
-            // $orderDetail = Order::with(['logodetail'=>function($query){
-            //     $query->select('logo_name');
-            // }])->where('user_id',auth()->user()->id)->get();
             $orderDetail = Order::with('logodetail')->where('user_id',auth()->user()->id)->get();
-            // dd($orderDetail);
-            return view('users.dashboard.index',compact('request','orderDetail'));
+            return view('users.dashboard.order',compact('request','orderDetail'));
+        }else{
+            return abort(404);
+        }
+    }
+    public function orderDetail(Request $request){
+        $order_num = $request->order_num;
+        if(Auth::check()){
+            $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->get();
+            return view('users.dashboard.order_detail',compact('request','orderDetail'));
+        }else{
+            return abort(404);
         }
     }
 }
