@@ -89,7 +89,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('/user-orders', [UserDashboardController::class,'userOrders']);
     Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail']);
     Route::get('/download-logo/{order_num}', [UserDashboardController::class,'downloadLogo']);
-    Route::get('/request-for-revision/{order_num}', [UserDashboardController::class,'requestForRevision']);
+    Route::get('/request-for-revision', [UserDashboardController::class,'requestForRevision']);
     
 });
 
@@ -158,6 +158,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
     // Logo Revision Routes :
     Route::get('admin-dashboard/revision-request',[RevisionController::class,'revisionRequest']);
+    Route::get('admin-dashboard/request-detail/{request_id}',[RevisionController::class,'revisionRequestDetail']);
 
     
 

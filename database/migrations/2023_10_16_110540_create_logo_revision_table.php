@@ -18,13 +18,15 @@ return new class extends Migration
     */
     public function up(): void
     {
-        Schema::create('logo_revision', function (Blueprint $table) {
+        Schema::create('logo_revisions', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
+            $table->string('request_title');
+            $table->text('request_description');
             $table->string('order_num');
             $table->string('logo_id');
             $table->string('client_id');
-            $table->string('designer_id');
+            $table->string('designer_id')->nullable();
             $table->integer('revision_time');
             $table->integer('status'); 
             $table->timestamps();
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logo_revision');
+        Schema::dropIfExists('logo_revisions');
     }
 };

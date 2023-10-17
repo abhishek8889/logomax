@@ -78,7 +78,7 @@
                             <label for="email">
                                 <span aria-hidden="true"></span>
                             </label>
-                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Enter your email" <?php if((auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Enter your email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <!--  -->
                         <div class="mt-3 sm:mt-0 form__field">

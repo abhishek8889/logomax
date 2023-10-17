@@ -1911,7 +1911,7 @@ a.video-icon {
     margin-top: auto;
 }
 
-.modal-content {
+.popup_sec .modal-content {
     width: 100%;
     position: relative;
 }
@@ -1925,22 +1925,22 @@ a.video-icon {
 }
 
 
-.modal-dialog {
+.popup_sec .modal-dialog {
     max-width: 1400px;
     margin-top: 100px;
 }
 
-.modal-content .modal-body {
+.popup_sec .modal-content .modal-body {
     display: flex;
     padding: 0;
     width: 100%;
 }
 
-.modl-img {
+.popup_sec .modl-img {
     width: 50%;
 }
 
-.modal-text {
+.popup_sec .modal-text {
     width: 50%;
     padding: 30px;
 }
@@ -1950,7 +1950,7 @@ a.video-icon {
     margin: auto;
 }
 
-.modal-content button.close {
+.popup_sec .modal-content button.close {
     position: absolute;
     z-index: 99999;
     top: 20px;
@@ -1959,7 +1959,7 @@ a.video-icon {
     right: 20px;
 }
 
-.modal_form input.form-control {
+.popup_sec .modal_form input.form-control {
     padding: 20px;
     border: 1px solid #E3E9ED;
     color: #656F79;
@@ -1969,7 +1969,7 @@ a.video-icon {
     line-height: normal;
 }
 
-.modal_form input.form-control::placeholder {
+.popup_sec .modal_form input.form-control::placeholder {
     color: #656F79;
     font-size: 12px;
     font-style: normal;
@@ -1982,7 +1982,7 @@ a.video-icon {
     color: #fff;
 }
 
-.modal-btn a {
+.popup_sec .modal-btn a {
     border-radius: 5px;
     background: #000;
     padding: 17px;
@@ -1995,7 +1995,7 @@ a.video-icon {
     transition: 0.3s;
     border: 2px solid#000;
 }
-.modal-btn button {
+.popup_sec .modal-btn button {
     border-radius: 5px;
     background: #000;
     padding: 17px;
@@ -2014,17 +2014,17 @@ a {
     text-decoration: none !important;
 }
 
-.modal-btn {
+.popup_sec .modal-btn {
     margin-top: 60px;
 }
 
 
-.modal-btn a:hover {
+.popup_sec .modal-btn a:hover {
     background-color: #fff;
     color: #000;
 
 }
-.modal-btn button:hover {
+.popup_sec .modal-btn button:hover {
     background-color: #fff;
     color: #000;
 
@@ -3021,15 +3021,15 @@ form#progress-form [data-complete="true"] .box_studio {
         background-size: 100% 100%;
     }
 
-    .modal-dialog {
+    .popup_sec .modal-dialog {
         max-width: 1050px;
     }
 
-    .modl-img img {
+    .popup_sec .modl-img img {
         width: 100%;
     }
 
-    .modal-text {
+    .popup_sec .modal-text {
         padding: 20px;
         padding-bottom: 0 !important;
     }
@@ -3038,7 +3038,7 @@ form#progress-form [data-complete="true"] .box_studio {
         padding-top: 10px;
     }
 
-    .modal-btn {
+    .popup_sec .modal-btn {
         margin-top: 30px;
     }
 
@@ -3050,7 +3050,7 @@ form#progress-form [data-complete="true"] .box_studio {
         padding: 18px !important;
     }
 
-    .modal-btn a {
+    .popup_sec .modal-btn a {
         padding: 15px;
     }
 
@@ -3237,20 +3237,20 @@ form#progress-form [data-complete="true"] .box_studio {
         margin-bottom: 10px;
     }
 
-    .modal-dialog {
+    .popup_sec .modal-dialog {
         margin-top: 60px;
         max-width: 850px;
     }
 
-    .modal_form input.form-control {
+    .popup_sec .modal_form input.form-control {
         padding: 15px;
     }
 
-    .modal-btn {
+    .popup_sec .modal-btn {
         margin: 0;
     }
 
-    .modal-btn a {
+    .popup_sec .modal-btn a {
         padding: 12px;
     }
 
@@ -3607,7 +3607,7 @@ form#progress-form [data-complete="true"] .box_studio {
         width: 100px;
     }
 
-    .modal-btn a {
+    .popup_sec .modal-btn a {
         padding: 8px;
         font-size: 14px;
     }
@@ -3625,7 +3625,7 @@ form#progress-form [data-complete="true"] .box_studio {
         margin-bottom: 12px;
     }
 
-    .modal-dialog {
+    .popup_sec .modal-dialog {
         max-width: 670px;
     }
 
@@ -4095,15 +4095,15 @@ form#progress-form [data-complete="true"] .box_studio {
         font-size: 13px;
     }
 
-    .modal-content .modal-body {
+    .popup_sec .modal-content .modal-body {
         flex-direction: column;
     }
 
-    .modl-img {
+    .popup_sec .modl-img {
         width: 100%;
     }
 
-    .modal-text {
+    .popup_sec .modal-text {
         width: 100%;
     }
 
