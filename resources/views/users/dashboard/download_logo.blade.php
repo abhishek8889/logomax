@@ -165,10 +165,10 @@
         e.preventDefault();
         @if($orderDetail->logodetail->status == 2)
                 Swal.fire({
-                icon: 'error',
-                title: 'Your logo is already on revision.',
-                footer: 'Please wait we have provide your logo as soon as possible !'
-            })
+                    icon: 'error',
+                    title: 'Your logo is already on revision.',
+                    footer: 'Please wait we have provide your logo as soon as possible !'
+                });
         @elseif($orderDetail->logodetail->status == 3)
             $("#revisionRequestModal").modal('show');
             // Send request 
@@ -195,12 +195,14 @@
                         setTimeout(()=>{
                             $(".loader-box").hide();
                             Swal.fire(
-                                'Good Job!',
+                                'Request Sent!',
                                 'You have sent revision request succesfully !',
                                 'success'
-                            )
-                            console.log(response.status);
-                            console.log(response.message);
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
                         }, 1000);
                     },
                     error: function(response) {

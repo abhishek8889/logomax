@@ -126,8 +126,7 @@ class CheckoutController extends Controller
         $logo = Logo::find($req->logo_id);
         $logo->status = 3;
         $logo->update();
-        
-        return redirect()->url('/download-logo/'.$orderNum)->with('success','Congratulations You have succesfully buy a logo !');
+        return redirect('/download-logo/'.$orderNum)->with('success','Congratulations You have succesfully buy a logo !');
     }
 
     public function random_strings($length_of_string){

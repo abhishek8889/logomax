@@ -10,12 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
 
-    /**
-     * ::::::::::::  Note :::::::::::::
-        *          Revision Status (enabled) = 0 => revision request send 
-        *          Revision Status (disabled) = 1 => revision on work  
-        *          Revision Status (disabled) = 2 => revision approved  
-    */
+
     public function up(): void
     {
         Schema::create('logo_revisions', function (Blueprint $table) {
@@ -23,12 +18,9 @@ return new class extends Migration
             $table->string('order_id');
             $table->string('request_title');
             $table->text('request_description');
-            $table->string('order_num');
             $table->string('logo_id');
-            $table->string('client_id');
-            $table->string('designer_id')->nullable();
-            $table->integer('revision_time');
-            $table->integer('status'); 
+            $table->integer('revision_time')->nullable();
+            $table->integer('status')->default(0); // 0  When request on revision // 1 approved by customer 
             $table->timestamps();
         });
     }
