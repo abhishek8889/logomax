@@ -368,28 +368,7 @@
     });
 </script>
 @endif
-<script>
-//   $('.sign-up').click(function(e){
-//     e.preventDefault();
-//     // $("#exampleloginModal").modal("hide");
-//     $('.close').click();
-//     $('.cta-register').click();
-// //     $('#exampleModal').modal({
-// //     backdrop: 'static',
-// //     keyboard: false
-// // });
 
-//   });
-</script>
-<script>
-var onloadCallback = function() {
-    grecaptcha.execute();
-};
-
-// function setResponse(response) { 
-//     document.getElementById('captcha-response').value = response; 
-// }
-</script>
 <!-- session error end : -->
 </body>
 </html>

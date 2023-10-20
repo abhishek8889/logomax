@@ -21,12 +21,12 @@ class FrontLogoController extends Controller
             $search_lower = strtolower(str_replace(" ","-",$request->search));
         $query->where([['logo_slug','like',$search_lower.'%']]);
         }
-        if($request->style){
+        if($request->styles){
             $styleslug = json_decode($request->styles);
            if(count($styleslug) > 0){
             foreach($styleslug as $slug){
-                $styles = Style::where('slug',$slug)->first();
-                $styleid[] =  $styles->id;
+                $styles1 = Style::where('slug',$slug)->first();
+                $styleid[] =  $styles1->id;
             }
             $query->whereHas('style', function ($stylesQuery) use ($styleid) {
                 $stylesQuery->whereIn('id', $styleid);
