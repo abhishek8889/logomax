@@ -35,10 +35,44 @@
                                         <p class="card-text">Given Time : {{ $taskDetails->task_duration }} (in minutes)</p>
                                         <p class="card-text">Customer Name : {{ $taskDetails->clientDetail->name }} </p>
                                         <p class="card-text">Customer Email : {{ $taskDetails->clientDetail->email }} </p>
+                                        <p class="card-text">Time Left : <span class="text text-danger" id="time_left"></span> </p>
                                     </div>
+                                    <!--  |||||||||||||||||||||||||  Time Calculate |||||||||||||||||||  -->
+                                    <?php 
+                                    
+                                        use Carbon\Carbon;
+                                        $durationForTask = (int)$taskDetails->task_duration;
+                                        $assignAt = $taskDetails->created_at;
+                                        
+                                        // :::::::::::: Current time with my timezone :::::::::::::::
+                                        
+                                        $currentTime = Carbon::now();
+                                        $currentTime = $currentTime->setTimezone($siteData['user_timezone']);
+                                        
+                                        // :::::::::::: Assign time with my timezone :::::::::::::::
+
+                                        $carbonTime =  Carbon::parse($assignAt);
+                                        $assignAtMyTz = $carbonTime->setTimezone($siteData['user_timezone']);
+                                        $taskValidUpto = $assignAtMyTz->addMinutes($durationForTask);
+
+                                        $taskValidStatus = true;
+                                        if($currentTime  > $taskValidUpto){
+                                            $taskValidStatus = false;
+                                        }
+                                    ?>
                                     <div class="task-buttons">
-                                        <button class="btn btn-danger">Downlaod logo</button>
-                                        <button class="btn btn-info">Upload With change</button>
+                                        <a class="btn btn-danger" href="{{ url('download-file/'.$mediaObj->id) }}">Download logo</a>
+                                        <?php 
+                                            if($taskValidStatus == true){
+                                        ?>
+                                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalUploadImage">Upload With change</button>
+                                        <?php
+                                            }else{
+                                        ?>
+                                            <div class="alert alert-danger mt-3">You missed this task , your task duration is over now.</div>
+                                        <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                         </div>
@@ -49,4 +83,84 @@
         </div>
     </div>
 </div>
+<!-- Modal for uploda image  -->
+
+<div class="modal fade" tabindex="-1" id="modalUploadImage">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Icons</h5>
+            </div>
+            <form action="" method="POST">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="form-label">Upload AI Logo</label>
+                        <input type="file" name="ai_logo" />
+                    </div>
+                    <div class="col-sm-6" >
+                        <label class="form-label">Upload PNG Logo</label>
+                        <input type="file" name="png_logo" />
+                    </div>
+                    <div class="col-sm-6" >
+                        <label class="form-label">Upload JPG Logo</label>
+                        <input type="file" name="jpg_logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button class="text text-light btn btn-primary"  type="submit">Submit Job</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal end -->
+<script>
+    @if($taskValidStatus == true) 
+        let validUpto = "{{ $taskValidUpto }}";
+        let newValidUpto = new Date(validUpto);  
+
+        function checkTimeLeft( validUpto){
+            var  currentTime = new Date();
+            let timeLeft = (validUpto.getTime() - currentTime.getTime())/1000;
+            var minutesLeft = Math.abs(Math.floor(timeLeft / 60));
+            var secondsLeft = Math.floor(timeLeft % 60);
+            if(currentTime > validUpto){
+                $("#time_left").html(`00:00`);
+            }else{
+                $("#time_left").html(`${ minutesLeft.toString().padStart(2, '0') }:${ secondsLeft.toString().padStart(2, '0') }`);
+            }
+        }
+        setInterval(function(){
+            checkTimeLeft( newValidUpto );
+        }, 1000);
+    @else
+        $("#time_left").html(`00:00`);
+    @endif
+</script>
+<script>
+    $('body').delegate('.deleteimage','click',function(e){
+        e.preventDefault();
+        mediaid = $(this).attr('data-id');
+        imagename = $(this).attr('image-name');
+    // console.log(imagename);
+        $.ajax({
+            method: 'post',
+            url: "{{ url('special-designer/delete-image') }}",
+            data: { mediaid:mediaid,imagename:imagename,_token:"{{ csrf_token() }}" },
+            dataType: 'json',
+            success: function(response)
+            {
+                html = '<div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span><button type="button" class="btn btn-primary">SELECT</button></div>';
+                $('.upload-zone').html(html);
+                $('.upload-zone').removeClass('dz-started');
+            }
+        })
+    })
+</script>
 @endsection

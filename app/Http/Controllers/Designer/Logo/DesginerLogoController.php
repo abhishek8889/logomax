@@ -35,7 +35,7 @@ class DesginerLogoController extends Controller
         if(auth()->user()->is_approved !== 0 && auth()->user()->is_approved !== 2){
             if($request->hasFile('file')){
                 $request->validate([
-                    'file' => 'required|mimes:ai,png'
+                    'file' => 'required|mimes:ai,png,jpg'
                 ]);
                 $file = $request->file('file');
                 $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();

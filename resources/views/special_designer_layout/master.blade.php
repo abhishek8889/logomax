@@ -262,6 +262,30 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
     // };
 </script>
 
+<script>
+     NioApp.Dropzone.init = function () {
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        NioApp.Dropzone('.upload-zone', { 
+            url: "{{ url('special-designer/upload-process') }}" ,
+            headers: {
+            'X-CSRF-TOKEN': csrfToken
+        },
+        success:function(file, response){
+            html = '<div class="deletebuttondiv"><input type="hidden" name="media_id" value="'+response.id+'"><button type="button" class="btn btn-danger deleteimage" data-id="'+response.id+'" image-name="'+response.image_name+'">Delete</button></div>';
+            $('.upload-zone').append(html);
+           
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            html = '<div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span><button type="button" class="btn btn-primary">SELECT</button></div>';
+            $('.upload-zone').html(html);
+            // $(".upload-zone").load(location.href + " .upload-zone");
+            $('.upload-zone').removeClass('dz-started');
+            NioApp.Toast('This format is not compatible for upload please uplaod png or AI format!', 'info', {position: 'top-right'});
+            }
+        });
+    };
+</script>
+
 </body>
 
 </html>

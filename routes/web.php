@@ -196,13 +196,18 @@ Route::group(['middleware'=>['auth','Designer']],function(){
 Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::class,'index']);
 Route::get('special-designer/task-list',[TaskController::class,'taskList']);
 Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
+Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
+Route::post('special-designer/delete-image',[TaskController::class,'deleteimage']);
+
 
 /////////////////////////// SPECIAL DESIGNER END  ///////////////////////////
 
-/** Log-out Route */
+/**  ::::::::::::::::: Basic Routes :::::::::::::::  */
 Route::get('/logout', [AuthenticationController::class, 'logout']);
 
 Route::get('/mail', function () {
     return view('Mail.register_confirmation.index');
 });
+
 Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
+Route::get('download-file/{media_id}',[BasicController::class,'downloadFile']);
