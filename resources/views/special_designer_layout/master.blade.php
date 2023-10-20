@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
-    <title>Designer Dashbaord</title>
+    <title>Special Designer Dashbaord</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js']) -->
-    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    @vite(['resources/css/app.css' ,'resources/js/designer_notification.js','resources/js/specialdDsignerNotification.js'])
+    <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
     <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script> 
-
+    <script type="module" src="{{ asset('/build/assets/specialdDsignerNotification-8e67a84a.js') }}"></script>  -->
 </head>
 <style>
     .icon-active {
@@ -32,7 +32,11 @@
     display: none;
 }
 </style>
+<?php 
+$specialDesignerTask = App\Models\SpecialDesignerTask::class;
+$taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->user()->id],['status','=',0]])->get();
 
+?>
 <body class="nk-body bg-lighter npc-general has-sidebar ">
     <input type="hidden" id="page_id" value="{{ auth()->user()->id }}">
 <div class="nk-app-root">
@@ -46,33 +50,36 @@
                         <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                     </div>
                     <div class="nk-sidebar-brand">
-                        <a href="{{ url('designer-dashboard') ?? '' }}" class="logo-link nk-sidebar-logo">
+                        <a href="{{ url('special-designer/dashboard/') ?? '' }}" class="logo-link nk-sidebar-logo">
                             <img class="logo-light logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo">
                             <img class="logo-dark logo-img" src="{{ asset('logomax-front-asset/img/logo.png') }}" srcset="{{ asset('logomax-front-asset/img/logo.png') }}" alt="logo-dark">
                         </a>
-                        <!-- <h4><a href="{{ url('designer-dashboard') }}">LOGOMAX</a></h4> -->
+                        <!-- <h4><a href="{{  url('special-designer/dashboard/') }}">LOGOMAX</a></h4> -->
                     </div>
-                </div><!-- .nk-sidebar-element -->
+                </div>
                 <div class="nk-sidebar-element nk-sidebar-body">
                     <div class="nk-sidebar-content">
                         <div class="nk-sidebar-menu" data-simplebar>
                             <ul class="nk-menu">
                                 <!-- Dashboard -->
                                 <li class="nk-menu-heading">
-                                    <h6 class="overline-title text-primary-alt"><a href="{{ url('designer-dashboard') }}">Designer-Dashboard</a></h6>
+                                    <h6 class="overline-title text-primary-alt"><a href="{{  url('special-designer/dashboard/') }}">Designer-Dashboard</a></h6>
                                 </li>
-                               @if(auth()->user()->is_approved == 1)
+                               @if(auth()->user()->role_id == 4)
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Logos</span>
+                                        <span class="nk-menu-text">Tasks List </span>
                                     </a>
+                                    
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('designer-dashboard/mylogos') }}" class="nk-menu-link"><span class="nk-menu-text">My Logos</span></a>
+                                            <a href="{{ url('special-designer/task-list') }}" class="nk-menu-link">
+                                                <span class="nk-menu-text">New Request</span>
+                                            </a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('designer-dashboard/uploadlogo') }}" class="nk-menu-link"><span class="nk-menu-text">Upload Logo</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Complete Task</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -84,66 +91,27 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('/designer-dashboard/setting') }}" class="nk-menu-link"><span class="nk-menu-text">Account setting</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Account setting</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('/designer-dashboard/change-password') }}" class="nk-menu-link"><span class="nk-menu-text">Change password</span></a>
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Change password</span></a>
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                                        <span class="nk-menu-text">Setting</span>
-                                    </a>
-                                    <ul class="nk-menu-sub">
-                                        <li class="nk-menu-item">
-                                            <a href="" class="nk-menu-link"><span class="nk-menu-text">Account setting</span></a>
-                                        </li>
-                                        <li class="nk-menu-item">
-                                            <a href="" class="nk-menu-link"><span class="nk-menu-text">Change password</span></a>
-                                        </li>
-                                    </ul>
-                                </li> -->
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- sidebar @e -->
             <div class="nk-wrap ">
-                <!-- main header @s -->
                 <div class="nk-header nk-header-fixed is-light">
                     <div class="container-fluid">
                         <div class="nk-header-wrap">
                             <div class="nk-menu-trigger d-xl-none ms-n1">
                                 <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                             </div>
-                            <!-- <div class="nk-header-brand d-xl-none">
-                                <a href="html/index.html" class="logo-link">
-                                    <img class="logo-light logo-img" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                                    <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                                </a>
-                            </div> -->
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
-                                    <!-- <li class="dropdown language-dropdown d-none d-sm-block me-n1">
-                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                                            <div class="quick-icon border border-light">
-                                                <img class="icon" src="{{ asset('admin-theme/images/flags/english-sq.png') }}" alt="">
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-s1">
-                                            <ul class="language-list">
-                                                <li>
-                                                    <a href="#" class="language-item">
-                                                        <img src="{{ asset('admin-theme/images/flags/english.png') }}" alt="" class="language-flag">
-                                                        <span class="language-name">English</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li> -->
                                     <!-- .dropdown -->
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
@@ -152,7 +120,7 @@
                                                     <em class="icon ni ni-user-alt"></em>
                                                 </div>
                                                 <div class="user-info d-none d-md-block">
-                                                    <div class="user-status">Designer</div>
+                                                    <div class="user-status">Special Designer</div>
                                                     <div class="user-name dropdown-indicator">{{ Auth::user()->name ?? ''}}</div>
                                                 </div>
                                             </div>
@@ -172,7 +140,7 @@
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
                                                     <!-- <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li> -->
-                                                    <li><a href="{{ url('/designer-dashboard/setting') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                                    <li><a href="{{ url('/special-designer/dashboard/') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
                                                     <!-- <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li> -->
                                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                                 </ul>
@@ -185,7 +153,6 @@
                                         </div>
                                     </li>
                                     <!-- notifications -->
-
                                     <?php
                                         $notifictations =  App\Models\Notifications::class;
                                         $newNotifications = $notifictations::where([['is_read','=',0],['reciever_id','=',auth()->user()->id]])->get();
@@ -267,102 +234,7 @@
             </div>
         </div>
     </div>
-    <?php 
-        $notifications = App\Models\Notifications::class::where([['reciever_id','=',auth()->user()->id],['type','=','designer-approve'],['is_read','=',0]])->first();
-        if($notifications){?>
-        <script>
-            $(document).ready(function(){
-            Swal.fire({
-                title: 'Congratulations Your account is approved by admin !',
-                icon: 'info',
-                showCancelButton: false,
-                confirmButtonText: 'Ok',
-                confirmButtonColor: '#008000',
-                allowOutsideClick: false,
-                allowEscapeKey: false
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ url('designer-dashboard') }}';
-                } 
-                });
-            });
-        </script>
-    <?php 
-        $notifications->is_read = 1;
-        $notifications->update();
-          }
-    ?>
-    @if(auth()->user()->address == null || auth()->user()->experience == null || auth()->user()->country == null )
-        @if(isset($request))
-            @if($request->url() != url('designer-dashboard/setting'))
-                <script>
-                    $(document).ready(function(){
-                    Swal.fire({
-                        title: 'Your account is not complete for approval please complete your profile !',
-                        showCancelButton: false,
-                        confirmButtonText: 'Ok',
-                        confirmButtonColor: '#008000',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = '{{ url('designer-dashboard/setting') }}';
-                        }
-                        });
-                    });
-                </script>
-
-            @endif
-        @else
-            <script>
-                $(document).ready(function(){
-                Swal.fire({
-                    title: 'Your account is not complete for approval please complete your profile !',
-                    icon: 'info',
-                    showCancelButton: false,
-                    confirmButtonText: 'Ok',
-                    confirmButtonColor: '#008000',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '{{ url('designer-dashboard/setting') }}';
-                    } 
-                    });
-                });
-            </script>
-        @endif
-    @elseif(auth()->user()->is_approved == 0) <!-- Account is not approved still pending  -->
-        <script>
-            $(document).ready(function(){
-            Swal.fire({
-                title: 'Your account is not approved wait for approval, Currently you are not able to upload logos !',
-                icon: 'info',
-                showCancelButton: false,
-                showConfirmButton: true,
-                confirmButtonText: 'Ok',
-                confirmButtonColor: '#008000',
-                allowOutsideClick: false,
-                allowEscapeKey: false
-                });
-            });
-        </script>
-    @elseif(auth()->user()->is_approved == 2)  <!-- Disapproved by admin  -->
-        <script>
-            $(document).ready(function(){
-            Swal.fire({
-                title: 'Your account is disapproved by admin, Currently you are not able to upload logos !',
-                icon: 'Warning',
-                showCancelButton: false,
-                showConfirmButton: true,
-                confirmButtonText: 'Ok',
-                confirmButtonColor: '#008000',
-                allowOutsideClick: false,
-                allowEscapeKey: false
-                });
-            });
-        </script>
-    @endif
+    
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
@@ -383,10 +255,34 @@
 @endif
 
 <script>
+    //  NioApp.Dropzone.init = function () {
+    //     var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    //     NioApp.Dropzone('.upload-zone', { 
+    //         url: "{{ url('designer-dashboard/uploadprocc') }}" ,
+    //         headers: {
+    //         'X-CSRF-TOKEN': csrfToken
+    //     },
+    //     success:function(file, response){
+    //         html = '<div class="deletebuttondiv"><input type="hidden" name="media_id" value="'+response.id+'"><button type="button" class="btn btn-danger deleteimage" data-id="'+response.id+'" image-name="'+response.image_name+'">Delete</button></div>';
+    //         $('.upload-zone').append(html);
+           
+    //     },
+    //     error: function(jqXHR, textStatus, errorThrown) {
+    //         html = '<div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span><button type="button" class="btn btn-primary">SELECT</button></div>';
+    //         $('.upload-zone').html(html);
+    //         // $(".upload-zone").load(location.href + " .upload-zone");
+    //         $('.upload-zone').removeClass('dz-started');
+    //         NioApp.Toast('This format is not compatible for upload please uplaod png or AI format!', 'info', {position: 'top-right'});
+    //         }
+    //     });
+    // };
+</script>
+
+<script>
      NioApp.Dropzone.init = function () {
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
         NioApp.Dropzone('.upload-zone', { 
-            url: "{{ url('designer-dashboard/uploadprocc') }}" ,
+            url: "{{ url('special-designer/upload-process') }}" ,
             headers: {
             'X-CSRF-TOKEN': csrfToken
         },

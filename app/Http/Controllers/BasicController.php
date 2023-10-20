@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notifications;
 use App\Models\Logo;
+use App\Models\Media;
+
 
 class BasicController extends Controller
 {
@@ -39,8 +41,33 @@ class BasicController extends Controller
                 $notification->update();
                 return redirect()->back();
             }
+        }elseif(auth()->user()->role_id == 4){
+            if($notification_id == 'all-read' ){
+                $admin_notifications = Notifications::where([['is_read' ,'=' , 0],['reciever_id','=',auth()->user()->id]])->update(['is_read'=>1]);
+                return redirect()->back();
+            }else{
+                $notification = Notifications::find($notification_id);
+                $notification->is_read = 1;
+                $notification->update();
+                return redirect()->back();
+            }
         }else{
             return redirect()->back()->with('error','Hey buddy where are you.');
+        }
+    }
+    public function downloadFile(Request $req){
+        $media_id = $req->media_id;
+        $mediaObj = Media::find($media_id);
+        if($mediaObj){
+            // dd($mediaObj);
+            $filePath = public_path($mediaObj->image_path);
+            if (file_exists($filePath)) {
+                return response()->download($filePath,$mediaObj->image_name);
+            } else {
+                return redirect()->back()->with('error','There is some error in downloading please contact with support.');
+            }
+        }else{
+            return redirect()->back()->with('error','There is some error in downloading please contact with support.');
         }
     }
 }

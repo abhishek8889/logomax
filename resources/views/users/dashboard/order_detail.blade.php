@@ -13,6 +13,10 @@
 .dashboard-section {
     padding: 73px 0px;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
 </style>
 <section class="dashboard-section">
     <div class="container">
@@ -25,8 +29,8 @@
                 $image_url = asset($mediaObj->image_path);
             ?>
             <div class="card mb-3" >
-                <div class="row no-gutters">
-                    <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4 ">
                         <img src="{{ $image_url ?? ''; }}" alt="{{ $image_name ?? ''; }}">
                     </div>
                     <div class="col-md-8">

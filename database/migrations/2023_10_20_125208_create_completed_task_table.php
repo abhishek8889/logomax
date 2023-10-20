@@ -9,18 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
-
     public function up(): void
     {
-        Schema::create('logo_revisions', function (Blueprint $table) {
+        Schema::create('completed_task', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id');
-            $table->string('request_title');
-            $table->text('request_description');
+            $table->string('task_id');
+            $table->string('client_id');
+            $table->string('designer_id');
             $table->string('logo_id');
-            $table->integer('revision_time')->nullable();
-            $table->integer('status')->default(0); // 0  When request on revision // 1 approved by customer 
+            $table->string('media_id');
+            $table->string('status')->default(0); // 0 means not approved by customer , 1 means approved by customer 
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logo_revisions');
+        Schema::dropIfExists('completed_task');
     }
 };

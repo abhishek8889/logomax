@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogoRevision extends Model
+class SpecialDesignerTask extends Model
 {
     use HasFactory;
+    protected $table = "special_designer_tasks";
+    
+    public function revisionRequestDetail(){
+        return $this->belongsTo(LogoRevision::class,'logo_revision_id');
+    }
+
     public function logoDetail(){
         return $this->belongsTo(Logo::class,'logo_id');
     }
-    public function orderDetail(){
-        return $this->belongsTo(Order::class,'order_id');
-    }
-    public function customerDetail(){
+
+    public function clientDetail(){
         return $this->belongsTo(User::class,'client_id');
     }
-    public function order()
-    {
-        return $this->belongsTo(Order::class, 'order_id', 'id');
-    }
+
 }

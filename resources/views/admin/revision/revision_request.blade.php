@@ -52,10 +52,10 @@
                             </td>
                             <td class="tb-tnx-info">
                                 <div class="tb-tnx-desc">
-                                    <span class="title">{{ $revision->logoDetail->logo_name }}</span>
+                                     <span class="title">{{ $revision->logoDetail->logo_name }}</span>
                                 </div>
                                 <div class="tb-tnx-date">
-                                    <span class="date"><strong>#{{ $revision->order_num }}</strong></span>
+                                    <span class="date"><strong>#{{ $revision->orderDetail->order_num }}</strong></span>
                                     <span class="date"> {{ $revision->revision_time }}</span>
                                 </div>
                             </td>

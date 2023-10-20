@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <title>Admin Dashbaord</title>
     <!-- add coustam css file here -->
@@ -321,7 +322,23 @@
                                                         </div>
                                                         <div class="nk-notification-content">
                                                             <div class="nk-notification-text"><?php  echo $notification->message; ?><span> <a href="{{ url('read-notification/'.$notification->id) }}"> see </a></span></div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
+                                                            <!-- <div class="nk-notification-time">2 hrs ago</div> -->
+                                                            @if($notification->created_at)
+                                                                <div class="nk-notification-time">
+                                                                <?php
+                                                                    $notificationTime = $notification->created_at;
+                                                                    $currentTime = now();
+                                                                    $minutesDiff = $currentTime->diffInMinutes($notificationTime);
+                                                                ?>
+                                                                    @if ($minutesDiff < 1)
+                                                                        a few seconds ago
+                                                                    @elseif ($minutesDiff < 60)
+                                                                        {{ $minutesDiff }} minute{{ $minutesDiff > 1 ? 's' : '' }} ago
+                                                                    @else
+                                                                        {{ $notificationTime->diffForHumans($currentTime) }}
+                                                                    @endif.
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <?php }} ?>

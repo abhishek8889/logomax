@@ -30,6 +30,10 @@ use App\Http\Controllers\BasicController;
 
 use App\Events\RegisterNotificationEvent;
 
+//  ::::::::::::::::::: Special Designer :::::::::::::::::
+use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
+use App\Http\Controllers\SpecialDesigner\Task\TaskController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -159,7 +163,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     // Logo Revision Routes :
     Route::get('admin-dashboard/revision-request',[RevisionController::class,'revisionRequest']);
     Route::get('admin-dashboard/request-detail/{request_id}',[RevisionController::class,'revisionRequestDetail']);
-
+    // :::::::::::::::::: Assign work to special designer :::::::::::::::::
+    Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
     
 
 });
@@ -187,11 +192,22 @@ Route::group(['middleware'=>['auth','Designer']],function(){
 
 /////////////////////////// DESIGNER ROUTES END ////////////////////////////////
 
+/////////////////////////// SPECIAL DESIGNER ROUTES  ///////////////////////////
+Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::class,'index']);
+Route::get('special-designer/task-list',[TaskController::class,'taskList']);
+Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
+Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
+Route::post('special-designer/delete-image',[TaskController::class,'deleteimage']);
 
-/** Log-out Route */
+
+/////////////////////////// SPECIAL DESIGNER END  ///////////////////////////
+
+/**  ::::::::::::::::: Basic Routes :::::::::::::::  */
 Route::get('/logout', [AuthenticationController::class, 'logout']);
 
 Route::get('/mail', function () {
     return view('Mail.register_confirmation.index');
 });
+
 Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
+Route::get('download-file/{media_id}',[BasicController::class,'downloadFile']);

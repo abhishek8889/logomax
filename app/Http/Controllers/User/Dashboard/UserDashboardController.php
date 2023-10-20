@@ -10,6 +10,8 @@ use App\Models\LogoRevision;
 use App\Models\Logo;
 use App\Mail\LogoRevisionRequest;
 use Mail;
+use Carbon\Carbon;
+
 
 class UserDashboardController extends Controller
 {
@@ -53,41 +55,40 @@ class UserDashboardController extends Controller
         }
     }
     public function requestForRevision(Request $request){
-        // return response()->json(['status'=>200,'success' => 'You have succesfully send revision request.']);
-    
         $order_num = $request->order_num;
         if(Auth::check()){
             $orderDetail = Order::where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
-            $logo_id = $orderDetail->logo_id;
-            $logo = Logo::find($logo_id);
-            $logo->status = 2 ; //  status = 2 => on revision 
-            $logo->update(); 
+            
+            // Check how many days it is done to make this order if it exceeds more than 60 days then no revision is allowed.
 
-            $logoRevision = LogoRevision::where('order_num',$order_num)->first();
-            if($logoRevision){
-                $revisionTime = (int)$logoRevision->revision_time;
-                if($revisionTime == 3){
-                    // return redirect()
-                }else{
-
-                }
+            $orderMakeAt = $orderDetail->created_at;
+            $dateObj = Carbon::parse($orderMakeAt);
+            $revisionValidUpto = $dateObj->addDays(60);
+            $currentDate = Carbon::now()->format('Y-m-d H:i:s');
+            if($currentDate > $revisionValidUpto){
+                return response()->json(['status' => 403 , 'error' => "Sorry ! You can't make request for revision after 60 days."]);
             }else{
+                $logo_id = $orderDetail->logo_id;
+                $logo = Logo::find($logo_id);
+                $logo->status = 2 ; //  status = 2 => on revision 
+                $logo->update(); 
+
+                ///////////////// Send Logo Revision Request ////////////////////
+
                 $logoRevision = new LogoRevision;
                 $logoRevision->order_id = $orderDetail->id;
-                $logoRevision->order_num = $orderDetail->order_num;
                 $logoRevision->request_title = $request->request_title ;
                 $logoRevision->request_description = $request->request_description ;
-                $logoRevision->logo_id = $logo_id;
-                $logoRevision->client_id = $orderDetail->user_id;
-                // $logoRevision->designer_id = '';
-                $logoRevision->revision_time = 0; // When customer approve revision then revision time convert to 1.
-                $logoRevision->status = 0; // status 0 mean  revision request sent by user  
+                $logoRevision->logo_id = $logo_id;$logoRevision->status = 0; // status 0 mean  revision request sent by user  
                 $logoRevision->save();
                 // ::::::::::::::::::  Send mail from here ::::::::::::::::: 
-                // $mailData = array(
-                //     ''
-                // );
-                // Mail::to(env('ADMIN_MAIL'))->send(new LogoRevisionRequest());
+                $mailData = array(
+                    'msg' => ' You have a new reuest for revision logo From '.auth()->user()->name.'.',
+                    'title' => 'Logo Revision',
+                );
+        
+                $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoRevisionRequest($mailData));
+
                 return response()->json(['status'=>200,'success' => 'You have succesfully send revision request.']);
             }
         }else{
