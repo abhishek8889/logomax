@@ -17,4 +17,8 @@ class LogoRevision extends Model
     public function customerDetail(){
         return $this->belongsTo(User::class,'client_id');
     }
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'id');
+    }
 }

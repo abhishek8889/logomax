@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js']) -->
-    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    @vite(['resources/css/app.css' ,'resources/js/designer_notification.js','resources/js/specialdDsignerNotification.js'])
+    <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
     <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script> 
-
+    <script type="module" src="{{ asset('/build/assets/specialdDsignerNotification-8e67a84a.js') }}"></script>  -->
 </head>
 <style>
     .icon-active {
@@ -185,7 +185,23 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
                                                         </div>
                                                         <div class="nk-notification-content">
                                                             <div class="nk-notification-text"><?php  echo $notification->message; ?><span> <a href="{{ url('read-notification/'.$notification->id) }}"> see </a></span></div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
+                                                            <!-- <div class="nk-notification-time">2 hrs ago</div> -->
+                                                            @if($notification->created_at)
+                                                                <div class="nk-notification-time">
+                                                                <?php
+                                                                    $notificationTime = $notification->created_at;
+                                                                    $currentTime = now();
+                                                                    $minutesDiff = $currentTime->diffInMinutes($notificationTime);
+                                                                ?>
+                                                                    @if ($minutesDiff < 1)
+                                                                        a few seconds ago
+                                                                    @elseif ($minutesDiff < 60)
+                                                                        {{ $minutesDiff }} minute{{ $minutesDiff > 1 ? 's' : '' }} ago
+                                                                    @else
+                                                                        {{ $notificationTime->diffForHumans($currentTime) }}
+                                                                    @endif.
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <?php }} ?>

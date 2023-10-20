@@ -13,4 +13,8 @@ class Order extends Model
     public function logodetail(){
         return $this->belongsTo(Logo::class,'logo_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

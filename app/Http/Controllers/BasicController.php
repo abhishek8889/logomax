@@ -39,6 +39,16 @@ class BasicController extends Controller
                 $notification->update();
                 return redirect()->back();
             }
+        }elseif(auth()->user()->role_id == 4){
+            if($notification_id == 'all-read' ){
+                $admin_notifications = Notifications::where([['is_read' ,'=' , 0],['reciever_id','=',auth()->user()->id]])->update(['is_read'=>1]);
+                return redirect()->back();
+            }else{
+                $notification = Notifications::find($notification_id);
+                $notification->is_read = 1;
+                $notification->update();
+                return redirect()->back();
+            }
         }else{
             return redirect()->back()->with('error','Hey buddy where are you.');
         }

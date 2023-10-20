@@ -9,6 +9,8 @@ use App\Models\User;
 use Hash;
 use App\Models\Order;
 use Auth;
+use App\Mail\LogoPurchaseMail;
+use Mail;
 
 class CheckoutController extends Controller
 {
@@ -126,6 +128,29 @@ class CheckoutController extends Controller
         $logo = Logo::find($req->logo_id);
         $logo->status = 3;
         $logo->update();
+
+        /* add a mail here of success purchase of logo to user and Admin . */
+        /* mail to user ..... */
+        $mailData = array(
+            'for' => 'user',
+            'msg' => 'Thankyou ! your logo has been succesfully purchased',
+            'title' => 'Succesfully purchased',
+            'mail' => $req->email
+        );
+        // $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoPurchaseMail($mailData));
+        $mail = Mail::to($req->email)->send(new LogoPurchaseMail($mailData));
+
+        /* Mail to admin ......*/
+        $mailData = array(
+            'for' => 'admin',
+            'msg' => $req->name . ' has purchased a new logo',
+            'title' => 'Logo purchased',
+            'mail' => $req->email
+        );
+
+        $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoPurchaseMail($mailData));
+
+
         return redirect('/download-logo/'.$orderNum)->with('success','Congratulations You have succesfully buy a logo !');
     }
 
