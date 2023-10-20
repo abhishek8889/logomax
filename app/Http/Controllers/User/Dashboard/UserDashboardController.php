@@ -82,10 +82,13 @@ class UserDashboardController extends Controller
                 $logoRevision->logo_id = $logo_id;$logoRevision->status = 0; // status 0 mean  revision request sent by user  
                 $logoRevision->save();
                 // ::::::::::::::::::  Send mail from here ::::::::::::::::: 
-                // $mailData = array(
-                //     ''
-                // );
-                // Mail::to(env('ADMIN_MAIL'))->send(new LogoRevisionRequest());
+                $mailData = array(
+                    'msg' => ' You have a new reuest for revision logo From '.auth()->user()->name.'.',
+                    'title' => 'Logo Revision',
+                );
+        
+                $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoRevisionRequest($mailData));
+
                 return response()->json(['status'=>200,'success' => 'You have succesfully send revision request.']);
             }
         }else{

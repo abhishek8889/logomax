@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class LogoRevisionRequest extends Mailable
+class DesignerAssignedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,9 +19,10 @@ class LogoRevisionRequest extends Mailable
     public $mailData;
     public function __construct($mailData)
     {
+        //
         $this->mailData = $mailData;
-    }
 
+    }
 
     /**
      * Get the message envelope.
@@ -29,7 +30,7 @@ class LogoRevisionRequest extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Logo Revision Request',
+            subject: 'Designer Assigned Mail',
         );
     }
 
@@ -39,8 +40,8 @@ class LogoRevisionRequest extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'Mail.afterPurchase.revisionRequest',
-            with: [
+            view: 'Mail.afterPurchase.assignedDesigner',
+            with :[
                 'mailData' => $this->mailData,
             ]
         );

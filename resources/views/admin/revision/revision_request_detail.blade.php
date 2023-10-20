@@ -134,10 +134,14 @@
                 'selectedDesigner' : selectDesigner,
             },
             // dataType: 'JSON',
+            beforeSend: function() {
+                $('.spinner-container').show();
+            },
             success:function(response)
             {
                 // console.log(response);
                 setTimeout(()=>{
+                $('.spinner-container').hide();
                     $(".loader-box").hide();
                     Swal.fire(
                         'Request Sent!',
@@ -151,6 +155,7 @@
                 }, 1000);
             },
             error: function(response) {
+                $('.spinner-container').hide();
                 console.log(error);
             }
         });
