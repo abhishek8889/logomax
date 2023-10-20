@@ -8,10 +8,13 @@ use App\Models\Categories;
 use App\Models\Tag;
 use App\Models\Logo;
 use App\Models\Style;
+use App\Models\LogoFacilities;
+
 
 class FrontLogoController extends Controller
 {
     public function index(Request $request){
+        
 
         $categories = Categories::all();
         $tags = Tag::all();
@@ -74,8 +77,11 @@ class FrontLogoController extends Controller
         if(empty($logo)){
             abort(404);
         }
+
+        $logoFacilities = LogoFacilities::all();
+
         $similar_logos = Logo::where([['category_id',$logo->category_id],['approved_status',1],['status',1],['id','!=',$logo->id]])->take(4)->get();
-        return view('users.logos.logodetails',compact('request','logo','similar_logos','category_slug'));
+        return view('users.logos.logodetails',compact('request','logo','similar_logos','category_slug','logoFacilities'));
     }
     public function download_page(Request $request){
 

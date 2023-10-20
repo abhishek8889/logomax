@@ -43,7 +43,8 @@ class AuthenticationController extends Controller
             );
         try {
             if (Auth::attempt($data)) {
-                if (Auth::user()->email_verified == 1) {
+
+                if ((Auth::user()->role_id == 2 || Auth::user()->role_id == 3 || Auth::user()->role_id == 4 ) && Auth::user()->email_verified == 1) {
                     switch (Auth::user()->role_id) {
                         case 1:
                             return redirect('/home')->with('success', 'Welcome ' . Auth::user()->name . ' to home page');
@@ -52,14 +53,13 @@ class AuthenticationController extends Controller
                         case 3:
                             return redirect('/admin-dashboard')->with('success', 'Welcome ' . Auth::user()->name . ' to Admin Dashboard.');
                         case 4:
-                            return redirect('/designer-dashboard')->with('success', 'Welcome ' . Auth::user()->name . ' to Designer Dashboard');
+                            return redirect('special-designer/dashboard/')->with('success', 'Welcome ' . Auth::user()->name . ' to Special Designer Dashboard');
                         default:
                             Auth::logout();
                             abort(401, 'Invalid user');
                     }
                 } else {
-                    Auth::logout();
-                    return redirect()->back()->with('error', 'You need to verify your email');
+                    return redirect('/')->with('success', Auth::user()->name . ' you are logged in succesfully !');
                 }
             } else {
                 return redirect()->back()->with('error', 'Invalid email or password');
@@ -103,7 +103,7 @@ class AuthenticationController extends Controller
         $user->experience = $validate['experience'];
         $user->country = $validate['country'];
         $user->address = $validate['address'];
-        $user->role_id = 2;
+        $user->role_id = 3;
         $user->remember_token = $remember_token;
         $user->status = 1;
         $user->save();
@@ -111,6 +111,7 @@ class AuthenticationController extends Controller
             
             if($user->role_id == 2){
         $mailData = [
+            'title' => 'User Registration',
             'token' => $remember_token,
             'email' => $validate['email'],
         ];

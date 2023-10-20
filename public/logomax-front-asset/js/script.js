@@ -151,7 +151,7 @@ $(function () {
 
 
 // form
-console.clear();
+// console.clear();
 
 function ready(fn) {
   if (
@@ -217,6 +217,11 @@ ready(function () {
   /*****************************************************************************
    * Expects a Node (input[type="text"] or textarea).
    */
+  const validateHidden = (field)=>{
+    return {
+      isValid: true
+    };
+  }
 
   const validateText = (field) => {
     const val = field.value.trim();
@@ -363,6 +368,8 @@ ready(function () {
         return validatePhone(field);
       case "email":
         return validateEmail(field);
+      case "hidden":
+        return validateHidden(field);
       default:
         throw new Error(
           `The provided field type '${field.tagName}:${field.type}' is not supported in this form.`

@@ -35,7 +35,6 @@
     <meta property="og:image" content="{{ asset('blog_images/' . $blog->banner_img) }}" />
     @endif
 
-    <!-- <meta property="og:image"      content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
     <!-- end meta fb -->
   <title>home page </title>
 </head>
@@ -148,7 +147,11 @@
                             </div>
                 </div>
                 <?php } }?>
+                
                 @if(Auth::user())
+                <div class="header-btn mr-1">
+                    <a class="login-btn" href="{{ url('/user-orders') }}">Orders</a>
+                </div>
                 <div class="header-btn">
                     <a class="login-btn" href="{{ url('logout') }}">Log Out</a>
                 </div>
@@ -317,7 +320,9 @@
 
 
   <!-- ================= footer section start ====================== -->
- 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -327,15 +332,12 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="https://alexandrebuffet.fr/codepen/slider/slick-animation.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  // <script
-  //           src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
-  //           integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-  //           crossorigin="anonymous"
-  //           referrerpolicy="no-referrer"
-  //       ></script>
+  
   
   <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+ 
   <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>
+
 
 <!-- facebook code : -->
 <!-- show login model on email or password error -->

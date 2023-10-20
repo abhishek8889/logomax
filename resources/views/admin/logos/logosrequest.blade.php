@@ -10,12 +10,10 @@
                                             <h3 class="nk-block-title page-title">Logos Requests</h3>
                                         </div>
                                         <div>{{ Breadcrumbs::render('logos-request') }}</div>
-                                        
                                     </div>
                                 </div><!-- .nk-block-head -->
                                 <div class="nk-block">
                                     <div class="row g-gs">
-                                
                                         @foreach($logos as $logo)
                                         <div class="col-sm-6 col-lg-4 col-xxl-3">
                                             <div class="gallery card card-bordered">
@@ -50,7 +48,7 @@
                 <!-- Button trigger modal -->
 
                 <!-- logo deatil  modal-->
-                @forelse($logos as $logo)
+                @foreach($logos as $logo)
                 <div class="modal fade" id="exampleviewModal{{ $logo->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -93,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                @endforelse
+                @endforeach
                 <!-- logos review modal -->
                 <!-- Modal -->
                 <!-- Dissapproval modal -->

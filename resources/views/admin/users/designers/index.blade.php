@@ -36,7 +36,7 @@
                                                 <?php $i=1; ?>
                                                     @foreach ($users as $user)
                                                         
-                                                    <tr class="tb-tnx-item">
+                                                    <tr class="">
                                                         <td class="tb-tnx-id">
                                                             <a href="#"><span>{{$i++ ?? ''}}</span></a>
                                                         </td>

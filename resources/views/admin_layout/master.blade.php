@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <title>Admin Dashbaord</title>
     <!-- add coustam css file here -->
@@ -16,10 +17,10 @@
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
-    <script type="module" src="{{ asset('/build/assets/app-df470c34.js') }}"></script>  -->
+    <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
+    <script type="module" src="{{ asset('/build/assets/app-df470c34.js') }}"></script> 
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
-    @vite(['resources/css/app.css' , 'resources/js/app.js'])
+    <!-- vite(['resources/css/app.css' , 'resources/js/app.js']) -->
 </head>
 <style>
     .icon-active {
@@ -75,7 +76,7 @@
                                     <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
-                               <ul class="nk-menu-sub">
+                                    <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/logos-list') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
@@ -87,6 +88,25 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <!-- Logo Revision request  -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
+                                        <span class="nk-menu-text">Logos for revision</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/revision-request') }}" class="nk-menu-link"><span class="nk-menu-text">Revision Request</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">On Revision</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
@@ -130,6 +150,22 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                <!-- ##########################  -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-puzzle"></em></span>
+                                        <span class="nk-menu-text">Logo Facilities</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/logo-facilities') }}" class="nk-menu-link"><span class="nk-menu-text">Add Facilities</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/logo-options') }}" class="nk-menu-link"><span class="nk-menu-text">Additional Options</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!-- ##########################  -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                     <span class="nk-menu-icon"><em class="icon ni ni-text-rich"></em></span>
