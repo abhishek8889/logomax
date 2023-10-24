@@ -86,6 +86,9 @@
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/disapproved-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Disapproved Logos</span></a>
                                         </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/sold-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Sold Logos</span></a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <!-- Logo Revision request  -->
@@ -196,6 +199,22 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                <!-- Reviews -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Reviews</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/add-review') }}" class="nk-menu-link"><span class="nk-menu-text">Add Review</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/review-list') }}" class="nk-menu-link"><span class="nk-menu-text">Review List</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!-- End -->
                                 <!-- special designer -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">

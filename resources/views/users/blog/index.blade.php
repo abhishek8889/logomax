@@ -1,5 +1,6 @@
 @extends('user_layout/master')
 @section('content')
+
   <section class="blog-sec ">
     <div class="container">
       <nav aria-label="breadcrumb">
@@ -10,7 +11,7 @@
       </nav>
       <div class="Select-text">
         <div class="search">
-          <input type="search" class="form-control" id="blog-search" placeholder="Search our blog...">
+          <input type="search" class="form-control" id="blog-search" placeholder="Search our blog">
         </div>
         <div class="Search-bar">
           <button id="button-addon5" class="blog-search" type="submit">
@@ -57,11 +58,13 @@
                 <div class="col-lg-4 col-md-6 {{ $k >= 9 ? 'blogs-data d-none' : '' }}">
                   <div class="blog-content">
                     <div class="recent-blog-img">
-                    <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}"><img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt=""></a> 
+                      <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">
+                        <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
+                      </a> 
                     </div>
                     <div class="recent-text">
                       <div class="lorem-text">
-                        <p>By {{ $blog->user->name ?? '' }} <span>| {{ $blog->created_at->format('F d, Y') ?? '' }}</span></p>
+                        <p><span> {{ $blog->created_at->format('F d, Y') ?? '' }}</span></p>
                       </div>
                       <div class="simply-text">
                       <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}"><h6>{{ $blog->title ?? '' }}</h6></a>  
@@ -122,7 +125,7 @@ document.getElementById('recent-blog-text').scrollIntoView({ behavior: 'smooth',
 
         date = moment(value.created_at).format("MMMM DD,Y");
         
-        html = '<div class="col-lg-4 col-md-6"><div class="blog-content"><div class="recent-blog-img"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><img src="{{ asset('blog_images') }}/'+value.banner_img+'" alt=""></a></div><div class="recent-text"><div class="lorem-text"><p>By '+value.user.name+' <span>| '+date+'</span></p></div><div class="simply-text"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><h6>'+value.title+'</h6></a><p>'+value.sub_title+'</p></div></div></div></div>';
+        html = '<div class="col-lg-4 col-md-6"><div class="blog-content"><div class="recent-blog-img"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><img src="{{ asset('blog_images') }}/'+value.banner_img+'" alt=""></a></div><div class="recent-text"><div class="lorem-text"><p><span>'+date+'</span></p></div><div class="simply-text"><a href="{{ url('blogs-details/') }}/'+value.slug+'"><h6>'+value.title+'</h6></a><p>'+value.sub_title+'</p></div></div></div></div>';
         appendhtml.push(html);
       });
 

@@ -13,4 +13,7 @@ class MetaPagesController extends Controller
     public function reviews(Request $request){
         return view('users.meta-pages.reviews',compact('request'));
     }
+    public function support(Request $request){
+        return view('users.meta-pages.support',compact('request'));
+    }
 }

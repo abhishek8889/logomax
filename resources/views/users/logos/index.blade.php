@@ -155,7 +155,7 @@
                             @foreach($logos as $logo)
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="logo_img">
-                                   <a href="{{ url('logos-detail/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
+                                   <a href="{{ url('logo/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
                                     <div class="heart_icon">
                                         <i class="fa-regular fa-heart"></i>
                                     </div>
@@ -312,7 +312,7 @@
 
                         append_html = [];
                         $.each(response['data'], function(key,value){
-                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logos-detail/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon"><i class="fa-regular fa-heart"></i></div></div></div>';
+                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon"><i class="fa-regular fa-heart"></i></div></div></div>';
                             append_html.push(html);
                         })
                         $('#logo_html_row').html(append_html);

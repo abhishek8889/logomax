@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SpecialDesigner\Task;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SpecialDesignerTask;
+use App\Models\Media;
 
 class TaskController extends Controller
 {
@@ -23,11 +24,11 @@ class TaskController extends Controller
     }
 
     public function uploadProc(Request $request){
-        return $request->all();
+       
         if(auth()->user()->is_approved !== 0 && auth()->user()->is_approved !== 2){
             if($request->hasFile('file')){
                 $request->validate([
-                    'file' => 'required|mimes:ai,png'
+                    'file' => 'required|mimetypes:application/postscript,image/png,image/jpeg'
                 ]);
                 $file = $request->file('file');
                 $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
@@ -57,4 +58,6 @@ class TaskController extends Controller
             return reponse()->json('something went worng');
         }
     }
+
+
 }
