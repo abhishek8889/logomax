@@ -143,7 +143,7 @@ ol.breadcrumb {
     text-align: start;
 }
 
-.Read-More-btn a.read-btn {
+.Read-More-btn .read-btn {
     background: #FFFFFF;
     border-radius: 5px;
     padding: 17px 23px;
@@ -156,7 +156,7 @@ ol.breadcrumb {
     border: 2px solid #fff;
 }
 
-.Read-More-btn a.read-btn:hover {
+.Read-More-btn .read-btn:hover {
     background: none;
     color: #fff;
     border: 2px solid;
@@ -171,7 +171,7 @@ ol.breadcrumb {
 }
 
 .blog-sec .content {
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     left: 0px;
     right: 0;
@@ -184,10 +184,6 @@ ol.breadcrumb {
     align-items: flex-end;
     justify-content: flex-start;
     transition: all 0.3s ease-in-out;
-}
-
-.blog-sec .blog-img .content:hover {
-    opacity: 1;
 }
 
 .blog-sec .blog-img .content .blog-dummy-text {
@@ -245,7 +241,7 @@ ol.breadcrumb {
     bottom: 0;
     padding: 30px;
     text-align: left;
-    opacity: 0;
+    opacity: 1;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -401,7 +397,7 @@ ol.breadcrumb.blog_breadcrumb {
     background: #FFF;
     width: 100%;
     max-width: 167px;
-    padding: 14px;
+    padding: 6px 14px;
 }
 
 button.copy-asset-id__icon.js-copy-asset-id.hover-trigger {
@@ -412,8 +408,8 @@ button.copy-asset-id__icon.js-copy-asset-id.hover-trigger {
 }
 a.asset-id-link__button {
     color: #656F79;
-    font-family: Montserrat;
-    font-size: 10px;
+    font-family: "Montserrat";
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -589,7 +585,7 @@ a.asset-id-link__button {
         font-size: 28px;
     }
 
-    .Read-More-btn a.read-btn {
+    .Read-More-btn .read-btn {
         padding: 13px 20px;
     }
 
@@ -638,7 +634,7 @@ a.asset-id-link__button {
         padding: 20px;
     }
 
-    .Read-More-btn a.read-btn {
+    .Read-More-btn .read-btn {
         padding: 8px 15px;
         font-size: 14px;
     }

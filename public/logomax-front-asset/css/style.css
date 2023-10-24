@@ -88,9 +88,9 @@ section.banner-sec {
 a.login-btn {
     background: #FFFFFF;
     border-radius: 130px;
-    padding: 13px 26px;
+    padding: 15px 56px;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 15px;
     color: #000000;
     text-decoration: none;
@@ -1216,6 +1216,7 @@ a.now-btn:hover {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    height: 100%;
 }
 
 .img_logs:hover img {
