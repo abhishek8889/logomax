@@ -95,4 +95,7 @@ class UserDashboardController extends Controller
             return abort(404);
         }
     }
+    public function termsAndConditions(Request $request){
+        return view('users.meta-pages.terms&conditions');
+    }
 }

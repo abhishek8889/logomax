@@ -19,7 +19,40 @@
         </div>
       </div>
       <div class="blog-img-box">
-        <div class="row">
+      <div class="row">
+          @if($blogs)
+            @foreach($blogs as $key => $blog)
+              @if($key < 2)
+                @if($key === 0)
+                  <div class="col-md-8">
+                    <div class="blog-img">
+                      <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
+                      <div class="content">
+                        <div class="blog-dummy-text">
+                          <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}"><h2>{{ $blog->title ?? '' }}</h2></a>
+                          <div class="Read-More-btn">
+                            <a href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}" class="read-btn">Read More</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                @else
+                  <div class="col-md-4">
+                    <div class="group-img-{{ $key ?? '1' }}">
+                      <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
+                      <div class="passage-text">
+                        <p>{{ $blog->title ?? '' }}</p>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+              @endif
+            @endforeach
+          @endif
+        </div>
+
+        <!-- <div class="row">
           @if($blogs)
             @foreach ($blogs as $n => $b)
               @if($n <= 3)
@@ -39,7 +72,7 @@
                 @endif
             @endforeach
           @endif
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

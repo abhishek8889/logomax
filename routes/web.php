@@ -67,6 +67,9 @@ Route::group(['middleware'=>['EnsureUser']],function(){
 
     Route::post('blog-search',[BlogController::class,'blogsearch']);
 
+
+    /* term and conditions: */
+  
     /** Authentications */
     // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
 
@@ -94,6 +97,10 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail']);
     Route::get('/download-logo/{order_num}', [UserDashboardController::class,'downloadLogo']);
     Route::get('/request-for-revision', [UserDashboardController::class,'requestForRevision']);
+    // Route::get('/TermsAndconditions', function () {
+    //     return view('users.meta-pages.terms&conditions');
+    // });
+    Route::get('/terms-and-conditions', [UserDashboardController::class,'termsAndConditions']);
     
 });
 

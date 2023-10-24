@@ -190,7 +190,7 @@
 
   <!-- ================= join logo section start ====================== -->
 
-  <section class="join-logo-sec" style="background-image: url({{ asset('logomax-front-asset/img/signup-bg 1.png')}});">
+  <section class="join-logo-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
     <div class="container">
       <div class="join-logo-text">
         <div class="download-text">
