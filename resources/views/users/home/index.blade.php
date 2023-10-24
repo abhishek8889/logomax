@@ -73,13 +73,14 @@
         @if ($categories->IsNotEmpty())
           @foreach ($categories as $category)
             <div class="img__wrapper_boxs">
-                  <div class="img_logs">
-                    <!-- <img src="{{ asset('logomax-front-asset/img/logs3.png') }}" alt=""> -->
-                    <img src="{{ asset('category_images') }}/{{ $category->image ?? '' }}" alt="">
-                  </div>
-                  <div class="img__wrapper_boxs_text">
-                    <h5>{{ $category->name }}</h5>
-                  </div>
+              <a href="{{ url('logos-search?categories=%5B"'.$category->slug.'"%5D') }}">
+                <div class="img_logs">
+                  <img src="{{ asset('category_images') }}/{{ $category->image ?? '' }}" alt="">
+                </div>
+                <div class="img__wrapper_boxs_text">
+                  <h5>{{ $category->name }}</h5>
+                </div>
+              </a>
             </div>
           @endforeach
         @else

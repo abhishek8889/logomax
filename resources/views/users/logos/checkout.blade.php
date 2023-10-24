@@ -331,17 +331,19 @@
                             <h5>Billing address</h5>
                         </div>
                         <!-- Email -->
-                        <div class="mt-3 sm:mt-0 form__field">
-                            <label for="name">
-                                <span aria-hidden="true"></span>
-                            </label>
-                            <input id="first_name" type="text" name="first_name" value="" placeholder="First name" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
-                        </div>
-                        <div class="mt-3 sm:mt-0 form__field">
-                            <label for="name">
-                                <span aria-hidden="true"></span>
-                            </label>
-                            <input id="name" type="text" name="last_name" value="" placeholder="Last name" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                        <div class="form-row form__field mt-3 sm:mt-0 mx-0">
+                            <div class="col-md-6 ">
+                                <label for="name">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="first_name" type="text" name="first_name" value="" placeholder="First name"   />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="name">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="name" type="text" name="last_name" value="" placeholder="Last name"   />
+                            </div>
                         </div>
                         <div class="mt-3 sm:mt-0 form__field">
                             <label for="email">

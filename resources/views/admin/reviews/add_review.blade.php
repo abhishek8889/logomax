@@ -34,9 +34,11 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="form-label" for="password">Password</label>
+                        <label class="form-label" for="logo">Select Logo</label>
                         <div class="form-control-wrap">
-                            <input type="password" name="password" class="form-control" id="password" >
+                            <select name="" id="">
+                                <option value=""></option>
+                            </select>
                         </div>
                         @error('password')
                             <span class="text text-danger">{{ $message }}</span>
