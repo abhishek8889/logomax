@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
 use App\Http\Controllers\User\Checkout\CheckoutController;
 use App\Http\Controllers\User\Dashboard\UserDashboardController;
 use App\Http\Controllers\Admin\Revision\RevisionController;
+use App\Http\Controllers\Admin\Reviews\ReviewsController;
 
 use App\Http\Controllers\BasicController;
 
@@ -53,10 +54,12 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('/',[HomeController::class,'index'])->name('/');
     Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
     Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
+    Route::get('/support',[MetaPagesController::class,'support'])->name('support');
+
     Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
     Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
     Route::get('/logos-search',[FrontLogoController::class,'index']);
-    Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
+    Route::get('/logo/{slug}',[FrontLogoController::class,'logodetail']);
 
     Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
     Route::post('logo-checkout',[CheckoutController::class,'checkoutProcess']);
@@ -135,6 +138,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/logo-detail/{slug}',[LogosController::class,'logodetail'])->name('logo-detail');
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos'])->name('approved-logos');
     Route::get('admin-dashboard/disapproved-logos',[LogosController::class,'disapprovedLogos'])->name('disapproved-logos');
+    Route::get('admin-dashboard/sold-logos',[LogosController::class,'soldLogos'])->name('sold-logos');
+    
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
     
     // Logo Facilities :
@@ -173,6 +178,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     // :::::::::::::::::: Assign work to special designer :::::::::::::::::
     Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
     
+    // Reviews System 
+    Route::get('/admin-dashboard/add-review',[ReviewsController::class,'addReview']);
+
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////
@@ -205,6 +213,9 @@ Route::get('special-designer/task-list',[TaskController::class,'taskList']);
 Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
 Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
 Route::post('special-designer/delete-image',[TaskController::class,'deleteimage']);
+
+// Route::post('/store', [TaskController::class,'store'])->name('store');
+// Route::post('uploads', [TaskController::class,'uploads'])->name('uploads');
 
 
 /////////////////////////// SPECIAL DESIGNER END  ///////////////////////////

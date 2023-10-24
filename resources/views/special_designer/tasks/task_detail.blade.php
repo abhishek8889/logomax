@@ -94,26 +94,17 @@
             <div class="modal-header">
                 <h5 class="modal-title">Upload Icons</h5>
             </div>
-            <form action="" method="POST">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="form-label">Upload AI Logo</label>
-                        <input type="file" name="ai_logo" />
-                    </div>
-                    <div class="col-sm-6" >
-                        <label class="form-label">Upload PNG Logo</label>
-                        <input type="file" name="png_logo" />
-                    </div>
-                    <div class="col-sm-6" >
-                        <label class="form-label">Upload JPG Logo</label>
-                        <input type="file" name="jpg_logo" />
+            <form action="{{ url('special-designer/upload-process') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-file">
+                        <input type="file" multiple class="form-file-input" name="icon_list[]" id="customMultipleFiles">
+                        <label class="form-file-label" for="customMultipleFiles">Choose files</label>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer bg-light">
-                <button class="text text-light btn btn-primary"  type="submit">Submit Job</button>
-            </div>
+                <div class="modal-footer bg-light">
+                    <button class="text text-light btn btn-primary"  type="submit">Submit Job</button>
+                </div>
             </form>
         </div>
     </div>

@@ -245,6 +245,7 @@ header.header {
     font-weight: 700;
     line-height: 28px;
     text-align: center;
+    cursor:pointer;
 }
 
 .banner-sec .all-select {
@@ -2940,6 +2941,7 @@ form#progress-form [data-complete="true"] .box_studio {
         font-size: 20px;
         margin: 0;
         font-weight: 600;
+        cursor:pointer;
     }
 
     .site-footer .dropdown:before {

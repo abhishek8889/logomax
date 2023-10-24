@@ -26,13 +26,14 @@ return new class extends Migration
             $table->integer('get_favicon_status')->default(0);
             $table->string('get_favicon_price')->nullable();
             $table->string('total_payment_amount');
+            $table->integer('status')->default(0); // 0 if payment is not done and 1 if payment is done 
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
-     */
+        * Reverse the migrations.
+    */
     public function down(): void
     {
         Schema::dropIfExists('orders');

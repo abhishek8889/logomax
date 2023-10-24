@@ -7,7 +7,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('logos-search') }}">Logos Search</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('logos-search') }}">Logos</a></li>
                         <li class="breadcrumb-item"><a > {{ $logo->logo_slug ?? '' }}</a>
                         </li>
                     </ol>
@@ -45,7 +45,7 @@
                                   <div class="card">
                                       <div class="card-header pointer" data-toggle="collapse"
                                           data-target="#collapse-{{ $facility->id }}">
-                                          <h5>{{ $facility->facilities_name ?? '' }}</h5>
+                                          <h5 class="text text-dark">{{ $facility->facilities_name ?? '' }}</h5>
                                       </div>
                                       <div id="collapse-{{ $facility->id }}" class="collapse " data-parent="#accordion">
                                           <div class="card-body">
@@ -126,7 +126,7 @@
                     </div>
                     <div class="similar_wrapper">
                         @foreach($similar_logos as $similar)
-                        <a href="{{ url('logos-detail/'.$similar->logo_slug) }}">
+                        <a href="{{ url('logo/'.$similar->logo_slug) }}">
                           <div class="similar_img_box">
                               <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
                           </div>

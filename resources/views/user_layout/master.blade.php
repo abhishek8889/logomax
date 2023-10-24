@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?khbkhsdfsdghgvgh')}}">
   <!-- <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}"> -->
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
+  <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/custom.css')}}">
+  
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -108,7 +110,7 @@
                             <a class="nav-link" href="{{ route('blogs') }}">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Support</a>
+                            <a class="nav-link" href="{{ route('support') }}">Support</a>
                         </li>
                     </ul>
                 </div>
@@ -136,7 +138,7 @@
                             <div class="Select-text">
                                 <div class="all-select">
                                     <div class="search">
-                                        <input type="search" name="search_field" class="form-control" value="{{ $request->search ?? '' }}" placeholder="Search for logo...">
+                                        <input type="search" name="search_field" class="form-control" value="{{ $request->search ?? '' }}" placeholder="Search logo by branch or style">
                                     </div>
                                 </div>
                                 <div class="Search-bar">

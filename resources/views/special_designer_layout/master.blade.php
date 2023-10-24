@@ -292,6 +292,7 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
            
         },
         error: function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
             html = '<div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span><button type="button" class="btn btn-primary">SELECT</button></div>';
             $('.upload-zone').html(html);
             // $(".upload-zone").load(location.href + " .upload-zone");

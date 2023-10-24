@@ -13,9 +13,272 @@
 
 </style>
 <?php 
-    $countries = [
-        'America' => "USA",
-    ];
+    $countries = array(
+        "AF" => "Afghanistan",
+        "AL" => "Albania",
+        "DZ" => "Algeria",
+        "AS" => "American Samoa",
+        "AD" => "Andorra",
+        "AO" => "Angola",
+        "AI" => "Anguilla",
+        "AQ" => "Antarctica",
+        "AG" => "Antigua and Barbuda",
+        "AR" => "Argentina",
+        "AM" => "Armenia",
+        "AW" => "Aruba",
+        "AU" => "Australia",
+        "AT" => "Austria",
+        "AZ" => "Azerbaijan",
+        "BS" => "Bahamas",
+        "BH" => "Bahrain",
+        "BD" => "Bangladesh",
+        "BB" => "Barbados",
+        "BY" => "Belarus",
+        "BE" => "Belgium",
+        "BZ" => "Belize",
+        "BJ" => "Benin",
+        "BM" => "Bermuda",
+        "BT" => "Bhutan",
+        "BO" => "Bolivia",
+        "BA" => "Bosnia and Herzegovina",
+        "BW" => "Botswana",
+        "BV" => "Bouvet Island",
+        "BR" => "Brazil",
+        "BQ" => "British Antarctic Territory",
+        "IO" => "British Indian Ocean Territory",
+        "VG" => "British Virgin Islands",
+        "BN" => "Brunei",
+        "BG" => "Bulgaria",
+        "BF" => "Burkina Faso",
+        "BI" => "Burundi",
+        "KH" => "Cambodia",
+        "CM" => "Cameroon",
+        "CA" => "Canada",
+        "CT" => "Canton and Enderbury Islands",
+        "CV" => "Cape Verde",
+        "KY" => "Cayman Islands",
+        "CF" => "Central African Republic",
+        "TD" => "Chad",
+        "CL" => "Chile",
+        "CN" => "China",
+        "CX" => "Christmas Island",
+        "CC" => "Cocos [Keeling] Islands",
+        "CO" => "Colombia",
+        "KM" => "Comoros",
+        "CG" => "Congo - Brazzaville",
+        "CD" => "Congo - Kinshasa",
+        "CK" => "Cook Islands",
+        "CR" => "Costa Rica",
+        "HR" => "Croatia",
+        "CU" => "Cuba",
+        "CY" => "Cyprus",
+        "CZ" => "Czech Republic",
+        "CI" => "Côte d’Ivoire",
+        "DK" => "Denmark",
+        "DJ" => "Djibouti",
+        "DM" => "Dominica",
+        "DO" => "Dominican Republic",
+        "NQ" => "Dronning Maud Land",
+        "DD" => "East Germany",
+        "EC" => "Ecuador",
+        "EG" => "Egypt",
+        "SV" => "El Salvador",
+        "GQ" => "Equatorial Guinea",
+        "ER" => "Eritrea",
+        "EE" => "Estonia",
+        "ET" => "Ethiopia",
+        "FK" => "Falkland Islands",
+        "FO" => "Faroe Islands",
+        "FJ" => "Fiji",
+        "FI" => "Finland",
+        "FR" => "France",
+        "GF" => "French Guiana",
+        "PF" => "French Polynesia",
+        "TF" => "French Southern Territories",
+        "FQ" => "French Southern and Antarctic Territories",
+        "GA" => "Gabon",
+        "GM" => "Gambia",
+        "GE" => "Georgia",
+        "DE" => "Germany",
+        "GH" => "Ghana",
+        "GI" => "Gibraltar",
+        "GR" => "Greece",
+        "GL" => "Greenland",
+        "GD" => "Grenada",
+        "GP" => "Guadeloupe",
+        "GU" => "Guam",
+        "GT" => "Guatemala",
+        "GG" => "Guernsey",
+        "GN" => "Guinea",
+        "GW" => "Guinea-Bissau",
+        "GY" => "Guyana",
+        "HT" => "Haiti",
+        "HM" => "Heard Island and McDonald Islands",
+        "HN" => "Honduras",
+        "HK" => "Hong Kong SAR China",
+        "HU" => "Hungary",
+        "IS" => "Iceland",
+        "IN" => "India",
+        "ID" => "Indonesia",
+        "IR" => "Iran",
+        "IQ" => "Iraq",
+        "IE" => "Ireland",
+        "IM" => "Isle of Man",
+        "IL" => "Israel",
+        "IT" => "Italy",
+        "JM" => "Jamaica",
+        "JP" => "Japan",
+        "JE" => "Jersey",
+        "JT" => "Johnston Island",
+        "JO" => "Jordan",
+        "KZ" => "Kazakhstan",
+        "KE" => "Kenya",
+        "KI" => "Kiribati",
+        "KW" => "Kuwait",
+        "KG" => "Kyrgyzstan",
+        "LA" => "Laos",
+        "LV" => "Latvia",
+        "LB" => "Lebanon",
+        "LS" => "Lesotho",
+        "LR" => "Liberia",
+        "LY" => "Libya",
+        "LI" => "Liechtenstein",
+        "LT" => "Lithuania",
+        "LU" => "Luxembourg",
+        "MO" => "Macau SAR China",
+        "MK" => "Macedonia",
+        "MG" => "Madagascar",
+        "MW" => "Malawi",
+        "MY" => "Malaysia",
+        "MV" => "Maldives",
+        "ML" => "Mali",
+        "MT" => "Malta",
+        "MH" => "Marshall Islands",
+        "MQ" => "Martinique",
+        "MR" => "Mauritania",
+        "MU" => "Mauritius",
+        "YT" => "Mayotte",
+        "FX" => "Metropolitan France",
+        "MX" => "Mexico",
+        "FM" => "Micronesia",
+        "MI" => "Midway Islands",
+        "MD" => "Moldova",
+        "MC" => "Monaco",
+        "MN" => "Mongolia",
+        "ME" => "Montenegro",
+        "MS" => "Montserrat",
+        "MA" => "Morocco",
+        "MZ" => "Mozambique",
+        "MM" => "Myanmar [Burma]",
+        "NA" => "Namibia",
+        "NR" => "Nauru",
+        "NP" => "Nepal",
+        "NL" => "Netherlands",
+        "AN" => "Netherlands Antilles",
+        "NT" => "Neutral Zone",
+        "NC" => "New Caledonia",
+        "NZ" => "New Zealand",
+        "NI" => "Nicaragua",
+        "NE" => "Niger",
+        "NG" => "Nigeria",
+        "NU" => "Niue",
+        "NF" => "Norfolk Island",
+        "KP" => "North Korea",
+        "VD" => "North Vietnam",
+        "MP" => "Northern Mariana Islands",
+        "NO" => "Norway",
+        "OM" => "Oman",
+        "PC" => "Pacific Islands Trust Territory",
+        "PK" => "Pakistan",
+        "PW" => "Palau",
+        "PS" => "Palestinian Territories",
+        "PA" => "Panama",
+        "PZ" => "Panama Canal Zone",
+        "PG" => "Papua New Guinea",
+        "PY" => "Paraguay",
+        "YD" => "People's Democratic Republic of Yemen",
+        "PE" => "Peru",
+        "PH" => "Philippines",
+        "PN" => "Pitcairn Islands",
+        "PL" => "Poland",
+        "PT" => "Portugal",
+        "PR" => "Puerto Rico",
+        "QA" => "Qatar",
+        "RO" => "Romania",
+        "RU" => "Russia",
+        "RW" => "Rwanda",
+        "RE" => "Réunion",
+        "BL" => "Saint Barthélemy",
+        "SH" => "Saint Helena",
+        "KN" => "Saint Kitts and Nevis",
+        "LC" => "Saint Lucia",
+        "MF" => "Saint Martin",
+        "PM" => "Saint Pierre and Miquelon",
+        "VC" => "Saint Vincent and the Grenadines",
+        "WS" => "Samoa",
+        "SM" => "San Marino",
+        "SA" => "Saudi Arabia",
+        "SN" => "Senegal",
+        "RS" => "Serbia",
+        "CS" => "Serbia and Montenegro",
+        "SC" => "Seychelles",
+        "SL" => "Sierra Leone",
+        "SG" => "Singapore",
+        "SK" => "Slovakia",
+        "SI" => "Slovenia",
+        "SB" => "Solomon Islands",
+        "SO" => "Somalia",
+        "ZA" => "South Africa",
+        "GS" => "South Georgia and the South Sandwich Islands",
+        "KR" => "South Korea",
+        "ES" => "Spain",
+        "LK" => "Sri Lanka",
+        "SD" => "Sudan",
+        "SR" => "Suriname",
+        "SJ" => "Svalbard and Jan Mayen",
+        "SZ" => "Swaziland",
+        "SE" => "Sweden",
+        "CH" => "Switzerland",
+        "SY" => "Syria",
+        "ST" => "São Tomé and Príncipe",
+        "TW" => "Taiwan",
+        "TJ" => "Tajikistan",
+        "TZ" => "Tanzania",
+        "TH" => "Thailand",
+        "TL" => "Timor-Leste",
+        "TG" => "Togo",
+        "TK" => "Tokelau",
+        "TO" => "Tonga",
+        "TT" => "Trinidad and Tobago",
+        "TN" => "Tunisia",
+        "TR" => "Turkey",
+        "TM" => "Turkmenistan",
+        "TC" => "Turks and Caicos Islands",
+        "TV" => "Tuvalu",
+        "UM" => "U.S. Minor Outlying Islands",
+        "PU" => "U.S. Miscellaneous Pacific Islands",
+        "VI" => "U.S. Virgin Islands",
+        "UG" => "Uganda",
+        "UA" => "Ukraine",
+        "SU" => "Union of Soviet Socialist Republics",
+        "AE" => "United Arab Emirates",
+        "GB" => "United Kingdom",
+        "US" => "United States",
+        "ZZ" => "Unknown or Invalid Region",
+        "UY" => "Uruguay",
+        "UZ" => "Uzbekistan",
+        "VU" => "Vanuatu",
+        "VA" => "Vatican City",
+        "VE" => "Venezuela",
+        "VN" => "Vietnam",
+        "WK" => "Wake Island",
+        "WF" => "Wallis and Futuna",
+        "EH" => "Western Sahara",
+        "YE" => "Yemen",
+        "ZM" => "Zambia",
+        "ZW" => "Zimbabwe",
+        "AX" => "Åland Islands",
+        );
 ?>
 
 <section class="banner-sec checkout_banner" style="background-image: url('{{ asset('logomax-front-asset/img/check_banner.png') }}');">
@@ -72,20 +335,26 @@
                             <label for="name">
                                 <span aria-hidden="true"></span>
                             </label>
-                            <input id="name" type="text" name="name" value="{{ auth()->user()->name ?? ''; }}" placeholder="Enter your name" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                            <input id="first_name" type="text" name="first_name" value="" placeholder="First name" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                        </div>
+                        <div class="mt-3 sm:mt-0 form__field">
+                            <label for="name">
+                                <span aria-hidden="true"></span>
+                            </label>
+                            <input id="name" type="text" name="last_name" value="" placeholder="Last name" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <div class="mt-3 sm:mt-0 form__field">
                             <label for="email">
                                 <span aria-hidden="true"></span>
                             </label>
-                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Enter your email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <!--  -->
                         <div class="mt-3 sm:mt-0 form__field">
                             <label for="address">
                                 <span  aria-hidden="true"></span>
                             </label>
-                            <input id="address" type="text" name="address" placeholder="Address Line" />
+                            <input id="address" type="text" name="address" placeholder="Street, number" />
                         </div>
                         
                         <div class="mt-3 form__field">
@@ -129,7 +398,7 @@
                             </div>
                             <div class="drawn_data">
                                 <p>{{ $logo->logo_name }}</p>
-                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                                <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                             </div>
                             </div>
                             <div class="additional_content">
@@ -201,7 +470,7 @@
                             </div>
                             <div class="total_data">
                                 <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                                <p>${{ $gst_cut }}</p>
+                                <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
@@ -290,7 +559,7 @@
                             </div>
                             <div class="drawn_data">
                                 <p>{{ $logo->logo_name }}</p>
-                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                                <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                             </div>
                             </div>
                             <div class="additional_content">
@@ -350,10 +619,10 @@
                                 $total_price = $logo_price + $gst_cut;
                             ?>
                             <!-- price -->
-                            <!-- <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
+                            <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
                             <input type="hidden" name="taxes" value="{{ $gst_cut }}" />
                             <input type="hidden" name="taxe_percent" value="{{ $gst_prcnt }}" />
-                            <input type="hidden" name="total_price" value="{{ $total_price }}" /> -->
+                            <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
                             <div class="total_data">
@@ -362,7 +631,7 @@
                             </div>
                             <div class="total_data">
                                 <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                                <p>${{ $gst_cut }}</p>
+                                <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
@@ -430,7 +699,7 @@
                             </div>
                             <div class="drawn_data">
                                 <p>{{ $logo->logo_name }}</p>
-                                <span><b>${{ $logo->price_for_customer }}</b></span>
+                                <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                             </div>
                             </div>
                             <div class="additional_content">
@@ -490,10 +759,10 @@
                                 $total_price = $logo_price + $gst_cut;
                             ?>
                             <!-- price -->
-                            <!-- <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
+                            <input type="hidden" name="logo_price" value="{{ $logo_price }}" />
                             <input type="hidden" name="taxes" value="{{ $gst_cut }}" />
                             <input type="hidden" name="taxe_percent" value="{{ $gst_prcnt }}" />
-                            <input type="hidden" name="total_price" value="{{ $total_price }}" /> -->
+                            <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
                             <div class="total_data">
@@ -502,7 +771,7 @@
                             </div>
                             <div class="total_data">
                                 <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                                <p>${{ $gst_cut }}</p>
+                                <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
@@ -590,32 +859,50 @@
             token.setAttribute('type', 'hidden')
             token.setAttribute('name', 'token')
             token.setAttribute('value', setupIntent.payment_method)
+
+            let payment_gateway = document.createElement('input')
+            payment_gateway.setAttribute('type','hidden')
+            payment_gateway.setAttribute('name', 'payment_gateway')
+            payment_gateway.setAttribute('value', 'stripe')
+
             form.appendChild(token)
+            form.appendChild(payment_gateway)
+
             form.submit();
             // console.log(setupIntent);
         }
     });
 
     $(".save-logo-for-future-btn").on('click',function(e){
+        // gst_cut_val
         e.preventDefault();
         let price = parseFloat($(this).attr('data-price'));
+        let logo_price_for_customer = parseFloat("{{ $logo->price_for_customer }}");
         let data_enabled = $(this).attr('data-enabled');
         let total_price = parseFloat(<?php echo $total_price; ?>);
+        let gst_prcnt = parseFloat("{{ $gst_prcnt }}");
         let favicon_enabled_status = $(".get-favicon-btn").attr('data-enabled');
         let favicon_enabled_price = parseFloat($(".get-favicon-btn").attr('data-price'));
-        console.log('favicon_enabled_status'  + favicon_enabled_status);
-        console.log('favicon_enabled_price'  + favicon_enabled_price);
-       
+        // console.log('favicon_enabled_status'  + favicon_enabled_status);
+        // console.log('favicon_enabled_price'  + favicon_enabled_price);
+        // console.log('gst prcnt is there => ' + gst_prcnt);
         // get-favicon-check save-logo-check
 
         if(data_enabled == 'false'){
             let new_total = 0;
             if(favicon_enabled_status == 'false'){
-                new_total = total_price + price;
+                prcnt_cut = ((logo_price_for_customer + price) *  gst_prcnt) / 100; 
+                // console.log(logo_price_for_customer + '<- totoal price current-> '  +  price + 'gst_prcnt_cut ' + prcnt_cut );
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+                new_total = logo_price_for_customer + price + prcnt_cut;
             }else{
-                new_total = total_price + price + favicon_enabled_price;
+                prcnt_cut = ((logo_price_for_customer + price + favicon_enabled_price) *  gst_prcnt) / 100; 
+                console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + price + favicon_enabled_price + prcnt_cut;
             }
-            console.log('new_total'+new_total);
+            // console.log('new_total'+new_total);
             $('.save-logo-for-future-btn').attr('data-enabled','true');
             $(".save-logo-future-box").html(`<p>Price for saving logo for future use</p><p>$${price}</p>`);
             $('.save-logo-for-future-btn').html('Remove');
@@ -625,9 +912,17 @@
         }else{
             let new_total = 0;
             if(favicon_enabled_status == 'false'){
-                new_total = total_price;
+                prcnt_cut = (logo_price_for_customer  *  gst_prcnt) / 100; 
+                // console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + prcnt_cut;
             }else{
-                new_total = total_price + favicon_enabled_price;
+                prcnt_cut = ((logo_price_for_customer + favicon_enabled_price)  *  gst_prcnt) / 100; 
+                // console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + favicon_enabled_price + prcnt_cut;
             }
             $('.save-logo-for-future-btn').attr('data-enabled','false');
             $(".save-logo-future-box").html('');
@@ -638,20 +933,31 @@
         }
     });
     $(".get-favicon-btn").on('click',function(e){
+        // gst_cut_val
         e.preventDefault();
         let price = parseFloat($(this).attr('data-price'));
         let data_enabled = $(this).attr('data-enabled');
         let total_price = parseFloat(<?php echo $total_price; ?>);
         let logo_future_enabled_status = $(".save-logo-for-future-btn").attr('data-enabled');
         let logo_future_enabled_price = parseFloat($(".save-logo-for-future-btn").attr('data-price'));
+        let gst_prcnt = parseFloat("{{ $gst_prcnt }}");
+        let logo_price_for_customer = parseFloat("{{ $logo->price_for_customer }}");
 
 
         if(data_enabled == 'false'){
             let new_total = 0;
             if(logo_future_enabled_status == 'false'){
-                new_total = total_price + price;
+                prcnt_cut = ((logo_price_for_customer + price) *  gst_prcnt) / 100; 
+                // console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + price + prcnt_cut;
             }else{
-                new_total = total_price + price + logo_future_enabled_price;
+                prcnt_cut = ((logo_price_for_customer + price + logo_future_enabled_price) *  gst_prcnt) / 100; 
+                // console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + price + logo_future_enabled_price + prcnt_cut;
             }
             $('.get-favicon-btn').attr('data-enabled','true');
             $(".favicon-logo-box").html(`<p>Favicon logo price</p><p>$${price}</p>`);
@@ -663,9 +969,17 @@
         }else{
             let new_total = 0;
             if(logo_future_enabled_status == 'false'){
-                new_total = total_price ;
+                prcnt_cut = (logo_price_for_customer *  gst_prcnt) / 100; 
+                // console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + prcnt_cut ;
             }else{
-                new_total = total_price + logo_future_enabled_price;
+                prcnt_cut = ((logo_price_for_customer + logo_future_enabled_price) *  gst_prcnt) / 100; 
+                // console.log(prcnt_cut);
+                $(".gst_cut_val").html(`$${prcnt_cut}`);
+
+                new_total = logo_price_for_customer + logo_future_enabled_price + prcnt_cut;
             }
             $('.get-favicon-btn').attr('data-enabled','false');
             $(".favicon-logo-box").html(``);

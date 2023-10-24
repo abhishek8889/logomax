@@ -1,14 +1,18 @@
 @extends('user_layout/master')
 @section('content')
   <!-- ================= banner section start ====================== -->
-
+<style>
+  input.form-control.search-box::placeholder {
+      font-size: 15px;
+  }
+</style>
   <section class="banner-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
     <div class="container-fluid">
       <div class="banner-content">
         <div class="Select-text">
           <div class="all-select">
             <div class="search">
-              <input type="search" class="form-control" placeholder="Search for logo...">
+              <input type="search" class="form-control search-box" placeholder="Search logo by branch or style">
             </div>
           </div>
           <div class="Search-bar">
@@ -42,7 +46,7 @@
           </h5>
         </div>
         <div class="try-btn">
-          <a class="login-btn" href="#">Try Now</a>
+          <a class="login-btn" href="{{ url('/logos-search') }}">Try Now</a>
         </div>
       </div>
     </div>
