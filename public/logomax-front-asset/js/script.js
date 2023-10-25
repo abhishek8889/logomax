@@ -941,5 +941,21 @@ $('a#confirm-password').click(function(){
     input.attr("type","password");
     $(this).removeClass('login');
   }
-  
+
 });
+
+$(document).ready(function(){
+  $(".filter-title").click(function(){
+    $(this).parent().addClass("filter_full")
+    $(".search_sec").addClass("search_open")
+    $(this).hide()
+    $(this).next(".filter-main-button").show()
+  })
+  $(".filter-collapse").click(function(){
+    $(".search_sec").removeClass("search_open")
+    $(this).parent().hide()
+    $(".filter-title").show()
+    $(this).parents(".filter-content").removeClass("filter_full")
+
+  })
+})

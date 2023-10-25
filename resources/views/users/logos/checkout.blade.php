@@ -331,7 +331,7 @@
                             <h5>Billing address</h5>
                         </div>
                         <!-- Email -->
-                        <div class="form-row form__field mt-3 sm:mt-0 mx-0">
+                        <div class="form-row form__field mt-3 sm:mt-0 ">
                             <div class="col-md-6 ">
                                 <label for="name">
                                     <span aria-hidden="true"></span>

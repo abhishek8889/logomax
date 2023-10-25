@@ -396,10 +396,12 @@ ol.breadcrumb.blog_breadcrumb {
     border: 1px solid #E3E9ED;
     background: #FFF;
     width: 100%;
-    max-width: 167px;
-    padding: 6px 14px;
+    padding: 12px 21px;
 }
 
+.button.button--action-v2.detail-panel-file-id__container >span {
+    line-height: 0px;
+}
 button.copy-asset-id__icon.js-copy-asset-id.hover-trigger {
     border: none;
     background: none;
@@ -409,7 +411,7 @@ button.copy-asset-id__icon.js-copy-asset-id.hover-trigger {
 a.asset-id-link__button {
     color: #656F79;
     font-family: "Montserrat";
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

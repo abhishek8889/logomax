@@ -46,6 +46,16 @@
                             </button>
                         </div>
                     </div>
+                    <!--  -->
+                    <div class="filter-main-button">
+                        <button class="filter-collapse">
+                            <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="">
+                            <span>
+                                Filters <span class="badge badge--blue">1</span>
+                            </span>
+                        </button>
+                    </div>
+                    <!--  -->
                     <div class="fil-slider">
                         <div class="slider-content">
                             <div class="slider-box">
@@ -153,7 +163,7 @@
                         </div>
                         <div class="row" id="logo_html_row">
                             @foreach($logos as $logo)
-                            <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <div class="logo_img">
                                    <a href="{{ url('logo/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
                                     <div class="heart_icon">
