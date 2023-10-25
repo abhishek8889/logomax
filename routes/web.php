@@ -212,6 +212,8 @@ Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::cl
 Route::get('special-designer/task-list',[TaskController::class,'taskList']);
 Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
 Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
+Route::post('special-designer/upload-icon',[TaskController::class,'uploadIcon']);
+
 Route::post('special-designer/delete-image',[TaskController::class,'deleteimage']);
 
 // Route::post('/store', [TaskController::class,'store'])->name('store');

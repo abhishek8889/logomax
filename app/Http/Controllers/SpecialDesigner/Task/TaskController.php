@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SpecialDesignerTask;
 use App\Models\Media;
+use App\Models\CompletedTask;
 
 class TaskController extends Controller
 {
@@ -47,6 +48,66 @@ class TaskController extends Controller
             }
         }else{
             return redirect()->back()->with('error','You are not able to upload any logo until your account is not approved !');
+        }
+    }
+    public function uploadIcon(Request $request){
+        $task_id = $request->task_id;
+        $assigned_task = SpecialDesignerTask::find($task_id); 
+       
+        if($request->hasFile('icon_list')){
+            $request->validate([
+                'icon_list.*' => 'required|file|mimetypes:application/postscript,image/png,image/jpeg'
+            ]);
+            $media_id = [];
+            foreach ($request->file('icon_list') as $file) {
+                // $path = $file->store('public');
+                $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
+                $filesize = getimagesize($file);
+                $filesizekb = filesize($file);
+                // echo "<pre>";
+                // echo $filesize[3];
+                // echo "</pre>";
+
+                // echo "<pre>";
+                // print_r($filesizekb);
+                // echo "</pre>";
+                // die();
+                // return ($filesizekb/1000).' KB';
+                $image_dimensions = '';
+                $image_format = '';
+                if($filesize){
+                    foreach($filesize as $ind => $v){
+                        if($ind == 3){
+                            $image_dimensions = $v;
+                        }
+                        if($ind == 'mime'){
+                            $image_format = $v;
+                        }
+                    }
+                }
+                $file->move(public_path().'/logos/', $name);
+                $media = new Media;
+                $media->image_name = $name;
+                $media->image_path = '/logos/'.$name;
+                $media->image_size = ($filesizekb/1000).' KB';
+                $media->image_dimensions =  $image_dimensions ;
+                $media->image_format = $image_format ;
+                $media->save();
+                $media_id[] = $media->id;
+            }
+            $completedTask = new CompletedTask;
+            $completedTask->task_id = $task_id;
+            $completedTask->client_id = $assigned_task->client_id;
+            $completedTask->designer_id = auth()->user()->id; // Special designer id 
+            $completedTask->logo_id = $assigned_task->logo_id;
+            $completedTask->media_id = serialize($media_id);
+            $completedTask->status =  0; // status 0 mean not approved by customer 
+            $completedTask->save();
+
+            $assigned_task->status = 1;
+            $assigned_task->update();
+           
+            return redirect()->back()->with('success','Your job is submit please wait for client approval.');
         }
     }
     public function deleteimage(Request $request){

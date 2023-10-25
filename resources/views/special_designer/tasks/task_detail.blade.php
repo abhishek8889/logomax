@@ -60,6 +60,8 @@
                                             $taskValidStatus = false;
                                         }
                                     ?>
+                                    
+                                    @if($taskDetails->status == 0)
                                     <div class="task-buttons">
                                         <a class="btn btn-danger" href="{{ url('download-file/'.$mediaObj->id) }}">Download logo</a>
                                         <?php 
@@ -74,6 +76,10 @@
                                             }
                                         ?>
                                     </div>
+                                    @elseif($taskDetails->status == 1)
+                                        <a class="btn btn-danger" href="{{ url('download-file/'.$mediaObj->id) }}">Download logo</a>
+                                        <div class="alert alert-warning mt-3">Wait for customer approval.</div>
+                                    @endif
                                 </div>
                         </div>
                     </div>
@@ -94,14 +100,18 @@
             <div class="modal-header">
                 <h5 class="modal-title">Upload Icons</h5>
             </div>
-            <form action="{{ url('special-designer/upload-process') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('special-designer/upload-icon') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="task_id" value="{{ $taskDetails->id }}"> 
                 <div class="modal-body">
                     <div class="form-file">
                         <input type="file" multiple class="form-file-input" name="icon_list[]" id="customMultipleFiles">
                         <label class="form-file-label" for="customMultipleFiles">Choose files</label>
                     </div>
                 </div>
+                @error('icon_list')
+                    {{ $message }}
+                @enderror
                 <div class="modal-footer bg-light">
                     <button class="text text-light btn btn-primary"  type="submit">Submit Job</button>
                 </div>
