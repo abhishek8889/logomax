@@ -1,7 +1,6 @@
 @extends('user_layout/master')
 @section('content')
             <?php 
-           
             if(isset($_GET['categories'])){
 
                 $filterCategories = $_GET['categories'];
@@ -237,7 +236,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                         search = ajaxRequest(searchvalue,categories,styles,tags);
             });
             $('input.category').on('change',function(){
@@ -254,7 +253,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReque = ajaxRequest(searchvalue,categories,styles,tags);
                
             
@@ -274,7 +273,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags);
 
             
@@ -298,7 +297,7 @@
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
 
                     window.history.replaceState(stateObj, 
-                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
 
                 ajax = ajaxRequest(searchvalue,categories,styles,tags);
 
