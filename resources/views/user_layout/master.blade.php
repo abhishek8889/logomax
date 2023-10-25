@@ -69,7 +69,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               @if($categories->isNotEmpty())
                                 @foreach($categories as $cat)
-                                <a class="dropdown-item" href="{{ url('logos-search?categories=%5B"'.$cat->slug.'"%5D') }}">{{ $cat->name ?? '' }}</a>
+                                <a class="dropdown-item" href="{{ url('logos/search?categories=%5B"'.$cat->slug.'"%5D') }}">{{ $cat->name ?? '' }}</a>
                                 @endforeach
                               @endif
                             </div>
@@ -91,7 +91,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               @if($styles->isNotEmpty())
                                 @foreach($styles as $style)
-                                  <a class="dropdown-item" href="{{ url('logos-search?styles=%5B"'.$style->slug.'"%5D') }}">{{ $style->name ?? '' }}</a>
+                                  <a class="dropdown-item" href="{{ url('logos/search?styles=%5B"'.$style->slug.'"%5D') }}">{{ $style->name ?? '' }}</a>
                                 @endforeach
                               @endif
                             </div>
@@ -314,7 +314,7 @@
                 
                 $('#button-addon5').click(function(){
                     val = $('input[type="search"]').val();
-                    url = '{{ url('logos-search?search=') }}'+val;
+                    url = '{{ url("logos/search?search=") }}'+val;
                     location.href = url;
                 });
             })

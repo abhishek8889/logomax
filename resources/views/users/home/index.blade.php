@@ -6,12 +6,14 @@
       font-size: 15px;
   }
 </style>
+
   <section class="banner-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
     <div class="container-fluid">
       <div class="banner-content">
         <div class="Select-text">
           <div class="all-select">
             <div class="search">
+           
               <input type="search" class="form-control search-box" placeholder="Search logo by branch or style">
             </div>
           </div>
@@ -29,7 +31,7 @@
               @foreach ($tags as $t => $tag)
               @if($t < 6)
                 <li>
-                  <a class="design-btn" href="{{ url('logos-search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
+                  <a class="design-btn" href="{{ url('logos/search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
                 </li>
               @endif
               @endforeach
@@ -46,7 +48,7 @@
           </h5>
         </div>
         <div class="try-btn">
-          <a class="login-btn" href="{{ url('/logos-search') }}">Try Now</a>
+          <a class="login-btn" href="{{ url('/logos/search') }}">Try Now</a>
         </div>
       </div>
     </div>
@@ -73,7 +75,7 @@
         @if ($categories->IsNotEmpty())
           @foreach ($categories as $category)
             <div class="img__wrapper_boxs">
-              <a href="{{ url('logos-search?categories=%5B"'.$category->slug.'"%5D') }}">
+              <a href="{{ url('logos/search?categories=%5B"'.$category->slug.'"%5D') }}">
                 <div class="img_logs">
                   <img src="{{ asset('category_images') }}/{{ $category->image ?? '' }}" alt="">
                 </div>
@@ -241,7 +243,7 @@
             @if($tags->IsNotEmpty())
               @foreach ($tags as $t => $tag)
                 <li class="{{ $t >= 10 ? 'tags-data d-none' : '' }}">
-                  <a href="{{ url('logos-search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
+                  <a href="{{ url('logos/search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
                 </li>
               @endforeach
             @else
@@ -402,8 +404,10 @@
       if(searchvalue == null || searchvalue == ""){
         return false;
       }
-      url = '{{ url('logos-search?search=') }}'+searchvalue;
-      location.href = url;
+      console.log(searchvalue);
+      url = '{{ url("/logos/search=") }}'+searchvalue;
+    
+      console.log(url);
     });
     
   });

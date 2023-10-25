@@ -15,7 +15,6 @@ class FrontLogoController extends Controller
 {
     public function index(Request $request){
         
-
         $categories = Categories::all();
         $tags = Tag::all();
         $styles = Style::where('status',1)->get();

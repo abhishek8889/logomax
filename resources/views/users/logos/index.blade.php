@@ -153,7 +153,7 @@
                         <div class="filter-btn <?php  if(!$_GET){
                echo 'd-none';
             } ?>">
-                            <a href="{{ url('logos-search') }}"><button>Clear Filters</button></a>
+                            <a href="{{ url('logos/search') }}"><button>Clear Filters</button></a>
                         </div>
                     </div>
 
@@ -191,13 +191,13 @@
                                     <a><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
                                 @else
                                 <div class="arrow-bt black">
-                                    <a href="{{ url('/logos-search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()-1 }}"><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
+                                    <a href="{{ url('/logos/?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()-1 }}"><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
                                 @endif
                                 </div>
                                 
                                 @if ($logos->hasMorePages())
                                 <div class="arrow-bt black">
-                                    <a href="{{ url('/logos-search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()+1 }}">Next Page <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a href="{{ url('/logos/search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()+1 }}">Next Page <i class="fa-solid fa-arrow-right"></i></a>
                                 @else
                                 <div class="arrow-bt">
                                     <a>Next Page <i class="fa-solid fa-arrow-right"></i></a>
@@ -237,7 +237,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                         search = ajaxRequest(searchvalue,categories,styles,tags);
             });
             $('input.category').on('change',function(){
@@ -254,7 +254,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReque = ajaxRequest(searchvalue,categories,styles,tags);
                
             
@@ -274,7 +274,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags);
 
             
@@ -298,7 +298,7 @@
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
 
                     window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "/logos/search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
 
                 ajax = ajaxRequest(searchvalue,categories,styles,tags);
 
@@ -328,7 +328,7 @@
                         $('#logo_html_row').html(append_html);
 
                         if(response['last_page'] > 1){
-                            paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos-search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
+                            paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
                             $('.next-button').html(paginationhtml);
                         }else{
                             $('.next-button').html('');

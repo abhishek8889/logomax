@@ -58,7 +58,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
 
     Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
     Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
-    Route::get('/logos-search',[FrontLogoController::class,'index']);
+    Route::get('/logos/{slug}',[FrontLogoController::class,'index']);
     Route::get('/logo/{slug}',[FrontLogoController::class,'logodetail']);
 
     Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
@@ -229,3 +229,7 @@ Route::get('/mail', function () {
 
 Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 Route::get('download-file/{media_id}',[BasicController::class,'downloadFile']);
+
+// Route::get('logos?{slug}',function(){
+//     return "hello";
+// });

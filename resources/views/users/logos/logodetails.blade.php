@@ -7,7 +7,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('logos-search') }}">Logos</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('logos/search') }}">Logos</a></li>
                         <li class="breadcrumb-item"><a > {{ $logo->logo_slug ?? '' }}</a>
                         </li>
                     </ol>
@@ -133,7 +133,7 @@
                         </a>
                         @endforeach
                         @if(count($similar_logos) == 4)
-                        <a href="{{ url('/logos-search?categories=%5B"'.$category_slug.'"%5D') }}">
+                        <a href="{{ url('/logos/search?categories=%5B"'.$category_slug.'"%5D') }}">
                           <div class="similar_img_box white">
                               <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
                           </div>
