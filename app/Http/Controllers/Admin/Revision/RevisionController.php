@@ -17,9 +17,20 @@ class RevisionController extends Controller
 {
     public function revisionRequest(Request $req){
         // return view();
-        $logo_on_revision = LogoRevision::with('logoDetail','orderDetail','customerDetail')->orderBy('created_at', 'DESC')->get();
-       
+        $logo_on_revision = LogoRevision::with('logoDetail','orderDetail','customerDetail')->where([['status','=',0],['assigned','=',0]])->orderBy('created_at', 'DESC')->get();
+        
         return view('admin.revision.revision_request',compact('logo_on_revision'));
+    }
+    public function onRevisionTask(Request $req){
+        $logo_on_revision = LogoRevision::with('logoDetail','orderDetail','customerDetail')->where([['status','=',0],['assigned','=',1]])->orderBy('created_at', 'DESC')->get();
+        
+        return view('admin.revision.on_revision',compact('logo_on_revision'));
+    }
+    public function onRevisionDetail(Request $req){
+        $revision_id = $req->revision_id;
+        // Get detail of revision logo 
+        // Get track of what work should be done here by special designer 
+        return view('admin.revision.on_revision_detail');
     }
     public function revisionRequestDetail(Request $req){
         
@@ -46,6 +57,12 @@ class RevisionController extends Controller
         $specialDesignerTask->task_duration = $req->duration_for_complete;
         $specialDesignerTask->status = 0;  // assigned or on working , 1 done but not approved by customer , 2 disapproved by customer , 3 Approved by cutomer
         $specialDesignerTask->save();
+
+        // Change assigned status in logo revision table 
+        $logoRevision = LogoRevision::find($req->revision_request_id);
+        $logoRevision->assigned = 1;
+        $logoRevision->update();
+
         /* mail to designer : */
         if($req->revision_request_id){
             $userId =  LogoRevision::with('order.user')->where('id',$req->revision_request_id)->first();
@@ -54,7 +71,6 @@ class RevisionController extends Controller
                     'msg' => 'Designer has been assigned for your logo revision.',
                     'title' => 'Logo Revision',
                 );
-
                 $mail = Mail::to($userId->order->user->email)->send(new DesignerAssignedMail($mailData));
             }
             

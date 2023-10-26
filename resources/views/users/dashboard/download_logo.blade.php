@@ -98,21 +98,46 @@
                        <div class="hand_text">
                         <h4>{{ $orderDetail->logodetail->logo_name ?? ''; }}</h4>
                        </div>
-                        <div class="cta_wrapp arrow-ct"> 
-                            <div class="load-btn">
-                                <a href="" class="download-btn">
-                                    <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
-                                    Download
-                                <i class="fa-solid fa-angle-down"></i></a>
+                        @if(empty($completedTask))
+                            <div class="cta_wrapp arrow-ct"> 
+                                <div class="load-btn">
+                                    <a href="#" class="download-btn">
+                                        <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
+                                        Download
+                                    <i class="fa-solid fa-angle-down"></i>
+                                    </a>
+                                </div>
+                                <div class="load-btn free">
+                                    <a href="{{ url('/request-for-revision/'.$orderDetail->order_num) }}" class="request-btn">Request Free Customization</a>
+                                </div>
                             </div>
-                            <div class="load-btn free">
-                                <a href="{{ url('/request-for-revision/'.$orderDetail->order_num) }}" class="request-btn">Request Free Customization</a>
+                            @if($orderDetail->on_revision == 1)
+                                <div class="alert alert-danger mt-5">
+                                    Your Logo is on revision .
+                                </div>
+                            @endif
+                        @else
+                            <div class="alert alert-success">Your revision request is done.</div>
+                            <div class="cta_wrapp arrow-ct">
+                                <div class="load-btn">
+                                    <a href="#" class="download-btn" id="download_revised_logo">
+                                        <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
+                                        Download Revised Logo
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        @if($orderDetail->logodetail->status == 2)
-                        <div class="alert alert-danger mt-5">
-                            Your Logo is on revision .
-                        </div>
+                            <div class="cta_wrapp arrow-ct"> 
+                                <div class="load-btn mr-2">
+                                    <a href="{{ url('/disapprove-logo/'.$completedTask->id) }}" class="resp_btn">
+                                        Diaspprove <i class="fa-solid fa-circle-xmark"></i>
+                                    </a>
+                                </div>
+                                <div class="load-btn free">
+                                    <a href="{{ url('/approve-logo/'.$completedTask->id) }}" class="resp_btn">
+                                        Approve <i class="fa-solid fa-check"></i>
+                                    </a>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -163,13 +188,13 @@
     });
     $(".request-btn").on('click',function(e){
         e.preventDefault();
-        @if($orderDetail->logodetail->status == 2)
+        @if($orderDetail->on_revision == 1)
                 Swal.fire({
                     icon: 'error',
                     title: 'Your logo is already on revision.',
                     footer: 'Please wait we have provide your logo as soon as possible !'
                 });
-        @elseif($orderDetail->logodetail->status == 3)
+        @else
             $("#revisionRequestModal").modal('show');
             // Send request 
             $("#send_request_btn").on('click',function(e){
@@ -211,6 +236,33 @@
                 });
             })
         @endif
+    });
+    $("#download_revised_logo").on('click',function(e){
+        e.preventDefault();
+        <?php 
+            $completedTask = App\Models\CompletedTask::class::find($completedTask->id);
+            $media = unserialize($completedTask->media_id);
+            if(!empty($media)){
+                if(is_array($media)){
+                    foreach($media as $m){
+                        $media_data = App\Models\Media::find($m);
+                        ?>
+                        $.ajax({
+                            url: "{{ url('/download-file/'.$m) }}",
+                            method: 'GET',
+                            success:function(response)
+                            {
+                                console.log(response);
+                            },
+                            error: function(response) {
+                                console.log(error);
+                            }
+                        });
+                        <?php 
+                    }
+                }
+            }
+        ?>
     });
 </script>
 @endsection

@@ -50,8 +50,11 @@ class TaskController extends Controller
             return redirect()->back()->with('error','You are not able to upload any logo until your account is not approved !');
         }
     }
+    
     public function uploadIcon(Request $request){
         $task_id = $request->task_id;
+        $order_id = $request->order_id;
+        $revision_id = $request->revision_id;
         $assigned_task = SpecialDesignerTask::find($task_id); 
        
         if($request->hasFile('icon_list')){
@@ -97,6 +100,8 @@ class TaskController extends Controller
             }
             $completedTask = new CompletedTask;
             $completedTask->task_id = $task_id;
+            $completedTask->order_id = $order_id;
+            $completedTask->revision_id = $revision_id;
             $completedTask->client_id = $assigned_task->client_id;
             $completedTask->designer_id = auth()->user()->id; // Special designer id 
             $completedTask->logo_id = $assigned_task->logo_id;

@@ -103,6 +103,8 @@
             <form action="{{ url('special-designer/upload-icon') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="task_id" value="{{ $taskDetails->id }}"> 
+                <input type="hidden" name="order_id" value="{{ $taskDetails->revisionRequestDetail->order_id }}" />
+                <input type="hidden" name="revision_id" value="{{ $taskDetails->revisionRequestDetail->id }}">
                 <div class="modal-body">
                     <div class="form-file">
                         <input type="file" multiple class="form-file-input" name="icon_list[]" id="customMultipleFiles">

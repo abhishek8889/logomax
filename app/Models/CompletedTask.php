@@ -9,4 +9,5 @@ class CompletedTask extends Model
 {
     use HasFactory;
     protected $table = 'completed_task';
+ 
 }

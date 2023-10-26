@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('logo_id');
             $table->integer('revision_time')->nullable();
             $table->integer('status')->default(0); // 0  When request on revision // 1 approved by customer 
+            $table->integer('assigned')->default(0); // 0 => not assigned , 1 => assigned to designer
             $table->timestamps();
         });
     }

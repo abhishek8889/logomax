@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('get_favicon_price')->nullable();
             $table->string('total_payment_amount');
             $table->integer('status')->default(0); // 0 if payment is not done and 1 if payment is done 
+            $table->integer('on_revision')->default(0); // 0 if order is complete done , 1 if order is on revision
             $table->timestamps();
         });
     }

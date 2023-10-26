@@ -72,7 +72,7 @@
                                     <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                         <ul class="link-list-plain">
-                                            <li><a href="{{ url('admin-dashboard/request-detail/'.$revision->id) }}">View</a></li>
+                                            <li><a href="{{ url('admin-dashboard/on-revision-detail/'.$revision->id) }}">View</a></li>
                                             <!-- <li><a href="#">Edit</a></li>
                                             <li><a href="#">Remove</a></li> -->
                                         </ul>
