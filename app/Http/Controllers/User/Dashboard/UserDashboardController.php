@@ -15,6 +15,7 @@ use App\Mail\LogoRevisionRequest;
 use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use ZipArchive;
 
 
 
@@ -121,29 +122,53 @@ class UserDashboardController extends Controller
         $directory_name = "Order_".$order_num;
         $media = unserialize($completedTask->media_id);
         // Make directory path 
-        // $directoryPath = public_path().'/download_logo_zip/'.$directory_name;
-        // // Create directory if it is not exist 
-        // if (File::isDirectory($directoryPath)) {
-        //     File::deleteDirectory($directoryPath);
-        //     File::makeDirectory($directoryPath, 0755, true);
-        // }else{
-        //     File::makeDirectory($directoryPath, 0755, true);
-        // }
-        // $media_name = array();
+        $directoryPath = public_path().'/download_logo_zip/'.$directory_name;
+        // Create directory if it is not exist 
+        if (File::isDirectory($directoryPath)) {
+            File::deleteDirectory($directoryPath);
+            File::makeDirectory($directoryPath, 0755, true);
+        }else{
+            File::makeDirectory($directoryPath, 0755, true);
+        }
+        $media_name = array();
         $media_in_response = array();
         if(!empty($media)){
+            $filePathArr = array();
             if(is_array($media)){
                 foreach($media as $m){
-                     $media_data = Media::find($m);
+                    $media_data = Media::find($m);
                     $filePath = public_path($media_data->image_path);
-
+                    $filePathArr[] = $filePath;
+                    $newImagePath = $directoryPath .'/'.$media_data->image_name;
                     if (file_exists($filePath)) {
-                        $media_in_response[] = response()->download($filePath,$media_data->image_name);
+                        File::copy($filePath, $newImagePath);
+                        // $media_in_response[] = response()->download($filePath,$media_data->image_name);
                     }
                 }
             }
+
+             // Create a zip file containing the copied images
+            $zipFileName = $directory_name.'.zip';
+            $zipFilePath = storage_path($zipFileName);
+
+            $zip = new ZipArchive;
+            if ($zip->open($zipFilePath, ZipArchive::CREATE) === true) {
+                foreach ($imagePaths as $imagePath) {
+                    $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
+                    $newImagePath = $tempDirectory . '/' . $imageName;
+                    $zip->addFile($newImagePath, $imageName);
+                }
+                $zip->close();
+            }
+        
+            // Remove the temporary directory
+            File::deleteDirectory($tempDirectory);
+        
+            // Create a downloadable response for the zip file
+            return response()->download($zipFilePath, $zipFileName)->deleteFileAfterSend(true);
+
         }
-        return response($media_in_response);
+        // return response($media_in_response);
     }
     public function approveLogo(Request $request){
         $complete_task_id = $request->complete_task_id;

@@ -120,7 +120,7 @@
                             <div class="alert alert-success">Your revision request is done.</div>
                             <div class="cta_wrapp arrow-ct">
                                 <div class="load-btn">
-                                    <a href="#" class="download-btn" id="download_revised_logo">
+                                    <a href="{{ url('/downloadProcess/'.$completedTask->id) }}" class="download-btn" id="download_revised_logo">
                                         <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
                                         Download Revised Logo
                                     </a>
@@ -236,26 +236,6 @@
                 });
             })
         @endif
-    });
-    $("#download_revised_logo").on('click',function(e){
-        e.preventDefault();
-        <?php 
-            $completedTask = App\Models\CompletedTask::class::find($completedTask->id);
-            $media = unserialize($completedTask->media_id);
-            if(!empty($media)){
-                if(is_array($media)){
-                    foreach($media as $m){
-                        $media_data = App\Models\Media::find($m);
-                        ?>
-                        $filePath = public_path($media_data->image_path);
-                        if (file_exists($filePath)) {
-                            return response()->download($filePath,$media_data->image_name);
-                        }
-                        <?php 
-                    }
-                }
-            }
-        ?>
     });
 </script>
 @endsection
