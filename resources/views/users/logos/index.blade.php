@@ -165,7 +165,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <div class="logo_img">
                                    <a href="{{ url('logo/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
-                                    <div class="heart_icon">
+                                    <div class="heart_icon add_to_wishlist" id="logo_wish_{{ $logo->id }}" logo_id="{{ $logo->id }}">
                                         <i class="fa-regular fa-heart"></i>
                                     </div>
                                 </div>
@@ -275,9 +275,6 @@
                 window.history.replaceState(stateObj, 
                         "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags);
-
-            
-           
             });
             $('input.tags').on('change',function(){
                 tagvalue = $(this).val();
@@ -321,7 +318,7 @@
 
                         append_html = [];
                         $.each(response['data'], function(key,value){
-                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon"><i class="fa-regular fa-heart"></i></div></div></div>';
+                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon id="logo_wish_'+value.id+'" logo_id="'+value.id+'"><i class="fa-regular fa-heart"></i></div></div></div>';
                             append_html.push(html);
                         })
                         $('#logo_html_row').html(append_html);
@@ -339,6 +336,15 @@
         
 
     }      
-
+    $('.add_to_wishlist').on('click',function(e){
+        e.preventDefault();
+        let logo_id = $(this).attr('logo_id');
+        let user_id = "{{ auth()->user()->id }}";
+        let url = "{{ url('add-to-wishlist') }}";
+        let objId = 'logo_wish_'+logo_id;
+        
+        addToWishlist(logo_id,user_id,url,$(this));
+        
+    });
     </script> 
 @endsection

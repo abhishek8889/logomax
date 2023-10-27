@@ -245,6 +245,8 @@ Route::get('/mail', function () {
 
 Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 Route::get('download-file/{media_id}',[BasicController::class,'downloadFile']);
+Route::post('add-to-wishlist',[BasicController::class,'addToWishlist']);
+
 
 // Route::get('logos?{slug}',function(){
 //     return "hello";

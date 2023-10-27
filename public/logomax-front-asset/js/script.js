@@ -959,3 +959,24 @@ $(document).ready(function(){
 
   })
 })
+
+function addToWishlist(logo_id , user_id,url,thisObj){
+  var csrfToken = $('meta[name="csrf-token"]').attr('content');
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: { 
+      logo_id:logo_id,
+      user_id:user_id,
+      _token:csrfToken,
+    },
+    success: function(data, status, xhr){
+      if(xhr.status == 204){
+        thisObj.html('<i class="fa-regular fa-heart"></i>');                              
+      }
+      if(xhr.status == 201){
+        thisObj.html('<i class="fa-solid fa-heart"></i>');
+      }
+    }
+  });
+}

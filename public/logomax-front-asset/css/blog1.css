@@ -423,7 +423,7 @@ a.asset-id-link__button {
     align-items: center;
     padding-top: 22px;
 }
-.file_wrapper {
+.file_wrapper:not(:last-child) {
     margin-right: 20px;
 }
 .similar-logos {
