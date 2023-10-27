@@ -247,17 +247,10 @@
                     foreach($media as $m){
                         $media_data = App\Models\Media::find($m);
                         ?>
-                        $.ajax({
-                            url: "{{ url('/download-file/'.$m) }}",
-                            method: 'GET',
-                            success:function(response)
-                            {
-                                console.log(response);
-                            },
-                            error: function(response) {
-                                console.log(error);
-                            }
-                        });
+                        $filePath = public_path($media_data->image_path);
+                        if (file_exists($filePath)) {
+                            return response()->download($filePath,$media_data->image_name);
+                        }
                         <?php 
                     }
                 }

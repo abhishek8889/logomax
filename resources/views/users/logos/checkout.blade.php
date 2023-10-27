@@ -328,9 +328,15 @@
                 <div class="custom_step_form">
                     <div class="step_form">
                         <div class="step_form_content">
-                            <h5>Billing address</h5>
+                            <h5>Contact information</h5>
                         </div>
                         <!-- Email -->
+                        <div class="mt-3 sm:mt-0 form__field">
+                            <label for="email">
+                                <span aria-hidden="true"></span>
+                            </label>
+                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                        </div>
                         <div class="form-row form__field mt-3 sm:mt-0 ">
                             <div class="col-md-6 ">
                                 <label for="name">
@@ -344,12 +350,6 @@
                                 </label>
                                 <input id="name" type="text" name="last_name" value="" placeholder="Last name"   />
                             </div>
-                        </div>
-                        <div class="mt-3 sm:mt-0 form__field">
-                            <label for="email">
-                                <span aria-hidden="true"></span>
-                            </label>
-                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <!--  -->
                         <div class="mt-3 sm:mt-0 form__field">
@@ -470,16 +470,18 @@
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
-                            <div class="total_data">
-                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                                <p class="gst_cut_val">${{ $gst_cut }}</p>
-                            </div>
+                            
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
                                 
                             </div>
                             <div class="total_data favicon-logo-box">
                                 
+                            </div>
+                            <!-- Tax -->
+                            <div class="total_data">
+                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
+                                <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- END -->
                             <div class="total_data num total_price_box">
@@ -631,16 +633,18 @@
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
-                            <div class="total_data">
-                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                                <p class="gst_cut_val">${{ $gst_cut }}</p>
-                            </div>
+                            
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
                                 
                             </div>
                             <div class="total_data favicon-logo-box">
                                 
+                            </div>
+                            <!-- Tax -->
+                            <div class="total_data">
+                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
+                                <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- END -->
                             <div class="total_data num total_price_box">
@@ -771,16 +775,18 @@
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
-                            <div class="total_data">
-                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
-                                <p class="gst_cut_val">${{ $gst_cut }}</p>
-                            </div>
+                            
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
                                 
                             </div>
                             <div class="total_data favicon-logo-box">
                                 
+                            </div>
+                            <!-- Tax -->
+                            <div class="total_data">
+                                <p>VAT/GST/Sales taxes ({{ $gst_prcnt }}%)</p>
+                                <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- END -->
                             <div class="total_data num total_price_box">
