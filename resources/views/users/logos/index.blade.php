@@ -165,6 +165,10 @@
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <div class="logo_img">
                                    <a href="{{ url('logo/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
+                                   <?php 
+                                    $wishlistItem = App\Models\Wishlist::class::where('user_id','=',auth()->user()->id);
+
+                                   ?>
                                     <div class="heart_icon add_to_wishlist" id="logo_wish_{{ $logo->id }}" logo_id="{{ $logo->id }}">
                                         <i class="fa-regular fa-heart"></i>
                                     </div>
@@ -322,14 +326,12 @@
                             append_html.push(html);
                         })
                         $('#logo_html_row').html(append_html);
-
                         if(response['last_page'] > 1){
                             paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
                             $('.next-button').html(paginationhtml);
                         }else{
                             $('.next-button').html('');
                         }
-                        
                         // console.log(re);
                     }
         });
