@@ -110,13 +110,24 @@
                         </a>
                       </div>
                     </div>
-                    <div class="file_wrapper">
+                    <?php 
+                    $wishlistItem = '';
+                    if(Auth::check()){
+                      $wishlistItem = App\Models\Wishlist::class::where([['user_id','=',auth()->user()->id],['logo_id','=',$logo->id]])->first();
+                    }
+                    ?>
+                    <div class="file_wrapper add_to_wishlist_button">
                       <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
                         <span class="copy-asset-id__icon__container container-relative">
-                          <button class="copy-asset-id__icon js-copy-asset-id hover-trigger" >
+                          <button class="copy-asset-id__icon js-copy-asset-id hover-trigger" id="favorite_box">
                               <!-- <i class="fa-regular fa-heart"></i> -->
-
-                              <i class="fa-solid fa-heart"></i>
+                              <?php
+                                  if(!empty($wishlistItem)){
+                                    ?>
+                                      <i class="fa-solid fa-heart"></i>
+                               <?php }else{?>
+                                <i class="fa-regular fa-heart"></i>
+                                <?php } ?>
                           </button>
                         </span>
                         <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
@@ -131,7 +142,6 @@
                 <div class="similar-logos">
                     <div class="similar_text">
                         <h5>Similar Logos</h5>
-
                     </div>
                     <div class="similar_wrapper">
                         @foreach($similar_logos as $similar)
@@ -276,5 +286,49 @@
       </div>
     </div>
   </section>
-
+<script>
+   $(document).on('click','.add_to_wishlist_button',function(e){
+        e.preventDefault();
+        @if(Auth::check())
+            let logo_id = "{{ $logo->id }}";
+            let user_id = "{{ auth()->user()->id }}";
+            let url = "{{ url('add-to-wishlist') }}";
+            let objId = 'logo_wish_'+logo_id;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              method: 'POST',
+              url: url,
+              data: { 
+                logo_id:logo_id,
+                user_id:user_id,
+                _token:csrfToken,
+              },
+              success: function(data, status, xhr){
+                let thisObj = $("#favorite_box");
+                if(xhr.status == 204){
+                  thisObj.html('<i class="fa-regular fa-heart"></i>');                              
+                }
+                if(xhr.status == 201){
+                  thisObj.html('<i class="fa-solid fa-heart"></i>');
+                }
+              }
+            });
+        @else
+            Swal.fire({
+                title: 'Please Login',
+                text: "You have to Login to save this in your wishlist !",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#exampleloginModal').modal('show');
+                }
+            })
+        @endif
+    });
+   
+</script>
 @endsection
