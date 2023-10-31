@@ -178,9 +178,9 @@
                             </button>
 
                             <div class="modal-body">
-                                <div class="modl-img">
+                                <!-- <div class="modl-img">
                                     <img src="{{ asset('logomax-front-asset/img/modal.png') }}" alt="" />
-                                </div>
+                                </div> -->
                                 <div class="modal-text">
                                     <div class="login-modal">
                                         <h2>Log in to Logomax</h2>

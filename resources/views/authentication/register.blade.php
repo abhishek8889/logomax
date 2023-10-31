@@ -1,6 +1,7 @@
 @extends('user_layout.master')
 @section('content')
-<div class="container-fluid">
+<section class = "popup_sec resister_pop_sec p-110">
+<div class="container">
     <div class="row">
         <div class="col-lg-6">
             <img src="{{ asset('logomax-front-asset/img/modal.png') }}" alt=""  width="100%"/>
@@ -84,6 +85,7 @@
         </div>
     </div>
 </div>
+</section>
 <script>
     var onloadCallback = function() {
     grecaptcha.execute();

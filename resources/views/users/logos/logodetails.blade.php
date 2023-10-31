@@ -15,7 +15,7 @@
             </div>
             
             <div class="logo_wrapper">
-                <div class="row custom-align">
+                <div class="row">
                     <div class="col-lg-6 col-md-12">
                         @if(isset($logo->media['image_name']))
                         <div class="vita-img">
