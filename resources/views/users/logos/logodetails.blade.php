@@ -1,6 +1,8 @@
 @extends('user_layout/master')
 @section('content')
+<style>
 
+</style>
 <section class="logo-detail-sec">
           <div class="container">
             <div class="brand-logo">
@@ -62,50 +64,28 @@
                     </div>
                 </div>
                 <div class="file_box">
-                    <div class="file_wrapper">
+                    <div class="file_wrapper" id="copy_to_clipboard" logo_unique_id="{{ $logo->logo_unique_id }}">
                       <div
                         class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
                         <span class="copy-asset-id__icon__container container-relative">
                           <button class="copy-asset-id__icon js-copy-asset-id hover-trigger">
                               <img src="{{ asset('logomax-front-asset/img/file.png') }}" alt="">
                           </button>
-                          <div class="container-absolute container-above h-align in-front margin-bottom-medium hover-container copy-asset-id__tooltip">
-                              <div class="tooltip tooltip--primary tooltip--top left-align">
-                                  <div class="text-small">
-                                      <strong class="js-copy-asset-id-tooltip">Copy 639521383</strong>
-                                  </div>
-                              </div>
-                          </div>
                         </span>
-                        <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
-                          data-ingest-clicktype="click-file-id" data-content-id="639521383"
-                          title="Go to content details page">
+                        <a class="asset-id-link__button" href="#" id="tooltip-copy-box" data-toggle="tooltip" title="Copy to clipboard!">
                           <strong class="text-up">File #:&nbsp;</strong>
-                          <span>269827623</span>
+                          <span>{{ $logo->logo_unique_id }}</span>
                         </a>
                       </div>
                     </div>
-                    <div class="file_wrapper">
+                    <div class="file_wrapper" id="find-similar-btn">
                       <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
                         <span class="copy-asset-id__icon__container container-relative">
-                            <button class="copy-asset-id__icon js-copy-asset-id hover-trigger"
-                                data-t="asset-id-copy-icon" aria-label="Copy asset id"
-                                data-ingest-content-id="639521383" data-content-id="639521383"
-                                data-ingest-clicktype="copy-asset-id">
+                            <button class="copy-asset-id__icon js-copy-asset-id hover-trigger">
                                 <img src="{{ asset('logomax-front-asset/img/camera.png') }}" alt="">
                             </button>
-                            <div
-                                class="container-absolute container-above h-align in-front margin-bottom-medium hover-container copy-asset-id__tooltip">
-                                <div class="tooltip tooltip--primary tooltip--top left-align">
-                                    <div class="text-small">
-                                        <strong class="js-copy-asset-id-tooltip">Copy 639521383</strong>
-                                    </div>
-                                </div>
-                            </div>
                         </span>
-                        <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
-                            data-ingest-clicktype="click-file-id" data-content-id="639521383"
-                            title="Go to content details page">
+                        <a class="asset-id-link__button" href="#" title="Go to content details page">
                             <span>Find Similar</span>
                         </a>
                       </div>
@@ -130,8 +110,7 @@
                                 <?php } ?>
                           </button>
                         </span>
-                        <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
-                          data-ingest-clicktype="click-file-id" data-content-id="639521383"
+                        <a class="asset-id-link__button" href="#" 
                           title="Add to favorite list">
                           <span>Add to favorites</span>
                         </a>
@@ -139,7 +118,7 @@
                     </div>
                   </div>
 
-                <div class="similar-logos">
+                <div class="similar-logos" id="similar-logo-box">
                     <div class="similar_text">
                         <h5>Similar Logos</h5>
                     </div>
@@ -330,6 +309,23 @@
             })
         @endif
     });
-   
+
+
+    $("#find-similar-btn").on('click',function(e){
+      e.preventDefault();
+      $('html, body').scrollTop($("#similar-logo-box").offset().top);
+    });
+
+    $("#copy_to_clipboard").on('click',function(e){
+      e.preventDefault();
+      let copy_text = $(this).attr('logo_unique_id');
+      navigator.clipboard.writeText(copy_text);
+      var tooltip = $("#tooltip-copy-box");
+      tooltip.attr('data-original-title',`Copied : ${copy_text}`);
+    })
+    
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
 </script>
 @endsection

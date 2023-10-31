@@ -16,9 +16,6 @@
                         <div class="form-control-wrap">
                             <input type="text" name="title" class="form-control" id="title" value="">
                         </div>
-                        @error('title')
-                            <span class="text text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -27,22 +24,23 @@
                         <div class="form-control-wrap">
                             <input type="email" name="description" class="form-control" id="description" value="">
                         </div>
-                        @error('email')
-                            <span class="text text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-label" for="logo">Select Logo</label>
                         <div class="form-control-wrap">
-                            <select name="" id="">
-                                <option value=""></option>
+                            <select name="logo_id" id="select_logo" class="form-control">
+                                @if(isset($soldLogoList))
+                                <option value="select-logo">Select Logo</option>
+                                @foreach($soldLogoList as $logo)
+                                <option value="{{ $logo->id }}">{{ $logo->logo_name }}</option>
+                                @endforeach
+                                @else
+                                <option value="no-logo">No logo is there</option>
+                                @endif
                             </select>
                         </div>
-                        @error('password')
-                            <span class="text text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                 </div>
                 <div class="form-group mt-3">

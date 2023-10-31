@@ -194,6 +194,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     
     // Reviews System 
     Route::get('/admin-dashboard/add-review',[ReviewsController::class,'addReview']);
+    Route::post('/admin-dashboard/add-review-process',[ReviewsController::class,'addReviewProcc']);
 
 
 });

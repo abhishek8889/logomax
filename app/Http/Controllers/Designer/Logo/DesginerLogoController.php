@@ -68,8 +68,9 @@ class DesginerLogoController extends Controller
                     'media_id.required' => 'Please upload your logo',
                 ]);
 
-
+                    $unique_id= echo floor(time()-999999999);
                     $logos = new Logo;
+                    $logo->
                     $logos->logo_name = $request->logo_name;
                     $logos->logo_slug = $request->logo_slug;
                     $logos->media_id = $request->media_id;

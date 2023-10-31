@@ -25,27 +25,17 @@
                                                 </a>
                                                 <div class="gallery-body card-inner align-center justify-between flex-wrap g-2">
                                                     <div class="user-card">
-                                                        <div class="user-avatar">
-                                                            
-                                                            <!-- <img src="{{ asset('admin-theme/images/avatar/a-sm.jpg') }}" alt=""> -->
-                                                        </div>
                                                         <div class="user-info" >
-                                                            <span class="lead-text">{{ $logo->userdata['name'] ?? '' }}</span>
+                                                            <span class="lead-text">({{ $logo->logo_name ?? '' }})</span>
+                                                            <span class="designer-name">{{ $logo->userdata['name'] ?? '' }}</span>
                                                             <span class="sub-text">{{ $logo->userdata['email'] ?? '' }}</span>
-                                                                <div class="user-info" >
-                                                                        <span class="lead-text">{{ $logo->logo_name ?? '' }}</span>
-                                                                        <!-- <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleviewModal{{ $logo->id ?? '' }}" style="padding:0px;">
-                                                                        View More
-                                                                        </button> -->
-                                                                        <a href="{{ url('admin-dashboard/logo-detail/'.$logo->logo_slug) }}">View More</a>
-                                                                </div>
-
+                                                            <div class="user-info mt-2" >
+                                                                <a href="{{ url('admin-dashboard/logo-detail/'.$logo->logo_slug) }}" class="view-more action-btn btn btn-primary">View More</a>
+                                                                <a href="#" class="add-review-btn action-btn btn btn-primary" logo_id="{{ $logo->id }}" >Add review</a>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="">
-                                                         <a status="{{ $logo->approved_status ?? '' }}" action="approved" data-id="{{ $logo->id ?? '' }}"  class="btn btn-primary statusbutton">Approved</a>
-                                                       <button status="{{ $logo->approved_status ?? '' }}" action="deapproved" data-id="{{ $logo->id ?? '' }}" class="btn btn-danger statusbutton">disapproved</button>
-                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -57,6 +47,50 @@
                         </div>
                     </div>
                 </div>
+                <!-- Add Review Modal -->
+                <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                         <form action="">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="title">Title</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" name="title" class="form-control" placeholder="Enter title" id="title" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="description">Description</label>
+                                    <div class="form-control-wrap">
+                                        <textarea name="description" class="form-control" id="description" value="" placeholder="Enter your review" rows = "4" ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="description">Star Rating</label>
+                                    <div class="form-control-wrap">
+                                        <input class="form-control" type="number" min="1" max="5" name="star_rating" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                         </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="submitReviewBtn">Submit Review</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review Modal End -->
                   <!-- logo deatil  modal-->
                   @forelse($logos as $logo)
                 <div class="modal fade" id="exampleviewModal{{ $logo->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,6 +139,70 @@
                 @empty
                 <h4 class="text-center">No disapproved logos found</h4>
                 @endforelse
-
+                <script>
+                    $(document).on('click','.add-review-btn',function(e){
+                        e.preventDefault();
+                        let logo_id = $(this).attr('logo_id');
+                        $("#reviewModal").modal('show');
+                        $("#submitReviewBtn").on('click',function(e){
+                            e.preventDefault();
+                            logo_id = logo_id;
+                            let title = $("input[name=title]").val();
+                            let description = $("textarea[name=description]").val();
+                            let star_rating = $("input[name=star_rating]").val();
+                            
+                            $.ajax({
+                                url: "{{ url('/admin-dashboard/add-review-process') }}",
+                                method: 'POST',
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                   "title" : title,
+                                   "description" : description,
+                                   "star_rating" : star_rating,
+                                   "logo_id" : logo_id,
+                                   "review_by" : "admin",
+                                },
+                                beforeSend: function() {
+                                    $('.spinner-container').show();
+                                },
+                                success: function(data, status, xhr){
+                                    if(xhr.status == 201){
+                                        setTimeout(()=>{
+                                        $('.spinner-container').hide();
+                                            $(".loader-box").hide();
+                                            Swal.fire(
+                                                'Review is added',
+                                                'You have added a review !',
+                                                'success'
+                                            ).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    location.reload();
+                                                }
+                                            });
+                                        }, 1000);
+                                    }else{
+                                        setTimeout(()=>{
+                                        $('.spinner-container').hide();
+                                            $(".loader-box").hide();
+                                            Swal.fire(
+                                                'Error',
+                                                'There is an error in processing.',
+                                                'error'
+                                            ).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    location.reload();
+                                                }
+                                            });
+                                        }, 1000);
+                                    }
+                                },
+                                error: function(response) {
+                                    $('.spinner-container').hide();
+                                    console.log(error);
+                                }
+                            });
+                        });
+                    })
+                </script>
                 
 @endsection
