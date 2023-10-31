@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Notifications;
 use App\Models\Logo;
 use App\Models\Media;
+use App\Models\Wishlist;
 
 
 class BasicController extends Controller
@@ -68,6 +69,30 @@ class BasicController extends Controller
             }
         }else{
             return redirect()->back()->with('error','There is some error in downloading please contact with support.');
+        }
+    }
+    public function addToWishlist(Request $request){
+        // return $request->all();
+        $user_id = $request->user_id;
+        $logo_id = $request->logo_id;
+        $wishlist_data = Wishlist::where([['user_id','=',$user_id],['logo_id','=',$logo_id]])->first();
+        if($wishlist_data){
+            $wishlist_data->delete();
+            $response = array(
+                'status' => 204,
+                'message' => 'logo remove from wishlist',
+            );
+            return response()->json($response , 204);
+        }else{
+            $wishlist = new Wishlist;
+            $wishlist->logo_id = $logo_id;
+            $wishlist->user_id = $user_id;
+            $wishlist->save();
+            $response = array(
+                'status' => 201,
+                'message' => 'logo added to wishlist',
+            );
+            return response()->json($response , 201);
         }
     }
 }

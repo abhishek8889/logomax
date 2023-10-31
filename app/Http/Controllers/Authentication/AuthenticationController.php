@@ -103,7 +103,7 @@ class AuthenticationController extends Controller
         $user->experience = $validate['experience'];
         $user->country = $validate['country'];
         $user->address = $validate['address'];
-        $user->role_id = 3;
+        $user->role_id = 2;
         $user->remember_token = $remember_token;
         $user->status = 1;
         $user->save();

@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('logo_reviews', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
             $table->string('logo_id');
-            $table->string('title');
-            $table->string('description');
-            $table->string('approved');
-            $table->string('rating');
-            $table->string('status');
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logo_reviews');
+        Schema::dropIfExists('wishlists');
     }
 };

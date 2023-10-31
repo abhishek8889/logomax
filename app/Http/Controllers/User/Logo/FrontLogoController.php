@@ -9,7 +9,7 @@ use App\Models\Tag;
 use App\Models\Logo;
 use App\Models\Style;
 use App\Models\LogoFacilities;
-
+use App\Models\Wishlist;
 
 class FrontLogoController extends Controller
 {
@@ -87,7 +87,9 @@ class FrontLogoController extends Controller
     }
     public function logoFilter(Request $request){
         // return $request->all();
-       $query = Logo::with('media')->where([['approved_status',1],['status',1]]);
+       $query = Logo::with(['media','inWhishlist' => function ($query) {
+                    $query->where('user_id', auth()->user()->id);
+                }])->where([['approved_status',1],['status',1]]);
        
        if($request->searchvalue){
         $search_lower = strtolower(str_replace(" ","-",$request->searchvalue));
@@ -132,4 +134,5 @@ class FrontLogoController extends Controller
        }
        return response()->json($query->paginate(20));
     }
+    
 }

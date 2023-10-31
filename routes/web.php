@@ -48,7 +48,7 @@ use App\Http\Controllers\SpecialDesigner\Task\TaskController;
 
 //  USER PANEL 
 Route::group(['middleware'=>['EnsureUser']],function(){
-    Route::get('test-check',[TestController::class,'index']);
+   
     //  :::::::::::::::::::::  Basic Controller ::::::::::::::::::::::::: 
 
     Route::get('/',[HomeController::class,'index'])->name('/');
@@ -245,7 +245,9 @@ Route::get('/mail', function () {
 
 Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 Route::get('download-file/{media_id}',[BasicController::class,'downloadFile']);
+Route::post('add-to-wishlist',[BasicController::class,'addToWishlist']);
 
+Route::get('test-check',[TestController::class,'index']);
 // Route::get('logos?{slug}',function(){
 //     return "hello";
 // });

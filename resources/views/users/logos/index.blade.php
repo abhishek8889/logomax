@@ -165,14 +165,29 @@
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <div class="logo_img">
                                    <a href="{{ url('logo/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
-                                    <div class="heart_icon">
-                                        <i class="fa-regular fa-heart"></i>
+                                   <?php 
+                                    if(Auth::check()){
+                                        $wishlistItem = App\Models\Wishlist::class::where('user_id','=',auth()->user()->id)->get(); 
+                                    }
+                                  ?>
+                                    <div class="heart_icon add_to_wishlist" id="logo_wish_{{ $logo->id }}" logo_id="{{ $logo->id }}">
+                                        <?php 
+                                        $logoIdsInWishlist = array();
+                                            if(isset($wishlistItem) && count($wishlistItem) > 0){
+                                                $logoIdsInWishlist = $wishlistItem->pluck('logo_id')->all();
+                                                if(in_array($logo->id,$logoIdsInWishlist)){ ?>
+                                                    <i class="fa-solid fa-heart"></i>
+                                                <?php }else{ ?>
+                                                    <i class="fa-regular fa-heart"></i>
+                                                <?php } ?>
+                                            <?php }else{?>
+                                                <i class="fa-regular fa-heart"></i>
+                                            <?php }  ?>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
-                       
                        <?php
                        $filterSearchEncoded = urlencode($filterSearch);
                        $filterCategoriesEncoded = urlencode($filterCategories);
@@ -220,7 +235,7 @@
             </div>
         </section>
           
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
       
         $(document).ready(function(){
@@ -275,9 +290,6 @@
                 window.history.replaceState(stateObj, 
                         "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags);
-
-            
-           
             });
             $('input.tags').on('change',function(){
                 tagvalue = $(this).val();
@@ -307,38 +319,75 @@
 
     function ajaxRequest(searchvalue,categories,styles,tags){
         let categoriesString = encodeURIComponent(JSON.stringify(categories));
-                let stylestring = encodeURIComponent(JSON.stringify(styles));
-                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+        let stylestring = encodeURIComponent(JSON.stringify(styles));
+        let tagsstring = encodeURIComponent(JSON.stringify(tags));
 
         $.ajax({
-                    method: 'post',
-                    url: '{{ url('logo-filter') }}',
-                    data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
-                    success: function(response){
-                        // console.table(response);
-                        // console.table(response[0]['media']);
-                        $('.filter-btn').removeClass('d-none');
-
-                        append_html = [];
-                        $.each(response['data'], function(key,value){
-                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon"><i class="fa-regular fa-heart"></i></div></div></div>';
-                            append_html.push(html);
-                        })
-                        $('#logo_html_row').html(append_html);
-
-                        if(response['last_page'] > 1){
-                            paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
-                            $('.next-button').html(paginationhtml);
-                        }else{
-                            $('.next-button').html('');
+            method: 'post',
+            url: '{{ url('logo-filter') }}',
+            data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
+            success: function(response){
+                // console.table(response);
+                // console.table(response[0]['media']);
+                $('.filter-btn').removeClass('d-none');
+                append_html = [];
+                $.each(response['data'], function(key,value){
+                    let logoIdsInWishlist = [];
+                    @if(isset($logoIdsInWishlist))
+                    logoIdsInWishlist = <?php echo json_encode($logoIdsInWishlist); ?>;
+                    @endif
+                    
+                    let heartIconClass = '';
+                    heartIconClass = 'fa-regular';
+                    $.each(logoIdsInWishlist,function(ind,val){
+                        if(value.id == val){
+                            heartIconClass = 'fa-solid';
                         }
-                        
-                        // console.log(re);
+                    });
+                    if(value.in_whishlist !== undefined && value.in_whishlist !== null){
+                        heartIconClass = 'fa-solid';
+                    }else{
+                        heartIconClass = 'fa-regular';
                     }
+                    html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon add_to_wishlist" id="logo_wish_'+value.id+'" logo_id="'+value.id+'"><i class="'+ heartIconClass +' fa-heart"></i></div></div></div>';
+                    // console.log(html);
+                    append_html.push(html);
+                })
+                $('#logo_html_row').html(append_html);
+                if(response['last_page'] > 1){
+                    paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
+                    $('.next-button').html(paginationhtml);
+                }else{
+                    $('.next-button').html('');
+                }
+            }
         });
-        
-
     }      
-
+    
+    $(document).on('click','.add_to_wishlist',function(e){
+        e.preventDefault();
+        @if(Auth::check())
+            let logo_id = $(this).attr('logo_id');
+            let user_id = "{{ auth()->user()->id }}";
+            let url = "{{ url('add-to-wishlist') }}";
+            let objId = 'logo_wish_'+logo_id;
+            addToWishlist(logo_id,user_id,url,$(this));
+        @else
+            Swal.fire({
+                title: 'Please Login',
+                text: "You have to Login to save this in your wishlist !",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#exampleloginModal').modal('show');
+                }
+            })
+        @endif
+    });
+   
     </script> 
 @endsection
