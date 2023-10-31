@@ -132,7 +132,7 @@
                         </span>
                         <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
                           data-ingest-clicktype="click-file-id" data-content-id="639521383"
-                          title="Go to content details page">
+                          title="Add to favorite list">
                           <span>Add to favorites</span>
                         </a>
                       </div>
@@ -286,6 +286,7 @@
       </div>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
    $(document).on('click','.add_to_wishlist_button',function(e){
         e.preventDefault();
