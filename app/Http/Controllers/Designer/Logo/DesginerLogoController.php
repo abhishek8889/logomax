@@ -27,7 +27,7 @@ class DesginerLogoController extends Controller
         $categories = Categories::all();
         $tags = Tag::where('status',1)->get();
         $styles = Style::where('status',1)->get();
-
+       
         return view('designer.logos.addlogos',compact('categories','tags','styles'));
     }
    
@@ -68,9 +68,9 @@ class DesginerLogoController extends Controller
                     'media_id.required' => 'Please upload your logo',
                 ]);
 
-                    $unique_id= echo floor(time()-999999999);
+                    $uniqueId = mt_rand(100000000, 999999999);
                     $logos = new Logo;
-                    $logo->
+                    $logos->logo_unique_id = $uniqueId;
                     $logos->logo_name = $request->logo_name;
                     $logos->logo_slug = $request->logo_slug;
                     $logos->media_id = $request->media_id;

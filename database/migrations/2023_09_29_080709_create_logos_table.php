@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('logos', function (Blueprint $table) {
             $table->id();
-            $table->string('logo_unique_id')->unique();
+            $table->string('logo_unique_id');
             $table->string('designer_id');
             $table->string('logo_name');
             $table->string('logo_slug');
