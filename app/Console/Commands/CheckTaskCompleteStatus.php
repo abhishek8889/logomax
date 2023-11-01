@@ -52,10 +52,28 @@ class CheckTaskCompleteStatus extends Command
                             if(count($task_backup_designer) > 0){
                                 $task->status = 4; // 4 status mean terminate job from that designer
                                 $task->update();
-                                $newAssignedDesigner = $task_backup_designer[0];
+                                /////// Check if next backup designer exist or not ?
+                                $assignedIndex = 0;
+                                $task_backup_designer = unserialize($task->backup_designer_id);
+                                /////// $newAssignedDesigner = $task_backup_designer[0];
+                                $newAssignedDesigner = '';
+
+                                foreach($task_backup_designer as $ind => $designer_id){
+                                    $user = User::find($designer_id);
+                                    if($user){
+                                        $newAssignedDesigner = $designer_id;
+                                        $assignedIndex = $ind;
+                                        break; 
+                                    }else{
+                                        unset($task_backup_designer[$ind]);
+                                        continue;
+                                    }
+                                }
                                 $newArr = $task_backup_designer;
-                                unset($newArr[0]);
+                                unset($newArr[$assignedIndex]);
                                 $newBackupDesigner = array_values($newArr);
+                                $task_duration = $task->task_duration;
+                                //                                 
                                 $newTask = new SpecialDesignerTask;
                                 $newTask->logo_revision_id = $task->logo_revision_id;
                                 $newTask->logo_id = $task->logo_id;

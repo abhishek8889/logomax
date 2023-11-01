@@ -120,7 +120,7 @@
                                             <a href="{{url('/admin-dashboard/designers-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/guests-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a>
+                                            <!-- <a href="{{--url('/admin-dashboard/guests-list')--}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a> -->
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/special-designer-list') }}" class="nk-menu-link"><span class="nk-menu-text">User List - Special Designer</span></a>

@@ -30,7 +30,10 @@ class RevisionController extends Controller
         $revision_id = $req->revision_id;
         // Get detail of revision logo 
         // Get track of what work should be done here by special designer 
-        return view('admin.revision.on_revision_detail');
+        $revisionDetail = LogoRevision::with('logoDetail','orderDetail','customerDetail','assignedTaskList.completeTask')->find($revision_id);
+        $revision_logo_id = $revisionDetail->logo_id;
+        
+        return view('admin.revision.on_revision_detail',compact('revisionDetail'));
     }
     public function revisionRequestDetail(Request $req){
         
@@ -38,7 +41,7 @@ class RevisionController extends Controller
         
         $req_id = $req->request_id;
         $revisionDetail = LogoRevision::with('logoDetail','orderDetail','customerDetail')->find($req_id);
-        // dd($revisionDetail);
+        
         return view('admin.revision.revision_request_detail',compact('revisionDetail','specialDesigners'));
     }
     public function assignToSpecialDesigner(Request $req){
