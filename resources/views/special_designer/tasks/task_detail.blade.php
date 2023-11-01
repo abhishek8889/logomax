@@ -79,6 +79,8 @@
                                     @elseif($taskDetails->status == 1)
                                         <a class="btn btn-danger" href="{{ url('download-file/'.$mediaObj->id) }}">Download logo</a>
                                         <div class="alert alert-warning mt-3">Wait for customer approval.</div>
+                                    @elseif($taskDetails->status == 4)
+                                    <div class="alert alert-danger mt-3">You have skipped this task.</div>
                                     @endif
                                 </div>
                         </div>
