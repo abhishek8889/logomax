@@ -36,11 +36,13 @@ class TestController extends Controller
         // $mail = Mail::to('abhishek@sagmetic.com')->send(new RegisterConfirmationMail($mailData));
         // $userId = auth()->user()->id;
 
-        $data = Logo::with(['inWhishlist' => function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        }])->where([['approved_status',1],['status',1]])->get();
-        dd($data);
-
+        // $data = Logo::with(['inWhishlist' => function ($query) {
+        //     $query->where('user_id', auth()->user()->id);
+        // }])->where([['approved_status',1],['status',1]])->get();
+        // dd($data);
+         $uniqueId = mt_rand(100000000, 999999999);
+       
+        dd($uniqueId);
       
         // $host_schedule = HostAppointments::where([['host_id','=',Auth::user()->_id],['questionrie_status',1]])->with('usermessages',function($response){ $response->where([['reciever_id',Auth::user()->id],['status',1]]); } )->with('answers')->orderBy('created_at','desc')->with('payments')->paginate(10);
     }
