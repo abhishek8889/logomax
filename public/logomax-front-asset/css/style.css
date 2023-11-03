@@ -1014,6 +1014,7 @@ header.header.custom-header {
     border-bottom: 1px solid #E3E9ED;
     margin-right: 30px;
     padding-left: 0px;
+    cursor: pointer;
 }
 
 .filtter-slider {
@@ -1184,6 +1185,7 @@ header.header.custom-header {
     outline: none;
     border: none;
     background: none;
+    cursor:pointer;
 }
 
 .slider-box ul {
@@ -1235,7 +1237,7 @@ a.now-btn:hover {
     border: 1px solid #E3E9ED;
     border-radius: 5px;
     margin-right: 15px;
-
+    cursor: pointer;
 }
 
 .filtr_box a {
