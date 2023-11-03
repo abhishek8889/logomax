@@ -23,7 +23,7 @@
       <div class="row">
         @if($blogs)
         @foreach($blogs as $key => $blog)
-        @if($key < 2) @if($key===0) <div class="col-md-8">
+        @if($key < 3) @if($key===0) <div class="col-md-8">
           <a class="blog_box d-block" href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">
             <div class="blog-img">
               <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
