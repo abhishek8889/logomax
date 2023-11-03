@@ -2024,6 +2024,7 @@ a.video-icon {
     transition: 0.3s;
     border: 2px solid#000;
     width: 100%;
+    cursor:pointer;
 }
 
 a {

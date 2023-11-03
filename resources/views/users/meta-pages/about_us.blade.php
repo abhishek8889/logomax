@@ -111,7 +111,7 @@
                         </p>
                     </div>
                     <div class="about_btn">
-                        <a href="">Jion Us</a>
+                        <a href="">Join Us</a>
                     </div>
                 </div>
             </div>
