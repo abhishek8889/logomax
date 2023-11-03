@@ -89,7 +89,7 @@
                                     @empty
                                     <tr>
                                         <td class="text text-danger">
-                                        No request found
+                                            No data found
                                         </td>
                                     </tr>
                                     @endforelse

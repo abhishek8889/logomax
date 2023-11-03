@@ -498,7 +498,6 @@
                 <div class="custom_step_form">
                     <div class="step_form">
                     <h5>Payment method</h5>
-                        <!-- Stripe Credit Card -->
                         <div class="pay_form_data">
                             <div class="card_wrapper">
                                 <div class="form-group">

@@ -47,7 +47,7 @@
                                                 echo "<span class='text text-dark'> Work Status :</span> <span class='badge rounded-pill bg-warning'>On Approval </span>  ";
                                                 break;
                                             case 2:
-                                                echo "<span class='text text-dark'> Work Status :</span> <span class='badge rounded-pill bg-primary'> Approved </span>";
+                                                echo "<span class='text text-dark'> Work Status :</span> <span class='badge rounded-pill bg-success'> Approved </span>";
                                                 break;
                                             case 3:
                                                 echo "<span class='text text-dark'> Work Status :</span> <span class='badge rounded-pill bg-danger'> Disapproved  </span>";

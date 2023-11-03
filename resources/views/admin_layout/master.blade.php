@@ -105,7 +105,7 @@
                                             <a href="{{ url('admin-dashboard/on-revision') }}" class="nk-menu-link"><span class="nk-menu-text">On Revision</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
+                                            <a href="{{ url('admin-dashboard/revised-logo-list') }}" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
                                         </li>
                                     </ul>
                                 </li>

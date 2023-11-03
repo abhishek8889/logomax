@@ -187,7 +187,13 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/on-revision',[RevisionController::class,'onRevisionTask']);
     Route::get('admin-dashboard/on-revision-detail/{revision_id}',[RevisionController::class,'onRevisionDetail']);
 
+    // Revised Logo 
+    Route::get('admin-dashboard/revised-logo-list',[RevisionController::class,'revisedLogoList']);
+    Route::get('admin-dashboard/revised-logo/{revision_id}',[RevisionController::class,'revisedLogoDetail']);
+
     
+   
+
 
     // :::::::::::::::::: Assign work to special designer :::::::::::::::::
     Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
@@ -226,6 +232,11 @@ Route::group(['middleware'=>['auth','Designer']],function(){
 Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::class,'index']);
 Route::get('special-designer/task-list',[TaskController::class,'taskList']);
 Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
+
+// Complete task of special designer
+Route::get('special-designer/complete-task',[TaskController::class,'completeTask']);
+
+
 Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
 Route::post('special-designer/upload-icon',[TaskController::class,'uploadIcon']);
 

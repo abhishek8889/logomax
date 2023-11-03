@@ -82,7 +82,9 @@
                         </tr>
                         @empty
                         <tr>
-                            No revision request found.
+                            <td class="text text-danger">
+                                No revision request found.
+                            </td>
                         </tr>
                         @endforelse
                     </tbody>

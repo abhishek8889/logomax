@@ -79,7 +79,7 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
                                             </a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Complete Task</span></a>
+                                            <a href="{{ url('special-designer/complete-task') }}" class="nk-menu-link"><span class="nk-menu-text">Complete Task</span></a>
                                         </li>
                                     </ul>
                                 </li>

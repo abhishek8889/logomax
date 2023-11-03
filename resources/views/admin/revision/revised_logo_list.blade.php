@@ -3,7 +3,7 @@
 <div class="nk-block nk-block-lg">
     <div class="nk-block-head d-flex justify-content-between">
         <div class="nk-block-head-content">
-            <h4 class="nk-block-title">Logo Revision Request - </h4>
+            <h4 class="nk-block-title">Revised Logo List - </h4>
         </div>
         <div>
                 <!-- Breadcrumbs::render('desingers-list') -->
@@ -64,7 +64,12 @@
                                     <span class="amount">{{ $revision->created_at }}</span>
                                 </div>
                                 <div class="tb-tnx-status">
+                                @if($revision->status == 0)
                                     <span class="badge badge-dot bg-warning">Due</span>
+                                @else
+                                    <span class="badge badge-dot bg-success">Approved</span>
+                                @endif
+                                    
                                 </div>
                             </td>
                             <td class="tb-tnx-action">
@@ -72,9 +77,7 @@
                                     <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                         <ul class="link-list-plain">
-                                            <li><a href="{{ url('admin-dashboard/on-revision-detail/'.$revision->id) }}">View</a></li>
-                                            <!-- <li><a href="#">Edit</a></li>
-                                            <li><a href="#">Remove</a></li> -->
+                                            <li><a href="{{ url('admin-dashboard/revised-logo/'.$revision->id) }}">View</a></li>
                                         </ul>
                                     </div>
                                 </div>

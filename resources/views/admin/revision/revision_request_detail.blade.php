@@ -144,9 +144,9 @@
                 $('.spinner-container').hide();
                     $(".loader-box").hide();
                     Swal.fire(
-                        'Request Sent!',
-                        'You have sent revision request succesfully !',
-                        'success'
+                        response.title,
+                        response.message,
+                        response.statusMessage,
                     ).then((result) => {
                         if (result.isConfirmed) {
                             location.reload();

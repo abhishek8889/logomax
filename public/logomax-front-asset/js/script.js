@@ -894,6 +894,16 @@ ready(function () {
 // =================
 jQuery(document).ready(function (e) {
   $(".card_wrapper").on("click", function () {
+    var otherCardWrappers = $(".card_wrapper").not(this);
+    otherCardWrappers.each(function () {
+      var cardDetail = $(this).next(".card_detail");
+      if($(this).hasClass('clicked')){
+        $(this).removeClass('clicked');
+      }
+      if (cardDetail.is(":visible")) {
+          cardDetail.slideUp();
+      }
+    });
     $(this).next(".card_detail").slideToggle();
     $(this).toggleClass("clicked");
   })

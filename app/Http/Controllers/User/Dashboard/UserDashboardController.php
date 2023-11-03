@@ -61,8 +61,8 @@ class UserDashboardController extends Controller
         $order_num = $request->order_num;
         if(Auth::check()){
             $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
-            $completeTask = CompletedTask::where([['client_id','=',auth()->user()->id],['logo_id','=',$orderDetail->logo_id],['status','=',0]])->first();
-            
+            $completeTask = CompletedTask::where([['client_id','=',auth()->user()->id],['logo_id','=',$orderDetail->logo_id]])->latest('created_at')->first();
+            // dd($completeTask);
             if($completeTask){
                 $completedTask = $completeTask; 
             }else{
@@ -84,7 +84,7 @@ class UserDashboardController extends Controller
             $orderDetail = Order::where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
             
             // Check how many days it is done to make this order if it exceeds more than 60 days then no revision is allowed.
-
+            
             $orderMakeAt = $orderDetail->created_at;
             $dateObj = Carbon::parse($orderMakeAt);
             $revisionValidUpto = $dateObj->addDays(60);
@@ -93,19 +93,24 @@ class UserDashboardController extends Controller
                 return response()->json(['status' => 403 , 'error' => "Sorry ! You can't make request for revision after 60 days."]);
             }else{
                 $logo_id = $orderDetail->logo_id;
-                // $logo = Logo::find($logo_id);
-                // $logo->status = 2 ; //  status = 2 => on revision 
-                // $logo->update(); 
+          
                 $orderDetail->on_revision = 1;
                 $orderDetail->save();
 
                 ///////////////// Send Logo Revision Request ////////////////////
 
+                /////////////////// Check previous Revision Request ////////////
+                $previousRevision = LogoRevision::where('order_id',$orderDetail->id)->get();
+                $previousRevisionCount = 0;
+                if(!empty($previousRevision) && count($previousRevision) > 0){
+                    $previousRevisionCount = count($previousRevision);
+                }
                 $logoRevision = new LogoRevision;
                 $logoRevision->order_id = $orderDetail->id;
                 $logoRevision->request_title = $request->request_title ;
                 $logoRevision->request_description = $request->request_description ;
                 $logoRevision->logo_id = $logo_id;
+                $logoRevision->revision_time = $previousRevisionCount;
                 $logoRevision->status = 0; // status 0 mean  revision request sent by user  
                 $logoRevision->save();
                 // ::::::::::::::::::  Send mail from here ::::::::::::::::: 
@@ -185,7 +190,11 @@ class UserDashboardController extends Controller
         $specialDesignerTask = SpecialDesignerTask::find($specialDesignerTaskID);
         $logoRevisionID = $specialDesignerTask->logo_revision_id;
         $logoRevision = LogoRevision::find($logoRevisionID);
+        $orderDetail = Order::find($logoRevision->order_id);
         
+        //Update order status 1 -> 0
+        $orderDetail->on_revision = 0; // O means completely done // 1 is on revision
+        $orderDetail->update(); 
 
         // Update status Complete task table 
         $completedTask->status = 1; // Approved by cutomer 
@@ -196,7 +205,7 @@ class UserDashboardController extends Controller
         $specialDesignerTask->update();
 
         // Update in Logo Revision table
-        $revision_time = $logoRevision->revision_time;
+        $revision_time = (int)$logoRevision->revision_time;
         if(empty($revision_time) || $revision_time == null || $revision_time == ''){
             $revision_time = 0 ;
         }
