@@ -2767,7 +2767,7 @@ form#progress-form [data-complete="true"] .box_studio {
 /*  */
 
 
-.login-btn.cta-register {
+.custom-header .login-btn.cta-register {
     border: 1px solid #000 !important;
 } 
 
