@@ -10,26 +10,30 @@
         <div>
         </div>
     </section>
+    <?php 
+     $recovery_token = request()->segment(count(request()->segments()));
+    ?>
     <section class="log-in p-100">
         <div class="container">
             <div class="login-content">
                 <div class="login-form">
                     <div class="login-accnt">
-                        <p>Enter your new password</p>
+                        <h3>Enter your new password</h3>
                     </div>
                     <form action="{{ url('/change-pass') }}" method="Post">
                         @csrf
+                        <input type="hidden" name="recovery_token" value="{{ $recovery_token }}">
                         <div class="mail-info">
                             <div class="form-group">
                                 <input type="password" class="form-control form-inp-box" name="new_pass" placeholder="New Password" />
                                 @error('new_pass')
-                                    <span class="text text-danger">{{ $message }}</span>
+                                    <span class="text text-danger mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control form-inp-box" name="confirm_new_pass" placeholder="Confirm New Password" />
                                 @error('confirm_new_pass')
-                                    <span class="text text-danger">{{ $message }}</span>
+                                    <span class="text text-danger mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="btm-buttn">

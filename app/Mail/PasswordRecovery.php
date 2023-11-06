@@ -16,9 +16,10 @@ class PasswordRecovery extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    protected $recovery_url;
+    public function __construct($recovery_url)
     {
-        //
+        $this->recovery_url = $recovery_url;
     }
 
     /**
@@ -33,11 +34,15 @@ class PasswordRecovery extends Mailable
 
     /**
      * Get the message content definition.
-     */
+    */
+    
     public function content(): Content
     {
         return new Content(
             view: 'Mail.recoverPassword.recover_your_pass',
+            with:[
+                'recovery_url' => $this->recovery_url,
+            ]
         );
     }
 

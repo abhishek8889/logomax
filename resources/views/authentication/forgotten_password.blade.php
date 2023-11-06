@@ -10,6 +10,7 @@
         <div>
         </div>
     </section>
+    
     <section class="log-in p-100">
         <div class="container">
             <div class="login-content">
@@ -20,6 +21,7 @@
                     </div>
                     <form action="{{ url('/send-recovery-email') }}" method="Post">
                         @csrf
+                        <input type="hidden" name="recovery_token" value="$_get">
                         <div class="mail-info">
                             <div class="form-group">
                                 <input type="Email" class="form-control form-inp-box" name="login_email" placeholder="Email" />

@@ -28,7 +28,7 @@ class AuthenticationController extends Controller
         return view('authentication.new-register',compact('request'));
     }
     public function loginprocess(Request $request){
-        
+            
             $validate = $request->validate([
                 'g-recaptcha-response' => 'required',
                 'login_email' => 'required|email',
@@ -174,7 +174,7 @@ class AuthenticationController extends Controller
     public function changePassword(Request $req){
         return view('designer.setting.change_password');
     }
-    public function changePasswordProcc(Request $req){
+    public function changePasswordProcc(Request $req){ // For designer dashboard
         
         // $validate = $req->validate([
         //     'confirm_pass' => 'required|min:6|confirmed:new_pass',
@@ -192,25 +192,48 @@ class AuthenticationController extends Controller
         }
         
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     public function forgotPassword(Request $request){
         return view('authentication.forgotten_password',compact('request'));
     }
+
     public function sendRecoveryEmail(Request $request){
         $registered_email = $request->login_email;
         $user = User::where('email',$registered_email)->first();
         if($user){
             $recovery_token = base64_encode($registered_email);
-            $recovery_url = 
-            $mail = Mail::to($registered_email)->send(new PasswordRecovery($recovery_token));
+            $recovery_url = url("/recover-your-pass/$recovery_token"); 
+            $mail = Mail::to($registered_email)->send(new PasswordRecovery($recovery_url));
             return redirect()->back()->with('success','Please check your email to recover your password.');
         }else{
             return redirect()->back()->with('error','We didn\'find this email in our system.');
         }
     }
+
     public function recoverYourPass(Request $request){
         return view('authentication.recover-password',compact('request'));
     }
+
     public function changePassProcess(Request $request){
-        return $request->all();
+        $validate = $request->validate([ 
+            'confirm_new_pass' => 'required|same:new_pass',
+        ],[
+         'confirm_new_pass.required' => 'Confirm password must be required',
+         'confirm_new_pass.same' => 'Confirm password must be match with new password',   
+        ]);
+        if(isset($request->recovery_token)){
+            $recovery_token = $request->recovery_token;
+            $user_email = base64_decode($recovery_token);
+            $user = User::where('email',$user_email)->first();
+            // Update here 
+            $user->password = Hash::make($request->confirm_new_pass);
+            $user->update();
+            return redirect('/login')->with('success','You password is updated');
+        }else{
+            return redirect('/login');
+        }
+        
     }
 }

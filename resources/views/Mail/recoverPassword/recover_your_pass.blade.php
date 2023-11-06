@@ -18,7 +18,7 @@
     <div class="nk-block container col-lg-6 ">
             <div class="card card-bordered">
                 <div class="card-inner">
-                    <h4 class="title text-soft mb-4 overline-title">Please click in the given below link to recover your password.</h4>
+                    <h4 class="title text-soft mb-4 overline-title">Recover your password</h4> 
                     <table class="email-wraper">
                         <tbody><tr>
                             <td class="py-5">
@@ -33,16 +33,10 @@
                                 <table class="email-body text-center">
                                     <tbody>
                                         <tr>
-                                            <td class="px-3 px-sm-5 pt-3 pt-sm-5 pb-4">
-                                                <img class="w-100px" src="{{ asset('admin-theme/images/email/kyc-success.png') }}" alt="Verified">
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td class="px-3 px-sm-5 pb-3 pb-sm-5">
-                                                <h5 class="text-success mb-3">Your Designer Account Verified.</h5>
-                                                <p>Hi,<span class="text-success mb-3">{{ $mailData['name']}} </span> One fo our team verified your indentity. You are now ready for upload logo on logomax.</p>
+                                                <h5 class="text-success mb-3">Please click in the given below link.</h5>
+                                                <a href="{{ $recovery_url }}">Click Here...</a>
                                             </td>
-                                            
                                         </tr>
                                     </tbody>
                                 </table>
