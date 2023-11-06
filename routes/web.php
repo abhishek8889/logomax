@@ -75,12 +75,14 @@ Route::group(['middleware'=>['EnsureUser']],function(){
   
     /** Authentications */
     // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+    Route::get('/login', [AuthenticationController::class,'loginNew']);
+    Route::get('/register', [AuthenticationController::class,'registerNew']);
 
     Route::get('/admin-login', function () {
         return view('authentication.admin_login');
     });
 
-    Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+    Route::get('/login-old', [AuthenticationController::class,'login'])->name('login');
     Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
 
@@ -91,7 +93,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('authorized/facebook',[GoogleController::class,'redirecttofacebook']);
     Route::get('authorized/facebook/callback',[GoogleController::class,'handleFacebookCallback']);
 
-    Route::get('/register', [AuthenticationController::class,'register']);
+    Route::get('/register-old', [AuthenticationController::class,'register']);
     Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
     Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
 

@@ -20,6 +20,12 @@ class AuthenticationController extends Controller
     public function login(){
         return view('authentication.login');
     }
+    public function loginNew(Request $request){
+        return view('authentication.new_login',compact('request'));
+    }
+    public function registerNew(Request $request){
+        return view('authentication.new-register',compact('request'));
+    }
     public function loginprocess(Request $request){
         
             $validate = $request->validate([

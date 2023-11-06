@@ -1,0 +1,299 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    overflow-x: hidden;
+}
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+*:focus {
+    outline: 0;
+}
+.p-100{
+	padding: 100px 0px;
+}
+section.bann-sec {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 200px 0px;
+}
+
+body{
+   color: #000;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+h2{
+	color: #000;
+font-family: Montserrat;
+font-size: 40px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.small-p{
+	color: #231F20;
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.cta {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 5px;
+    background: #000;
+    display: inline-block;
+    max-width: 100%;
+    padding: 20px 333px;
+}
+
+.login-form {
+    max-width: 924px;
+    text-align: center;
+    padding: 89px 102px;
+    border-radius: 25px;
+    background: #FFF;
+    box-shadow: 0px 24px 64px 0px rgba(0, 0, 0, 0.06);
+    margin: auto;
+}
+.log-in{
+	margin-top: -350px;
+}
+.social-links {gap: 20px;}
+
+.login-gg {
+    border: 1px solid #E3E9ED;
+    padding: 20px 123px;
+}
+.login-gg a {
+    text-decoration: none;
+}
+.login-gg a span.txt {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    /* border: 1px solid #ced4da; */
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border: 1px solid #E3E9ED;
+}
+/*.form-check-label {
+    margin-bottom: 40px;
+}*/
+.form-group.form-check {
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.login-accnt {
+    margin-bottom: 35px;
+}
+
+.continue-we {
+    margin: 30px 0px;
+}
+
+.btm-buttn {
+    margin-bottom: 35px;
+}
+::placeholder{
+	color: #656F79;
+text-align: left;
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+input[type="password"] {
+    border: none;
+    focus: none;
+    width: 90%;
+    /* padding-right: 60px; */
+}
+/*
+.input-group-addon {
+    padding-left: 65%;
+}*/
+div#show_hide_password {
+    justify-content: space-between;
+    align-items: center;
+}
+.login-accnt p {
+    margin-top: 15px;
+}
+.input-group-addon a {
+    color: #656F79;
+}
+input.form-check-input {
+    border-radius: 2px;
+    border: 1px solid #D9D9D9;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+label.form-check-label {
+    color: #828282;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+label.form-check-label p {
+    color: #828282;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+@media only screen and (max-width: 1399px) {
+   
+
+}
+
+@media only screen and (max-width: 1199px) {
+   
+
+}
+
+@media only screen and (max-width: 991px) {
+  .login-form {
+    max-width: 924px;
+    text-align: center;
+    padding: 40px 50px;
+    border-radius: 25px;
+    background: #FFF;
+    box-shadow: 0px 24px 64px 0px rgba(0, 0, 0, 0.06);
+    margin: auto;
+}
+.login-gg {
+    border: 1px solid #E3E9ED;
+    padding: 20px 100px;
+}
+.cta {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 5px;
+    background: #000;
+    display: inline-block;
+    max-width: 100%;
+    padding: 20px 268px;
+}
+}
+
+@media only screen and (max-width: 767px) {
+ h2 {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+ .login-gg {
+   padding: 16px 60px;
+}
+.cta {
+    padding: 15px 178px;
+}
+.login-accnt {
+    margin-bottom: 25px;
+}
+.form-group.form-check {
+    
+    margin-bottom: 20px;
+}
+}
+
+@media only screen and (max-width: 575px) {
+ h2 {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+body {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.login-gg {
+    border: 1px solid #E3E9ED;
+    padding: 14px 37px;
+}
+.login-form {
+    max-width: 924px;
+    text-align: center;
+    padding: 30px 25px;
+    border-radius: 25px;
+    background: #FFF;
+    box-shadow: 0px 24px 64px 0px rgba(0, 0, 0, 0.06);
+    margin: auto;
+}
+.cta {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 5px;
+    background: #000;
+    display: inline-block;
+    max-width: 100%;
+    padding: 15px 148px;
+}
+
+}
+
