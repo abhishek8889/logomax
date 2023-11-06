@@ -2753,6 +2753,21 @@ form#progress-form [data-complete="true"] .box_studio {
 .popup_sec .join-btn i {
     padding-right: 10px;
 }
+/* Shivani css */
+/* .fil-slider {
+    width: 80%;
+    padding: 0px;
+    position: absolute;
+    right: 40px;
+    top: 35%;
+}
+.filter-main-button {
+    width: 13%;
+    margin-bottom: 0.5rem;
+    display: none;
+    position: relative;
+} */
+/* End */
 
 @media screen and (max-width: 1800px) {
     .custom-header .banner-content {
@@ -4363,4 +4378,34 @@ form#progress-form [data-complete="true"] .box_studio {
     padding-right: 100px;
 }
 
+
 /*  */
+
+/* Shivani css */
+
+    
+/* 
+    @media only screen and (max-width: 991px){
+        .fil-slider {
+            width: 80%;
+            padding: 0px;
+            position: absolute;
+            right: 60px;
+            top: 48%;
+            height: 100%;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .fil-slider {
+            right: 40px;
+            }
+    }
+
+    @media only screen and (max-width: 575px) {
+        .fil-slider {
+            width: 50%;
+            position: absolute;
+            top: 75%;
+            right: 70px;
+        }
+    } */
