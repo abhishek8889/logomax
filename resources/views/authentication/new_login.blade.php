@@ -1,5 +1,10 @@
 @extends('user_layout.master')
 @section('content')
+<style>
+    .top-header li.nav-item.dropdown:before{
+        top: 18px !important;
+    }
+</style>
     <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
     <section class="bann-sec p-100" style=" background-image: url(' {{ asset('logomax-front-asset/img/login-ban.png')}} '); ">
         <div>
@@ -28,20 +33,20 @@
                         </div>
                     </div>
                     <div class="continue-we">
-                        <p class="small-p">or continue with email</p>
+                        <p class="small-p">or</p>
                     </div>
                     <form action="{{ url('/login-process') }}" method="Post">
                         @csrf
                         <div class="mail-info">
                             <div class="form-group">
-                                <input type="Email" class="form-control" name="login_email" placeholder="Email" />
+                                <input type="Email" class="form-control form-inp-box" name="login_email" placeholder="Email" />
                                 @error('login_email')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group form-control">
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="Password"  name="login_password" id="login_password" placeholder="Password" />
+                                    <input type="Password"  name="login_password" class="form-inp-box" id="login_password" placeholder="Password" />
                                     <a class="password" id="login_password"></a>
                                     @error('login_password')
                                         <span class="text text-danger">{{ $message }}</span>

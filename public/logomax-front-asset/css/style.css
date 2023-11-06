@@ -94,7 +94,8 @@ a.login-btn {
     line-height: 15px;
     color: #000000;
     text-decoration: none;
-    transition: none;
+    /* transition: none; */
+    transition: .3s ease-in-out;
 }
 
 a.login-btn.cta-btn {
@@ -1204,7 +1205,7 @@ a.now-btn {
     font-weight: 600;
     text-decoration: none;
     border: 1px solid;
-    transition: 0.5s;
+    transition: .3s ease-in-out;
 }
 
 a.now-btn:hover {
@@ -2794,7 +2795,7 @@ form#progress-form [data-complete="true"] .box_studio {
     }
 
     .content-wrapper {
-        padding: 22px 0px;
+        padding: 17px 0px;
     }
 
     h5 {

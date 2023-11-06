@@ -1,5 +1,10 @@
 @extends('user_layout.master')
 @section('content')
+<style>
+    .top-header li.nav-item.dropdown:before{
+        top: 18px !important;
+    }
+</style>
 <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
 
 <section class="bann-sec p-100" style="background-image: url('{{ asset('logomax-front-asset/img/login-ban.png') }}');">
@@ -38,7 +43,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="name" placeholder="Name" />
+                                    <input type="text" class="form-control form-inp-box" name="name" placeholder="Name" />
                                     @error('name')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -46,7 +51,7 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="Email" class="form-control" name="email" placeholder="Email" />
+                                    <input type="Email" class="form-control form-inp-box" name="email" placeholder="Email" />
                                     @error('email')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -56,7 +61,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="experience" placeholder="Experience" />
+                                    <input type="text" class="form-control form-inp-box" name="experience" placeholder="Experience" />
                                     @error('experience')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror  
@@ -64,7 +69,7 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="country" placeholder="Country" />
+                                    <input type="text" class="form-control form-inp-box" name="country" placeholder="Country" />
                                     @error('country')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -74,7 +79,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="address" placeholder="Address" />
+                                    <input type="text" class="form-control form-inp-box" name="address" placeholder="Address" />
                                     @error('address')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
@@ -85,9 +90,9 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group form-control">
                                     <div class="input-group" id="show_hide_password">
-                                        <input type="Password"  name="password" placeholder="Password" />
+                                        <input type="Password" class="form-inp-box" name="password" placeholder="Password" />
                                         <div class="input-group-addon">
-                                            <a href="#" id="registerpassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0)" id="registerpassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     @error('password')
@@ -95,13 +100,12 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group form-control">
                                     <div class="input-group" id="show_hide_password">
-                                    <input type="Password"  name="password_confirmation" placeholder="Confirm Password" />
+                                    <input type="Password" class="form-inp-box"  name="password_confirmation" placeholder="Confirm Password" />
                                         <div class="input-group-addon">
-                                            <a href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0)"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     @error('password_confirmation')
