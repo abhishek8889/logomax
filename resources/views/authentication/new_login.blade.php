@@ -1,8 +1,7 @@
 @extends('user_layout.master')
 @section('content')
-<link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
-
-<section class="bann-sec p-100" style="background-image: url('{{ asset('logomax-front-asset/img/login-ban.png')}}');">
+    <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
+    <section class="bann-sec p-100" style=" background-image: url(' {{ asset('logomax-front-asset/img/login-ban.png')}} '); ">
         <div>
         </div>
     </section>
@@ -35,7 +34,6 @@
                         @csrf
                         <div class="mail-info">
                             <div class="form-group">
-                                <!-- <input type="email" class="form-control" placeholder="Email" id="email"> -->
                                 <input type="Email" class="form-control" name="login_email" placeholder="Email" />
                                 @error('login_email')
                                     <span class="text text-danger">{{ $message }}</span>
@@ -67,7 +65,7 @@
                                 <button  type="submit" class="cta btn">Log In</button>
                             </div>
                             <div class="login-alert">
-                                <p class="small-p">Don’t you have an account? <a href="{{ url('register) }}"> <strong>Sign up</strong></a></p>
+                                <p class="small-p">Don’t you have an account? <a href="{{ url('register') }}"> <strong>Sign up</strong></a></p>
                             </div>
                         </div>
                     </form>
@@ -75,5 +73,4 @@
             </div>
         </div>
     </section>
-
 @endsection

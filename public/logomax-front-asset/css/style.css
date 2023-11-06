@@ -1676,9 +1676,7 @@ section.logo-detail-sec ol.breadcrumb {
     margin-bottom: 0;
 }
 
-.logo_wrapper.download_page .vita-img {
-    padding: 20px 100px;
-}
+
 
 .download_sec {
     padding-bottom: 120px;
@@ -2753,7 +2751,19 @@ form#progress-form [data-complete="true"] .box_studio {
 .popup_sec .join-btn i {
     padding-right: 10px;
 }
+/* raj */
+.filter-title {
+    padding: 13px 32px;
+}
 
+.filter-main-button {
+    width: 100%;
+}
+
+.filter-collapse {
+    padding: 12px 24px;
+}
+/*  */
 @media screen and (max-width: 1800px) {
     .custom-header .banner-content {
         width: 100%;
