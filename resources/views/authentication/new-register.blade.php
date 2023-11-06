@@ -1,5 +1,10 @@
 @extends('user_layout.master')
 @section('content')
+<style>
+    .top-header li.nav-item.dropdown:before{
+        top: 18px !important;
+    }
+</style>
 <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
 
 <section class="bann-sec p-100" style="background-image: url('{{ asset('logomax-front-asset/img/login-ban.png') }}');">
@@ -87,7 +92,7 @@
                                     <div class="input-group" id="show_hide_password">
                                         <input type="Password"  name="password" placeholder="Password" />
                                         <div class="input-group-addon">
-                                            <a href="#" id="registerpassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0)" id="registerpassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     @error('password')
@@ -101,7 +106,7 @@
                                     <div class="input-group" id="show_hide_password">
                                     <input type="Password"  name="password_confirmation" placeholder="Confirm Password" />
                                         <div class="input-group-addon">
-                                            <a href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0)"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     @error('password_confirmation')

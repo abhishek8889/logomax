@@ -1,8 +1,12 @@
 @extends('user_layout.master')
 @section('content')
-<link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
-
-<section class="bann-sec p-100" style="background-image: url('{{ asset('logomax-front-asset/img/login-ban.png')}}');">
+<style>
+    .top-header li.nav-item.dropdown:before{
+        top: 18px !important;
+    }
+</style>
+    <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
+    <section class="bann-sec p-100" style=" background-image: url(' {{ asset('logomax-front-asset/img/login-ban.png')}} '); ">
         <div>
         </div>
     </section>
@@ -35,7 +39,6 @@
                         @csrf
                         <div class="mail-info">
                             <div class="form-group">
-                                <!-- <input type="email" class="form-control" placeholder="Email" id="email"> -->
                                 <input type="Email" class="form-control" name="login_email" placeholder="Email" />
                                 @error('login_email')
                                     <span class="text text-danger">{{ $message }}</span>
@@ -54,7 +57,7 @@
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox"> <Span class="pl-2 mt-2">Remember me</Span>
                                     </label>
-                                    <!-- <p class="small-p">Forget Password?</p> -->
+                                    <p class="small-p"> <a href="{{ url('/account-recovery') }}"> Forget Password? </a></p>
                                 </div>
                                 <div class="form-group">
                                     <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
@@ -67,7 +70,7 @@
                                 <button  type="submit" class="cta btn">Log In</button>
                             </div>
                             <div class="login-alert">
-                                <p class="small-p">Don’t you have an account? <a href="{{ url('register) }}"> <strong>Sign up</strong></a></p>
+                                <p class="small-p">Don’t you have an account? <a href="{{ url('register') }}"> <strong>Sign up</strong></a></p>
                             </div>
                         </div>
                     </form>
@@ -75,5 +78,4 @@
             </div>
         </div>
     </section>
-
 @endsection

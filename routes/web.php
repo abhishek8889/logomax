@@ -77,6 +77,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
     Route::get('/login', [AuthenticationController::class,'loginNew']);
     Route::get('/register', [AuthenticationController::class,'registerNew']);
+    Route::get('/account-recovery', [AuthenticationController::class,'forgotPassword']);
 
     Route::get('/admin-login', function () {
         return view('authentication.admin_login');

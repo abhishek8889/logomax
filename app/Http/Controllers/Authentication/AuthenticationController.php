@@ -191,5 +191,7 @@ class AuthenticationController extends Controller
         }
         
     }
-
+    public function forgotPassword(Request $request){
+        return view('authentication.forgotten_password',compact('request'));
+    }
 }
