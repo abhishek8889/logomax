@@ -78,7 +78,11 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('/login', [AuthenticationController::class,'loginNew']);
     Route::get('/register', [AuthenticationController::class,'registerNew']);
     Route::get('/account-recovery', [AuthenticationController::class,'forgotPassword']);
-
+    Route::post('/send-recovery-email', [AuthenticationController::class,'sendRecoveryEmail']);
+    Route::get('/recover-your-pass/{token}', [AuthenticationController::class,'recoverYourPass']);
+    Route::post('/change-pass', [AuthenticationController::class,'changePassProcess']);
+    
+    
     Route::get('/admin-login', function () {
         return view('authentication.admin_login');
     });

@@ -15,24 +15,25 @@
             <div class="login-content">
                 <div class="login-form">
                     <div class="login-accnt">
-                        <!-- <h2></h2> -->
-                        <p>Enter your registered email</p>
+                        <p>Enter your new password</p>
                     </div>
-                    <form action="{{ url('/send-recovery-email') }}" method="Post">
+                    <form action="{{ url('/change-pass') }}" method="Post">
                         @csrf
                         <div class="mail-info">
                             <div class="form-group">
-                                <input type="Email" class="form-control form-inp-box" name="login_email" placeholder="Email" />
-                                @error('login_email')
+                                <input type="password" class="form-control form-inp-box" name="new_pass" placeholder="New Password" />
+                                @error('new_pass')
+                                    <span class="text text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-inp-box" name="confirm_new_pass" placeholder="Confirm New Password" />
+                                @error('confirm_new_pass')
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="btm-buttn">
-                                <button  type="submit" class="cta btn">Recover</button>
-                            </div>
-
-                            <div class="login-alert">
-                                <p class="small-p">Don’t you have an account? <a href="{{ url('register') }}"> <strong>Sign up</strong></a></p>
+                                <button  type="submit" class="cta btn">Change password</button>
                             </div>
                         </div>
                     </form>

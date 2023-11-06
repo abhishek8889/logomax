@@ -44,9 +44,9 @@
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-group form-control">
+                            <div class="form-group">
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="Password"  name="login_password" id="login_password" placeholder="Password" />
+                                    <input type="Password"  name="login_password" id="login_password" class="form-control" placeholder="Password" />
                                     <a class="password" id="login_password"></a>
                                     @error('login_password')
                                         <span class="text text-danger">{{ $message }}</span>

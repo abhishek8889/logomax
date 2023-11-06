@@ -13,6 +13,7 @@ use App\Mail\RegisterConfirmationMail;
 use App\Rules\ReCaptcha;
 use App\Events\RegisterNotificationEvent;
 use App\Models\Notifications;
+use App\Mail\PasswordRecovery;
 
 class AuthenticationController extends Controller
 {
@@ -193,5 +194,23 @@ class AuthenticationController extends Controller
     }
     public function forgotPassword(Request $request){
         return view('authentication.forgotten_password',compact('request'));
+    }
+    public function sendRecoveryEmail(Request $request){
+        $registered_email = $request->login_email;
+        $user = User::where('email',$registered_email)->first();
+        if($user){
+            $recovery_token = base64_encode($registered_email);
+            $recovery_url = 
+            $mail = Mail::to($registered_email)->send(new PasswordRecovery($recovery_token));
+            return redirect()->back()->with('success','Please check your email to recover your password.');
+        }else{
+            return redirect()->back()->with('error','We didn\'find this email in our system.');
+        }
+    }
+    public function recoverYourPass(Request $request){
+        return view('authentication.recover-password',compact('request'));
+    }
+    public function changePassProcess(Request $request){
+        return $request->all();
     }
 }

@@ -143,12 +143,12 @@ line-height: normal;
 .form-group {
     margin-bottom: 20px;
 }
-input[type="password"] {
+/* input[type="password"] {
     border: none;
     focus: none;
     width: 90%;
-    /* padding-right: 60px; */
-}
+    
+} */
 /*
 .input-group-addon {
     padding-left: 65%;
