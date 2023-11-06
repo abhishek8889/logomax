@@ -30,7 +30,7 @@
                                 @enderror
                             </div>
                             <div class="btm-buttn">
-                                <button  type="submit" class="cta btn">Recover</button>
+                                <button  type="submit" class="cta btn">Send mail</button>
                             </div>
 
                             <div class="login-alert">

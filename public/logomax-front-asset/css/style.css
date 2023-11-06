@@ -2765,6 +2765,12 @@ form#progress-form [data-complete="true"] .box_studio {
     padding: 12px 24px;
 }
 /*  */
+
+
+.login-btn.cta-register {
+    border: 1px solid #000 !important;
+} 
+
 @media screen and (max-width: 1800px) {
     .custom-header .banner-content {
         width: 100%;

@@ -95,7 +95,7 @@ line-height: normal;
     font-weight: 600;
     line-height: normal;
 }
-.form-control {
+.form-inp-box{
     display: block;
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
