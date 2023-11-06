@@ -27,6 +27,10 @@
                                     <span class="text text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="btm-buttn">
+                                <button  type="submit" class="cta btn">Recover</button>
+                            </div>
+
                             <div class="login-alert">
                                 <p class="small-p">Don’t you have an account? <a href="{{ url('register') }}"> <strong>Sign up</strong></a></p>
                             </div>
