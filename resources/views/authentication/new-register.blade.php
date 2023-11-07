@@ -90,10 +90,8 @@
                             <div class="col-lg-6 col-sm-12 col-12">
                                 <div class="form-group  ">
                                     <div class="input-group" id="show_hide_password">
-                                        <input type="Password" class="form-control form-inp-box" name="password" placeholder="Password" />
-                                        <!-- <div class="input-group-addon">
-                                            <a href="javascript:void(0)" id="registerpassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </div> -->
+                                        <input type="Password" class="form-control form-inp-box  hide_password" name="password" placeholder="Password" />
+                                        <a href="javascript:void(0)" class="password_eye"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                     </div>
                                     @error('password')
                                         <span class="text text-danger">{{ $message }}</span>
@@ -103,10 +101,8 @@
                             <div class="col-lg-6 col-sm-12 col-12">
                                 <div class="form-group ">
                                     <div class="input-group" id="show_hide_password">
-                                    <input type="Password" class="form-control form-inp-box"  name="password_confirmation" placeholder="Confirm Password" />
-                                        <!-- <div class="input-group-addon">
-                                            <a href="javascript:void(0)"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </div> -->
+                                        <input type="Password" class="form-control form-inp-box hide_password"  name="password_confirmation" placeholder="Confirm Password" />
+                                        <a href="javascript:void(0)" class="password_eye"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                     </div>
                                     @error('password_confirmation')
                                         <span class="text text-danger">{{ $message }}</span>

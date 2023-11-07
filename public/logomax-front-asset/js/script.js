@@ -924,7 +924,6 @@ $('a#login_password').click(function(){
     input.attr("type","password");
     $(this).removeClass('login');
   }
-  
 });
 
 $('a#registerpassword').click(function(){
@@ -990,3 +989,26 @@ function addToWishlist(logo_id , user_id,url,thisObj){
     }
   });
 }
+
+$(".password_eye").on('click',function(){
+  let input_password = $(this).siblings('input');
+  let eye_icon = $(this).children('i');
+  if(input_password.hasClass('hide_password')){
+    input_password.removeClass('hide_password');
+    input_password.addClass('show_password');
+    input_password.attr('type','text');
+    
+    if(eye_icon.hasClass('fa-eye-slash')){
+      eye_icon.removeClass('fa-eye-slash');
+      eye_icon.addClass('fa-eye');
+    }
+  }else{
+    input_password.removeClass('show_password');
+    input_password.addClass('hide_password');
+    input_password.attr('type','password');
+    if(eye_icon.hasClass('fa-eye')){
+      eye_icon.removeClass('fa-eye');
+      eye_icon.addClass('fa-eye-slash');
+    }
+  }
+});

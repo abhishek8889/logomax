@@ -63,8 +63,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="Password"  name="login_password" class="form-control form-inp-box" id="login_password" placeholder="Password" />
-                                    <!-- <a class="password" id="login_password"></a> -->
+                                    <input type="password"  name="login_password" class="form-control form-inp-box hide_password" id="login_password" placeholder="Password" />
+                                    <a href="javascript:void(0)" class="password_eye"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                     @error('login_password')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror

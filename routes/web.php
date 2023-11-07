@@ -26,6 +26,7 @@ use App\Http\Controllers\User\Checkout\CheckoutController;
 use App\Http\Controllers\User\Dashboard\UserDashboardController;
 use App\Http\Controllers\Admin\Revision\RevisionController;
 use App\Http\Controllers\Admin\Reviews\ReviewsController;
+use App\Http\Controllers\Admin\SiteMeta\SiteMetaController;
 
 use App\Http\Controllers\BasicController;
 
@@ -197,6 +198,11 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     // Revised Logo 
     Route::get('admin-dashboard/revised-logo-list',[RevisionController::class,'revisedLogoList']);
     Route::get('admin-dashboard/revised-logo/{revision_id}',[RevisionController::class,'revisedLogoDetail']);
+
+    //SiteMeta
+    Route::get('admin-dashboard/sitemeta/',[SiteMetaController::class,'index']);
+    Route::get('admin-dashboard/sitemeta/add/{id?}',[SiteMetaController::class,'addMeta']);
+    Route::post('admin-dashboard/sitemeta/addprocc',[SiteMetaController::class,'addProcc']);
 
     
    
