@@ -111,7 +111,17 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     //     return view('users.meta-pages.terms&conditions');
     // });
     Route::get('/terms-and-conditions', [UserDashboardController::class,'termsAndConditions']);
+
+    ///////////////////////// Simple user Dashboard Routes /////////////////////////////////
     
+        Route::get('/dashboard',[UserDashboardController::class, 'UserDashboardIndex']);
+        Route::get('/favourites',[UserDashboardController::class, 'UserFavouritelist']);
+        Route::get('/logo',[UserDashboardController::class, 'UserLogoslist']);
+        Route::get('/configuration',[UserDashboardController::class, 'UserConfiguration']);
+        Route::get('/subscriptions',[UserDashboardController::class, 'UserSubscription']);
+        Route::get('/messages',[UserDashboardController::class, 'UserMessages']);
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 });
 
 ///////////////   USER PANEL ROUTES END   //////////////////////////////////

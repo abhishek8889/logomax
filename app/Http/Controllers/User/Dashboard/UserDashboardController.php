@@ -232,4 +232,28 @@ class UserDashboardController extends Controller
     public function termsAndConditions(Request $request){
         return view('users.meta-pages.terms&conditions');
     }
+    public function userDashboardIndex(Request $req){
+        return view('user_dashboard_view.userDashboard.index');
+    }
+
+    public function UserFavouritelist(){
+        return view('user_dashboard_view.MyFavouriteList.index');
+    }
+
+    public function UserLogoslist(){
+        return view('user_dashboard_view.Mylogoslist.index');
+    }
+
+    public function UserConfiguration(){
+        return view('user_dashboard_view.configuration.index');
+    }
+
+    public function UserSubscription(){
+        return view('user_dashboard_view.subscription.index');
+    }
+
+    public function UserMessages(){
+        return view('user_dashboard_view.Message.index');
+    }
+    
 }
