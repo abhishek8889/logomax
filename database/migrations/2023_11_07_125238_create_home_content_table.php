@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('home_content', function (Blueprint $table) {
             $table->id();
+            $table->string('key');
+            $table->longText('value');
+            $table->string('type');
             $table->timestamps();
         });
     }

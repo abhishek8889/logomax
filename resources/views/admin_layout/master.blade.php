@@ -244,6 +244,19 @@
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
                                 <!-- end -->
+                                <!--  Site  content  -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Site Content</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Add Home content</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!--  -->
                             </ul>
                         </div>
                     </div>
