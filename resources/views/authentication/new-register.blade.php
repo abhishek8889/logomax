@@ -91,9 +91,9 @@
                                 <div class="form-group  ">
                                     <div class="input-group" id="show_hide_password">
                                         <input type="Password" class="form-control form-inp-box" name="password" placeholder="Password" />
-                                        <div class="input-group-addon">
+                                        <!-- <div class="input-group-addon">
                                             <a href="javascript:void(0)" id="registerpassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     @error('password')
                                         <span class="text text-danger">{{ $message }}</span>
@@ -104,9 +104,9 @@
                                 <div class="form-group ">
                                     <div class="input-group" id="show_hide_password">
                                     <input type="Password" class="form-control form-inp-box"  name="password_confirmation" placeholder="Confirm Password" />
-                                        <div class="input-group-addon">
+                                        <!-- <div class="input-group-addon">
                                             <a href="javascript:void(0)"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     @error('password_confirmation')
                                         <span class="text text-danger">{{ $message }}</span>

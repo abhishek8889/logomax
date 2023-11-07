@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <div class="input-group" id="show_hide_password">
                                     <input type="Password"  name="login_password" class="form-control form-inp-box" id="login_password" placeholder="Password" />
-                                    <a class="password" id="login_password"></a>
+                                    <!-- <a class="password" id="login_password"></a> -->
                                     @error('login_password')
                                         <span class="text text-danger">{{ $message }}</span>
                                     @enderror
