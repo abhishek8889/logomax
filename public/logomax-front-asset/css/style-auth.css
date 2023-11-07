@@ -339,7 +339,13 @@ label.form-check-label {
     align-items: baseline;
 }
 
-
+.password_eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adadad;
+}
 
 @media only screen and (max-width: 1399px) {
    
