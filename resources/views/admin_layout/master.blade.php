@@ -338,7 +338,7 @@
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
-    @if(Session::get('error'))
+@if(Session::get('error'))
 <script>
     toastr.clear();
     NioApp.Toast('{{ Session::get("error") }}', 'error', {position: 'top-right'});
