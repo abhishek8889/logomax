@@ -51,47 +51,6 @@
                     <div class="vita-img">
                         <img src="{{ $image_url }}" alt="{{ $image_name }}">
                     </div>
-                    <div class="file_box">
-                        <div class="file_wrapper">
-                           <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
-                               <span class="copy-asset-id__icon__container container-relative">
-                                   <button class="copy-asset-id__icon js-copy-asset-id hover-trigger" data-t="asset-id-copy-icon" aria-label="Copy asset id" data-ingest-content-id="639521383" data-content-id="639521383" data-ingest-clicktype="copy-asset-id">
-                                      <img src="{{ asset('logomax-front-asset/img/file.png') }}" alt="">
-                                   </button>
-                                   <div class="container-absolute container-above h-align in-front margin-bottom-medium hover-container copy-asset-id__tooltip">
-                                       <div class="tooltip tooltip--primary tooltip--top left-align">
-                                           <div class="text-small">
-                                               <strong class="js-copy-asset-id-tooltip">Copy 639521383</strong>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </span>
-                               <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id" data-ingest-clicktype="click-file-id" data-content-id="639521383" title="Go to content details page">
-                                   <strong class="text-up">File #:&nbsp;</strong>
-                                   <span>269827623</span>
-                               </a>
-                           </div>
-                       </div>
-                       <div class="file_wrapper">
-                           <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
-                               <span class="copy-asset-id__icon__container container-relative">
-                                   <button class="copy-asset-id__icon js-copy-asset-id hover-trigger" data-t="asset-id-copy-icon" aria-label="Copy asset id" data-ingest-content-id="639521383" data-content-id="639521383" data-ingest-clicktype="copy-asset-id">
-                                      <img src="{{ asset('logomax-front-asset/img/camera.png') }}" alt="">
-                                   </button>
-                                   <div class="container-absolute container-above h-align in-front margin-bottom-medium hover-container copy-asset-id__tooltip">
-                                       <div class="tooltip tooltip--primary tooltip--top left-align">
-                                           <div class="text-small">
-                                               <strong class="js-copy-asset-id-tooltip">Copy 639521383</strong>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </span>
-                               <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id" data-ingest-clicktype="click-file-id" data-content-id="639521383" title="Go to content details page">
-                                   <span>Find Similar</span>
-                               </a>
-                           </div>
-                       </div>
-                    </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="template_data">
@@ -117,27 +76,41 @@
                                 </div>
                             @endif
                         @else
-                            <div class="alert alert-success">Your revision request is done.</div>
-                            <div class="cta_wrapp arrow-ct">
-                                <div class="load-btn">
-                                    <a href="{{ url('/downloadProcess/'.$completedTask->id) }}" class="download-btn" id="download_revised_logo">
-                                        <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
-                                        Download Revised Logo
-                                    </a>
+                            @if($completedTask->status == 0)
+                                <div class="alert alert-success">Your revision request is done.</div>
+                                <div class="cta_wrapp arrow-ct">
+                                    <div class="load-btn">
+                                        <a href="{{ url('/downloadProcess/'.$completedTask->id) }}" class="download-btn" id="download_revised_logo">
+                                            <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
+                                            Download Revised Logo
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="cta_wrapp arrow-ct"> 
-                                <div class="load-btn mr-2">
-                                    <a href="{{ url('/disapprove-logo/'.$completedTask->id) }}" class="resp_btn">
-                                        Diaspprove <i class="fa-solid fa-circle-xmark"></i>
-                                    </a>
+                                <div class="cta_wrapp arrow-ct"> 
+                                    <div class="load-btn mr-2">
+                                        <a href="{{ url('/disapprove-logo/'.$completedTask->id) }}" class="resp_btn">
+                                            Diaspprove <i class="fa-solid fa-circle-xmark"></i>
+                                        </a>
+                                    </div>
+                                    <div class="load-btn free">
+                                        <a href="{{ url('/approve-logo/'.$completedTask->id) }}" class="resp_btn">
+                                            Approve <i class="fa-solid fa-check"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="load-btn free">
-                                    <a href="{{ url('/approve-logo/'.$completedTask->id) }}" class="resp_btn">
-                                        Approve <i class="fa-solid fa-check"></i>
-                                    </a>
+                            @elseif($completedTask->status == 1)
+                                <div class="cta_wrapp arrow-ct"> 
+                                    <div class="load-btn">
+                                        <a href="{{ url('/downloadProcess/'.$completedTask->id) }}" class="download-btn" id="download_revised_logo">
+                                            <img src="{{ asset('logomax-front-asset/img/download.svg') }}" alt="">
+                                            Download
+                                        </a>
+                                    </div>
+                                    <div class="load-btn free">
+                                        <a href="{{ url('/request-for-revision/'.$orderDetail->order_num) }}" class="request-btn">Request Free Customization</a>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         @endif
                     </div>
                 </div>

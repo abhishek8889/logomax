@@ -140,6 +140,7 @@
                 <h4 class="text-center">No disapproved logos found</h4>
                 @endforelse
                 <script>
+                    let count = 0 ; 
                     $(document).on('click','.add-review-btn',function(e){
                         e.preventDefault();
                         let logo_id = $(this).attr('logo_id');
@@ -150,57 +151,63 @@
                             let title = $("input[name=title]").val();
                             let description = $("textarea[name=description]").val();
                             let star_rating = $("input[name=star_rating]").val();
-                            
-                            $.ajax({
-                                url: "{{ url('/admin-dashboard/add-review-process') }}",
-                                method: 'POST',
-                                data: {
+                            let dataSent = false;
+                            if((title !== '' || title !== undefined || title !== null) && (description !== '' || description !== undefined) && (star_rating !== '' || star_rating !== undefined) && (star_rating !== '' || star_rating !== undefined)){
+                                dataSent = true;
+                            }
+                            if(dataSent == true && count < 1){
+                                count = count + 1;
+                                $.ajax({
+                                    url: "{{ url('/admin-dashboard/add-review-process') }}",
+                                    method: 'POST',
+                                    data: {
                                     "_token": "{{ csrf_token() }}",
-                                   "title" : title,
-                                   "description" : description,
-                                   "star_rating" : star_rating,
-                                   "logo_id" : logo_id,
-                                   "review_by" : "admin",
-                                },
-                                beforeSend: function() {
-                                    $('.spinner-container').show();
-                                },
-                                success: function(data, status, xhr){
-                                    if(xhr.status == 201){
-                                        setTimeout(()=>{
+                                    "title" : title,
+                                    "description" : description,
+                                    "star_rating" : star_rating,
+                                    "logo_id" : logo_id,
+                                    "review_by" : "admin",
+                                    },
+                                    beforeSend: function() {
+                                        $('.spinner-container').show();
+                                    },
+                                    success: function(data, status, xhr){
+                                        if(xhr.status == 201){
+                                            setTimeout(()=>{
+                                            $('.spinner-container').hide();
+                                                $(".loader-box").hide();
+                                                Swal.fire(
+                                                    'Review is added',
+                                                    'You have added a review !',
+                                                    'success'
+                                                ).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        location.reload();
+                                                    }
+                                                });
+                                            }, 1000);
+                                        }else{
+                                            setTimeout(()=>{
+                                            $('.spinner-container').hide();
+                                                $(".loader-box").hide();
+                                                Swal.fire(
+                                                    'Error',
+                                                    'There is an error in processing.',
+                                                    'error'
+                                                ).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        location.reload();
+                                                    }
+                                                });
+                                            }, 1000);
+                                        }
+                                    },
+                                    error: function(response) {
                                         $('.spinner-container').hide();
-                                            $(".loader-box").hide();
-                                            Swal.fire(
-                                                'Review is added',
-                                                'You have added a review !',
-                                                'success'
-                                            ).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    location.reload();
-                                                }
-                                            });
-                                        }, 1000);
-                                    }else{
-                                        setTimeout(()=>{
-                                        $('.spinner-container').hide();
-                                            $(".loader-box").hide();
-                                            Swal.fire(
-                                                'Error',
-                                                'There is an error in processing.',
-                                                'error'
-                                            ).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    location.reload();
-                                                }
-                                            });
-                                        }, 1000);
+                                        console.log(error);
                                     }
-                                },
-                                error: function(response) {
-                                    $('.spinner-container').hide();
-                                    console.log(error);
-                                }
-                            });
+                                });
+                            }
                         });
                     })
                 </script>

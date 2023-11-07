@@ -21,40 +21,51 @@
     </div>
     <div class="blog-img-box">
       <div class="row">
-        @if($blogs)
-        @foreach($blogs as $key => $blog)
-        @if($key < 2) @if($key===0) <div class="col-md-8">
-          <a class="blog_box d-block" href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">
+        @if(isset($blogs[0])) 
+          <?php  $blog = $blogs[0]; ?>
+          <div class="col-md-8">
+            
             <div class="blog-img">
               <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
-            </div>
-            <div class="content">
-              <div class="blog-dummy-text">
-                <h2>{{ $blog->title ?? '' }}</h2>
-                <div class="Read-More-btn">
-                  <button class="read-btn" href="javascript-void(0)">Read More</button>
+              <div class="content">
+                <div class="blog-dummy-text">
+                  <h2>{{ $blog->title ?? '' }}</h2>
+                  <div class="Read-More-btn">
+                    <a href="#" class="read-btn">Read More</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </a>
-      </div>
-      @else
-      <div class="col-md-4">
-        <a class="blog_box d-block" href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">
-          <div class="group-img-{{ $key ?? '1' }}">
-            <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
-            <div class="passage-text">
-              <p>{{ $blog->title ?? '' }}</p>
-            </div>
           </div>
-        </a>
+        @endif
+        @if(isset($blogs[1]) || isset($blogs[2]))
+          <div class="col-md-4">
+            @if(isset($blogs[1]))
+            <?php $blog = $blogs[1]; ?>
+              <a class="blog_box d-block" href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">
+                <div class="group-img-{{ $key ?? '1' }}">
+                  <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
+                  <div class="passage-text">
+                    <p>{{ $blog->title ?? '' }}</p>
+                  </div>
+                </div>
+              </a>
+            @endif
+            @if(isset($blogs[2]))
+            <?php $blog = $blogs[2]; ?>
+              <a class="blog_box d-block" href="{{ url('blogs-details/' . ($blog->slug ?? '')) }}">
+                <div class="group-img-{{ $key ?? '2' }}">
+                  <img src="{{ asset('blog_images') }}/{{ $blog->banner_img ?? '' }}" alt="">
+                  <div class="passage-text">
+                    <p>{{ $blog->title ?? '' }}</p>
+                  </div>
+                </div>
+              </a>
+            @endif
+          </div>
+        @endif
       </div>
-      @endif
-      @endif
-      @endforeach
-      @endif
     </div>
-  </div>
   </div>
 </section>
 

@@ -377,8 +377,8 @@
                             </label>
                             <input id="zip" type="text" name="zip_code" placeholder="Zip / Postal Code" />
                         </div>
-                        <div class="form-group">
-                            <select name="country" id="country">
+                        <div class="form-group" >
+                            <select name="country" id="country" style="cursor:pointer;">
                                 @foreach($countries as $k => $v)
                                 <option value="{{$k}}">{{ $v }}</option>
                                 @endforeach
@@ -498,7 +498,6 @@
                 <div class="custom_step_form">
                     <div class="step_form">
                     <h5>Payment method</h5>
-                        <!-- Stripe Credit Card -->
                         <div class="pay_form_data">
                             <div class="card_wrapper">
                                 <div class="form-group">
@@ -667,9 +666,9 @@
                             <!-- <h6>Billing Address</h6>
                             <p>80191 Blaise Street Apt. 110 Boganland, Arkansas USA 893804</p> -->
                         </div>
-                        <div class="bill-icon">
+                        <!-- <div class="bill-icon">
                             <i class="fa-solid fa-pen"></i>
-                        </div>
+                        </div> -->
                         </div>
                         <div class="billing_wrapper">
                         <div class="billing_text" id="payment_method_box">
@@ -679,9 +678,9 @@
                             </div>
                             <p>Visa card ending in 1234</p>
                         </div>
-                        <div class="bill-icon">
+                        <!-- <div class="bill-icon">
                             <i class="fa-solid fa-pen"></i>
-                        </div>
+                        </div> -->
                         </div>
                     </div>
                     <div>

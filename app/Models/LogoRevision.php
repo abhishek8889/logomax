@@ -21,4 +21,8 @@ class LogoRevision extends Model
     {
         return $this->belongsTo(Order::class, 'order_id', 'id');
     }
+    public function assignedTaskList(){
+        return $this->hasMany(SpecialDesignerTask::class,'logo_revision_id','id');
+    }
+    
 }

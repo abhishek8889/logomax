@@ -28,7 +28,6 @@
                                                 <span>Logo Name</span>
                                             </span>
                                             <span class="tb-tnx-date d-md-inline-block d-none">
-                                                <span class="d-md-none">Date</span>
                                                 <span class="d-none d-md-block">
                                                     <span>Change Title</span>
                                                 </span>
@@ -48,45 +47,50 @@
                                         $count = 0;
                                     ?>
                                     @forelse ($taskList as $task)
-                                    <?php 
-                                    $count = $count + 1;
-                                    ?>
-                                    <tr class="tb-tnx-item">
-                                        <td class="tb-tnx-id">
-                                            <a href="#"><span>{{ $count }}</span></a>
-                                        </td>
-                                        <td class="tb-tnx-info">
-                                            <div class="tb-tnx-desc">
-                                                <span class="title">{{ $task->logoDetail->logo_name }}</span>
-                                            </div>
-                                            <div class="tb-tnx-date">
-                                                <span class="date"><strong>{{ $task->revisionRequestDetail->request_title }}</strong></span>
-                                            </div>
-                                        </td>
-                                        <td class="tb-tnx-amount is-alt">
-                                            <div class="tb-tnx-total">
-                                                <!-- <span class="amount">adsf</span> -->
-                                            </div>
-                                            <div class="tb-tnx-status">
-                                                <span class="badge badge-dot bg-warning">Due</span>
-                                            </div>
-                                        </td>
-                                        <td class="tb-tnx-action">
-                                            <div class="dropdown">
-                                                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                    <ul class="link-list-plain">
-                                                        <li><a href="{{ url('special-designer/task-detail/'.$task->id) }}">View</a></li>
-                                                        <!-- <li><a href="#">Edit</a></li>
-                                                        <li><a href="#">Remove</a></li> -->
-                                                    </ul>
+                                    @if(!empty($task->logoDetail) && !empty($task->revisionRequestDetail))
+                                        <?php 
+                                        $count = $count + 1;
+                                        ?>
+
+                                        <tr class="tb-tnx-item">
+                                            <td class="tb-tnx-id">
+                                                <a href="#"><span>{{ $count }}</span></a>
+                                            </td>
+                                            <td class="tb-tnx-info">
+                                                <div class="tb-tnx-desc">
+                                                    <span class="title">{{ $task->logoDetail->logo_name }}</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                <div class="tb-tnx-date">
+                                                    <span class="date"><strong>{{ $task->revisionRequestDetail->request_title }}</strong></span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-amount is-alt">
+                                                <div class="tb-tnx-total">
+                                                    <span class="amount">{{ $task->created_at }}</span>
+                                                </div>
+                                                <div class="tb-tnx-status">
+                                                    <span class="badge badge-dot bg-warning">Due</span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-action">
+                                                <div class="dropdown">
+                                                    <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                        <ul class="link-list-plain">
+                                                            <li><a href="{{ url('special-designer/task-detail/'.$task->id) }}">View</a></li>
+                                                            <!-- <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Remove</a></li> -->
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     @empty
                                     <tr>
-                                        No data found
+                                        <td class="text text-danger">
+                                        No request found
+                                        </td>
                                     </tr>
                                     @endforelse
                                 </tbody>

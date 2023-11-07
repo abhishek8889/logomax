@@ -79,9 +79,7 @@ class UsersController extends Controller
 
     public function simpleuser(){
         $users = User::where([
-            ['role_id', '=', 1],
-            ['email_verified', '=', 1],
-            ['status', '=', 1],
+            ['role_id', '=', 1]
         ])->get();
         return view('admin.users.simpleuser.index',compact('users'));
     }

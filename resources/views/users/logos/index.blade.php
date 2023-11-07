@@ -1,5 +1,30 @@
 @extends('user_layout/master')
 @section('content')
+<style>
+    .new_div {
+        width: 20%;
+        max-width: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #E3E9ED;
+        margin-right: 30px;
+        padding-left: 0px;
+        cursor: pointer;
+    }
+
+    .new_div.filter_full {
+        width: 15%;
+        border: none;
+    }
+
+    .filtter-button {
+        float: right;
+    }
+    .filter-title {
+        width: 100%;
+    }
+</style>
             <?php 
             if(isset($_GET['categories'])){
 
@@ -34,6 +59,7 @@
 <section class="filter-sec">
             <div class="container-fluid">
                 <div class="filter-content">
+                    <div class="new_div ">
                     <div class="filter-title">
                         <div class="filter-img">
                             <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="" />
@@ -53,6 +79,7 @@
                                 Filters <span class="badge badge--blue">1</span>
                             </span>
                         </button>
+                    </div>
                     </div>
                     <!--  -->
                     <div class="fil-slider">

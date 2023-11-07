@@ -12,10 +12,18 @@ use App\Models\LogoRevision;
 use App\Models\Logo;
 use App\Models\Media;
 use App\Mail\LogoRevisionRequest;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use App\Models\Notifications;
+use App\Events\SpecialDesignerNotification;
+
+use App\Mail\DesignerAssignedMail;
 use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
+
+
 
 
 
@@ -53,8 +61,8 @@ class UserDashboardController extends Controller
         $order_num = $request->order_num;
         if(Auth::check()){
             $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
-            $completeTask = CompletedTask::where([['client_id','=',auth()->user()->id],['logo_id','=',$orderDetail->logo_id],['status','=',0]])->first();
-            
+            $completeTask = CompletedTask::where([['client_id','=',auth()->user()->id],['logo_id','=',$orderDetail->logo_id]])->latest('created_at')->first();
+            // dd($completeTask);
             if($completeTask){
                 $completedTask = $completeTask; 
             }else{
@@ -76,7 +84,7 @@ class UserDashboardController extends Controller
             $orderDetail = Order::where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
             
             // Check how many days it is done to make this order if it exceeds more than 60 days then no revision is allowed.
-
+            
             $orderMakeAt = $orderDetail->created_at;
             $dateObj = Carbon::parse($orderMakeAt);
             $revisionValidUpto = $dateObj->addDays(60);
@@ -85,19 +93,24 @@ class UserDashboardController extends Controller
                 return response()->json(['status' => 403 , 'error' => "Sorry ! You can't make request for revision after 60 days."]);
             }else{
                 $logo_id = $orderDetail->logo_id;
-                // $logo = Logo::find($logo_id);
-                // $logo->status = 2 ; //  status = 2 => on revision 
-                // $logo->update(); 
+          
                 $orderDetail->on_revision = 1;
                 $orderDetail->save();
 
                 ///////////////// Send Logo Revision Request ////////////////////
 
+                /////////////////// Check previous Revision Request ////////////
+                $previousRevision = LogoRevision::where('order_id',$orderDetail->id)->get();
+                $previousRevisionCount = 0;
+                if(!empty($previousRevision) && count($previousRevision) > 0){
+                    $previousRevisionCount = count($previousRevision);
+                }
                 $logoRevision = new LogoRevision;
                 $logoRevision->order_id = $orderDetail->id;
                 $logoRevision->request_title = $request->request_title ;
                 $logoRevision->request_description = $request->request_description ;
                 $logoRevision->logo_id = $logo_id;
+                $logoRevision->revision_time = $previousRevisionCount;
                 $logoRevision->status = 0; // status 0 mean  revision request sent by user  
                 $logoRevision->save();
                 // ::::::::::::::::::  Send mail from here ::::::::::::::::: 
@@ -177,7 +190,11 @@ class UserDashboardController extends Controller
         $specialDesignerTask = SpecialDesignerTask::find($specialDesignerTaskID);
         $logoRevisionID = $specialDesignerTask->logo_revision_id;
         $logoRevision = LogoRevision::find($logoRevisionID);
+        $orderDetail = Order::find($logoRevision->order_id);
         
+        //Update order status 1 -> 0
+        $orderDetail->on_revision = 0; // O means completely done // 1 is on revision
+        $orderDetail->update(); 
 
         // Update status Complete task table 
         $completedTask->status = 1; // Approved by cutomer 
@@ -188,7 +205,7 @@ class UserDashboardController extends Controller
         $specialDesignerTask->update();
 
         // Update in Logo Revision table
-        $revision_time = $logoRevision->revision_time;
+        $revision_time = (int)$logoRevision->revision_time;
         if(empty($revision_time) || $revision_time == null || $revision_time == ''){
             $revision_time = 0 ;
         }
@@ -201,34 +218,82 @@ class UserDashboardController extends Controller
         // dd($logoRevision);
     }
     public function disapproveLogo(Request $request){
-        // $complete_task_id = $request->complete_task_id;
-        // $completedTask = CompletedTask::find($complete_task_id);
-        // $specialDesignerTaskID =  $completedTask->task_id;
-        // $specialDesignerTask = SpecialDesignerTask::find($specialDesignerTaskID);
-        // $logoRevisionID = $specialDesignerTask->logo_revision_id;
-        // $logoRevision = LogoRevision::find($logoRevisionID);
+        
+        $complete_task_id = $request->complete_task_id;
+        $completedTask = CompletedTask::find($complete_task_id);
+        $specialDesignerTaskID =  $completedTask->task_id;
+        $specialDesignerTask = SpecialDesignerTask::find($specialDesignerTaskID);
+        $logoRevisionID = $specialDesignerTask->logo_revision_id;
+        $logoRevision = LogoRevision::find($logoRevisionID);
 
         // // Update status Complete task table 
-        // $completedTask->status = 1; // Approved by cutomer 
-        // $completedTask->update();
+        $completedTask->status = 2; // Not Approved by cutomer 
+        $completedTask->update();
 
         // // Update status in special designer task
-        // $specialDesignerTask->status = 2; // Approved by customer 
-        // $specialDesignerTask->update();
+        $specialDesignerTask->status = 3; // Not Approved by customer 
+        $specialDesignerTask->update();
+        $assignedIndex = 0;
+        $task_backup_designer = unserialize($specialDesignerTask->backup_designer_id);
+        // $newAssignedDesigner = $task_backup_designer[0];
+        $newAssignedDesigner = '';
 
-        // // Update in Logo Revision table
-        // $revision_time = $logoRevision->revision_time;
-        // if(empty($revision_time) || $revision_time == null || $revision_time == ''){
-        //     $revision_time = 0 ;
-        // }
-        // $revision_time = $revision_time + 1 ;
-        // $logoRevision->revision_time = $revision_time;
-        // $logoRevision->status = 1;
-        // $logoRevision->update();
+        foreach($task_backup_designer as $ind => $designer_id){
+            $user = User::find($designer_id);
+            if($user){
+                $newAssignedDesigner = $designer_id;
+                $assignedIndex = $ind;
+                break; 
+            }else{
+                unset($task_backup_designer[$ind]);
+                continue;
+            }
+        }
 
+        $newArr = $task_backup_designer;
+        unset($newArr[$assignedIndex]);
+        $newBackupDesigner = array_values($newArr);
+        $task_duration = $specialDesignerTask->task_duration;
 
-        // return redirect()->back()->with('success','You have disapproved these changes.');
+        // Assign task to new designer 
+        $newTask = new SpecialDesignerTask;
+        $newTask->logo_revision_id = $logoRevisionID;
+        $newTask->logo_id = $specialDesignerTask->logo_id;
+        $newTask->client_id = $specialDesignerTask->client_id;
+        $newTask->assigned_designer_id = $newAssignedDesigner;
+        $newTask->backup_designer_id = serialize($newBackupDesigner);
+        $newTask->task_duration = $task_duration;
+        $newTask->status = 0;
+        $newTask->save();
+        $mailData = array(
+            'msg' => ' You have new logo for revision please check your dashboard. ',
+            'title' => 'New logo Revision request',
+        );
+        $user = User::find($newAssignedDesigner);
+        $mail = Mail::to($user->email)->send(new DesignerAssignedMail($mailData));
+
+        /* try to send notification to assigned designer : */
+
+        $notifications = Notifications::create(array(
+            'type' => 'designer-aproved-for-logo',
+            'sender_id' => '0',
+            'reciever_id' => $newAssignedDesigner,
+            'designer_id' => $newAssignedDesigner,
+            'logo_id' => $specialDesignerTask->logo_id,
+            'message' => 'You have new task for <span>logo revision </span>.'
+        )); 
+        $eventData = array(
+            'type' => 'designer-aproved-for-logo',
+            'designer_id' => $newAssignedDesigner,
+            'notification_id' => $notifications->id,
+            'logo_id' => $specialDesignerTask->logo_id,
+            'read_url' => url('read-notification/'.$notifications->id),
+            'message' => 'You have new task for <span>logo revision </span>.'
+        );
+        event(new SpecialDesignerNotification($eventData));
+        return redirect()->back()->with('success','You have disapproved these changes.');
     }
+   
     public function termsAndConditions(Request $request){
         return view('users.meta-pages.terms&conditions');
     }

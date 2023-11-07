@@ -1,0 +1,136 @@
+/*@media only screen and (min-width: 1600px) {
+    .container {
+        max-width: 1440px;
+    }
+}*/
+
+@media only screen and (max-width: 1399px) {
+   span.ms-1.d-none.d-sm-inline {
+    font-size: 16px;
+}
+h4 {
+   font-size: 35px;
+}
+
+}
+
+@media only screen and (max-width: 1199px) {
+   .scrollbar {
+    height: 310px;
+    
+}
+
+}
+
+@media only screen and (max-width: 991px) {
+  .tbl-d {
+    gap: 20px;
+}
+p {
+    font-size: 15px;
+    line-height: 1.4;
+}
+.table thead th {
+    vertical-align: top;
+
+}
+td.tble-ryt-text {
+    padding-right: 41px;
+    padding-top: 22px;
+}
+body {
+    font-size: 16px;
+    line-height: 1.4;
+}
+/*.dash-ryt-row {
+    flex-direction: column;
+    width: 100%;
+}*/
+h4 {
+    font-size: 29px;
+}
+.navbar-nav {
+   display: flex;
+     /* flex-direction: column; */
+   gap: 15px;
+}
+.dash-ryt-content {
+    margin-top: 30px;
+}
+}
+
+@media only screen and (max-width: 767px) {
+   .dash-ryt-content {
+    margin-top: 30px;
+}
+.recently-chat {
+    padding: 0;
+  
+}
+h4 {
+    font-size: 24px;
+}
+.dash-ryt-row {
+    flex-direction: column;
+}
+.collapse:not(.show) {
+    display: flex;
+    flex-direction: column-reverse;
+}
+}
+
+@media only screen and (max-width: 575px) {
+   td.tble-ryt-text {
+    padding-right: 0;
+    padding-top: 0;
+}
+.footer .ftr-content {
+    /* justify-content: space-between; */
+    align-items: center;
+    background: #FFF;
+    padding: 20px 45px;
+    flex-direction: column-reverse;
+}
+.table {
+    width: 90%;
+    margin-bottom: 0;
+    color: #212529;
+    padding: 0;
+    margin: auto;
+}
+.d-flex.phn-tabs.flex-column.align-items-center.align-items-sm-start.px-3.pt-2.text-white.min-vh-100.bg-dark {
+    min-vh: 0;
+    display: flex;
+}
+
+a.nav-link.px-0.align-middle.text-white {
+    display: flex;
+    flex-direction: column;
+}
+
+ul#menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    padding: 0;
+}
+
+span.ms-1.d-sm-inline {
+    font-size: 10px;
+}
+.tbl-d {
+    flex-direction: column;
+    align-items: flex-start;
+}
+td.tble-ryt-text {
+    padding-right: 12px;
+    padding-top: 22px;
+}
+
+}
+
+
+
+
+/*file for custom css*/

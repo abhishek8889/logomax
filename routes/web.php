@@ -26,6 +26,7 @@ use App\Http\Controllers\User\Checkout\CheckoutController;
 use App\Http\Controllers\User\Dashboard\UserDashboardController;
 use App\Http\Controllers\Admin\Revision\RevisionController;
 use App\Http\Controllers\Admin\Reviews\ReviewsController;
+use App\Http\Controllers\Admin\SiteMeta\SiteMetaController;
 
 use App\Http\Controllers\BasicController;
 
@@ -75,12 +76,19 @@ Route::group(['middleware'=>['EnsureUser']],function(){
   
     /** Authentications */
     // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
-
+    Route::get('/login', [AuthenticationController::class,'loginNew']);
+    Route::get('/register', [AuthenticationController::class,'registerNew']);
+    Route::get('/account-recovery', [AuthenticationController::class,'forgotPassword']);
+    Route::post('/send-recovery-email', [AuthenticationController::class,'sendRecoveryEmail']);
+    Route::get('/recover-your-pass/{token}', [AuthenticationController::class,'recoverYourPass']);
+    Route::post('/change-pass', [AuthenticationController::class,'changePassProcess']);
+    
+    
     Route::get('/admin-login', function () {
         return view('authentication.admin_login');
     });
 
-    Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+    Route::get('/login-old', [AuthenticationController::class,'login'])->name('login');
     Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
 
 
@@ -91,7 +99,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('authorized/facebook',[GoogleController::class,'redirecttofacebook']);
     Route::get('authorized/facebook/callback',[GoogleController::class,'handleFacebookCallback']);
 
-    Route::get('/register', [AuthenticationController::class,'register']);
+    Route::get('/register-old', [AuthenticationController::class,'register']);
     Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
     Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
 
@@ -197,7 +205,18 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/on-revision',[RevisionController::class,'onRevisionTask']);
     Route::get('admin-dashboard/on-revision-detail/{revision_id}',[RevisionController::class,'onRevisionDetail']);
 
+    // Revised Logo 
+    Route::get('admin-dashboard/revised-logo-list',[RevisionController::class,'revisedLogoList']);
+    Route::get('admin-dashboard/revised-logo/{revision_id}',[RevisionController::class,'revisedLogoDetail']);
+
+    //SiteMeta
+    Route::get('admin-dashboard/sitemeta/',[SiteMetaController::class,'index']);
+    Route::get('admin-dashboard/sitemeta/add/{id?}',[SiteMetaController::class,'addMeta']);
+    Route::post('admin-dashboard/sitemeta/addprocc',[SiteMetaController::class,'addProcc']);
+
     
+   
+
 
     // :::::::::::::::::: Assign work to special designer :::::::::::::::::
     Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
@@ -236,6 +255,11 @@ Route::group(['middleware'=>['auth','Designer']],function(){
 Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::class,'index']);
 Route::get('special-designer/task-list',[TaskController::class,'taskList']);
 Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
+
+// Complete task of special designer
+Route::get('special-designer/complete-task',[TaskController::class,'completeTask']);
+
+
 Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
 Route::post('special-designer/upload-icon',[TaskController::class,'uploadIcon']);
 

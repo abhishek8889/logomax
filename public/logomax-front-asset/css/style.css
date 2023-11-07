@@ -94,7 +94,8 @@ a.login-btn {
     line-height: 15px;
     color: #000000;
     text-decoration: none;
-    transition: none;
+    /* transition: none; */
+    transition: .3s ease-in-out;
 }
 
 a.login-btn.cta-btn {
@@ -1014,6 +1015,7 @@ header.header.custom-header {
     border-bottom: 1px solid #E3E9ED;
     margin-right: 30px;
     padding-left: 0px;
+    cursor: pointer;
 }
 
 .filtter-slider {
@@ -1184,6 +1186,7 @@ header.header.custom-header {
     outline: none;
     border: none;
     background: none;
+    cursor:pointer;
 }
 
 .slider-box ul {
@@ -1202,7 +1205,7 @@ a.now-btn {
     font-weight: 600;
     text-decoration: none;
     border: 1px solid;
-    transition: 0.5s;
+    transition: .3s ease-in-out;
 }
 
 a.now-btn:hover {
@@ -1235,7 +1238,7 @@ a.now-btn:hover {
     border: 1px solid #E3E9ED;
     border-radius: 5px;
     margin-right: 15px;
-
+    cursor: pointer;
 }
 
 .filtr_box a {
@@ -1674,9 +1677,7 @@ section.logo-detail-sec ol.breadcrumb {
     margin-bottom: 0;
 }
 
-.logo_wrapper.download_page .vita-img {
-    padding: 20px 100px;
-}
+
 
 .download_sec {
     padding-bottom: 120px;
@@ -2024,6 +2025,7 @@ a.video-icon {
     transition: 0.3s;
     border: 2px solid#000;
     width: 100%;
+    cursor:pointer;
 }
 
 a {
@@ -2750,6 +2752,24 @@ form#progress-form [data-complete="true"] .box_studio {
 .popup_sec .join-btn i {
     padding-right: 10px;
 }
+/* raj */
+.filter-title {
+    padding: 13px 32px;
+}
+
+.filter-main-button {
+    width: 100%;
+}
+
+.filter-collapse {
+    padding: 12px 24px;
+}
+/*  */
+
+
+.custom-header .login-btn.cta-register {
+    border: 1px solid #000 !important;
+} 
 
 @media screen and (max-width: 1800px) {
     .custom-header .banner-content {
@@ -2781,7 +2801,7 @@ form#progress-form [data-complete="true"] .box_studio {
     }
 
     .content-wrapper {
-        padding: 22px 0px;
+        padding: 17px 0px;
     }
 
     h5 {
@@ -4360,4 +4380,7 @@ form#progress-form [data-complete="true"] .box_studio {
     padding-right: 100px;
 }
 
+
 /*  */
+
+/* Shivani css */

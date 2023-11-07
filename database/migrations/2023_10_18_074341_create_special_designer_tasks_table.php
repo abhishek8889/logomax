@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('assigned_designer_id');
             $table->string('backup_designer_id')->nullable();
             $table->integer('task_duration')->default(60)->comment('duration in minutes');
-            $table->integer('status'); // 0 assigned or on working ,1 send for approval,2 approve by customer , 3 disapproved by customer , 4 task terminate ,
+            $table->integer('status'); // 0 assigned or on working ,1 send for approval,2 approve by customer , 3 disapproved by customer , 4 task terminate , 5 no backup desginer left. ,
             $table->timestamps();
         });
     }

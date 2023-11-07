@@ -22,4 +22,8 @@ class SpecialDesignerTask extends Model
         return $this->belongsTo(User::class,'client_id');
     }
 
+    public function completeTask(){
+        return $this->hasOne(CompletedTask::class,'task_id','id');
+    }
+
 }

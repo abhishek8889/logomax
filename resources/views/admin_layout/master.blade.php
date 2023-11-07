@@ -105,7 +105,7 @@
                                             <a href="{{ url('admin-dashboard/on-revision') }}" class="nk-menu-link"><span class="nk-menu-text">On Revision</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
+                                            <a href="{{ url('admin-dashboard/revised-logo-list') }}" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -120,7 +120,7 @@
                                             <a href="{{url('/admin-dashboard/designers-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/guests-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a>
+                                            <!-- <a href="{{--url('/admin-dashboard/guests-list')--}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a> -->
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/special-designer-list') }}" class="nk-menu-link"><span class="nk-menu-text">User List - Special Designer</span></a>
@@ -228,6 +228,22 @@
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
                                 <!-- end  -->
+                                <!-- SiteMeta -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Site Meta</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/sitemeta') }}" class="nk-menu-link"><span class="nk-menu-text">Meta List</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/sitemeta/add') }}" class="nk-menu-link"><span class="nk-menu-text">Add new</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!-- end -->
                             </ul>
                         </div>
                     </div>
@@ -393,7 +409,7 @@
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
-    @if(Session::get('error'))
+@if(Session::get('error'))
 <script>
     toastr.clear();
     NioApp.Toast('{{ Session::get("error") }}', 'error', {position: 'top-right'});

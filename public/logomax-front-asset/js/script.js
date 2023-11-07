@@ -894,6 +894,16 @@ ready(function () {
 // =================
 jQuery(document).ready(function (e) {
   $(".card_wrapper").on("click", function () {
+    var otherCardWrappers = $(".card_wrapper").not(this);
+    otherCardWrappers.each(function () {
+      var cardDetail = $(this).next(".card_detail");
+      if($(this).hasClass('clicked')){
+        $(this).removeClass('clicked');
+      }
+      if (cardDetail.is(":visible")) {
+          cardDetail.slideUp();
+      }
+    });
     $(this).next(".card_detail").slideToggle();
     $(this).toggleClass("clicked");
   })
@@ -914,7 +924,6 @@ $('a#login_password').click(function(){
     input.attr("type","password");
     $(this).removeClass('login');
   }
-  
 });
 
 $('a#registerpassword').click(function(){
@@ -980,3 +989,26 @@ function addToWishlist(logo_id , user_id,url,thisObj){
     }
   });
 }
+
+$(".password_eye").on('click',function(){
+  let input_password = $(this).siblings('input');
+  let eye_icon = $(this).children('i');
+  if(input_password.hasClass('hide_password')){
+    input_password.removeClass('hide_password');
+    input_password.addClass('show_password');
+    input_password.attr('type','text');
+    
+    if(eye_icon.hasClass('fa-eye-slash')){
+      eye_icon.removeClass('fa-eye-slash');
+      eye_icon.addClass('fa-eye');
+    }
+  }else{
+    input_password.removeClass('show_password');
+    input_password.addClass('hide_password');
+    input_password.attr('type','password');
+    if(eye_icon.hasClass('fa-eye')){
+      eye_icon.removeClass('fa-eye');
+      eye_icon.addClass('fa-eye-slash');
+    }
+  }
+});

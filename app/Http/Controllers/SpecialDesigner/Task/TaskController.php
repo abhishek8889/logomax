@@ -11,7 +11,7 @@ use App\Models\CompletedTask;
 class TaskController extends Controller
 {
     public function taskList(Request $req){
-        $taskList = SpecialDesignerTask::with('revisionRequestDetail','logoDetail')->where('assigned_designer_id',auth()->user()->id)->get(); 
+        $taskList = SpecialDesignerTask::with('revisionRequestDetail','logoDetail')->where('assigned_designer_id',auth()->user()->id)->where('status',0)->get(); 
         
         return view('special_designer.tasks.task_list',compact('taskList'));
     }
@@ -22,6 +22,12 @@ class TaskController extends Controller
         $taskDetails = SpecialDesignerTask::with('revisionRequestDetail','logoDetail','clientDetail')->find($task_id); 
         // dd($taskDetails);
         return view('special_designer.tasks.task_detail',compact('taskDetails','siteData'));
+    }
+    public function completeTask(){
+        // $taskList = CompletedTask::where('designer_id',auth()->user()->id)->orderBy('created_at','DESC')->get();
+        $taskList = SpecialDesignerTask::with('revisionRequestDetail','logoDetail')->where('assigned_designer_id',auth()->user()->id)->where('status',1)->orWhere('status',2)->orWhere('status',3)->orWhere('status',4)->get(); 
+        
+        return view('special_designer.tasks.task_list',compact('taskList'));
     }
 
     public function uploadProc(Request $request){
@@ -67,15 +73,7 @@ class TaskController extends Controller
                 $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
                 $filesize = getimagesize($file);
                 $filesizekb = filesize($file);
-                // echo "<pre>";
-                // echo $filesize[3];
-                // echo "</pre>";
-
-                // echo "<pre>";
-                // print_r($filesizekb);
-                // echo "</pre>";
-                // die();
-                // return ($filesizekb/1000).' KB';
+               
                 $image_dimensions = '';
                 $image_format = '';
                 if($filesize){

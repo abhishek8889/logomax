@@ -154,6 +154,7 @@ ol.breadcrumb {
     color: #000000;
     text-decoration: none;
     border: 2px solid #fff;
+    cursor:pointer;
 }
 
 .Read-More-btn .read-btn:hover {
@@ -447,6 +448,7 @@ a.asset-id-link__button {
     line-height: normal;
     margin-left: 24px;
     position: relative;
+    cursor:pointer;
 }
 .logo_wrapper{
     padding-bottom: 0px !important;
