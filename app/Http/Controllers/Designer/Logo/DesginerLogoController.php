@@ -27,7 +27,7 @@ class DesginerLogoController extends Controller
         $categories = Categories::all();
         $tags = Tag::where('status',1)->get();
         $styles = Style::where('status',1)->get();
-
+       
         return view('designer.logos.addlogos',compact('categories','tags','styles'));
     }
    
@@ -35,7 +35,7 @@ class DesginerLogoController extends Controller
         if(auth()->user()->is_approved !== 0 && auth()->user()->is_approved !== 2){
             if($request->hasFile('file')){
                 $request->validate([
-                    'file' => 'required|mimes:ai,png'
+                    'file' => 'required|mimes:ai,png,jpg'
                 ]);
                 $file = $request->file('file');
                 $name = 'Logo_'.time().rand(1,100).'.'.$file->extension();
@@ -68,9 +68,9 @@ class DesginerLogoController extends Controller
                     'media_id.required' => 'Please upload your logo',
                 ]);
 
-                // echo 'done';
-
+                    $uniqueId = mt_rand(100000000, 999999999);
                     $logos = new Logo;
+                    $logos->logo_unique_id = $uniqueId;
                     $logos->logo_name = $request->logo_name;
                     $logos->logo_slug = $request->logo_slug;
                     $logos->media_id = $request->media_id;

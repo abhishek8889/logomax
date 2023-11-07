@@ -1,21 +1,22 @@
 @extends('user_layout/master')
 @section('content')
+<style>
 
+</style>
 <section class="logo-detail-sec">
           <div class="container">
             <div class="brand-logo">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('logos-search') }}">Logos Search</a></li>
-                        <li class="breadcrumb-item"><a > {{ $logo->logo_slug ?? '' }}</a>
-                        </li>
-                    </ol>
-                </nav>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{{ url('logos/search') }}">Logos</a></li>
+                      <li class="breadcrumb-item"><a > {{ $logo->logo_slug ?? '' }}</a>
+                      </li>
+                  </ol>
+              </nav>
             </div>
-            
             <div class="logo_wrapper">
-                <div class="row custom-align">
+                <div class="row">
                     <div class="col-lg-6 col-md-12">
                         @if(isset($logo->media['image_name']))
                         <div class="vita-img">
@@ -45,7 +46,7 @@
                                   <div class="card">
                                       <div class="card-header pointer" data-toggle="collapse"
                                           data-target="#collapse-{{ $facility->id }}">
-                                          <h5>{{ $facility->facilities_name ?? '' }}</h5>
+                                          <h5 class="text text-dark">{{ $facility->facilities_name ?? '' }}</h5>
                                       </div>
                                       <div id="collapse-{{ $facility->id }}" class="collapse " data-parent="#accordion">
                                           <div class="card-body">
@@ -63,77 +64,74 @@
                     </div>
                 </div>
                 <div class="file_box">
-                    <div class="file_wrapper">
-                        <div
-                            class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
-                            <span class="copy-asset-id__icon__container container-relative">
-                                <button class="copy-asset-id__icon js-copy-asset-id hover-trigger"
-                                    data-t="asset-id-copy-icon" aria-label="Copy asset id"
-                                    data-ingest-content-id="639521383" data-content-id="639521383"
-                                    data-ingest-clicktype="copy-asset-id">
-                                    <img src="{{ asset('logomax-front-asset/img/file.png') }}" alt="">
-                                </button>
-                                <div
-                                    class="container-absolute container-above h-align in-front margin-bottom-medium hover-container copy-asset-id__tooltip">
-                                    <div class="tooltip tooltip--primary tooltip--top left-align">
-                                        <div class="text-small">
-                                            <strong class="js-copy-asset-id-tooltip">Copy 639521383</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </span>
-                            <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
-                                data-ingest-clicktype="click-file-id" data-content-id="639521383"
-                                title="Go to content details page">
-                                <strong class="text-up">File #:&nbsp;</strong>
-                                <span>269827623</span>
-                            </a>
-                        </div>
+                    <div class="file_wrapper" id="copy_to_clipboard" logo_unique_id="{{ $logo->logo_unique_id }}">
+                      <div
+                        class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
+                        <span class="copy-asset-id__icon__container container-relative">
+                          <button class="copy-asset-id__icon js-copy-asset-id hover-trigger">
+                              <img src="{{ asset('logomax-front-asset/img/file.png') }}" alt="">
+                          </button>
+                        </span>
+                        <a class="asset-id-link__button" href="#" id="tooltip-copy-box" data-toggle="tooltip" title="Copy to clipboard!">
+                          <strong class="text-up">File #:&nbsp;</strong>
+                          <span>{{ $logo->logo_unique_id }}</span>
+                        </a>
+                      </div>
                     </div>
-                    <div class="file_wrapper">
-                        <div
-                            class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
-                            <span class="copy-asset-id__icon__container container-relative">
-                                <button class="copy-asset-id__icon js-copy-asset-id hover-trigger"
-                                    data-t="asset-id-copy-icon" aria-label="Copy asset id"
-                                    data-ingest-content-id="639521383" data-content-id="639521383"
-                                    data-ingest-clicktype="copy-asset-id">
-                                    <img src="{{ asset('logomax-front-asset/img/camera.png') }}" alt="">
-                                </button>
-                                <div
-                                    class="container-absolute container-above h-align in-front margin-bottom-medium hover-container copy-asset-id__tooltip">
-                                    <div class="tooltip tooltip--primary tooltip--top left-align">
-                                        <div class="text-small">
-                                            <strong class="js-copy-asset-id-tooltip">Copy 639521383</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </span>
-                            <a class="asset-id-link__button" href="#" data-t="detail-panel-file-id"
-                                data-ingest-clicktype="click-file-id" data-content-id="639521383"
-                                title="Go to content details page">
-
-                                <span>Find Similar</span>
-                            </a>
-                        </div>
+                    <div class="file_wrapper" id="find-similar-btn">
+                      <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
+                        <span class="copy-asset-id__icon__container container-relative">
+                            <button class="copy-asset-id__icon js-copy-asset-id hover-trigger">
+                                <img src="{{ asset('logomax-front-asset/img/camera.png') }}" alt="">
+                            </button>
+                        </span>
+                        <a class="asset-id-link__button" href="#" title="Go to content details page">
+                            <span>Find Similar</span>
+                        </a>
+                      </div>
                     </div>
-                </div>
+                    <?php 
+                    $wishlistItem = '';
+                    if(Auth::check()){
+                      $wishlistItem = App\Models\Wishlist::class::where([['user_id','=',auth()->user()->id],['logo_id','=',$logo->id]])->first();
+                    }
+                    ?>
+                    <div class="file_wrapper add_to_wishlist_button">
+                      <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
+                        <span class="copy-asset-id__icon__container container-relative">
+                          <button class="copy-asset-id__icon js-copy-asset-id hover-trigger" id="favorite_box">
+                              <!-- <i class="fa-regular fa-heart"></i> -->
+                              <?php
+                                  if(!empty($wishlistItem)){
+                                    ?>
+                                      <i class="fa-solid fa-heart"></i>
+                               <?php }else{?>
+                                <i class="fa-regular fa-heart"></i>
+                                <?php } ?>
+                          </button>
+                        </span>
+                        <a class="asset-id-link__button" href="#" 
+                          title="Add to favorite list">
+                          <span>Add to favorites</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
 
-                <div class="similar-logos">
+                <div class="similar-logos" id="similar-logo-box">
                     <div class="similar_text">
                         <h5>Similar Logos</h5>
-
                     </div>
                     <div class="similar_wrapper">
                         @foreach($similar_logos as $similar)
-                        <a href="{{ url('logos-detail/'.$similar->logo_slug) }}">
+                        <a href="{{ url('logo/'.$similar->logo_slug) }}">
                           <div class="similar_img_box">
                               <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
                           </div>
                         </a>
                         @endforeach
                         @if(count($similar_logos) == 4)
-                        <a href="{{ url('/logos-search?categories=%5B"'.$category_slug.'"%5D') }}">
+                        <a href="{{ url('/logos/search?categories=%5B"'.$category_slug.'"%5D') }}">
                           <div class="similar_img_box white">
                               <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
                           </div>
@@ -267,5 +265,67 @@
       </div>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   $(document).on('click','.add_to_wishlist_button',function(e){
+        e.preventDefault();
+        @if(Auth::check())
+            let logo_id = "{{ $logo->id }}";
+            let user_id = "{{ auth()->user()->id }}";
+            let url = "{{ url('add-to-wishlist') }}";
+            let objId = 'logo_wish_'+logo_id;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+              method: 'POST',
+              url: url,
+              data: { 
+                logo_id:logo_id,
+                user_id:user_id,
+                _token:csrfToken,
+              },
+              success: function(data, status, xhr){
+                let thisObj = $("#favorite_box");
+                if(xhr.status == 204){
+                  thisObj.html('<i class="fa-regular fa-heart"></i>');                              
+                }
+                if(xhr.status == 201){
+                  thisObj.html('<i class="fa-solid fa-heart"></i>');
+                }
+              }
+            });
+        @else
+            Swal.fire({
+                title: 'Please Login',
+                text: "You have to Login to save this in your wishlist !",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#exampleloginModal').modal('show');
+                }
+            })
+        @endif
+    });
 
+
+    $("#find-similar-btn").on('click',function(e){
+      e.preventDefault();
+      $('html, body').scrollTop($("#similar-logo-box").offset().top);
+    });
+
+    $("#copy_to_clipboard").on('click',function(e){
+      e.preventDefault();
+      let copy_text = $(this).attr('logo_unique_id');
+      navigator.clipboard.writeText(copy_text);
+      var tooltip = $("#tooltip-copy-box");
+      tooltip.attr('data-original-title',`Copied : ${copy_text}`);
+    })
+    
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>
 @endsection

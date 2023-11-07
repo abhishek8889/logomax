@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <title>Admin Dashbaord</title>
     <!-- add coustam css file here -->
@@ -75,7 +76,7 @@
                                     <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                                         <span class="nk-menu-text">Logos</span>
                                     </a>
-                               <ul class="nk-menu-sub">
+                                    <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/logos-list') }}" class="nk-menu-link"><span class="nk-menu-text">Logos Request</span></a>
                                         </li>
@@ -85,8 +86,30 @@
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/disapproved-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Disapproved Logos</span></a>
                                         </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/sold-logos') }}" class="nk-menu-link"><span class="nk-menu-text">Sold Logos</span></a>
+                                        </li>
                                     </ul>
                                 </li>
+                                <!-- Logo Revision request  -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
+                                        <span class="nk-menu-text">Logos for revision</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/revision-request') }}" class="nk-menu-link"><span class="nk-menu-text">Revision Request</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/on-revision') }}" class="nk-menu-link"><span class="nk-menu-text">On Revision</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/revised-logo-list') }}" class="nk-menu-link"><span class="nk-menu-text">Revised Logo</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
@@ -97,7 +120,7 @@
                                             <a href="{{url('/admin-dashboard/designers-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/guests-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a>
+                                            <!-- <a href="{{--url('/admin-dashboard/guests-list')--}}" class="nk-menu-link"><span class="nk-menu-text">User List - Guest</span></a> -->
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/special-designer-list') }}" class="nk-menu-link"><span class="nk-menu-text">User List - Special Designer</span></a>
@@ -176,6 +199,22 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                <!-- Reviews -->
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Reviews</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/add-review') }}" class="nk-menu-link"><span class="nk-menu-text">Add Review</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/review-list') }}" class="nk-menu-link"><span class="nk-menu-text">Review List</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
+                                <!-- End -->
                                 <!-- special designer -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
@@ -302,7 +341,23 @@
                                                         </div>
                                                         <div class="nk-notification-content">
                                                             <div class="nk-notification-text"><?php  echo $notification->message; ?><span> <a href="{{ url('read-notification/'.$notification->id) }}"> see </a></span></div>
-                                                            <div class="nk-notification-time">2 hrs ago</div>
+                                                            <!-- <div class="nk-notification-time">2 hrs ago</div> -->
+                                                            @if($notification->created_at)
+                                                                <div class="nk-notification-time">
+                                                                <?php
+                                                                    $notificationTime = $notification->created_at;
+                                                                    $currentTime = now();
+                                                                    $minutesDiff = $currentTime->diffInMinutes($notificationTime);
+                                                                ?>
+                                                                    @if ($minutesDiff < 1)
+                                                                        a few seconds ago
+                                                                    @elseif ($minutesDiff < 60)
+                                                                        {{ $minutesDiff }} minute{{ $minutesDiff > 1 ? 's' : '' }} ago
+                                                                    @else
+                                                                        {{ $notificationTime->diffForHumans($currentTime) }}
+                                                                    @endif.
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <?php }} ?>

@@ -143,7 +143,7 @@ ol.breadcrumb {
     text-align: start;
 }
 
-.Read-More-btn a.read-btn {
+.Read-More-btn .read-btn {
     background: #FFFFFF;
     border-radius: 5px;
     padding: 17px 23px;
@@ -154,9 +154,10 @@ ol.breadcrumb {
     color: #000000;
     text-decoration: none;
     border: 2px solid #fff;
+    cursor:pointer;
 }
 
-.Read-More-btn a.read-btn:hover {
+.Read-More-btn .read-btn:hover {
     background: none;
     color: #fff;
     border: 2px solid;
@@ -171,7 +172,7 @@ ol.breadcrumb {
 }
 
 .blog-sec .content {
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     left: 0px;
     right: 0;
@@ -184,10 +185,6 @@ ol.breadcrumb {
     align-items: flex-end;
     justify-content: flex-start;
     transition: all 0.3s ease-in-out;
-}
-
-.blog-sec .blog-img .content:hover {
-    opacity: 1;
 }
 
 .blog-sec .blog-img .content .blog-dummy-text {
@@ -245,7 +242,7 @@ ol.breadcrumb {
     bottom: 0;
     padding: 30px;
     text-align: left;
-    opacity: 0;
+    opacity: 1;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -266,7 +263,7 @@ ol.breadcrumb {
 
 .blog-sec .form-control {
     font-weight: 400;
-    font-size: 12px;
+    font-size: 17px;
     line-height: 15px;
     color: #656F79;
 }
@@ -400,10 +397,12 @@ ol.breadcrumb.blog_breadcrumb {
     border: 1px solid #E3E9ED;
     background: #FFF;
     width: 100%;
-    max-width: 167px;
-    padding: 14px;
+    padding: 12px 21px;
 }
 
+.button.button--action-v2.detail-panel-file-id__container >span {
+    line-height: 0px;
+}
 button.copy-asset-id__icon.js-copy-asset-id.hover-trigger {
     border: none;
     background: none;
@@ -412,8 +411,8 @@ button.copy-asset-id__icon.js-copy-asset-id.hover-trigger {
 }
 a.asset-id-link__button {
     color: #656F79;
-    font-family: Montserrat;
-    font-size: 10px;
+    font-family: "Montserrat";
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -425,7 +424,7 @@ a.asset-id-link__button {
     align-items: center;
     padding-top: 22px;
 }
-.file_wrapper {
+.file_wrapper:not(:last-child) {
     margin-right: 20px;
 }
 .similar-logos {
@@ -449,6 +448,7 @@ a.asset-id-link__button {
     line-height: normal;
     margin-left: 24px;
     position: relative;
+    cursor:pointer;
 }
 .logo_wrapper{
     padding-bottom: 0px !important;
@@ -589,7 +589,7 @@ a.asset-id-link__button {
         font-size: 28px;
     }
 
-    .Read-More-btn a.read-btn {
+    .Read-More-btn .read-btn {
         padding: 13px 20px;
     }
 
@@ -638,7 +638,7 @@ a.asset-id-link__button {
         padding: 20px;
     }
 
-    .Read-More-btn a.read-btn {
+    .Read-More-btn .read-btn {
         padding: 8px 15px;
         font-size: 14px;
     }

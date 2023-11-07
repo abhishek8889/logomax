@@ -110,6 +110,11 @@
                                                             </ul>
                                                         @else
                                                         <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                                            @if($logos->status == 3)
+                                                                <li class="w-140px">
+                                                                    <button class="btn btn-danger">Sold</button>
+                                                                </li>
+                                                            @else
                                                                 <li class="w-140px">
                                                                     @if($logos->approved_status == 1)<span class="badge bg-success">approved</span>@elseif($logos->approved_status == 2) <span class="badge bg-danger">Disapproved </span> @endif
                                                                 </li>
@@ -122,6 +127,7 @@
                                                                 <button status="{{ $logos->approved_status ?? '' }}" action="deapproved" data-id="{{ $logos->id ?? '' }}" class="btn btn-danger statusbutton">Disapprove</button>
                                                                 </li>
                                                                 @endif
+                                                            @endif
                                                         </ul>
                                                         @endif
                                                         </div><!-- .product-meta -->

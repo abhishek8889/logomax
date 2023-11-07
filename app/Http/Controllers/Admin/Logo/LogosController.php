@@ -38,9 +38,11 @@ class LogosController extends Controller
        
         return view('admin.logos.disapprovedlogos',compact('logos'));
     }
+    public function soldLogos(){
+        $logos = Logo::where('status',3)->get();
+        return view('admin.logos.sold-logos',compact('logos'));
+    }
     public function updateStatus(Request $request){
-      
-
         if($request->action == 'approved'){
             $logos = Logo::find($request->id);
             $logos->approved_status = 1;
@@ -145,6 +147,12 @@ class LogosController extends Controller
             return redirect()->back()->with('success','Facility is successfully added !');
         }
     }
+
+    public function logoFacilitiesDelete(Request $req){
+        $facility = LogoFacilities::find($req->id);
+        $facility->delete();
+        return redirect()->back()->with('success','You have succesfully deleted one item.');
+    }
     public function additionalOptions(Request $req){
         $addtionaloption = AdditionalOptions::where('status',1)->get();
         $editoption = AdditionalOptions::find($req->id);
@@ -152,15 +160,17 @@ class LogosController extends Controller
         return view('admin.logos.additional-options',compact('addtionaloption','editoption'));
     }
     public function additionalOptionsSave(Request $request){
-        $request->validate([
-            'text' => 'required',
-            'duration' => 'required',
-            'amount' => 'required',
-        ]);
+        // $request->validate([
+        //     'text' => 'required',
+        //     'duration' => 'required',
+        //     'amount' => 'required',
+        // ]);
         if(!$request->id){
             $options = new AdditionalOptions;
             $options->option_text = $request->text;
-            $options->duration = $request->duration;
+            $options->option_type = $request->option_type;
+            $options->pricing_duration = $request->duration;
+            $options->percentage = $request->percentage;
             $options->amount = $request->amount;
             $options->currency = $request->currency;
             $options->save();
@@ -168,10 +178,12 @@ class LogosController extends Controller
         }else{
             $options = AdditionalOptions::find($request->id);
             $options->option_text = $request->text;
-            $options->duration = $request->duration;
+            $options->option_type = $request->option_type;
+            $options->pricing_duration = $request->duration;
+            $options->percentage = $request->percentage;
             $options->amount = $request->amount;
             $options->currency = $request->currency;
-            $options->save();
+            $options->update();
             return redirect()->back()->with('success','successfully updated additional option');
         }
     }

@@ -217,6 +217,11 @@ ready(function () {
   /*****************************************************************************
    * Expects a Node (input[type="text"] or textarea).
    */
+  const validateHidden = (field)=>{
+    return {
+      isValid: true
+    };
+  }
 
   const validateText = (field) => {
     const val = field.value.trim();
@@ -363,6 +368,8 @@ ready(function () {
         return validatePhone(field);
       case "email":
         return validateEmail(field);
+      case "hidden":
+        return validateHidden(field);
       default:
         throw new Error(
           `The provided field type '${field.tagName}:${field.type}' is not supported in this form.`
@@ -887,6 +894,16 @@ ready(function () {
 // =================
 jQuery(document).ready(function (e) {
   $(".card_wrapper").on("click", function () {
+    var otherCardWrappers = $(".card_wrapper").not(this);
+    otherCardWrappers.each(function () {
+      var cardDetail = $(this).next(".card_detail");
+      if($(this).hasClass('clicked')){
+        $(this).removeClass('clicked');
+      }
+      if (cardDetail.is(":visible")) {
+          cardDetail.slideUp();
+      }
+    });
     $(this).next(".card_detail").slideToggle();
     $(this).toggleClass("clicked");
   })
@@ -907,7 +924,6 @@ $('a#login_password').click(function(){
     input.attr("type","password");
     $(this).removeClass('login');
   }
-  
 });
 
 $('a#registerpassword').click(function(){
@@ -934,5 +950,65 @@ $('a#confirm-password').click(function(){
     input.attr("type","password");
     $(this).removeClass('login');
   }
-  
+
+});
+
+$(document).ready(function(){
+  $(".filter-title").click(function(){
+    $(this).parent().addClass("filter_full")
+    $(".search_sec").addClass("search_open")
+    $(this).hide()
+    $(this).next(".filter-main-button").show()
+  })
+  $(".filter-collapse").click(function(){
+    $(".search_sec").removeClass("search_open")
+    $(this).parent().hide()
+    $(".filter-title").show()
+    $(this).parents(".filter-content").removeClass("filter_full")
+
+  })
+})
+
+function addToWishlist(logo_id , user_id,url,thisObj){
+  var csrfToken = $('meta[name="csrf-token"]').attr('content');
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: { 
+      logo_id:logo_id,
+      user_id:user_id,
+      _token:csrfToken,
+    },
+    success: function(data, status, xhr){
+      if(xhr.status == 204){
+        thisObj.html('<i class="fa-regular fa-heart"></i>');                              
+      }
+      if(xhr.status == 201){
+        thisObj.html('<i class="fa-solid fa-heart"></i>');
+      }
+    }
+  });
+}
+
+$(".password_eye").on('click',function(){
+  let input_password = $(this).siblings('input');
+  let eye_icon = $(this).children('i');
+  if(input_password.hasClass('hide_password')){
+    input_password.removeClass('hide_password');
+    input_password.addClass('show_password');
+    input_password.attr('type','text');
+    
+    if(eye_icon.hasClass('fa-eye-slash')){
+      eye_icon.removeClass('fa-eye-slash');
+      eye_icon.addClass('fa-eye');
+    }
+  }else{
+    input_password.removeClass('show_password');
+    input_password.addClass('hide_password');
+    input_password.attr('type','password');
+    if(eye_icon.hasClass('fa-eye')){
+      eye_icon.removeClass('fa-eye');
+      eye_icon.addClass('fa-eye-slash');
+    }
+  }
 });

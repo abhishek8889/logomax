@@ -22,5 +22,9 @@ class Logo extends Model
   public function style(){
     return $this->hasOne(Style::class,'id','style_id');
   }
-
+ 
+  public function inWhishlist()
+  {
+      return $this->hasOne(Wishlist::class, 'logo_id');
+  }
 }

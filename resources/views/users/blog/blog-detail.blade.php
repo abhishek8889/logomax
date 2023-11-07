@@ -22,7 +22,7 @@
         </div>
         <div class="detail-text">
           <div class="lorem-text">
-            <p>By {{ $blog->user->name ?? '' }} <span>| {{ $blog->created_at->format('F d, Y') ?? '' }}</span>
+            <p><span> {{ $blog->created_at->format('F d, Y') ?? '' }}</span>
             </p>
           </div>
           <div class="text-wrapper">
@@ -131,7 +131,7 @@
                 </div>
                 <div class="recent-text">
                   <div class="lorem-text">
-                    <p>By {{ $related->user->name ?? '' }} <span>| {{ $related->created_at->format('F d, Y') ?? '' }}</span> </p>
+                    <p><span> {{ $related->created_at->format('F d, Y') ?? '' }}</span> </p>
                   </div>
                   <div class="simply-text">
                     <a href="{{ url('blogs-details/' . ($related->slug ?? '')) }}"><h6>{{ $related->title ?? '' }}</h6></a> 

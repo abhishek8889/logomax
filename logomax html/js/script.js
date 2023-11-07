@@ -886,10 +886,11 @@ ready(function () {
 
 // =================
 jQuery(document).ready(function (e) {
+  e.preventDefault();
   $(".card_wrapper").on("click", function () {
     $(this).next(".card_detail").slideToggle();
     $(this).toggleClass("clicked");
   })
-  e.preventDefault();
+ 
 
 }) 

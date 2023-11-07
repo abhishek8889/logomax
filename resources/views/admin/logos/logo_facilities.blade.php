@@ -85,7 +85,7 @@
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                 <ul class="link-list-plain">
                                     <li><a class="edit-btn" fac-name="{{$facility->facilities_name ?? ''}}" fac-desc="{{ $facility->description ?? '' }}" fac-id="{{$facility->id ?? ''}}" href="{{ url('/admin-dashboard/') }}">Edit</a></li>
-                                    <li><a href="">delete</a></li>
+                                    <li><a href="{{ url('admin-dashboard/logo-facilities-dlt/'.$facility->id) }}">delete</a></li>
                                 </ul>
                             </div>
                         </div>

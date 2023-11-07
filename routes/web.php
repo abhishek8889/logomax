@@ -23,10 +23,17 @@ use App\Http\Controllers\Admin\Style\AdminStyleController;
 use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
 use App\Http\Controllers\User\Checkout\CheckoutController;
+use App\Http\Controllers\User\Dashboard\UserDashboardController;
+use App\Http\Controllers\Admin\Revision\RevisionController;
+use App\Http\Controllers\Admin\Reviews\ReviewsController;
 
 use App\Http\Controllers\BasicController;
 
 use App\Events\RegisterNotificationEvent;
+
+//  ::::::::::::::::::: Special Designer :::::::::::::::::
+use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
+use App\Http\Controllers\SpecialDesigner\Task\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,52 +45,86 @@ use App\Events\RegisterNotificationEvent;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('test-check',[TestController::class,'index']);
-//  :::::::::::::::::::::  Basic Controller ::::::::::::::::::::::::: 
-Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
 
-Route::get('/',[HomeController::class,'index'])->name('/');
-Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
-Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
-Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
-Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
-Route::get('/logos-search',[FrontLogoController::class,'index']);
-Route::get('/logos-detail/{slug}',[FrontLogoController::class,'logodetail']);
+//  USER PANEL 
+Route::group(['middleware'=>['EnsureUser']],function(){
+   
+    //  :::::::::::::::::::::  Basic Controller ::::::::::::::::::::::::: 
 
-Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
-Route::post('logo-checkout',[CheckoutController::class,'checkoutProcess']);
+    Route::get('/',[HomeController::class,'index'])->name('/');
+    Route::get('/about-us',[MetaPagesController::class,'aboutUs'])->name('about-us');
+    Route::get('/reviews',[MetaPagesController::class,'reviews'])->name('reviews');
+    Route::get('/support',[MetaPagesController::class,'support'])->name('support');
 
-Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
+    Route::get('/blogs',[BlogController::class,'index'])->name('blogs');
+    Route::get('/blogs-details/{slug}',[BlogController::class,'blogDetail']);
+    Route::get('/logos/{slug}',[FrontLogoController::class,'index']);
+    Route::get('/logo/{slug}',[FrontLogoController::class,'logodetail']);
 
-Route::post('logo-filter',[FrontLogoController::class,'logoFilter']);
+    Route::get('/logos/checkout/{slug}',[CheckoutController::class,'checkoutView']);
+    Route::post('logo-checkout',[CheckoutController::class,'checkoutProcess']);
 
-Route::post('blog-search',[BlogController::class,'blogsearch']);
+    Route::get('logo-download/{slug}',[FrontLogoController::class,'download_page']);
 
-/** Authentications */
-// Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+    Route::post('logo-filter',[FrontLogoController::class,'logoFilter']);
 
-Route::get('/admin-login', function () {
-    return view('authentication.admin_login');
+    Route::post('blog-search',[BlogController::class,'blogsearch']);
+
+
+    /* term and conditions: */
+  
+    /** Authentications */
+    // Route::get('/login', [AuthenticationController::class,'login'])->name('login');
+    Route::get('/login', [AuthenticationController::class,'loginNew']);
+    Route::get('/register', [AuthenticationController::class,'registerNew']);
+    Route::get('/account-recovery', [AuthenticationController::class,'forgotPassword']);
+    Route::post('/send-recovery-email', [AuthenticationController::class,'sendRecoveryEmail']);
+    Route::get('/recover-your-pass/{token}', [AuthenticationController::class,'recoverYourPass']);
+    Route::post('/change-pass', [AuthenticationController::class,'changePassProcess']);
+    
+    
+    Route::get('/admin-login', function () {
+        return view('authentication.admin_login');
+    });
+
+    Route::get('/login-old', [AuthenticationController::class,'login'])->name('login');
+    Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
+
+
+    //googlelogin
+    Route::get('authorized/google',[GoogleController::class,'redirecttogoogle']);
+    Route::get('authorized/google/callback',[GoogleController::class,'handleGoogleCallback']);
+
+    Route::get('authorized/facebook',[GoogleController::class,'redirecttofacebook']);
+    Route::get('authorized/facebook/callback',[GoogleController::class,'handleFacebookCallback']);
+
+    Route::get('/register-old', [AuthenticationController::class,'register']);
+    Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
+    Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
+
+    ///// User Dashboard route :::::::
+    Route::get('/user-orders', [UserDashboardController::class,'userOrders']);
+    Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail']);
+    Route::get('/download-logo/{order_num}', [UserDashboardController::class,'downloadLogo']);
+    Route::get('/request-for-revision', [UserDashboardController::class,'requestForRevision']);
+    Route::get('/approve-logo/{complete_task_id}',[UserDashboardController::class,'approveLogo']);
+    Route::get('/disapprove-logo/{complete_task_id}',[UserDashboardController::class,'disapproveLogo']);
+
+    // Download revised logo 
+    Route::get('/downloadProcess/{complete_task_id}',[UserDashboardController::class,'downloadProcess']);
+
+
+    // Route::get('/TermsAndconditions', function () {
+    //     return view('users.meta-pages.terms&conditions');
+    // });
+    Route::get('/terms-and-conditions', [UserDashboardController::class,'termsAndConditions']);
+    
 });
 
+///////////////   USER PANEL ROUTES END   //////////////////////////////////
 
+/** /////////////////   All Admin dashbord data //////////////////////////*/
 
-Route::get('/login', [AuthenticationController::class,'login'])->name('login');
-Route::post('/login-process', [AuthenticationController::class, 'loginProcess']);
-
-
-//googlelogin
-Route::get('authorized/google',[GoogleController::class,'redirecttogoogle']);
-Route::get('authorized/google/callback',[GoogleController::class,'handleGoogleCallback']);
-
-Route::get('authorized/facebook',[GoogleController::class,'redirecttofacebook']);
-Route::get('authorized/facebook/callback',[GoogleController::class,'handleFacebookCallback']);
-
-Route::get('/register', [AuthenticationController::class,'register']);
-Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
-Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
-
-/** All Admin dashbord data */
 Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard',[AdminDashController::class,'index'])->name('admin-dashboard');
     Route::get('/admin-dashboard/designers-list',[UsersController::class,'index'])->name('designer-list');
@@ -111,18 +152,18 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/logo-detail/{slug}',[LogosController::class,'logodetail'])->name('logo-detail');
     Route::get('admin-dashboard/approved-logos',[LogosController::class,'approvedLogos'])->name('approved-logos');
     Route::get('admin-dashboard/disapproved-logos',[LogosController::class,'disapprovedLogos'])->name('disapproved-logos');
+    Route::get('admin-dashboard/sold-logos',[LogosController::class,'soldLogos'])->name('sold-logos');
+    
     Route::post('admin-dashboard/updatestatus',[LogosController::class,'updateStatus']);
     
     // Logo Facilities :
     Route::get('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilities'])->name('logo-facilities');
     Route::post('admin-dashboard/logo-facilities',[LogosController::class,'logoFacilitiesAdd']);
+    Route::get('admin-dashboard/logo-facilities-dlt/{id}',[LogosController::class,'logoFacilitiesDelete']);
+    
     Route::get('admin-dashboard/logo-options/{id?}',[LogosController::class,'additionalOptions'])->name('additional-options');
     Route::post('admin-dashboard/logo-optionssave',[LogosController::class,'additionalOptionsSave']);
     Route::get('admin-dashboard/delete-options/{id}',[LogosController::class,'deleteAdditionlaOption']);
-
-    
-    
-    
 
     //adminblogs
     Route::get('admin-dashboard/blogs/category',[BlogCategoryController::class,'index'])->name('blog-category');
@@ -144,10 +185,37 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesigner'])->name('add-special-desinger');
     Route::post('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesignerProcess']);
     Route::get('/admin-dashboard/special-designer-list',[SpecialDesignerController::class,'specialDesignerList'])->name('special-desinger-list');
+
+    // Logo Revision Routes :
+    Route::get('admin-dashboard/revision-request',[RevisionController::class,'revisionRequest']);
+    Route::get('admin-dashboard/request-detail/{request_id}',[RevisionController::class,'revisionRequestDetail']);
+
+    // Revision Requests are assigned
+    Route::get('admin-dashboard/on-revision',[RevisionController::class,'onRevisionTask']);
+    Route::get('admin-dashboard/on-revision-detail/{revision_id}',[RevisionController::class,'onRevisionDetail']);
+
+    // Revised Logo 
+    Route::get('admin-dashboard/revised-logo-list',[RevisionController::class,'revisedLogoList']);
+    Route::get('admin-dashboard/revised-logo/{revision_id}',[RevisionController::class,'revisedLogoDetail']);
+
+    
+   
+
+
+    // :::::::::::::::::: Assign work to special designer :::::::::::::::::
+    Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
+    
+    // Reviews System 
+    Route::get('/admin-dashboard/add-review',[ReviewsController::class,'addReview']);
+    Route::post('/admin-dashboard/add-review-process',[ReviewsController::class,'addReviewProcc']);
+
+
 });
+/////////////////////////// ADMIN ROUTES END ///////////////////////////////
 
-
+/////////////////////////// DESIGNER ROUTES ////////////////////////////////
 /** All Designer dashbord data */
+
 Route::group(['middleware'=>['auth','Designer']],function(){
     Route::get('/designer-dashboard',[DesignerDashController::class,'index'])->name('designer-dashboard');
     Route::get('/designer-dashboard/setting',[AccountSetting::class,'index'])->name('account-setting');
@@ -165,9 +233,40 @@ Route::group(['middleware'=>['auth','Designer']],function(){
 
 });
 
-/** Log-out Route */
+/////////////////////////// DESIGNER ROUTES END ////////////////////////////////
+
+/////////////////////////// SPECIAL DESIGNER ROUTES  ///////////////////////////
+Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::class,'index']);
+Route::get('special-designer/task-list',[TaskController::class,'taskList']);
+Route::get('special-designer/task-detail/{task_id}',[TaskController::class,'taskDetail']);
+
+// Complete task of special designer
+Route::get('special-designer/complete-task',[TaskController::class,'completeTask']);
+
+
+Route::post('special-designer/upload-process',[TaskController::class,'uploadProc']);
+Route::post('special-designer/upload-icon',[TaskController::class,'uploadIcon']);
+
+Route::post('special-designer/delete-image',[TaskController::class,'deleteimage']);
+
+// Route::post('/store', [TaskController::class,'store'])->name('store');
+// Route::post('uploads', [TaskController::class,'uploads'])->name('uploads');
+
+
+/////////////////////////// SPECIAL DESIGNER END  ///////////////////////////
+
+/**  ::::::::::::::::: Basic Routes :::::::::::::::  */
 Route::get('/logout', [AuthenticationController::class, 'logout']);
 
 Route::get('/mail', function () {
     return view('Mail.register_confirmation.index');
 });
+
+Route::get('read-notification/{notification_id}',[BasicController::class,'readNotification']);
+Route::get('download-file/{media_id}',[BasicController::class,'downloadFile']);
+Route::post('add-to-wishlist',[BasicController::class,'addToWishlist']);
+
+Route::get('test-check',[TestController::class,'index']);
+// Route::get('logos?{slug}',function(){
+//     return "hello";
+// });

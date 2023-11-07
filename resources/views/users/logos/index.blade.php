@@ -1,7 +1,31 @@
 @extends('user_layout/master')
 @section('content')
+<style>
+    .new_div {
+        width: 20%;
+        max-width: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #E3E9ED;
+        margin-right: 30px;
+        padding-left: 0px;
+        cursor: pointer;
+    }
+
+    .new_div.filter_full {
+        width: 15%;
+        border: none;
+    }
+
+    .filtter-button {
+        float: right;
+    }
+    .filter-title {
+        width: 100%;
+    }
+</style>
             <?php 
-           
             if(isset($_GET['categories'])){
 
                 $filterCategories = $_GET['categories'];
@@ -35,6 +59,7 @@
 <section class="filter-sec">
             <div class="container-fluid">
                 <div class="filter-content">
+                    <div class="new_div ">
                     <div class="filter-title">
                         <div class="filter-img">
                             <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="" />
@@ -46,6 +71,17 @@
                             </button>
                         </div>
                     </div>
+                    <!--  -->
+                    <div class="filter-main-button">
+                        <button class="filter-collapse">
+                            <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="">
+                            <span>
+                                Filters <span class="badge badge--blue">1</span>
+                            </span>
+                        </button>
+                    </div>
+                    </div>
+                    <!--  -->
                     <div class="fil-slider">
                         <div class="slider-content">
                             <div class="slider-box">
@@ -143,7 +179,7 @@
                         <div class="filter-btn <?php  if(!$_GET){
                echo 'd-none';
             } ?>">
-                            <a href="{{ url('logos-search') }}"><button>Clear Filters</button></a>
+                            <a href="{{ url('logos/search') }}"><button>Clear Filters</button></a>
                         </div>
                     </div>
 
@@ -153,17 +189,32 @@
                         </div>
                         <div class="row" id="logo_html_row">
                             @foreach($logos as $logo)
-                            <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <div class="logo_img">
-                                   <a href="{{ url('logos-detail/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
-                                    <div class="heart_icon">
-                                        <i class="fa-regular fa-heart"></i>
+                                   <a href="{{ url('logo/'.$logo->logo_slug) }}"> <img src="{{ asset('logos/') }}/{{ $logo->media['image_name'] ?? '' }}" alt="" /></a>
+                                   <?php 
+                                    if(Auth::check()){
+                                        $wishlistItem = App\Models\Wishlist::class::where('user_id','=',auth()->user()->id)->get(); 
+                                    }
+                                  ?>
+                                    <div class="heart_icon add_to_wishlist" id="logo_wish_{{ $logo->id }}" logo_id="{{ $logo->id }}">
+                                        <?php 
+                                        $logoIdsInWishlist = array();
+                                            if(isset($wishlistItem) && count($wishlistItem) > 0){
+                                                $logoIdsInWishlist = $wishlistItem->pluck('logo_id')->all();
+                                                if(in_array($logo->id,$logoIdsInWishlist)){ ?>
+                                                    <i class="fa-solid fa-heart"></i>
+                                                <?php }else{ ?>
+                                                    <i class="fa-regular fa-heart"></i>
+                                                <?php } ?>
+                                            <?php }else{?>
+                                                <i class="fa-regular fa-heart"></i>
+                                            <?php }  ?>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
-                       
                        <?php
                        $filterSearchEncoded = urlencode($filterSearch);
                        $filterCategoriesEncoded = urlencode($filterCategories);
@@ -181,13 +232,13 @@
                                     <a><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
                                 @else
                                 <div class="arrow-bt black">
-                                    <a href="{{ url('/logos-search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()-1 }}"><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
+                                    <a href="{{ url('/logos/?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()-1 }}"><i class="fa-solid fa-arrow-left"></i> Prev Page </a>
                                 @endif
                                 </div>
                                 
                                 @if ($logos->hasMorePages())
                                 <div class="arrow-bt black">
-                                    <a href="{{ url('/logos-search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()+1 }}">Next Page <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a href="{{ url('/logos/search?search='.$filterSearchEncoded.'&categories='.$filterCategoriesEncoded.'&styles='.$filterStyleEncoded.'&tags='.$filterTagsEncoded.'&page=') }}{{ $logos->currentPage()+1 }}">Next Page <i class="fa-solid fa-arrow-right"></i></a>
                                 @else
                                 <div class="arrow-bt">
                                     <a>Next Page <i class="fa-solid fa-arrow-right"></i></a>
@@ -211,7 +262,7 @@
             </div>
         </section>
           
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
       
         $(document).ready(function(){
@@ -227,7 +278,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                         search = ajaxRequest(searchvalue,categories,styles,tags);
             });
             $('input.category').on('change',function(){
@@ -244,7 +295,7 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReque = ajaxRequest(searchvalue,categories,styles,tags);
                
             
@@ -264,11 +315,8 @@
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
                 window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags);
-
-            
-           
             });
             $('input.tags').on('change',function(){
                 tagvalue = $(this).val();
@@ -288,7 +336,7 @@
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
 
                     window.history.replaceState(stateObj, 
-                        "filter", "/logos-search?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
 
                 ajax = ajaxRequest(searchvalue,categories,styles,tags);
 
@@ -298,38 +346,75 @@
 
     function ajaxRequest(searchvalue,categories,styles,tags){
         let categoriesString = encodeURIComponent(JSON.stringify(categories));
-                let stylestring = encodeURIComponent(JSON.stringify(styles));
-                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+        let stylestring = encodeURIComponent(JSON.stringify(styles));
+        let tagsstring = encodeURIComponent(JSON.stringify(tags));
 
         $.ajax({
-                    method: 'post',
-                    url: '{{ url('logo-filter') }}',
-                    data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
-                    success: function(response){
-                        // console.table(response);
-                        // console.table(response[0]['media']);
-                        $('.filter-btn').removeClass('d-none');
-
-                        append_html = [];
-                        $.each(response['data'], function(key,value){
-                            html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logos-detail/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon"><i class="fa-regular fa-heart"></i></div></div></div>';
-                            append_html.push(html);
-                        })
-                        $('#logo_html_row').html(append_html);
-
-                        if(response['last_page'] > 1){
-                            paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos-search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
-                            $('.next-button').html(paginationhtml);
-                        }else{
-                            $('.next-button').html('');
+            method: 'post',
+            url: '{{ url('logo-filter') }}',
+            data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
+            success: function(response){
+                // console.table(response);
+                // console.table(response[0]['media']);
+                $('.filter-btn').removeClass('d-none');
+                append_html = [];
+                $.each(response['data'], function(key,value){
+                    let logoIdsInWishlist = [];
+                    @if(isset($logoIdsInWishlist))
+                    logoIdsInWishlist = <?php echo json_encode($logoIdsInWishlist); ?>;
+                    @endif
+                    
+                    let heartIconClass = '';
+                    heartIconClass = 'fa-regular';
+                    $.each(logoIdsInWishlist,function(ind,val){
+                        if(value.id == val){
+                            heartIconClass = 'fa-solid';
                         }
-                        
-                        // console.log(re);
+                    });
+                    if(value.in_whishlist !== undefined && value.in_whishlist !== null){
+                        heartIconClass = 'fa-solid';
+                    }else{
+                        heartIconClass = 'fa-regular';
                     }
+                    html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon add_to_wishlist" id="logo_wish_'+value.id+'" logo_id="'+value.id+'"><i class="'+ heartIconClass +' fa-heart"></i></div></div></div>';
+                    // console.log(html);
+                    append_html.push(html);
+                })
+                $('#logo_html_row').html(append_html);
+                if(response['last_page'] > 1){
+                    paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
+                    $('.next-button').html(paginationhtml);
+                }else{
+                    $('.next-button').html('');
+                }
+            }
         });
-        
-
     }      
-
+    
+    $(document).on('click','.add_to_wishlist',function(e){
+        e.preventDefault();
+        @if(Auth::check())
+            let logo_id = $(this).attr('logo_id');
+            let user_id = "{{ auth()->user()->id }}";
+            let url = "{{ url('add-to-wishlist') }}";
+            let objId = 'logo_wish_'+logo_id;
+            addToWishlist(logo_id,user_id,url,$(this));
+        @else
+            Swal.fire({
+                title: 'Please Login',
+                text: "You have to Login to save this in your wishlist !",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#exampleloginModal').modal('show');
+                }
+            })
+        @endif
+    });
+   
     </script> 
 @endsection
