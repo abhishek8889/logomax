@@ -226,6 +226,10 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('/admin-dashboard/add-review-process',[ReviewsController::class,'addReviewProcc']);
 
 
+    // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
+
+    
+
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////
 
