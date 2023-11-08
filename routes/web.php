@@ -31,7 +31,7 @@ use App\Http\Controllers\Admin\SiteMeta\SiteMetaController;
 use App\Http\Controllers\BasicController;
 
 use App\Events\RegisterNotificationEvent;
-
+use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 //  ::::::::::::::::::: Special Designer :::::::::::::::::
 use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
 use App\Http\Controllers\SpecialDesigner\Task\TaskController;
@@ -227,7 +227,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
 
     // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
-
+    Route::get('/admin-dashboard/site-content/add-about-content',[SiteContentController::class,'aboutContent']);
+    Route::post('/admin-dashboard/about-page-content/addprocess',[SiteContentController::class,'aboutAddProcess']);
     
 
 });

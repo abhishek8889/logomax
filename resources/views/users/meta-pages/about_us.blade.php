@@ -8,8 +8,9 @@
                         <li class="breadcrumb-item"><a href="#">About US</a></li>
                     </ol>
                 </nav>
-
+                <?php $data = App\Models\AboutUsContent::class::find(1); ?>
                 <div class="mission_data">
+                    <?php echo $data->value; ?>
                     <div class="mission_data_head">
                         <h2>Our mission</h2>
                     </div>

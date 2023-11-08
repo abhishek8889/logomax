@@ -254,6 +254,9 @@
                                         <li class="nk-menu-item">
                                             <a href="#" class="nk-menu-link"><span class="nk-menu-text">Add Home content</span></a>
                                         </li>
+                                        <li class="nk-menu-item">
+                                            <a href="/admin-dashboard/site-content/add-about-content" class="nk-menu-link"><span class="nk-menu-text">About</span></a>
+                                        </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
                                 <!--  -->

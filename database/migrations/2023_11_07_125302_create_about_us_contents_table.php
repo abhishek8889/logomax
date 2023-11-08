@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('about_us_content', function (Blueprint $table) {
+        Schema::create('about_us_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('key');
+            $table->longText('value');
+            $table->string('type');
             $table->timestamps();
         });
     }
