@@ -44,22 +44,33 @@
   <!-- ================= header section start ====================== -->
 <?php 
   $siteMeta = App\Models\SiteMeta::all();
-  $homePageSiteLogo = asset('/logomax-front-asset/img/custom-logo.png'); 
-  $otherPageSiteLogo =   asset('/logomax-front-asset/img/logo.png');
+  $homePageSiteLogo =  asset('logomax-front-asset/img/logo.png'); 
+  $otherPageSiteLogo =    asset('logomax-front-asset/img/custom-logo.png');
   $footer_logo = asset('logomax-front-asset/img/Group 15.png');
   foreach($siteMeta as $metaData){
     if($metaData->meta_key == 'home-page-site-logo'){
-      $homePageSiteLogo = $metaData->meta_value; 
-      
+      if(!empty($metaData->meta_value)){
+        $homePageSiteLogo = asset('/siteMeta/'.$metaData->meta_value); 
+      }else{
+        $homePageSiteLogo =  asset('logomax-front-asset/img/logo.png'); 
+      }
     }
     if($metaData->meta_key == 'other-pages-site-logo'){
-      $otherPageSiteLogo = $metaData->meta_value;
+      if(!empty($metaData->meta_value)){
+        $otherPageSiteLogo = asset('/siteMeta/'.$metaData->meta_value);
+      }else{
+        $otherPageSiteLogo = asset('logomax-front-asset/img/custom-logo.png'); 
+      }
+      
     }
     if($metaData->meta_key == 'footer-logo'){
-      $footer_logo = $metaData->meta_value;
+      if(!empty($metaData->meta_value)){
+        $footer_logo = asset('/siteMeta/'.$metaData->meta_value);
+      }else{
+        $footer_logo = asset('logomax-front-asset/img/Group 15.png'); 
+      }
     }
   }
-
   
 ?>
   <header class="header <?php if(isset($request)){if($request->url() != url('/')){ echo " custom-header"; }} ?> {{
@@ -150,9 +161,9 @@
             <a href="{{ url('/') ?? '' }}">
               <?php if(isset($request)){
                       if($request->url() != url('/')){?>
-              <img src="{{ asset('/siteMeta/'.$otherPageSiteLogo)}}" alt="" />
+              <img src="{{ $otherPageSiteLogo}}" alt="" />
               <?php }else{?>
-              <img src="{{ asset('/siteMeta/'.$homePageSiteLogo)}}" alt="" />
+              <img src="{{ $homePageSiteLogo }}" alt="" />
               <?php }} ?>
             </a>
           </div>
@@ -206,7 +217,7 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="footer-text">
               <div class="footer-logo">
-                <img src="{{ asset('/siteMeta/'.$footer_logo) }}" alt="">
+                <img src="{{ $footer_logo }}" alt="">
               </div>
             </div>
           </div>

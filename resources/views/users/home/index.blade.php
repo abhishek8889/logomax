@@ -7,9 +7,14 @@
   }
 </style>
 <?php $home_banner = \App\Models\SiteMeta::where('meta_key','home-banner')->first();
+
 ?>
-@if(isset($home_banner))
+@if(isset($home_banner) && !empty($home_banner))
+  @if(!empty($home_banner->meta_value))
   <section class="banner-sec" style="background-image: url({{ asset('siteMeta') }}/{{ $home_banner->meta_value ?? '' }});">
+  @else
+  <section class="banner-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
+  @endif
 @else
   <section class="banner-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
 @endif
