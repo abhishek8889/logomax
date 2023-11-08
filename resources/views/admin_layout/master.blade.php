@@ -20,6 +20,8 @@
     <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
     <script type="module" src="{{ asset('/build/assets/app-df470c34.js') }}"></script> 
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     <!-- vite(['resources/css/app.css' , 'resources/js/app.js']) -->
 </head>
 <style>
@@ -252,7 +254,12 @@
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Add Home content</span></a>
+                                            <a href="{{ url('/site-content/home') }}" class="nk-menu-link"><span class="nk-menu-text">Add Home content</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/site-content-list/home') }}" class="nk-menu-link"><span class="nk-menu-text">Content List</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
