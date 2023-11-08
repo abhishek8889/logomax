@@ -35,7 +35,6 @@ use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 //  ::::::::::::::::::: Special Designer :::::::::::::::::
 use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
 use App\Http\Controllers\SpecialDesigner\Task\TaskController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -229,7 +228,19 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
     Route::get('/admin-dashboard/site-content/add-about-content',[SiteContentController::class,'aboutContent']);
     Route::post('/admin-dashboard/about-page-content/addprocess',[SiteContentController::class,'aboutAddProcess']);
+
+    Route::get('/site-content/support',[ReviewsController::class,'addReview']);
+
+    // Site configuration page :::
+    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
+    Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
+    //// about page configuration 
+    Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting']);
+    Route::post('/admin-dashboard/about-page-update',[SiteContentController::class,'aboutPageupdate']);
     
+
+    
+
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////
