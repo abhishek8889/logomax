@@ -42,7 +42,26 @@
 <body>
 
   <!-- ================= header section start ====================== -->
+<?php 
+  $siteMeta = App\Models\SiteMeta::all();
+  $homePageSiteLogo = asset('/logomax-front-asset/img/custom-logo.png'); 
+  $otherPageSiteLogo =   asset('/logomax-front-asset/img/logo.png');
+  $footer_logo = asset('logomax-front-asset/img/Group 15.png');
+  foreach($siteMeta as $metaData){
+    if($metaData->meta_key == 'home-page-site-logo'){
+      $homePageSiteLogo = $metaData->meta_value; 
+      
+    }
+    if($metaData->meta_key == 'other-pages-site-logo'){
+      $otherPageSiteLogo = $metaData->meta_value;
+    }
+    if($metaData->meta_key == 'footer-logo'){
+      $footer_logo = $metaData->meta_value;
+    }
+  }
 
+  
+?>
   <header class="header <?php if(isset($request)){if($request->url() != url('/')){ echo " custom-header"; }} ?> {{
     $request }}">
     <div class="top-header">
@@ -131,9 +150,9 @@
             <a href="{{ url('/') ?? '' }}">
               <?php if(isset($request)){
                       if($request->url() != url('/')){?>
-              <img src="{{ asset('/logomax-front-asset/img/custom-logo.png')}}" alt="" />
+              <img src="{{ asset('/siteMeta/'.$otherPageSiteLogo)}}" alt="" />
               <?php }else{?>
-              <img src="{{ asset('/logomax-front-asset/img/logo.png')}}" alt="" />
+              <img src="{{ asset('/siteMeta/'.$homePageSiteLogo)}}" alt="" />
               <?php }} ?>
             </a>
           </div>
@@ -174,13 +193,11 @@
     </div>
   </header>
 
-
   <!-- ================= header section end ====================== -->
 
   @yield('content')
 
   <!-- ================= footer section start ====================== -->
-
 
   <footer>
     <div class="container">
@@ -189,7 +206,7 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="footer-text">
               <div class="footer-logo">
-                <img src="{{ asset('logomax-front-asset/img/Group 15.png')}}" alt="">
+                <img src="{{ asset('/siteMeta/'.$footer_logo) }}" alt="">
               </div>
             </div>
           </div>

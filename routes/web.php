@@ -223,6 +223,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     // Site configuration page :::
     Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
+    Route::post('/update-image',[SiteContentController::class,'updateImage']);
     
 
     
