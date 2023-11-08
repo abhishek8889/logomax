@@ -35,7 +35,7 @@ use App\Events\RegisterNotificationEvent;
 //  ::::::::::::::::::: Special Designer :::::::::::::::::
 use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
 use App\Http\Controllers\SpecialDesigner\Task\TaskController;
-
+use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -218,7 +218,15 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
     // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
 
+    Route::get('/site-content/support',[ReviewsController::class,'addReview']);
+
+    // Site configuration page :::
+    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
+    Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     
+
+    
+
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////

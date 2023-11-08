@@ -4,7 +4,6 @@
     <div class="nk-block-head">
         <div class="nk-block-head-content">
             <h4 class="title nk-block-title">Add Site Meta</h4>
-            
         </div>
     </div>
     <div class="card card-bordered card-preview">
