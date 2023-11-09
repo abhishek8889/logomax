@@ -67,14 +67,30 @@
                 </div>
             </div>
 
-            @foreach ($aboutdata as $data)
-                @if ($data->key == 'video-text')
+            
+              
                     <div class="row contact-wrappers">
-                        <?php echo $data->value; ?>
+                        @foreach ($aboutdata as $data)
+                        @if($data->key == 'video-text-title')
+                        <div class="col-md-4">
+                            <div class="long-head">
+                              <?php echo $data->value ?>
+                            </div>
+                        </div>
+                        @endif
+                        @if ($data->key == 'video-text')
+                        <div class="col-md-8">
+                            <div class="long-text">
+                              
+                                <?php echo $data->value ?>
 
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
                     </div>
-                @endif
-            @endforeach
+           
+           
 
         </div>
     </section>

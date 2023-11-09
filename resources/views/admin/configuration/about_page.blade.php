@@ -128,6 +128,16 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        @if ($data->key == 'video-text-title')
+                                        <div class="col-lg-12 mt-2">
+                                            <div class="form-group">
+                                                <label class="form-label" for="meta_name">{{ $data->name }}</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea name="{{ $data->id }}" id="video_text" class="form-control">{{ $data->value }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                         @if ($data->key == 'video-text')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
