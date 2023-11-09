@@ -44,35 +44,14 @@
                                                                     <div class="my-2" id="fieldInput">
 
                                                                         
-                                                                </div>
-                                                                    {{-- @if( != null)
-                                                                    @if(->meta_type == 'textarea')
-                                                                        <textarea name="meta_value" id="" class="form-control">{{ ->meta_value ?? '' }}</textarea>
-                                                                    @elseif(->meta_type == 'image')
-                                                                        <input type="file" name="meta_value" class="form-control">                                                                      
-                                                                    @endif
-                                                                    @else
-                                                                        <textarea name="meta_value" id="" class="form-control"></textarea>
-                                                                    @endif --}}
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                {{-- @if( == null)
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                                @else
-                                                                <button type="submit" class="btn btn-primary">Update</button>
-                                                                <a href="{{ url('admin-dashboard/sitemeta/add/') }}" class="btn btn-primary">Add New</a>
-                                                                @endif --}}
-                                                            </div>
+
                                                         </div>
-                                                        {{-- @if( != null && ->meta_type == 'image')
-                                                            <div class="col-lg-6">
-                                                                <img src="#" alt="">
-                                                            </div>
-                                                        @endif --}}
                                                         <button class="btn btn-outline-primary">Submit</button>
                                                         </div>
-
                                                     </form>
                                                 </div>
                                             </div>
@@ -84,38 +63,30 @@
                                     <script>
                                         $('#typeSelected').on('change', function () {
                                             var $val = $(this).val();
+                                            
                                             if ($val === 'textarea') {
-                                                $('#fieldInput').html('<textarea placeholder="Enter Text Here" name="field_value" id="textEditor"></textarea>')
-                                                
-                                            }else{
-                                                $('#fieldInput').html('<input type="file" name="field_value" id="image">')
+                                                $('#fieldInput').html('<textarea id="textEditor1" col="60" placeholder="Enter Text" name="field_value"></textarea>');
+                                                // tinymce.init({
+                                                //         selector: "#textEditor1",
+                                                //         plugins: 'codesample',
+                                                //         toolbar: 'codesample',
+                                                //         valid_elements: '*[*]',
+                                                //      });
+                                                // ClassicEditor
+                                                //     .create(document.querySelector('#textEditor1')),{
+                                                //         plugins: [ 'code' ],
+                                                //     }
+                                                //     .catch(error => {
+                                                //         console.error(error);
+                                                //     });
+                                            } else {
+                                                $('#fieldInput').html('<input type="file" name="field_value" id="image">');
                                             }
-                                        })
-                                    
-                                    //   $(document).ready(function () {
-                                    //     $('#typeSelected').on('change', function () {
-                                    //         var $val = $(this).val();
-                                    //         if ($val === 'text') {
-                                    //             // Check if the TinyMCE editor is already initialized
-                                    //             if (!tinymce.get('textEditor')) {
-                                    //                 // Initialize TinyMCE and replace the basic textarea
-                                    //                 tinymce.init({
-                                    //                     selector: "#textEditor",
-                                    //                 });
-                                    //             }
-                                    //             // Show the TinyMCE textarea and hide the input file
-                                    //             $('#textEditor').show();
-                                    //             $('#image').hide();
-                                    //         } else if ($val === 'image') {
-                                    //             // Remove the TinyMCE editor and replace it with the basic textarea
-                                    //             tinymce.EditorManager.execCommand('mceRemoveEditor', true, 'textEditor');
-                                    //             // Show the input file and hide the TinyMCE textarea
-                                    //             $('#image').show();
-                                    //             $('#textEditor').hide();
-                                    //         }
-                                    //     });
-                                    // });
+                                        });
                                     </script>
+                                <script>
+
+                                </script>
                                 <script>
                                 $('#field_name').keyup(function (e) {
                                     var fieldName = $(this).val();

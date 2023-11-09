@@ -35,7 +35,6 @@ use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 //  ::::::::::::::::::: Special Designer :::::::::::::::::
 use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
 use App\Http\Controllers\SpecialDesigner\Task\TaskController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -220,7 +219,18 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
     Route::get('/site-content/home',[SiteContentController::class,'homeContentPage']);
     Route::get('/site-content-list/home',[SiteContentController::class,'homeContentList']);
-    Route::post('/addHomeContent',[SiteContentController::class,'addHomeContent'])->name('addHomeContent');
+    Route::post('/addHomeContent',[SiteContentController::class,'homeContent'])->name('addHomeContent');
+    Route::get('/site-content/support',[ReviewsController::class,'addReview']);
+
+    // Site configuration page :::
+    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
+    Route::get('/admin-dashboard/site-content',[SiteContentController::class,'siteConfigurationContent']);
+    Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
+    Route::post('/admin-dashboard/update-site-content',[SiteContentController::class,'updateSiteContentConfiguration']);
+    
+
+    
+
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////
