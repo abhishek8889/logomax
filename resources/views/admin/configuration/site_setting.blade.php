@@ -3,7 +3,7 @@
 <div class="nk-block nk-block-lg">
     <div class="nk-block-head">
         <div class="nk-block-head-content">
-            <h4 class="title nk-block-title">Site Setting</h4>
+            <h4 class="title nk-block-title">Site Setting <i class="fa fa-cog" aria-hidden="true"></i></h4>
         </div>
     </div>
     <div class="card card-bordered card-preview">
