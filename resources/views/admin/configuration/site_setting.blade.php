@@ -13,7 +13,6 @@
                     @csrf
                     <div class="row">
                         <div class="col-lg-8">
-                            @dd($siteMetas)
                             @if(isset($siteMetas))
                             @foreach($siteMetas as $meta)
                                     <!-- Home banner -->

@@ -10,7 +10,7 @@
         </nav>
         <div class="terms-condition">
             <div class="row">
-                <h3>Support</h3>
+                <!-- <h3>Support</h3> -->
             </div>
             @if(isset($support_text))
             <?php print_r($support_text->meta_value);  ?>
