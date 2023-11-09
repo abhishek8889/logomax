@@ -212,13 +212,16 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
     
     // Reviews System 
-    Route::get('/admin-dashboard/add-review',[ReviewsController::class,'addReview']);
+    Route::get('/admin-dashboard/edit-review/{id}',[ReviewsController::class,'editReview']);
     Route::post('/admin-dashboard/add-review-process',[ReviewsController::class,'addReviewProcc']);
+    Route::get('admin-dashboard/review-list',[ReviewsController::class,'reviewlist']);
+    Route::post('admin-dashboard/update-review-status',[ReviewsController::class,'updatestatus']);
 
 
     // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
 
-    Route::get('/site-content/support',[ReviewsController::class,'addReview']);
+    Route::get('admin-dashboard/site-content/support',[SiteContentController::class,'supportContent']);
+    Route::post('admin-dashboard/site-content/support/submit',[SiteContentController::class,'supportContentSubmit']);
 
     // Site configuration page :::
     Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
