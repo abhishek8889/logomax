@@ -67,14 +67,30 @@
                 </div>
             </div>
 
-            @foreach ($aboutdata as $data)
-                @if ($data->key == 'video-text')
+            
+              
                     <div class="row contact-wrappers">
-                        <?php echo $data->value; ?>
+                        @foreach ($aboutdata as $data)
+                        @if($data->key == 'video-text-title')
+                        <div class="col-md-4">
+                            <div class="long-head">
+                              <?php echo $data->value ?>
+                            </div>
+                        </div>
+                        @endif
+                        @if ($data->key == 'video-text')
+                        <div class="col-md-8">
+                            <div class="long-text">
+                              
+                                <?php echo $data->value ?>
 
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
                     </div>
-                @endif
-            @endforeach
+           
+           
 
         </div>
     </section>
@@ -107,8 +123,12 @@
             </div>
         </div>
     </section>
+@foreach ($aboutdata as $data )
 
-    <section class="join-logo-sec" style="background-image: url('{{ asset('logomax-front-asset/img/signup-bg 1.png') }}');">
+@if($data->key == 'join-us-image')
+    <section class="join-logo-sec" style="background-image: url('{{ asset('/siteMeta/'.$data->value) }}');">
+@endif
+@endforeach
         <div class="container">
             @foreach ($aboutdata as $data)
                 @if ($data->key == 'join-us')

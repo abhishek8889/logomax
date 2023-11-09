@@ -128,6 +128,16 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        @if ($data->key == 'video-text-title')
+                                        <div class="col-lg-12 mt-2">
+                                            <div class="form-group">
+                                                <label class="form-label" for="meta_name">{{ $data->name }}</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea name="{{ $data->id }}" id="video_text" class="form-control">{{ $data->value }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                         @if ($data->key == 'video-text')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
@@ -158,6 +168,26 @@
                                             </div>
                                             <br>
                                         @endif
+                                        @if ($data->key == 'join-us-image')
+                                        <br>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="meta_name">{{ $data->name }}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="file" class="form-control"
+                                                        name="{{ $data->id }}" id="meta_name"
+                                                        value="{{ $data->value ?? '' }}">
+                                                </div>
+                                                @if (isset($data->value))
+                                                    <div class="mt-3">
+                                                        <img src="{{ asset('/siteMeta/' . $data->value) }}"
+                                                            alt="{{ $data->name }}" width="250px;" height="100 px;">
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <br>
+                                    @endif
                                      @endforeach
                                 @endif
                             </div>
