@@ -241,6 +241,9 @@
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/about-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">aboutus setting</span></a>
                                         </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Support setting</span></a>
+                                        </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
 
@@ -257,6 +260,7 @@
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/sitemeta/add') }}" class="nk-menu-link"><span class="nk-menu-text">Add new</span></a>
                                         </li>
+                                        
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
                                 <!-- end -->

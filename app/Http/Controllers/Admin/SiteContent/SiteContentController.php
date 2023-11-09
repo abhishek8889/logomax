@@ -61,7 +61,7 @@ class SiteContentController extends Controller
         $support_text =  SupportContent::where('meta_key','support_text')->first();
         
 
-        return view('admin.site_content.support.index',compact('support_text'));
+        return view('admin.configuration.support_page',compact('support_text'));
     }
     public function supportContentSubmit(Request $request){
         $supportContent = SupportContent::find($request->id);
