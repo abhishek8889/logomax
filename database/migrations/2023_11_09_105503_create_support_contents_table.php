@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('support_content', function (Blueprint $table) {
+        Schema::create('support_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('meta_key');
+            $table->text('meta_value')->nullable();
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('support_content');
+        Schema::dropIfExists('support_contents');
     }
 };

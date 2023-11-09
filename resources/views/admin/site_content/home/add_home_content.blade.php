@@ -25,14 +25,15 @@
                                                                 <label class="form-label" for="meta_type">Meta Type</label>
                                                                 <div class="form-control-wrap">
                                                                     <select class="form-control" name="meta_type" id="meta_type" >
-                                                                        <option @if($meta != null) @if($meta->meta_type == 'textarea') selected @endif @endif value="textarea">Text</option>
-                                                                        <option @if($meta != null) @if($meta->meta_type == 'image') selected @endif @endif value="image">Image</option>
+                                                                        <option @if(isset($meta)) @if($meta != null) @if($meta->meta_type == 'textarea') selected @endif @endif @endif value="textarea">Text</option>
+                                                                        <option @if(isset($meta)) @if($meta != null) @if($meta->meta_type == 'image') selected @endif @endif @endif value="image">Image</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="meta_name">Meta Value</label>
                                                                 <div class="form-control-wrap" id="meta_value_box">
+                                                            
                                                                     @if($meta != null)
                                                                     @if($meta->meta_type == 'textarea')
                                                                         <textarea name="meta_value" id="" class="form-control">{{ $meta->meta_value ?? '' }}</textarea>
@@ -53,10 +54,12 @@
                                                                 @endif
                                                             </div>
                                                         </div>
+                                                        @if(isset($meta))
                                                         @if($meta != null && $meta->meta_type == 'image')
                                                             <div class="col-lg-6">
                                                                 <img src="#" alt="">
                                                             </div>
+                                                        @endif
                                                         @endif
                                                         </div>
                                                     </form>

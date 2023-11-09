@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('approved');
             $table->string('rating');
             $table->string('status');
+            $table->integer('home_page_status')->default(0);
             $table->timestamps();
         });
     }

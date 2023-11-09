@@ -206,9 +206,9 @@
                                         <span class="nk-menu-text">Reviews</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
-                                        <li class="nk-menu-item">
+                                        <!-- <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/add-review') }}" class="nk-menu-link"><span class="nk-menu-text">Add Review</span></a>
-                                        </li>
+                                        </li> -->
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/review-list') }}" class="nk-menu-link"><span class="nk-menu-text">Review List</span></a>
                                         </li>
@@ -267,6 +267,9 @@
                                     <ul class="nk-menu-sub" style="display: none;">
                                         <li class="nk-menu-item">
                                             <a href="#" class="nk-menu-link"><span class="nk-menu-text">Add Home content</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Add Support content</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
