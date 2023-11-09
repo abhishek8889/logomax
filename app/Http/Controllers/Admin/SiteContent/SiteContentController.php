@@ -30,13 +30,13 @@ class SiteContentController extends Controller
     //////////////////////// about page function \\\\\\\\\\\\\\\\\\\\\\\\\\\\
     public function aboutContent()
     {
-        $meta = '';
-        return view('admin.site_content.about_us.add_about_us_content', compact('meta'));
+
+        return view('admin.site_content.about_us.add_about_us_content');
     }
 
     public function aboutAddProcess(Request $request)
     {
-        // dd($request->all());
+        //   dd($request->all());
         $request->validate([
             'content_name' => 'required',
             'slug' => 'required|unique:about_us_contents,key',
@@ -56,7 +56,7 @@ class SiteContentController extends Controller
                 $file->move(public_path() . '/siteMeta/', $filename);
                 $data->value = $filename;
             }
-        } else {
+        } else { 
             $data->value = $request->content_value;
         }
         $data->type = $request->content_type;
@@ -72,10 +72,8 @@ class SiteContentController extends Controller
 
     public function aboutPageupdate(Request $req)
     {
-        //  dd($req->all());
-
+        // dd($req->all());
         foreach ($req->all() as $key => $value) {
-
             $data = AboutUsContent::find($key);
             if ($data) {
                 if ($req->hasFile($key)) {
@@ -85,15 +83,12 @@ class SiteContentController extends Controller
                     $file->move(public_path() . '/siteMeta/', $filename);
                     $img = $filename;
                     $data->update(['value' => $img]);
-
                 } else {
                     $data->update(['value' => $value]);
                 }
-
             }
-
         }
-
+        return redirect()->back()->with('success', 'content added successfully');
     }
     //////////////////////////////////////////////////////////////////////////////////////
 
