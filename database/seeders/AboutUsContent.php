@@ -66,12 +66,11 @@ class AboutUsContent extends Seeder
                 'type' => 'textarea',
             ],
             [
-                'name' => 'video image',
-                'key' => 'video-image',
+                'name' => 'Join Us Image',
+                'key' => 'join-us-image',
                 'value' => '2023-11-09_133334_signup-bg 1.png',
                 'type' => 'file',
             ],
-          
             [
                 'name' => 'Join Us',
                 'key' => 'join-us',
