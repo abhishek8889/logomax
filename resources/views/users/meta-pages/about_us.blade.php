@@ -123,8 +123,12 @@
             </div>
         </div>
     </section>
+@foreach ($aboutdata as $data )
 
-    <section class="join-logo-sec" style="background-image: url('{{ asset('logomax-front-asset/img/signup-bg 1.png') }}');">
+@if($data->key == 'join-us-image')
+    <section class="join-logo-sec" style="background-image: url('{{ asset('/siteMeta/'.$data->value) }}');">
+@endif
+@endforeach
         <div class="container">
             @foreach ($aboutdata as $data)
                 @if ($data->key == 'join-us')

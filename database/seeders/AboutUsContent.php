@@ -33,6 +33,20 @@ class AboutUsContent extends Seeder
                 'value' => '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>',
                 'type' => 'textarea',
             ],
+         
+            [
+                'name' => 'video image',
+                'key' => 'video-image',
+                'value' => '2023-11-09_102227_video-img.png',
+                'type' => 'file',
+            ],
+            [
+                'name' => 'video link',
+                'key' => 'video-link',
+                'value' => 'https://www.youtube.com/embed/M2kSJbLbIgQ',
+                'type' => 'link',
+            ],
+
             [
                 'name' => 'video Text Title',
                 'key' => 'video-text-title',
@@ -48,24 +62,19 @@ class AboutUsContent extends Seeder
             [
                 'name' => 'video image',
                 'key' => 'video-image',
-                'value' => '2023-11-09_102227_video-img.png',
+                'value' => '2023-11-09_133334_signup-bg 1.png',
                 'type' => 'file',
             ],
+          
             [
-                'name' => 'video link',
-                'key' => 'video-link',
-                'value' => 'https://www.youtube.com/embed/M2kSJbLbIgQ',
-                'type' => 'link',
-            ],
-            [
-                'name' => 'Contact Us',
-                'key' => 'contact-us',
+                'name' => 'Join Us',
+                'key' => 'join-us',
                 'value' => '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>',
                 'type' => 'textarea',
             ],
             [
-                'name' => 'Join Us',
-                'key' => 'join-us',
+                'name' => 'Contact Us',
+                'key' => 'contact-us',
                 'value' => '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>',
                 'type' => 'textarea',
             ],
