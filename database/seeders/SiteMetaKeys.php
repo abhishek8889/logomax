@@ -19,7 +19,6 @@ class SiteMetaKeys extends Seeder
             ['meta_name' => 'Home Page Site Logo','meta_key' => 'home-page-site-logo' , 'meta_value' => '','meta_type' => 'image','status' => 1],
             ['meta_name' => 'Other pages Site Logo','meta_key' => 'other-pages-site-logo' , 'meta_value' => '','meta_type' => 'image','status' => 1],
             ['meta_name' => 'Footer Logo','meta_key' => 'footer-logo' , 'meta_value' => '','meta_type' => 'image','status' => 1],
-            
         );
         foreach($meta_keys as $keys){
             DB::table('site_metas')->insert([

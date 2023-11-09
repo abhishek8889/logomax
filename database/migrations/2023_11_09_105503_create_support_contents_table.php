@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('support_contents', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('meta_name');
             $table->string('meta_key');
             $table->text('meta_value')->nullable();
             $table->string('type');

@@ -31,11 +31,10 @@ use App\Http\Controllers\Admin\SiteMeta\SiteMetaController;
 use App\Http\Controllers\BasicController;
 
 use App\Events\RegisterNotificationEvent;
-
+use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 //  ::::::::::::::::::: Special Designer :::::::::::::::::
 use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
 use App\Http\Controllers\SpecialDesigner\Task\TaskController;
-use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -119,7 +118,17 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     //     return view('users.meta-pages.terms&conditions');
     // });
     Route::get('/terms-and-conditions', [UserDashboardController::class,'termsAndConditions']);
+
+    ///////////////////////// Simple user Dashboard Routes /////////////////////////////////
     
+        Route::get('/dashboard',[UserDashboardController::class, 'UserDashboardIndex']);
+        Route::get('/favourites',[UserDashboardController::class, 'UserFavouritelist']);
+        Route::get('/logo',[UserDashboardController::class, 'UserLogoslist']);
+        Route::get('/configuration',[UserDashboardController::class, 'UserConfiguration']);
+        Route::get('/subscriptions',[UserDashboardController::class, 'UserSubscription']);
+        Route::get('/messages',[UserDashboardController::class, 'UserMessages']);
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 });
 
 ///////////////   USER PANEL ROUTES END   //////////////////////////////////
@@ -219,6 +228,8 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
 
     // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
+    Route::get('/admin-dashboard/site-content/add-about-content',[SiteContentController::class,'aboutContent']);
+    Route::post('/admin-dashboard/about-page-content/addprocess',[SiteContentController::class,'aboutAddProcess']);
 
     Route::get('admin-dashboard/site-content/support',[SiteContentController::class,'supportContent']);
     Route::post('admin-dashboard/site-content/support/submit',[SiteContentController::class,'supportContentSubmit']);
@@ -227,10 +238,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     Route::post('/update-image',[SiteContentController::class,'updateImage']);
-    
-
-    
-
+    //// about page configuration 
+    Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting']);
+    Route::post('/admin-dashboard/about-page-update',[SiteContentController::class,'aboutPageupdate']);
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////

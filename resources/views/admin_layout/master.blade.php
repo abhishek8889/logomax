@@ -238,6 +238,9 @@
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/site-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Site setting</span></a>
                                         </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/about-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">aboutus setting</span></a>
+                                        </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
 
@@ -270,6 +273,7 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Add Support content</span></a>
+                                            <a href="/admin-dashboard/site-content/add-about-content" class="nk-menu-link"><span class="nk-menu-text">About</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
