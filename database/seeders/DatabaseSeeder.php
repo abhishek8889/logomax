@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(UserRole::class);
         $this->call(LogoStatus::class);
+        $this->call(AboutUsContent::class);
     }
 }

@@ -17,7 +17,7 @@
                                 @if (isset($aboutdata))
                                     @foreach ($aboutdata as $data)
                                     
-                                    @if ($data->key === 'upper-text-title')
+                                    @if ($data->key == 'upper-text-title')
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -27,7 +27,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                        @if ($data->key === 'upper-text-left')
+                                        @if ($data->key == 'upper-text-left')
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -38,7 +38,7 @@
                                             </div>
                                         @endif
                                        
-                                        @if ($data->key === 'upper-text-right')
+                                        @if ($data->key == 'upper-text-right')
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -138,7 +138,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        @if ($data->key === 'video-image')
+                                        @if ($data->key == 'video-image')
                                             <br>
                                             <div class="col-lg-12">
                                                 <div class="form-group">
