@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\SiteContent;
 
 use App\Http\Controllers\Controller;
-use App\Models\SiteContent;
+use App\Models\HomeContent;
 use Illuminate\Http\Request;
 use App\Models\SiteMeta;
 
@@ -21,7 +21,7 @@ class SiteContentController extends Controller
 
     public function updateHomeConfiguration(Request $req){
         foreach ($req->all() as $key => $value) {
-            $content = SiteContent::find($key);
+            $content = HomeContent::find($key);
     
             if ($content) {
                 if ($req->hasFile($key)) {
@@ -44,12 +44,12 @@ class SiteContentController extends Controller
 
 
     public function homeConfigurationContent(){
-        $sitecontent = SiteContent::all();
+        $sitecontent = HomeContent::all();
         return view('admin/configuration.site_content',compact('sitecontent'));
     }
 
     public function homeContentList(){
-        $sitecontent = SiteContent::all();
+        $sitecontent = HomeContent::all();
         return view('admin.site_content.home.list_home_content',compact('sitecontent'));
     }
     public function homeContent(Request $req){
@@ -58,7 +58,7 @@ class SiteContentController extends Controller
             'field_slug'=>'required',
             'field_type'=>'required'
         ]);
-        $content = new SiteContent;
+        $content = new HomeContent;
         $content->name = $req->field_name;
         $content->key = $req->field_slug;
         if($req->field_type == 'image'){

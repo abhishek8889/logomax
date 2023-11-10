@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SiteContent extends Model
+class HomeContent extends Model
 {
     use HasFactory;
     protected $table = 'home_content';
