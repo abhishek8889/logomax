@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SiteMetaKeys::class);
         $this->call(SupportContent::class);
         $this->call(AboutUsContent::class);
+        $this->call(HomeContentSeeder::class);
     }
 }

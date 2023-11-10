@@ -53,10 +53,12 @@
       </div>
       <div class="content-wrapper">
         <div class="logos-text">
-          <h5>Unique logos from
-            <span>$149</span>
-          </h5>
-        </div>
+          @foreach ($homeContent as $content)
+          @if ($content->key == 'unique-logos-from-text')
+            <?php echo $content->value; ?>
+          @endif
+          @endforeach
+        </div>    
         <div class="try-btn">
           <a class="login-btn" href="{{ url('/logos/search') }}">Try Now</a>
         </div>
@@ -71,13 +73,21 @@
   <section class="templates-sec p-110">
     <div class="container">
       <div class="template-content">
-        <h2>Thousands of Professional Logo Templates</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.</p>
+        @foreach ($homeContent as $content)
+            
+        @if($content->key == 'professional-logos-title')
+        <h2><?php echo $content->value ?></h2>
+ 
+        @endif
+        @if($content->key == 'professional-logos-text')
+        <p><?php echo $content->value ?></p>
+
+        @endif
+        @endforeach
       </div>
 
 
+  
 
 
       <div class="tab-wrapper">
@@ -206,20 +216,32 @@
   <!-- ================= templates section end ====================== -->
 
   <!-- ================= join logo section start ====================== -->
-
-  <section class="join-logo-sec" style="background-image: url({{ asset('/logomax-front-asset/img/banner-img.png') }});">
+@foreach ($homeContent as $content)
+    @if($content->key == 'register-background-image')
+<section class="join-logo-sec" style="background-image: url({{ asset('siteMeta') }}/{{ $content->value ?? '' }});">
+  @endif
+  @endforeach
     <div class="container">
       <div class="join-logo-text">
-        <div class="download-text">
-          <h6>What is <br>
-            Lorem Ipsum?</h6>
-          <p> <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it.</p>
+        <div class="download-text"><h6>
+          @foreach ($homeContent as $content)
+          @if($content->key == 'register-banner-title-desc')
+          <?php echo $content->value; ?>
+            @endif
+            @endforeach</h6>
+            @foreach ($homeContent as $content)
+            @if($content->key == 'register-banner-title-text-desc')
+            <p><?php 
+              echo $content->value; ?></p>
+              @endif
+              @endforeach
         </div>
         <div class="register-text">
-          <h6>Register to download Logos
-            from Logomax.</h6>
+          @foreach ($homeContent as $content)
+          @if($content->key == 'registerbanner-title')
+          <h6><?php echo $content->value ?></h6>
+            @endif
+            @endforeach
           <div class="join-btn">
             <a class="g-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i>Register with <strong>Google</strong> </a>
           </div>
@@ -275,9 +297,16 @@
   <section class="slider-sec">
     <div class="container">
       <div class="logomax-content">
-        <h2>Why our customers love Logomax</h2>
-        <p>Hundreds of customers have trusted Logomax logo maker and Brand Plan as a resource to set up, launch, and
-          grow a brand they love.</p>
+        @foreach ($homeContent as $content)
+        @if($content->key == 'customer-review-title')
+        <h2><?php echo $content->value ?></h2>
+        @endif
+        @endforeach
+        @foreach ($homeContent as $content)
+        @if($content->key == 'customer-review-text')
+        <p><?php echo $content->value ?></p>
+          @endif
+          @endforeach
         <div class="logomax-img">
           <img src="img/trustpilot.png" alt="">
         </div>
