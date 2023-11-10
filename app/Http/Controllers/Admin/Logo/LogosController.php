@@ -61,7 +61,7 @@ class LogosController extends Controller
             $mail = Mail::to($designer_detail['email'])->send(new ApproveLogoMail($mailData));
 
             // Send notification to Designers ::::::::: 
-
+                
             $notifications = Notifications::create(array(
                 'type' => 'logo-approved',
                 'sender_id' => '0',
@@ -101,7 +101,7 @@ class LogosController extends Controller
                     'reciever_id' => $designer_detail['id'],
                     'designer_id' => $designer_detail['id'],
                     'logo_id' => $logos->id,
-                    'message' => 'Congratulations ! Your logo is <span>Approved !</span>'
+                    'message' => 'Oops ! Your logo is <span>Disapproved !</span>'
                 )); 
                 $eventData = array(
                     'type' => 'logo-disapproved',

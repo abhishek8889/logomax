@@ -33,8 +33,8 @@
                                                                         <td class="px-3 px-sm-5 pb-3 pb-sm-5">
                                                                             <h5 class="text-primary mb-3">A new logo has been added !</h5>
                                                                             <div>
-                                                                                <p>Please check this by clicking on this link </p>
-                                                                                <a href="">click here</a>
+                                                                                <p>Please check this by clicking on the link below. </p>
+                                                                                <a href="{{ url('admin-dashboard/logo-detail/'.$mailData['logo_slug'] ?? '') }}">click here</a>
                                                                             </div>
                                                                         </td>
                                                                     </tr>

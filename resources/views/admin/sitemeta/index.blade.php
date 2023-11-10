@@ -55,7 +55,7 @@
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                 <ul class="link-list-plain">
                                     <li><a href="{{ url('admin-dashboard/sitemeta/add') }}/{{ $meta->meta_key ?? '' }}">Edit</a></li>
-                                    <!-- <li><a href="#">Remove</a></li> -->
+                                    <li><a href="{{ url('admin-dashboard/sitemeta/delete/'.$meta->id ?? '') }}">Remove</a></li>
                                 </ul>
                             </div>
                         </div>
