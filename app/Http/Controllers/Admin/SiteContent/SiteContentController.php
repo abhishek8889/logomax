@@ -18,11 +18,8 @@ class SiteContentController extends Controller
         $siteMetas = SiteMeta::all();
         return view('admin/configuration.site_setting',compact('siteMetas'));
     }
-    public function updateSiteConfiguration(Request $req){
-        dd($req);
-    }
 
-    public function updateSiteContentConfiguration(Request $req){
+    public function updateHomeConfiguration(Request $req){
         foreach ($req->all() as $key => $value) {
             $content = SiteContent::find($key);
     
@@ -46,11 +43,7 @@ class SiteContentController extends Controller
     }
 
 
-
-    public function updateImage(Request $req){
-
-    }
-    public function siteConfigurationContent(){
+    public function homeConfigurationContent(){
         $sitecontent = SiteContent::all();
         return view('admin/configuration.site_content',compact('sitecontent'));
     }
@@ -85,11 +78,5 @@ class SiteContentController extends Controller
         $content->save();
         return redirect()->back()->with('success','Successfully added Site Content');
     }
-    public function aboutContent(){
-        return true;
-    }
 
-    public function supportContent(Request $request){
-        
-    }
 }
