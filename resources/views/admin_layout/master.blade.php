@@ -206,9 +206,9 @@
                                         <span class="nk-menu-text">Reviews</span>
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
-                                        <!-- <li class="nk-menu-item">
-                                            <a href="{{ url('/admin-dashboard/add-review') }}" class="nk-menu-link"><span class="nk-menu-text">Add Review</span></a>
-                                        </li> -->
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/edit-review') }}" class="nk-menu-link"><span class="nk-menu-text">Add Review</span></a>
+                                        </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/review-list') }}" class="nk-menu-link"><span class="nk-menu-text">Review List</span></a>
                                         </li>
@@ -236,13 +236,13 @@
                                     </a>
                                     <ul class="nk-menu-sub" style="display: none;">
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('/admin-dashboard/site-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Site setting</span></a>
+                                            <a href="{{ url('/admin-dashboard/site-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Site Setting</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('/admin-dashboard/about-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">aboutus setting</span></a>
+                                            <a href="{{ url('/admin-dashboard/about-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">About Page Setting</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Support setting</span></a>
+                                            <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Support Page Setting</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
@@ -276,7 +276,9 @@
                                             <a href="#" class="nk-menu-link"><span class="nk-menu-text">Add Home content</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Add Support content</span></a>
+                                            <a href="{{ url('admin-dashboard/site-meta/support/') }}" class="nk-menu-link"><span class="nk-menu-text">Add Support content</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
                                             <a href="/admin-dashboard/site-content/add-about-content" class="nk-menu-link"><span class="nk-menu-text">About</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->

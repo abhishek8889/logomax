@@ -1,6 +1,6 @@
 @extends('admin_layout/master')
 @section('content')
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end p-3">
         {{ Breadcrumbs::render('add-special-desinger') }}
     </div>
     <div class="card card-bordered h-100">

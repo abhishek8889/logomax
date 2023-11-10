@@ -8,6 +8,9 @@ $option_type_arr = array(
                 );
 
 ?>
+    <div class="d-flex justify-content-end p-3">
+        {{ Breadcrumbs::render('additional-options') }}
+    </div>
     <div class="col-lg-12 " id="add-section">
         <div class="card card-bordered h-100">
             <div class="card-inner">

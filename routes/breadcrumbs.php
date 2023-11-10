@@ -17,19 +17,23 @@ Breadcrumbs::for('logos-request', function (BreadcrumbTrail $trail) {
 });
 Breadcrumbs::for('logos-detail', function (BreadcrumbTrail $trail, $slug) {
     $trail->parent('logos-request');
-    $trail->push('DETAIL-PAGE', route('logos-requests',['slug'=>$slug]));
+    $trail->push('DETAIL PAGE', route('logos-requests',['slug'=>$slug]));
 });
 Breadcrumbs::for('approved-logos', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
-    $trail->push('APPROVED-LOGOS', route('approved-logos'));
+    $trail->push('APPROVED LOGOS', route('approved-logos'));
 });
 Breadcrumbs::for('disapproved-logos', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
-    $trail->push('DISAPPROVED-LOGOS', route('disapproved-logos'));
+    $trail->push('DISAPPROVED LOGOS', route('disapproved-logos'));
+});
+Breadcrumbs::for('sold-logos', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('SOLD LOGOS', route('sold-logos'));
 });
 Breadcrumbs::for('desingers-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
-    $trail->push('DESIGNERS-LIST', route('designer-list'));
+    $trail->push('DESIGNERS LIST', route('designer-list'));
 });
 Breadcrumbs::for('designer-view', function (BreadcrumbTrail $trail,$name) {
     $trail->parent('desingers-list');
@@ -88,6 +92,67 @@ Breadcrumbs::for('additional-options', function(BreadcrumbTrail $trail){
     $trail->parent('admin-dashboard');
     $trail->push('LOGO-ADDITIONAL-OPTION',route('additional-options'));
 });
+Breadcrumbs::for('support-setting', function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('SUPPORT-PAGE-CONTENT',route('support-setting'));
+});
+Breadcrumbs::for('site-setting', function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('SITE-CONTENT',route('site-setting'));
+});
+Breadcrumbs::for('about-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('ABOUT-PAGE-CONTENT',route('about-setting'));
+});
+Breadcrumbs::for('reviews',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('REVIEWS',route('review-list'));
+});
+Breadcrumbs::for('update-review',function(BreadcrumbTrail $trail){
+    $trail->parent('reviews');
+    $trail->push('UPDATES',route('update-review',['id'=>1]));
+});
+Breadcrumbs::for('revision-request',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('LOGOS REVISION REQUESTS',route('revision-request'));
+});
+Breadcrumbs::for('revision-request-detail',function(BreadcrumbTrail $trail){
+    $trail->parent('revision-request');
+    $trail->push('DETAIL',route('revision-request-detail',['request_id'=>1]));
+});
+Breadcrumbs::for('on-revision',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('ON REVISION',route('on-revision'));
+});
+Breadcrumbs::for('on-revision-detail',function(BreadcrumbTrail $trail){
+    $trail->parent('on-revision');
+    $trail->push('DETAIL',route('on-revision-detail',['revision_id'=>1]));
+});
+Breadcrumbs::for('revised-logos',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('REVISED LOGOS',route('revised-logos'));
+});
+Breadcrumbs::for('revised-logos-detail',function(BreadcrumbTrail $trail){
+    $trail->parent('revised-logos');
+    $trail->push('DETAIL',route('revised-logos-detail',['revision_id'=>1]));
+});
+Breadcrumbs::for('site-meta',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('SITE META',route('site-meta'));
+});
+Breadcrumbs::for('site-meta-update',function(BreadcrumbTrail $trail,$site_key){
+    $trail->parent('site-meta');
+    $trail->push($site_key,route('site-meta-update',['id'=>$site_key]));
+});
+Breadcrumbs::for('support-meta',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('SUPPORT PAGE META',route('support-meta',['id'=>1]));
+});
+Breadcrumbs::for('about-meta',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('ABOUT PAGE META',route('about-meta',['id'=>1]));
+});
+
 
 /////// Desinger breadcrumbs 
 Breadcrumbs::for('designer-dashboard', function (BreadcrumbTrail $trail) {
