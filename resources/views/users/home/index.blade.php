@@ -315,7 +315,6 @@
       <div class="slick-wrapper">
         <div class="slick-test">
         @foreach($review as $r)
-        @dd($r)
           <div class="slider-box">
             <div class="slider-content">
               <p>
