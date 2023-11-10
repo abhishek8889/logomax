@@ -293,7 +293,7 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Add Support content</span></a>
-                                            <a href="/admin-dashboard/site-content/add-about-content" class="nk-menu-link"><span class="nk-menu-text">About</span></a>
+                                            <a href="{{ url('/admin-dashboard/site-content/add-about-content') }}" class="nk-menu-link"><span class="nk-menu-text">About</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>

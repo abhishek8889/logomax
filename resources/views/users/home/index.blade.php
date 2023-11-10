@@ -315,24 +315,18 @@
       <div class="slick-wrapper">
         <div class="slick-test">
         @foreach($review as $r)
+        @dd($r)
           <div class="slider-box">
             <div class="slider-content">
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                into electronic typesetting, remaining essentially unchanged. It was popularised..</p>
-
+              <p>
+                {{ $r->description ?? '' }}
+              </p>
             </div>
             <div class="choice_star">
-              <h6>the choice was great</h6>
-
+              <h6> {{ $r->title ?? ''}} </h6>
               <div class="choice-text">
                 <div class="slick-img">
-                  <i class="fa-sharp fa-solid fa-star"></i>
-                  <i class="fa-sharp fa-solid fa-star"></i>
-                  <i class="fa-sharp fa-solid fa-star"></i>
-                  <i class="fa-sharp fa-solid fa-star"></i>
-                  <i class="fa-sharp fa-solid fa-star"></i>
+                  <img src="{{ asset('logomax-front-asset/img/review-images/stars-'.$r->rating) }}" alt="stars-{{$r->rating}}">
                 </div>
                 <div class="Verified-content">
                   <i class="fa-solid fa-check"></i>
