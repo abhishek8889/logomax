@@ -212,7 +212,13 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/sitemeta/',[SiteMetaController::class,'index']);
     Route::get('admin-dashboard/sitemeta/add/{id?}',[SiteMetaController::class,'addMeta']);
     Route::post('admin-dashboard/sitemeta/addprocc',[SiteMetaController::class,'addProcc']);
+    Route::get('admin-dashboard/sitemeta/delete/{id}',[SiteMetaController::class,'sitemetadelete']);
 
+
+    //Support Meta
+    Route::get('admin-dashboard/site-meta/support/{id?}',[SiteMetaController::class,'SupportContent']);
+    Route::post('admin-dashboard/site-meta/support/submitProcc',[SiteMetaController::class,'supportSubmit']);
+    Route::get('admin-dashboard/site-meta/support/delete/{id}',[SiteMetaController::class,'supportmetaDelete']);
     
    
 
