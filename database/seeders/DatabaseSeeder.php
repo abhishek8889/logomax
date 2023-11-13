@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LogoStatus::class);
         $this->call(SiteMetaKeys::class);
         $this->call(SupportContent::class);
+        $this->call(AboutUsContent::class);
     }
 }
