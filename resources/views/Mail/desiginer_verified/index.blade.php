@@ -41,7 +41,7 @@
                                         <tr>
                                             @if($mailData['is_approved'] == 1)
                                             <td class="px-3 px-sm-5 pb-3 pb-sm-5">
-                                                <h5 class="text-success mb-3">Your Designer Account Verified.</h5>
+                                                <h5 class="text-success mb-3">Congratulations ! Your Designer Account Verified.</h5>
                                                 <p>Hi,<span class="text-success mb-3">{{ $mailData['name']}} </span> One fo our team verified your indentity. You are now ready for upload logo on logomax.</p>
                                             </td>
                                             @elseif($mailData['is_approved'] == 2)

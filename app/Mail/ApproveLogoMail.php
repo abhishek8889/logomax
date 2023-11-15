@@ -28,7 +28,7 @@ class ApproveLogoMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Approve Logo Mail',
+            subject: 'Approved Logo Mail',
         );
     }
 

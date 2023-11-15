@@ -10,6 +10,9 @@
         $imageUrl = asset($mediaObj->image_path);
     }
 ?>
+<div class="d-flex justify-content-end">
+    {{ Breadcrumbs::render('revision-request-detail') }}
+</div>
 <div class="card card-bordered card-preview">
     <div class="card-inner">
         <div class="row">

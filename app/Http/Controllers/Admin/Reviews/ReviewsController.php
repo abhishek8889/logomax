@@ -9,7 +9,7 @@ use App\Models\LogoReview;
 
 class ReviewsController extends Controller
 {
-    public function editReview($id){
+    public function editReview($id = null){
         $review = LogoReview::find($id);
         $soldLogoList = Logo::where('status',3)->orWhere('status',2)->get();
         return view('admin.reviews.add_review',compact('soldLogoList','review'));
@@ -20,6 +20,12 @@ class ReviewsController extends Controller
         return view('admin.reviews.reviews_list',compact('reviews'));
     }
     public function addReviewProcc(Request $req){
+        $req->validate([
+            'title' => 'required',
+            'logo_id' => 'required',
+            'description' => 'required',
+            'rating' => 'required'
+        ]);
         if($req->review_by =='admin'){
             $review = new LogoReview;
             $review->user_id = $req->review_by;
@@ -50,5 +56,13 @@ class ReviewsController extends Controller
         $review->home_page_status = $request->status;
         $review->update();
         return $review;
+    }
+    public function delete($id){
+        $review = LogoReview::find($id);
+        if(!$review){
+            abort(404);
+        }
+        $review->delete();
+        return redirect()->back()->with('success','Successfully deleted');
     }
 }

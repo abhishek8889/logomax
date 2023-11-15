@@ -43,7 +43,7 @@
                                         <?php    }}else{ ?>
                                             <tr>
                                                 <td class="px-3 px-sm-5 pb-3 pb-sm-5">
-                                                    <h5 class="text-primary mb-3">Your application under varification process.</h5>
+                                                    <h5 class="text-primary mb-3">Your application is under the verification process. Please verify your email by clicking the link below.</h5>
                                                     <a href="{{ url('register-verify/' . ($mailData['token'] ?? '')) }}" class="btn btn-info">Verify Email</a>
                                                 </td>
                                             </tr>

@@ -127,6 +127,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
         Route::get('/configuration',[UserDashboardController::class, 'UserConfiguration']);
         Route::get('/subscriptions',[UserDashboardController::class, 'UserSubscription']);
         Route::get('/messages',[UserDashboardController::class, 'UserMessages']);
+        Route::post('/changePassword',[UserDashboardController::class, 'changePassword']);
 
     ////////////////////////////////////////////////////////////////////////////////////////
 });
@@ -197,26 +198,26 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/special-designer-list',[SpecialDesignerController::class,'specialDesignerList'])->name('special-desinger-list');
 
     // Logo Revision Routes :
-    Route::get('admin-dashboard/revision-request',[RevisionController::class,'revisionRequest']);
-    Route::get('admin-dashboard/request-detail/{request_id}',[RevisionController::class,'revisionRequestDetail']);
+    Route::get('admin-dashboard/revision-request',[RevisionController::class,'revisionRequest'])->name('revision-request');
+    Route::get('admin-dashboard/request-detail/{request_id}',[RevisionController::class,'revisionRequestDetail'])->name('revision-request-detail');
 
     // Revision Requests are assigned
-    Route::get('admin-dashboard/on-revision',[RevisionController::class,'onRevisionTask']);
-    Route::get('admin-dashboard/on-revision-detail/{revision_id}',[RevisionController::class,'onRevisionDetail']);
+    Route::get('admin-dashboard/on-revision',[RevisionController::class,'onRevisionTask'])->name('on-revision');
+    Route::get('admin-dashboard/on-revision-detail/{revision_id}',[RevisionController::class,'onRevisionDetail'])->name('on-revision-detail');
 
     // Revised Logo 
-    Route::get('admin-dashboard/revised-logo-list',[RevisionController::class,'revisedLogoList']);
-    Route::get('admin-dashboard/revised-logo/{revision_id}',[RevisionController::class,'revisedLogoDetail']);
+    Route::get('admin-dashboard/revised-logo-list',[RevisionController::class,'revisedLogoList'])->name('revised-logos');
+    Route::get('admin-dashboard/revised-logo/{revision_id}',[RevisionController::class,'revisedLogoDetail'])->name('revised-logos-detail');
 
     //SiteMeta
-    Route::get('admin-dashboard/sitemeta/',[SiteMetaController::class,'index']);
-    Route::get('admin-dashboard/sitemeta/add/{id?}',[SiteMetaController::class,'addMeta']);
+    Route::get('admin-dashboard/sitemeta/',[SiteMetaController::class,'index'])->name('site-meta');
+    Route::get('admin-dashboard/sitemeta/add/{id?}',[SiteMetaController::class,'addMeta'])->name('site-meta-update');
     Route::post('admin-dashboard/sitemeta/addprocc',[SiteMetaController::class,'addProcc']);
     Route::get('admin-dashboard/sitemeta/delete/{id}',[SiteMetaController::class,'sitemetadelete']);
 
 
     //Support Meta
-    Route::get('admin-dashboard/site-meta/support/{id?}',[SiteMetaController::class,'SupportContent']);
+    Route::get('admin-dashboard/site-meta/support/{id?}',[SiteMetaController::class,'SupportContent'])->name('support-meta');
     Route::post('admin-dashboard/site-meta/support/submitProcc',[SiteMetaController::class,'supportSubmit']);
     Route::get('admin-dashboard/site-meta/support/delete/{id}',[SiteMetaController::class,'supportmetaDelete']);
     
@@ -227,17 +228,18 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('assign-work',[RevisionController::class,'assignToSpecialDesigner']);
     
     // Reviews System 
-    Route::get('/admin-dashboard/edit-review/{id}',[ReviewsController::class,'editReview']);
+    Route::get('/admin-dashboard/edit-review/{id?}',[ReviewsController::class,'editReview'])->name('update-review');
     Route::post('/admin-dashboard/add-review-process',[ReviewsController::class,'addReviewProcc']);
-    Route::get('admin-dashboard/review-list',[ReviewsController::class,'reviewlist']);
+    Route::get('admin-dashboard/review-list',[ReviewsController::class,'reviewlist'])->name('review-list');
     Route::post('admin-dashboard/update-review-status',[ReviewsController::class,'updatestatus']);
+    Route::get('admin-dashboard/review/delete/{id}',[ReviewsController::class,'delete']);
 
 
     // Site Content Routes ::::::::::::::::::::::::::::::::::::::::::::::::
-    Route::get('/admin-dashboard/site-content/add-about-content',[SiteContentController::class,'aboutContent']);
+    Route::get('/admin-dashboard/site-content/add-about-content',[SiteContentController::class,'aboutContent'])->name('about-meta');
     Route::post('/admin-dashboard/about-page-content/addprocess',[SiteContentController::class,'aboutAddProcess']);
 
-    Route::get('admin-dashboard/site-content/support',[SiteContentController::class,'supportContent']);
+    Route::get('admin-dashboard/site-content/support',[SiteContentController::class,'supportContent'])->name('support-setting');
     Route::post('admin-dashboard/site-content/support/submit',[SiteContentController::class,'supportContentSubmit']);
     Route::get('/site-content/home',[SiteContentController::class,'homeContentPage']);
     Route::get('/site-content-list/home',[SiteContentController::class,'homeContentList']);
@@ -250,7 +252,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     Route::post('/update-image',[SiteContentController::class,'updateImage']);
     //// about page configuration 
-    Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting']);
+    Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting'])->name('about-setting');
     Route::post('/admin-dashboard/about-page-update',[SiteContentController::class,'aboutPageupdate']);
     Route::post('/admin-dashboard/update-site-content',[SiteContentController::class,'updateHomeConfiguration']);
 

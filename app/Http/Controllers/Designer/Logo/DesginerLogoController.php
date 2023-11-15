@@ -102,7 +102,8 @@ class DesginerLogoController extends Controller
                 
                 event(new RegisterNotificationEvent($eventData));
                 $mailData = array(
-                    'data' => ''
+                    'logo_id' => $logo_id,
+                    'logo_slug' => $logos->logo_slug,
                 );
                 $mail = Mail::to(env('ADMIN_MAIL'))->send(new LogoAddedByDesigner($mailData));
 

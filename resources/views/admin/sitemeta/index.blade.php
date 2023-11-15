@@ -2,8 +2,9 @@
 @section('content')
 <div class="nk-block nk-block-lg">
     <div class="nk-block-head">
-        <div class="nk-block-head-content">
+        <div class="nk-block-head-content d-flex justify-content-between">
             <h4 class="nk-block-title">Site Metas</h4>
+            {{ Breadcrumbs::render('site-meta') }}
         </div>
     </div>
     <div class="card card-bordered card-preview">
@@ -54,7 +55,7 @@
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                 <ul class="link-list-plain">
                                     <li><a href="{{ url('admin-dashboard/sitemeta/add') }}/{{ $meta->meta_key ?? '' }}">Edit</a></li>
-                                    <!-- <li><a href="#">Remove</a></li> -->
+                                    <li><a href="{{ url('admin-dashboard/sitemeta/delete/'.$meta->id ?? '') }}">Remove</a></li>
                                 </ul>
                             </div>
                         </div>
