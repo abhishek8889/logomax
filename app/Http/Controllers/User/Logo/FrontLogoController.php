@@ -36,10 +36,9 @@ class FrontLogoController extends Controller
             });
             }
         }
-
         if($request->categories){
-            
             $categoryslug = json_decode($request->categories);
+            // dd($request->categories);
             if(count($categoryslug) > 0){
             foreach($categoryslug as $slug){
                 $category = Categories::where('slug',$slug)->first();
@@ -77,7 +76,7 @@ class FrontLogoController extends Controller
         if(empty($logo)){
             abort(404);
         }
-
+        
         $logoFacilities = LogoFacilities::all();
 
         $similar_logos = Logo::where([['category_id',$logo->category_id],['approved_status',1],['status',1],['id','!=',$logo->id]])->take(4)->get();

@@ -55,8 +55,9 @@
                                         $assignAtMyTz = $carbonTime->setTimezone($siteData['user_timezone']);
                                         $taskValidUpto = $assignAtMyTz->addMinutes($durationForTask);
 
+
                                         $taskValidStatus = true;
-                                        if($currentTime  > $taskValidUpto){
+                                        if($currentTime  > $taskValidUpto || $taskDetails->status == 3){
                                             $taskValidStatus = false;
                                         }
                                     ?>
@@ -81,6 +82,8 @@
                                         <div class="alert alert-warning mt-3">Wait for customer approval.</div>
                                     @elseif($taskDetails->status == 4)
                                     <div class="alert alert-danger mt-3">You have skipped this task.</div>
+                                    @elseif($taskDetails->status == 3)
+                                    <div class="alert alert-danger mt-3">Customer disapproved your changes.</div>
                                     @endif
                                 </div>
                         </div>
