@@ -325,7 +325,7 @@
               <h6> {{ $r->title ?? ''}} </h6>
               <div class="choice-text">
                 <div class="slick-img">
-                  <img src="{{ asset('logomax-front-asset/img/review-images/stars-'.$r->rating) }}" alt="stars-{{$r->rating}}">
+                  <img src="{{ asset('/logomax-front-asset/img/review-images/stars-'.$r->rating.'.svg') }}" alt="stars-{{$r->rating}}" width="60%">
                 </div>
                 <div class="Verified-content">
                   <i class="fa-solid fa-check"></i>
