@@ -416,7 +416,7 @@
                                     <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                                 </div>
                             </div>
-                            <div class="additional_content">
+                            <div class="additional_content mt-5">
                             <h6>Additional options:</h6>
                             </div>
                             <!--  -->
@@ -491,7 +491,7 @@
                                 
                             </div>
                             <!-- Subtotal  -->
-                            <div class="total_data">
+                            <div class="total_data subtotal-box">
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
@@ -585,7 +585,7 @@
                                     <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                                 </div>
                             </div>
-                            <div class="additional_content">
+                            <div class="additional_content mt-5">
                             <h6>Additional options:</h6>
                             </div>
                             <!--  -->
@@ -660,7 +660,7 @@
                                 
                             </div>
                             <!-- Subtotal  -->
-                            <div class="total_data">
+                            <div class="total_data subtotal-box">
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
@@ -734,7 +734,7 @@
                                     <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                                 </div>
                             </div>
-                            <div class="additional_content">
+                            <div class="additional_content mt-5">
                             <h6>Additional options:</h6>
                             </div>
                             <!--  -->
@@ -809,7 +809,7 @@
                                 
                             </div>
                             <!-- Subtotal  -->
-                            <div class="total_data">
+                            <div class="total_data subtotal-box">
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
@@ -933,12 +933,20 @@
                 // console.log(logo_price_for_customer + '<- totoal price current-> '  +  price + 'gst_prcnt_cut ' + prcnt_cut );
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
                 new_total = logo_price_for_customer + price + prcnt_cut;
+                
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
             }else{
                 prcnt_cut = ((logo_price_for_customer + price + favicon_enabled_price) *  gst_prcnt) / 100; 
                 console.log(prcnt_cut);
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + price + favicon_enabled_price + prcnt_cut;
+
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
             }
             // console.log('new_total'+new_total);
             $('.save-logo-for-future-btn').attr('data-enabled','true');
@@ -946,7 +954,8 @@
             $('.save-logo-for-future-btn').html('Remove');
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
             $(".save-logo-check").attr('checked','checked');
-          
+            
+
         }else{
             let new_total = 0;
             if(favicon_enabled_status == 'false'){
@@ -955,12 +964,20 @@
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + prcnt_cut;
+
+                if($(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").removeClass('subtotal-top-border');
+                }
             }else{
                 prcnt_cut = ((logo_price_for_customer + favicon_enabled_price)  *  gst_prcnt) / 100; 
                 // console.log(prcnt_cut);
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + favicon_enabled_price + prcnt_cut;
+
+                // if($(".subtotal-box").hasClass('subtotal-top-border')){
+                //     $(".subtotal-box").removeClass('subtotal-top-border');
+                // }
             }
             $('.save-logo-for-future-btn').attr('data-enabled','false');
             $(".save-logo-future-box").html('');
@@ -968,6 +985,7 @@
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
             $(".save-logo-check").removeAttr('checked');
 
+            
         }
     });
     $(".get-favicon-btn").on('click',function(e){
@@ -990,12 +1008,22 @@
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + price + prcnt_cut;
+
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
+
             }else{
                 prcnt_cut = ((logo_price_for_customer + price + logo_future_enabled_price) *  gst_prcnt) / 100; 
                 // console.log(prcnt_cut);
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + price + logo_future_enabled_price + prcnt_cut;
+                
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
+
             }
             $('.get-favicon-btn').attr('data-enabled','true');
             $(".favicon-logo-box").html(`<p>Favicon logo price</p><p>$${price}</p>`);
@@ -1003,6 +1031,8 @@
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
 
             $(".get-favicon-check").attr('checked','checked');
+
+            
 
         }else{
             let new_total = 0;
@@ -1012,6 +1042,11 @@
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + prcnt_cut ;
+
+                if($(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").removeClass('subtotal-top-border');
+                }
+                
             }else{
                 prcnt_cut = ((logo_price_for_customer + logo_future_enabled_price) *  gst_prcnt) / 100; 
                 // console.log(prcnt_cut);
@@ -1025,6 +1060,8 @@
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
 
             $(".get-favicon-check").removeAttr('checked');
+
+            
 
         }
     });
