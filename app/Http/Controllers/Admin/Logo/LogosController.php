@@ -18,7 +18,6 @@ class LogosController extends Controller
 {
     public function index(){
         $logos = Logo::where([['status',1],['approved_status',0]])->get();
-
         return view('admin.logos.logosrequest',compact('logos'));
     }
     public function logodetail($slug){

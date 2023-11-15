@@ -69,3 +69,4 @@
     RewriteRule ^ /index.php [L]
 
 </IfModule>
+

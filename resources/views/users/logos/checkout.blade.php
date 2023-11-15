@@ -10,6 +10,9 @@
         position: absolute;
         width: 0;
     }
+    .img-box {
+        background: #80808057;
+    }
 
 </style>
 <?php 
@@ -330,13 +333,7 @@
                         <div class="step_form_content">
                             <h5>Contact information</h5>
                         </div>
-                        <!-- Email -->
-                        <div class="mt-3 sm:mt-0 form__field">
-                            <label for="email">
-                                <span aria-hidden="true"></span>
-                            </label>
-                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
-                        </div>
+                        
                         <div class="form-row form__field mt-3 sm:mt-0 ">
                             <div class="col-md-6 ">
                                 <label for="name">
@@ -359,24 +356,29 @@
                             <input id="address" type="text" name="address" placeholder="Street, number" />
                         </div>
                         
-                        <div class="mt-3 form__field">
-                            <label for="city-address">
-                            <span  aria-hidden="true"></span>
-                            </label>
-                            <input id="city-address" type="text" name="city" placeholder="City"/>
+                        <!-- City and zip  -->
+                        <div class="form-row form__field mt-3 sm:mt-0 ">
+                            <div class="col-md-6 ">
+                                <label for="zip">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="zip" type="text" name="zip_code" placeholder="Zip / Postal Code" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="city-address">
+                                    <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="city-address" type="text" name="city" placeholder="City"/>
+                            </div>
                         </div>
+                        <!--  -->
                         <div class="mt-3 form__field">
                             <label for="state-address">
                             <span  aria-hidden="true"></span>
                             </label>
                             <input id="state" type="text" name="state" placeholder="State / Province / Region" />
                         </div>
-                        <div class="mt-3 form__field">
-                            <label for="zip">
-                            <span aria-hidden="true"></span>
-                            </label>
-                            <input id="zip" type="text" name="zip_code" placeholder="Zip / Postal Code" />
-                        </div>
+                        
                         <div class="form-group" >
                             <select name="country" id="country" style="cursor:pointer;">
                                 @foreach($countries as $k => $v)
@@ -384,6 +386,14 @@
                                 @endforeach
                             </select>
                         </div>
+                        <!-- Email -->
+                        <div class="mt-3 form__field">
+                            <label for="email">
+                                <span aria-hidden="true"></span>
+                            </label>
+                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                        </div>
+                        <!--  -->
                         <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
                             <button type="button" data-action="next" class="continue_btn" id="add_billing_address">
                                 Continue
@@ -395,13 +405,16 @@
                         <h5>Order summary</h5>
                         <div class="templete_wrapper">
                             <div class="summary_wrapp">
-                            <div class="img">
-                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
-                            </div>
-                            <div class="drawn_data">
-                                <p>{{ $logo->logo_name }}</p>
-                                <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
-                            </div>
+                                <div class="img">
+                                    <div class="img-box">
+                                        <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                                    </div>
+                                    <p>{{ $logo->logo_name }}</p>
+                                </div>
+                                <!-- Logo Price -->
+                                <div class="drawn_data">
+                                    <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
+                                </div>
                             </div>
                             <div class="additional_content">
                             <h6>Additional options:</h6>
@@ -421,35 +434,37 @@
                                 ?>
                                 @if($option->option_type == 'save-logo-for-future')
                                 <div class="add_account_wrapp">
-                                    <div class="save_data">
+                                    <div class="add_btn">
                                         <p>{{ $option->option_text }}</p>
+                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
+                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
+                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
+                                    </div>
+                                    <div class="save_data">
+                                        
                                         @if($option->pricing_duration == 'monthly')
                                         <span><b>${{ $option->amount }} /month</b></span>
                                         @else
                                         <span><b>${{ $option->amount }}</b></span>
                                         @endif
-                                    </div>
-                                    <div class="add_btn">
-                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
-                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
-                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
                                     </div>
                                 </div>
                                 @endif
                                 @if($option->option_type == 'get-favicon')
                                 <div class="add_account_wrapp">
-                                    <div class="save_data">
+                                    <div class="add_btn">
                                         <p>{{ $option->option_text }}</p>
+
+                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
+                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
+                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
+                                    </div>
+                                    <div class="save_data">
                                         @if($option->pricing_duration == 'monthly')
                                         <span><b>${{ $option->amount }} /month</b></span>
                                         @else
                                         <span><b>${{ $option->amount }}</b></span>
                                         @endif
-                                    </div>
-                                    <div class="add_btn">
-                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
-                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
-                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
                                     </div>
                                 </div>
                                 @endif
@@ -466,10 +481,7 @@
                             <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
-                            <div class="total_data">
-                                <p>Subtotal</p>
-                                <p>${{ $logo->price_for_customer }}</p>
-                            </div>
+                            
                             
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
@@ -477,6 +489,11 @@
                             </div>
                             <div class="total_data favicon-logo-box">
                                 
+                            </div>
+                            <!-- Subtotal  -->
+                            <div class="total_data">
+                                <p>Subtotal</p>
+                                <p>${{ $logo->price_for_customer }}</p>
                             </div>
                             <!-- Tax -->
                             <div class="total_data">
@@ -505,7 +522,7 @@
                                     <p>Credit card</p>
                                 </div>
                                 <div class="crad_img">
-                                    <img src="{{ asset('logomax-front-asset/img/payment.png') }}" alt="">
+                                    <img src="{{ asset('logomax-front-asset/img/card-img-icon.svg') }}" alt="">
                                 </div>
                             </div>
                             <div class="card_detail">
@@ -557,13 +574,16 @@
                         <h5>Order summary</h5>
                         <div class="templete_wrapper">
                             <div class="summary_wrapp">
-                            <div class="img">
-                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
-                            </div>
-                            <div class="drawn_data">
-                                <p>{{ $logo->logo_name }}</p>
-                                <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
-                            </div>
+                                <div class="img">
+                                    <div class="img-box">
+                                        <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                                    </div>
+                                    <p>{{ $logo->logo_name }}</p>
+                                </div>
+                                <!-- Logo Price -->
+                                <div class="drawn_data">
+                                    <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
+                                </div>
                             </div>
                             <div class="additional_content">
                             <h6>Additional options:</h6>
@@ -583,35 +603,37 @@
                                 ?>
                                 @if($option->option_type == 'save-logo-for-future')
                                 <div class="add_account_wrapp">
-                                    <div class="save_data">
+                                    <div class="add_btn">
                                         <p>{{ $option->option_text }}</p>
+                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
+                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
+                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
+                                    </div>
+                                    <div class="save_data">
+                                        
                                         @if($option->pricing_duration == 'monthly')
                                         <span><b>${{ $option->amount }} /month</b></span>
                                         @else
                                         <span><b>${{ $option->amount }}</b></span>
                                         @endif
-                                    </div>
-                                    <div class="add_btn">
-                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
-                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
-                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
                                     </div>
                                 </div>
                                 @endif
                                 @if($option->option_type == 'get-favicon')
                                 <div class="add_account_wrapp">
-                                    <div class="save_data">
+                                    <div class="add_btn">
                                         <p>{{ $option->option_text }}</p>
+
+                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
+                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
+                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
+                                    </div>
+                                    <div class="save_data">
                                         @if($option->pricing_duration == 'monthly')
                                         <span><b>${{ $option->amount }} /month</b></span>
                                         @else
                                         <span><b>${{ $option->amount }}</b></span>
                                         @endif
-                                    </div>
-                                    <div class="add_btn">
-                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
-                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
-                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
                                     </div>
                                 </div>
                                 @endif
@@ -628,10 +650,7 @@
                             <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
-                            <div class="total_data">
-                                <p>Subtotal</p>
-                                <p>${{ $logo->price_for_customer }}</p>
-                            </div>
+                            
                             
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
@@ -639,6 +658,11 @@
                             </div>
                             <div class="total_data favicon-logo-box">
                                 
+                            </div>
+                            <!-- Subtotal  -->
+                            <div class="total_data">
+                                <p>Subtotal</p>
+                                <p>${{ $logo->price_for_customer }}</p>
                             </div>
                             <!-- Tax -->
                             <div class="total_data">
@@ -699,13 +723,16 @@
                         <h5>Order summary</h5>
                         <div class="templete_wrapper">
                             <div class="summary_wrapp">
-                            <div class="img">
-                                <img src="{{ asset($logo->media->image_path) }}" alt="" />
-                            </div>
-                            <div class="drawn_data">
-                                <p>{{ $logo->logo_name }}</p>
-                                <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
-                            </div>
+                                <div class="img">
+                                    <div class="img-box">
+                                        <img src="{{ asset($logo->media->image_path) }}" alt="" />
+                                    </div>
+                                    <p>{{ $logo->logo_name }}</p>
+                                </div>
+                                <!-- Logo Price -->
+                                <div class="drawn_data">
+                                    <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
+                                </div>
                             </div>
                             <div class="additional_content">
                             <h6>Additional options:</h6>
@@ -725,35 +752,37 @@
                                 ?>
                                 @if($option->option_type == 'save-logo-for-future')
                                 <div class="add_account_wrapp">
-                                    <div class="save_data">
+                                    <div class="add_btn">
                                         <p>{{ $option->option_text }}</p>
+                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
+                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
+                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
+                                    </div>
+                                    <div class="save_data">
+                                        
                                         @if($option->pricing_duration == 'monthly')
                                         <span><b>${{ $option->amount }} /month</b></span>
                                         @else
                                         <span><b>${{ $option->amount }}</b></span>
                                         @endif
-                                    </div>
-                                    <div class="add_btn">
-                                        <a href="#" data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="save-logo-for-future-btn">Add </a>
-                                        <input type="checkbox" name="save_logo_for_future_status" class="save-logo-check"/>
-                                        <input type="hidden" name="save_logo_for_future_price" value="{{ $option->amount }}" />
                                     </div>
                                 </div>
                                 @endif
                                 @if($option->option_type == 'get-favicon')
                                 <div class="add_account_wrapp">
-                                    <div class="save_data">
+                                    <div class="add_btn">
                                         <p>{{ $option->option_text }}</p>
+
+                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
+                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
+                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
+                                    </div>
+                                    <div class="save_data">
                                         @if($option->pricing_duration == 'monthly')
                                         <span><b>${{ $option->amount }} /month</b></span>
                                         @else
                                         <span><b>${{ $option->amount }}</b></span>
                                         @endif
-                                    </div>
-                                    <div class="add_btn">
-                                        <a href=""  data-id="option-{{ $option->id }}" data-enabled="false" data-price="{{ $option->amount }}" class="get-favicon-btn">Add</a>
-                                        <input type="checkbox" name="get_favicon_status" class="get-favicon-check" />
-                                        <input type="hidden" name="get_favicon_price" value="{{ $option->amount }}" />
                                     </div>
                                 </div>
                                 @endif
@@ -770,10 +799,7 @@
                             <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
-                            <div class="total_data">
-                                <p>Subtotal</p>
-                                <p>${{ $logo->price_for_customer }}</p>
-                            </div>
+                            
                             
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
@@ -781,6 +807,11 @@
                             </div>
                             <div class="total_data favicon-logo-box">
                                 
+                            </div>
+                            <!-- Subtotal  -->
+                            <div class="total_data">
+                                <p>Subtotal</p>
+                                <p>${{ $logo->price_for_customer }}</p>
                             </div>
                             <!-- Tax -->
                             <div class="total_data">

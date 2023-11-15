@@ -241,14 +241,20 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
     Route::get('admin-dashboard/site-content/support',[SiteContentController::class,'supportContent'])->name('support-setting');
     Route::post('admin-dashboard/site-content/support/submit',[SiteContentController::class,'supportContentSubmit']);
+    Route::get('/site-content/home',[SiteContentController::class,'homeContentPage']);
+    Route::get('/site-content-list/home',[SiteContentController::class,'homeContentList']);
+    Route::post('/addHomeContent',[SiteContentController::class,'homeContent'])->name('addHomeContent');
+    Route::get('/site-content/support',[ReviewsController::class,'addReview']);
 
     // Site configuration page :::
-    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration'])->name('site-setting');
+    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
+    Route::get('/admin-dashboard/site-content',[SiteContentController::class,'homeConfigurationContent']);
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     Route::post('/update-image',[SiteContentController::class,'updateImage']);
     //// about page configuration 
     Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting'])->name('about-setting');
     Route::post('/admin-dashboard/about-page-update',[SiteContentController::class,'aboutPageupdate']);
+    Route::post('/admin-dashboard/update-site-content',[SiteContentController::class,'updateHomeConfiguration']);
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////

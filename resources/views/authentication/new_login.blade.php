@@ -20,16 +20,20 @@
                     </div>
                     <div class="social-links d-flex">
                         <div class="social-accnt">
-                            <a href="{{ url('authorized/google') }}" class="login-gg gs-btn">
-                                <span><img src="{{ asset('logomax-front-asset/img/google.svg') }}" class="img-fluid" alt=".."></span>
+                            <!-- <a href="{{-- url('authorized/google') --}}" class="login-gg gs-btn">
+                                <span><img src="{{-- asset('logomax-front-asset/img/google.svg') --}}" class="img-fluid" alt=".."></span>
                                 <span class="txt">Google</span>
-                            </a>
+                            </a> -->
+                            <a class="g-btn login-gg gs-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i> <strong>Google</strong> </a>
+
                         </div>
                         <div class="social-accnt">
-                            <a href="{{ url('authorized/facebook') }}" class="login-gg fb-btn">
-                                <span><img src="{{ asset('logomax-front-asset/img/fb.svg') }}" class="img-fluid" alt=".."></span>
+                            <!-- <a href="{{-- url('authorized/facebook') --}}" class="login-gg fb-btn">
+                                <span><img src="{{-- asset('logomax-front-asset/img/fb.svg') --}}" class="img-fluid" alt=".."></span>
                                 <span class="txt">Facebook</span>
-                            </a>
+                            </a> -->
+                            <a class="fb-btn login-gg fb-btn" href="{{ url('authorized/facebook') }}"> <i class="fa-brands fa-facebook"></i> <strong>Facebook</strong></a>
+
                         </div>
                     </div>
 

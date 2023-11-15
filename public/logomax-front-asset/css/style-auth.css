@@ -347,6 +347,32 @@ label.form-check-label {
     color: #adadad;
 }
 
+a.g-btn{
+    background: #DB4437;
+
+}
+a.fb-btn{
+    background: #1877F2;
+
+}
+.social-accnt a {
+    border-radius: 140px;
+    color: #fff;
+    padding: 15px 0px;
+    display: block;
+    margin-bottom: 18px;
+    text-decoration: none;
+    font-weight: 500;
+    line-height: 17px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.social-accnt a:hover {
+    background-color: #000000 !important;
+    color: #fff !important;
+}
+
 @media only screen and (max-width: 1399px) {
    
 

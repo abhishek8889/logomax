@@ -2771,6 +2771,164 @@ form#progress-form [data-complete="true"] .box_studio {
     border: 1px solid #000 !important;
 } 
 
+/* Shivani star Css */
+
+ /* utf star */
+
+ .rate { 
+    text-align: center;
+    height: 46px;
+    /* padding: 0 10px; */
+    display: inline-block;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+    
+.rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #FFE234;
+    display: inline-block;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.rating-str {
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.opn-rt a {
+    font-size: 20px;
+    font-weight: 400;
+    color: darkblue;
+    display: flex;
+    gap: 5px;
+}
+.opn-rt a:hover{
+    text-decoration: none;
+}
+.opn-rt {
+    margin-bottom: auto;
+}
+
+
+.file_wrapper {
+cursor: pointer;
+}
+
+a.asset-id-link__button {
+    color: #000;
+    font-family: "Montserrat";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 6px;
+    text-decoration: none;
+}
+.button.button--action-v2.detail-panel-file-id__container.js-details-hover-btn.margin-bottom-xsmall.new-ctx:hover {
+    color: #fff!important;
+    background: #000;
+    border: none;
+    transition: .3s ease-in-out;
+}
+.button.button--action-v2.detail-panel-file-id__container.js-details-hover-btn.margin-bottom-xsmall.new-ctx:hover a.asset-id-link__button {
+    color: #fff;
+    
+}
+
+.button.button--action-v2.detail-panel-file-id__container.js-details-hover-btn.margin-bottom-xsmall.new-ctx:hover button i{
+    color:#fff;
+}
+
+.search_sec .work_data {
+    background: #FFF;
+     padding-left: 0;
+     margin-left: 0;
+     position: relative;
+     width: 18%;
+     padding-right: 20px;
+ }
+ .search_sec .work_data::after {
+     content: "";
+     background-color: #D9D9D9;
+     height: 100%;
+     position: absolute;
+     width: 1px;
+     right: 0;
+     top: 0;
+     z-index: 99999;
+ }
+ /* Logo detail Accordion css */
+ .brand-text .dropdown_data div#accordion .card {
+    border: none;
+    width: 100%;
+}
+.brand-text .dropdown_data div#accordion .card .card-body {
+    padding-top: 0px;
+    padding-left: 32px;
+    font-size: 16px;
+}
+.brand-text .dropdown_data div#accordion .card .card-header.pointer {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+}
+
+.brand-text .dropdown_data div#accordion .card .card-header.collapsed {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+}
+.brand-text .template_content {
+    padding-top: 15px;
+}
+.brand-text .template_content p {
+    font-size: 16px;
+}
+.brand-text .dropdown_data div#accordion .card .card-header.pointer h5 {
+   font-size: 16px;
+}
+.brand-text .dropdown_data div#accordion .card .card-header h5:after {
+    padding-left: 15px;
+}
+
+
+
+    
+ /*  */
+
+@media only screen and (max-width: 767px) {
+    .opn-rt {
+        margin-bottom: unset!important;
+    }
+}
+
+
+
+
 @media screen and (max-width: 1800px) {
     .custom-header .banner-content {
         width: 100%;
@@ -4384,3 +4542,13 @@ form#progress-form [data-complete="true"] .box_studio {
 /*  */
 
 /* Shivani css */
+@media screen and (max-width: 1399px)
+{
+.brand-text .dropdown_data div#accordion .card .card-header.pointer {
+    padding: 5px 10px !important;
+}
+.brand-text .dropdown_data div#accordion .card .card-body {
+    padding-left: 32px !important;
+    padding-top: 0px;
+}
+}

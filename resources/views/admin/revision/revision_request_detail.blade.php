@@ -136,13 +136,13 @@
                 'revision_request_id' : revision_request_id,
                 'selectedDesigner' : selectDesigner,
             },
-            // dataType: 'JSON',
+            dataType: 'JSON',
             beforeSend: function() {
                 $('.spinner-container').show();
             },
             success:function(response)
             {
-                // console.log(response);
+                console.log(response);
                 setTimeout(()=>{
                 $('.spinner-container').hide();
                     $(".loader-box").hide();
