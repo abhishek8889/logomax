@@ -47,6 +47,7 @@ class UserDashboardController extends Controller
         $order_num = $request->order_num;
         if(Auth::check()){
             $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->get();
+           
             if($orderDetail){
                 return view('users.dashboard.order_detail',compact('request','orderDetail'));
             }else{
@@ -63,13 +64,19 @@ class UserDashboardController extends Controller
             $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
             $completeTask = CompletedTask::where([['client_id','=',auth()->user()->id],['logo_id','=',$orderDetail->logo_id]])->latest('created_at')->first();
             // dd($completeTask);
+            $previousRevision = LogoRevision::where('order_id',$orderDetail->id)->get();
+            $previousRevisionCount = 0;
+            if(isset($previousRevision)){
+                $previousRevisionCount = count($previousRevision);
+            }
+
             if($completeTask){
                 $completedTask = $completeTask; 
             }else{
                 $completedTask = '';
             }
             if($orderDetail){
-                return view('users.dashboard.download_logo',compact('request','orderDetail','completedTask'));
+                return view('users.dashboard.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount'));
             }else{
                 return abort(404);
             }
@@ -92,6 +99,7 @@ class UserDashboardController extends Controller
             if($currentDate > $revisionValidUpto){
                 return response()->json(['status' => 403 , 'error' => "Sorry ! You can't make request for revision after 60 days."]);
             }else{
+
                 $logo_id = $orderDetail->logo_id;
           
                 $orderDetail->on_revision = 1;

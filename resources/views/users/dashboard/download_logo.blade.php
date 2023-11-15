@@ -152,6 +152,7 @@
   </div>
 </div>
 <!-- End -->
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $.ajaxSetup({
@@ -161,54 +162,126 @@
     });
     $(".request-btn").on('click',function(e){
         e.preventDefault();
-        @if($orderDetail->on_revision == 1)
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Your logo is already on revision.',
-                    footer: 'Please wait we have provide your logo as soon as possible !'
-                });
-        @else
-            $("#revisionRequestModal").modal('show');
-            // Send request 
-            $("#send_request_btn").on('click',function(e){
-                e.preventDefault();
-                $("#revisionRequestModal").modal('hide');
-                let request_title = $('#request_title').val();
-                let request_description = $('#request_desc').val();
-
-                // Send Ajax
-                $(".loader-box").show();
-
-                $.ajax({
-                    url: "{{ url('/request-for-revision') }}",
-                    method: 'GET',
-                    data: {
-                        'order_num' : '{{ $orderDetail->order_num }}',
-                        'request_title' : request_title,
-                        'request_description' :request_description 
-                    },
-                    dataType: 'JSON',
-                    success:function(response)
-                    {
-                        setTimeout(()=>{
-                            $(".loader-box").hide();
-                            Swal.fire(
-                                'Request Sent!',
-                                'You have sent revision request succesfully !',
-                                'success'
-                            ).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
-                        }, 1000);
-                    },
-                    error: function(response) {
-                        console.log(error);
-                    }
-                });
-            })
+        @if($previousRevisionCount == 3 || $previousRevisionCount > 3  )
+        Swal.fire({
+            title: "You have completed free revision request",
+            text: "Your free revision request is over now you have to pay if you want more revision.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok i'll pay"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                
+            }
+        });
         @endif
+            @if($orderDetail->on_revision == 1)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Your logo is already on revision.',
+                        footer: 'Please wait we have provide your logo as soon as possible !'
+                    });
+            @else
+                @if($previousRevisionCount == 3 || $previousRevisionCount > 3  )
+                Swal.fire({
+                    title: "Need to Pay.",
+                    text: "Your free revision request is over now you have to pay if you want more revision.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ok i'll pay"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // need to pay to make more changes in logo .
+                            
+                            // $("#revisionRequestModal").modal('show');
+                            // // Send request 
+                            // $("#send_request_btn").on('click',function(e){
+                            //     e.preventDefault();
+                            //     $("#revisionRequestModal").modal('hide');
+                            //     let request_title = $('#request_title').val();
+                            //     let request_description = $('#request_desc').val();
+
+                            //     // Send Ajax
+                            //     $(".loader-box").show();
+
+                            //     $.ajax({
+                            //         url: "{{ url('/request-for-revision') }}",
+                            //         method: 'GET',
+                            //         data: {
+                            //             'order_num' : '{{ $orderDetail->order_num }}',
+                            //             'request_title' : request_title,
+                            //             'request_description' :request_description 
+                            //         },
+                            //         dataType: 'JSON',
+                            //         success:function(response)
+                            //         {
+                            //             setTimeout(()=>{
+                            //                 $(".loader-box").hide();
+                            //                 Swal.fire(
+                            //                     'Request Sent!',
+                            //                     'You have sent revision request succesfully !',
+                            //                     'success'
+                            //                 ).then((result) => {
+                            //                     if (result.isConfirmed) {
+                            //                         location.reload();
+                            //                     }
+                            //                 });
+                            //             }, 1000);
+                            //         },
+                            //         error: function(response) {
+                            //             console.log(error);
+                            //         }
+                            //     });
+                            // })
+                        }
+                    });
+                @else
+                    $("#revisionRequestModal").modal('show');
+                    // Send request 
+                    $("#send_request_btn").on('click',function(e){
+                        e.preventDefault();
+                        $("#revisionRequestModal").modal('hide');
+                        let request_title = $('#request_title').val();
+                        let request_description = $('#request_desc').val();
+
+                        // Send Ajax
+                        $(".loader-box").show();
+
+                        $.ajax({
+                            url: "{{ url('/request-for-revision') }}",
+                            method: 'GET',
+                            data: {
+                                'order_num' : '{{ $orderDetail->order_num }}',
+                                'request_title' : request_title,
+                                'request_description' :request_description 
+                            },
+                            dataType: 'JSON',
+                            success:function(response)
+                            {
+                                setTimeout(()=>{
+                                    $(".loader-box").hide();
+                                    Swal.fire(
+                                        'Request Sent!',
+                                        'You have sent revision request succesfully !',
+                                        'success'
+                                    ).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    });
+                                }, 1000);
+                            },
+                            error: function(response) {
+                                console.log(error);
+                            }
+                        });
+                    })
+                @endif
+            @endif
     });
 </script>
 @endsection

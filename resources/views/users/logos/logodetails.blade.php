@@ -66,10 +66,10 @@
                 <div class="file_box">
                     <div class="file_wrapper" id="copy_to_clipboard" logo_unique_id="{{ $logo->logo_unique_id }}">
                       <div
-                        class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
+                        class=" new-ctx button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
                         <span class="copy-asset-id__icon__container container-relative">
                           <button class="copy-asset-id__icon js-copy-asset-id hover-trigger">
-                              <img src="{{ asset('logomax-front-asset/img/file.png') }}" alt="">
+                            <i class="fa-solid fa-file"></i>
                           </button>
                         </span>
                         <a class="asset-id-link__button" href="#" id="tooltip-copy-box" data-toggle="tooltip" title="Copy to clipboard!">
@@ -79,10 +79,10 @@
                       </div>
                     </div>
                     <div class="file_wrapper" id="find-similar-btn">
-                      <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
+                      <div class="new-ctx button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
                         <span class="copy-asset-id__icon__container container-relative">
                             <button class="copy-asset-id__icon js-copy-asset-id hover-trigger">
-                                <img src="{{ asset('logomax-front-asset/img/camera.png') }}" alt="">
+                              <i class="fa-solid fa-camera"></i>
                             </button>
                         </span>
                         <a class="asset-id-link__button" href="#" title="Go to content details page">
@@ -97,7 +97,7 @@
                     }
                     ?>
                     <div class="file_wrapper add_to_wishlist_button">
-                      <div class="button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
+                      <div class="new-ctx button button--action-v2 detail-panel-file-id__container js-details-hover-btn margin-bottom-xsmall">
                         <span class="copy-asset-id__icon__container container-relative">
                           <button class="copy-asset-id__icon js-copy-asset-id hover-trigger" id="favorite_box">
                               <!-- <i class="fa-regular fa-heart"></i> -->
@@ -313,7 +313,10 @@
 
     $("#find-similar-btn").on('click',function(e){
       e.preventDefault();
-      $('html, body').scrollTop($("#similar-logo-box").offset().top);
+
+      let categoryName = "<?php echo $category_slug; ?>";
+      let category = `["${categoryName}"]`;
+      window.location.href="{{ url('/logos/search') }}?categories=" + encodeURIComponent(category);
     });
 
     $("#copy_to_clipboard").on('click',function(e){

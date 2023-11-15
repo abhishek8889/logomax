@@ -7,14 +7,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid #E3E9ED;
+        /* border-bottom: 1px solid #E3E9ED; */
         margin-right: 30px;
         padding-left: 0px;
         cursor: pointer;
     }
 
     .new_div.filter_full {
-        width: 15%;
+        /* width: 15%; */
         border: none;
     }
 

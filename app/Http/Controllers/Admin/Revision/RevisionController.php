@@ -124,7 +124,7 @@ class RevisionController extends Controller
         /* assigned designer notification end here : */
 
 
-        return response()->json(['status'=>200,'success'=>'You have successfully assign this work to special designer.' ,'requestData' => $req->all()]);
+        return response()->json(['status'=>200,'title'=>'Job Assigned','message'=>'You have successfully assign this work to special designer.']);
     }
     // Revised Logo Llist 
 

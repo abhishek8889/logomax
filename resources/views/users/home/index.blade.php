@@ -324,13 +324,86 @@
             <div class="choice_star">
               <h6> {{ $r->title ?? ''}} </h6>
               <div class="choice-text">
-                <div class="slick-img">
-                  <img src="{{ asset('logomax-front-asset/img/review-images/stars-'.$r->rating.'.svg') }}" alt="stars-{{$r->rating}}" width="50%">
+                <!-- <div class="slick-img">
+                  <img src="{{-- asset('logomax-front-asset/img/review-images/stars-'.$r->rating.'.svg') --}}" alt="stars-{{-- $r->rating --}}" width="50%">
+                </div> -->
+                <!--  -->
+                <div class="rating-str d-flex">
+                  <div class="rate">
+                   <?php 
+                    switch ($r->rating) {
+
+                      case 1:
+                        echo '<input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="Very poor">1 star</label>';
+                      break;
+
+                      case 2:
+                        echo '<input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="Poor">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="Very poor">1 star</label>';
+                      break;
+
+                      case 3:
+                        echo ' <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="Average or neutral">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="Poor">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="Very poor">1 star</label>';
+                      break;
+
+                      case 4:
+                        echo '<input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="Good">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="Average or neutral">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="Poor">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="Very poor">1 star</label>';
+                      break;
+
+                      case 5 :
+                        echo '<input type="radio" id="star5" name="rate" value="5" />
+                        <label for="star5" title="Excellent">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="Good">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="Average or neutral">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="Poor">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="Very poor">1 star</label>';
+                      break;
+
+                      default:
+                      echo '<input type="radio" id="star5" name="rate" value="5" />
+                      <label for="star5" title="Excellent">5 stars</label>
+                      <input type="radio" id="star4" name="rate" value="4" />
+                      <label for="star4" title="Good">4 stars</label>
+                      <input type="radio" id="star3" name="rate" value="3" />
+                      <label for="star3" title="Average or neutral">3 stars</label>
+                      <input type="radio" id="star2" name="rate" value="2" />
+                      <label for="star2" title="Poor">2 stars</label>
+                      <input type="radio" id="star1" name="rate" value="1" />
+                      <label for="star1" title="Very poor">1 star</label>';
+                    }
+                   ?>
+                  </div>
+                  <div class="opn-rt">
+                    <a href="#">
+                      <span>{{ $r->rating }}.0</span> rating
+                      <!-- <span style="text-decoration: underline;">1 opinion</span> -->
+                    </a>
+                  </div>
                 </div>
-                <div class="Verified-content">
+                <!--  -->
+                <!-- <div class="Verified-content">
                   <i class="fa-solid fa-check"></i>
                   <p>Verified</p>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
