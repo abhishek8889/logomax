@@ -247,7 +247,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/site-content/support',[ReviewsController::class,'addReview']);
 
     // Site configuration page :::
-    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
+    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration'])->name('site-setting');
     Route::get('/admin-dashboard/site-content',[SiteContentController::class,'homeConfigurationContent']);
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     Route::post('/update-image',[SiteContentController::class,'updateImage']);
@@ -255,6 +255,19 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting'])->name('about-setting');
     Route::post('/admin-dashboard/about-page-update',[SiteContentController::class,'aboutPageupdate']);
     Route::post('/admin-dashboard/update-site-content',[SiteContentController::class,'updateHomeConfiguration']);
+
+    Route::get('/admin-dashboard/login-page-setting',[SiteContentController::class,'login'])->name('login-setting');
+    Route::get('/admin-dashboard/register-page-setting',[SiteContentController::class,'register'])->name('register-setting');
+    Route::get('/admin-dashboard/blogs-page-setting',[SiteContentController::class,'blogs'])->name('blogs-setting');
+    Route::get('/admin-dashboard/reviews-page-setting',[SiteContentController::class,'reviews'])->name('reviews-setting');
+
+
+    Route::post('/admin-dashboard/reviews-page-submit',[SiteContentController::class,'reviewsSubmit']);
+    Route::post('/admin-dashboard/login-page-submit',[SiteContentController::class,'loginSubmit']);
+    Route::post('/admin-dashboard/register-page-submit',[SiteContentController::class,'registerSubmit']);
+    Route::post('/admin-dashboard/blogs-page-submit',[SiteContentController::class,'blogsSubmit']);
+
+    
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////

@@ -14,7 +14,13 @@ class MetaPagesController extends Controller
     }
     public function reviews(Request $request){
         $reviews = LogoReview::all();
-        return view('users.meta-pages.reviews',compact('request','reviews'));
+        $zerorating = LogoReview::where('rating',0)->get();
+        $onerating = LogoReview::where('rating',1)->get();
+        $tworating = LogoReview::where('rating',2)->get();
+        $threerating = LogoReview::where('rating',3)->get();
+        $fourrating = LogoReview::where('rating',4)->get();
+        $fiverating = LogoReview::where('rating',5)->get();
+        return view('users.meta-pages.reviews',compact('request','reviews','zerorating','onerating','tworating','threerating','fourrating','fiverating'));
     }
     public function support(Request $request){
         $support_text = SupportContent::where('meta_key','support_text')->first();

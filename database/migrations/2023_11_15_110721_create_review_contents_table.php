@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blog_content', function (Blueprint $table) {
+        Schema::create('review_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('key');
+            $table->longText('value');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blog_content');
+        Schema::dropIfExists('review_contents');
     }
 };
