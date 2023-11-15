@@ -67,10 +67,10 @@
                                             <input type="password" name="login_password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
                                         </div>
                                     </div>
-                                    
+                                  
                                     <div class="form-group">
                                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                        <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div>
+                                        <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}" data-callback="onSubmit" data-size="invisible"></div>
                                         @if ($errors->has('g-recaptcha-response'))
                                             <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif
@@ -78,7 +78,7 @@
                                     <!-- secret-key = 6Le4mnImAAAAAOHCAcxKErHw4oFBz-UFfN15ZdKK -->
                                 
                                     <div class="form-group">
-                                        <button class="btn btn-lg btn-primary btn-block">Login</button>
+                                        <button  class="btn btn-lg btn-primary btn-block">Login</button>
                                     </div>
                                     <h6>not an account? please <a href="{{ url('register') }}">register.</a></h6>
                                 </form>
@@ -96,6 +96,7 @@
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->
+    
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>

@@ -127,6 +127,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
         Route::get('/configuration',[UserDashboardController::class, 'UserConfiguration']);
         Route::get('/subscriptions',[UserDashboardController::class, 'UserSubscription']);
         Route::get('/messages',[UserDashboardController::class, 'UserMessages']);
+        Route::post('/changePassword',[UserDashboardController::class, 'changePassword']);
 
     ////////////////////////////////////////////////////////////////////////////////////////
 });

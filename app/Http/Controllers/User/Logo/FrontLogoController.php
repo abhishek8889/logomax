@@ -72,11 +72,11 @@ class FrontLogoController extends Controller
     }
     public function logodetail(Request $request, $slug){
         $logo = Logo::where([['logo_slug',$slug],['approved_status',1],['status',1]])->first();
-        $category_slug = Categories::find($logo->category_id)->slug;
+      
         if(empty($logo)){
             abort(404);
         }
-
+        $category_slug = Categories::find($logo->category_id)->slug;
         $logoFacilities = LogoFacilities::all();
 
         $similar_logos = Logo::where([['category_id',$logo->category_id],['approved_status',1],['status',1],['id','!=',$logo->id]])->take(4)->get();

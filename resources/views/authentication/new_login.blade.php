@@ -52,7 +52,7 @@
                     <div class="continue-we">
                         <p class="small-p line-text1">or continue with email</p>
                     </div>
-                    <form action="{{ url('/login-process') }}" method="Post">
+                    <form action="{{ url('/login-process') }}" method="Post" id="loginForm">
                         @csrf
                         <div class="mail-info">
                             <div class="form-group">
@@ -76,15 +76,15 @@
                                     </label>
                                     <p class="small-p"> <a href="{{ url('/account-recovery') }}"> Forget Password? </a></p>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group"> -->
                                     <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                                    <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div>
+                                    <!-- <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}" data-callback="onSubmit" data-size="invisible"></div> -->
                                     @if ($errors->has('g-recaptcha-response'))
-                                        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                        <!-- <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span> -->
                                     @endif
-                                </div> 
+                                <!-- </div>  -->
                             <div class="btm-buttn">
-                                <button  type="submit" class="cta btn">Log In</button>
+                                <button class="g-recaptcha cta btn" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}" data-callback="onSubmit" data-size="invisible" type="submit" >Log In</button>
                             </div>
                             <div class="login-alert">
                                 <p class="small-p">Don’t you have an account? <a href="{{ url('register') }}"> <strong>Sign up</strong></a></p>
@@ -95,4 +95,9 @@
             </div>
         </div>
     </section>
+    <script>
+        function onSubmit(token){
+           document.getElementById('loginForm').submit();
+        }
+    </script>
 @endsection

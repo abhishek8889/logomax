@@ -15,6 +15,7 @@ use App\Mail\LogoRevisionRequest;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use App\Models\Notifications;
+use App\Models\Wishlist;
 use App\Events\SpecialDesignerNotification;
 
 use App\Mail\DesignerAssignedMail;
@@ -22,6 +23,7 @@ use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
+use Hash;
 
 
 
@@ -297,28 +299,46 @@ class UserDashboardController extends Controller
     public function termsAndConditions(Request $request){
         return view('users.meta-pages.terms&conditions');
     }
-    public function userDashboardIndex(Request $req){
-        return view('user_dashboard_view.userDashboard.index');
+    public function userDashboardIndex(Request $request){
+       $wishlist = Wishlist::where('user_id',auth()->user()->id)->take(3)->orderBy('created_at','desc')->get();
+       $mylogos = Order::where([['user_id',Auth::user()->id],['status',1]])->take(3)->orderBy('created_at','desc')->get();
+
+        return view('user_dashboard_view.userDashboard.index',compact('request','wishlist','mylogos'));
     }
 
-    public function UserFavouritelist(){
-        return view('user_dashboard_view.MyFavouriteList.index');
+    public function UserFavouritelist(Request $request){
+        $wishlist = Wishlist::where('user_id',auth()->user()->id)->orderBy('created_at','desc')->get();
+
+        return view('user_dashboard_view.MyFavouriteList.index',compact('request','wishlist'));
     }
 
-    public function UserLogoslist(){
-        return view('user_dashboard_view.Mylogoslist.index');
+    public function UserLogoslist(Request $request){
+        $mylogos = Order::where([['user_id',Auth::user()->id],['status',1]])->orderBy('created_at','desc')->get();
+
+        return view('user_dashboard_view.Mylogoslist.index',compact('request','mylogos'));
     }
 
-    public function UserConfiguration(){
-        return view('user_dashboard_view.configuration.index');
+    public function UserConfiguration(Request $request){
+        return view('user_dashboard_view.configuration.index',compact('request'));
     }
 
-    public function UserSubscription(){
-        return view('user_dashboard_view.subscription.index');
+    public function UserSubscription(Request $request){
+        return view('user_dashboard_view.subscription.index',compact('request'));
     }
 
-    public function UserMessages(){
-        return view('user_dashboard_view.Message.index');
+    public function UserMessages(Request $request){
+        return view('user_dashboard_view.Message.index',compact('request'));
     }
-    
+    public function changePassword(Request $request){
+        $request->validate([
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required'
+        ]);
+        $password = Hash::make($request->password);
+
+        $user = User::find(Auth::user()->id);
+        $user->password = $password;
+        $user->update();
+        return redirect()->back()->with('success','Successfully updated password');
+    }
 }

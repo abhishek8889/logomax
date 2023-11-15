@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Wishlist extends Model
 {
     use HasFactory;
+
+    public function logos(){
+        return $this->hasOne(Logo::class,'id','logo_id');
+    }
 }

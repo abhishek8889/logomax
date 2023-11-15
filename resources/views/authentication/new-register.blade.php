@@ -37,7 +37,7 @@
                 <div class="continue-we">
                     <p class="small-p line-text"> or </p>
                 </div>
-                <form action="{{ url('/register-process') }}" method="POST">
+                <form action="{{ url('/register-process') }}" method="POST" id="registerForm">
                     @csrf
                     <div class="mail-info">
                         <div class="row">
@@ -110,15 +110,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group"> -->
                         <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
-                        <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div>
+                        <!-- <div class="g-recaptcha" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}"></div> -->
                         @if ($errors->has('g-recaptcha-response'))
-                            <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                            <!-- <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span> -->
                         @endif
-                    </div> 
+                    <!-- </div>  -->
                         <div class="btm-buttn">
-                            <button type="submit" class="cta btn">Sign Up</button>
+                            <button class="g-recaptcha cta btn" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}" data-callback="onSubmit" data-size="invisible" type="submit" >Sign Up</button>
                         </div>
                         <div class="login-alert text-center">
                             <p class="small-p text-center">Already have an account? <a href="{{url('login')}}"> <strong>Login</strong> </a></p>
@@ -128,4 +128,9 @@
             </div>
         </div>
 </section>
+<script>
+        function onSubmit(token){
+           document.getElementById('registerForm').submit();
+        }
+    </script>
 @endsection
