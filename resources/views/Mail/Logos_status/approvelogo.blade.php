@@ -41,7 +41,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="px-3 px-sm-5 pb-3 pb-sm-5">
-                                                                            <h5 class="text-primary mb-3">Congratulation Designer your logo is approved by admin now this logo is ready for sold! Please check update regarding it .</h5>
+                                                                            <h5 class="text-primary mb-3">Congratulations, designer! Your logo has been approved by the admin, and it is now ready for sale. Please check for updates regarding it.</h5>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>

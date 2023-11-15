@@ -41,7 +41,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="px-3 px-sm-5 pb-3 pb-sm-5">
-                                                                            <h5 class="text-primary mb-3">Designer your logo is deapproved by admin Please check the review of that logo.</h5>
+                                                                            <h5 class="text-primary mb-3">Designer, your logo has been disapproved by the admin. Please review the feedback provided for that logo.</h5>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>

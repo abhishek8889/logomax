@@ -10,7 +10,7 @@
                                             <h3 class="nk-block-title page-title">Sold Logos</h3>
                                         </div>
                                         <div>
-                                           {{-- Breadcrumbs::render('disapproved-logos') --}}
+                                           {{ Breadcrumbs::render('sold-logos') }}
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->

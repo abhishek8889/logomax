@@ -6,7 +6,7 @@
             <h4 class="nk-block-title">Revised Logo List - </h4>
         </div>
         <div>
-                <!-- Breadcrumbs::render('desingers-list') -->
+              {{ Breadcrumbs::render('revised-logos') }}
         </div>
     </div>
     <div class="card card-bordered card-preview">

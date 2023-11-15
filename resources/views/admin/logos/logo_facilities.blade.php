@@ -1,7 +1,7 @@
 @extends('admin_layout/master')
 @section('content')
     <div class="d-flex justify-content-end my-4"> 
-        {{ Breadcrumbs::render('additional-options') }}
+        {{ Breadcrumbs::render('facilities') }}
     </div>
     <div class="col-lg-6 d-none" id="add-section">
         <div class="card card-bordered h-100">

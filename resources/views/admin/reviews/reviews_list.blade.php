@@ -3,8 +3,9 @@
 
 <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
-                                            <div class="nk-block-head-content">
+                                            <div class="nk-block-head-content d-flex justify-content-between">
                                                 <h4 class="nk-block-title">Reviews List </h4>
+                                                {{ Breadcrumbs::render('reviews') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
@@ -66,9 +67,8 @@
                                                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                     <ul class="link-list-plain">
-                                                                        <li><a href="#">View</a></li>
                                                                         <li><a href="{{ url('admin-dashboard/edit-review/'.$review->id ?? '') }}">Edit</a></li>
-                                                                        <li><a href="#">Remove</a></li>
+                                                                        <li><a href="{{ url('admin-dashboard/review/delete/'.$review->id) }}">Remove</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

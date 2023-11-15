@@ -28,7 +28,7 @@ class AuthenticationController extends Controller
         return view('authentication.new-register',compact('request'));
     }
     public function loginprocess(Request $request){
-            
+     
             $validate = $request->validate([
                 'g-recaptcha-response' => 'required',
                 'login_email' => 'required|email',

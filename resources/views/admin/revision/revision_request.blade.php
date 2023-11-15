@@ -6,7 +6,7 @@
             <h4 class="nk-block-title">Logo Revision Request - </h4>
         </div>
         <div>
-                <!-- Breadcrumbs::render('desingers-list') -->
+               {{ Breadcrumbs::render('revision-request') }}
         </div>
     </div>
     <div class="card card-bordered card-preview">

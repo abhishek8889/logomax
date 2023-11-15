@@ -2,8 +2,9 @@
 @section('content')
 <div class="nk-block nk-block-lg">
     <div class="nk-block-head">
-        <div class="nk-block-head-content">
+        <div class="nk-block-head-content d-flex justify-content-between">
             <h4 class="title nk-block-title">Site Setting <i class="fa fa-cog" aria-hidden="true"></i></h4>
+            {{ Breadcrumbs::render('site-setting') }}
         </div>
     </div>
     <div class="card card-bordered card-preview">
