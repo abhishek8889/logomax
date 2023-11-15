@@ -2916,6 +2916,39 @@ a.asset-id-link__button {
 }
 
 
+.checkout_summary .templete_wrapper .summary_wrapp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkout_summary .templete_wrapper .summary_wrapp .img p {
+    margin-top: 10px;
+    text-align: center;
+}
+.checkout_summary .templete_wrapper .additional_content h6 {
+    padding-top: 15px;
+}
+.checkout_summary .templete_wrapper .add_account_wrapp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(227, 233, 237, 1);
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+.checkout_summary .templete_wrapper .add_account_wrapp .add_btn {
+    position: relative;
+    width: 70%;
+}
+.checkout_summary .templete_wrapper .add_account_wrapp .add_btn a {
+    padding: 12px 30px;
+   
+}
+.checkout_summary .templete_wrapper .table_data {
+    padding-top: 10px;
+}
+
 
     
  /*  */
@@ -4550,5 +4583,28 @@ a.asset-id-link__button {
 .brand-text .dropdown_data div#accordion .card .card-body {
     padding-left: 32px !important;
     padding-top: 0px;
+}
+}
+
+@media only screen and (max-width: 991px) {
+.checkout_summary .templete_wrapper .add_account_wrapp .add_btn {
+    position: relative;
+    width: 67%;
+}
+.checkout_summary .templete_wrapper .add_account_wrapp .add_btn p {
+    font-size: 16px;
+    line-height: 1.4;
+}
+.checkout_summary .templete_wrapper .add_account_wrapp {
+    
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+}
+
+
+@media only screen and (max-width: 767px) {
+.checkout_summary .templete_wrapper .add_account_wrapp .add_btn a {
+    padding: 8px 25px;
 }
 }
