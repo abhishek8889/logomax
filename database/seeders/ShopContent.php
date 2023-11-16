@@ -6,15 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
-class RegisterContent extends Seeder
+class ShopContent extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('register_contents')->truncate();
+        DB::table('shop_contents')->truncate();
         $about_data = [
             [
             'name'=>'meta title',
@@ -42,13 +41,12 @@ class RegisterContent extends Seeder
         ],
         ];
         foreach ($about_data as $data) {
-            DB::table('register_contents')->insert([
+            DB::table('shop_contents')->insert([
                 'name' => $data['name'],
                 'key' => $data['key'],
                 'value' => $data['value'],
                 'type' => $data['type'],
             ]);
         }
-
     }
 }

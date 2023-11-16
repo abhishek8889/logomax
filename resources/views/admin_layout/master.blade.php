@@ -250,6 +250,21 @@
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/site-content/support') }}" class="nk-menu-link"><span class="nk-menu-text">Support Page Setting</span></a>
                                         </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/reviews-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Reviews Page Setting</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/blogs-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Blogs Page Setting</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/login-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Login Page Setting</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/register-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Register Page Setting</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/shop-page-setting') }}" class="nk-menu-link"><span class="nk-menu-text">Shop Page Setting</span></a>
+                                        </li>
                                     </ul><!-- .nk-menu-sub -->
                                     <ul class="nk-menu-sub" style="display: none;">
                                         <li class="nk-menu-item">

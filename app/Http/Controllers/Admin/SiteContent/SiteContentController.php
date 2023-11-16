@@ -12,6 +12,7 @@ use App\Models\LoginContent;
 use App\Models\RegisterContent;
 use App\Models\BlogContent;
 use App\Models\ReviewContent;
+use App\Models\ShopContent;
 
 class SiteContentController extends Controller
 {
@@ -212,6 +213,10 @@ class SiteContentController extends Controller
         $content = ReviewContent::all();
         return view('admin.configuration.reviews_content',compact('content'));
     }
+    public function shop(){
+        $content = ShopContent::all();
+        return view('admin.configuration.shop_content',compact('content'));
+    }
     public function reviewsSubmit(Request $request){
         foreach($request->all() as $key=>$value){
             if($key == '_token'){
@@ -264,5 +269,18 @@ class SiteContentController extends Controller
 
         return redirect()->back()->with('success','Successfully updated blogs page content');  
     }
+    public function shopSubmit(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = ShopContent::find($key);
+          
+            $supportContent->value = $value;
+            $supportContent->update();
+        }
 
+        return redirect()->back()->with('success','Successfully updated blogs page content');
+
+    }
 }

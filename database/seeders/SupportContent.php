@@ -30,7 +30,7 @@ class SupportContent extends Seeder
                 [
                     'meta_name'=>'meta description',
                     'meta_key'=>'meta-description',
-                    'meta_value'=>'test',
+                    'meta_value'=>'',
                     'type'=>'textarea'
                 ],
                 [
@@ -42,7 +42,7 @@ class SupportContent extends Seeder
                 [
                 'meta_name'=>'meta country',
                 'meta_key'=>'meta-country',
-                'meta_value'=>'test',
+                'meta_value'=>'',
                 'type'=>'textarea'
             ],
         );

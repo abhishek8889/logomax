@@ -13,6 +13,8 @@ use App\Mail\RegisterConfirmationMail;
 use App\Rules\ReCaptcha;
 use App\Events\RegisterNotificationEvent;
 use App\Models\Notifications;
+use App\Models\LoginContent;
+use App\Models\RegisterContent;
 use App\Mail\PasswordRecovery;
 
 class AuthenticationController extends Controller
@@ -22,10 +24,22 @@ class AuthenticationController extends Controller
         return view('authentication.login');
     }
     public function loginNew(Request $request){
-        return view('authentication.new_login',compact('request'));
+
+        $meta_title = LoginContent::where('key','meta-title')->first()->value;
+        $meta_description = LoginContent::where('key','meta-description')->first()->value;
+        $meta_language = LoginContent::where('key','meta-language')->first()->value;
+        $meta_country = LoginContent::where('key','meta-country')->first()->value;
+
+        return view('authentication.new_login',compact('request','meta_title','meta_description','meta_language','meta_country'));
     }
     public function registerNew(Request $request){
-        return view('authentication.new-register',compact('request'));
+
+        $meta_title = RegisterContent::where('key','meta-title')->first()->value;
+        $meta_description = RegisterContent::where('key','meta-description')->first()->value;
+        $meta_language = RegisterContent::where('key','meta-language')->first()->value;
+        $meta_country = RegisterContent::where('key','meta-country')->first()->value;
+
+        return view('authentication.new-register',compact('request','meta_title','meta_description','meta_language','meta_country'));
     }
     public function loginprocess(Request $request){
      

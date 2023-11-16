@@ -6,8 +6,19 @@ $ratingget = 0;
 foreach($reviews as $review){
     $ratingget += $review->rating;
 }
- $totalrating =  $ratingget/count($reviews);
- $totalrate = count($reviews);
+if(count($reviews) == 0){
+
+    $totalrate = 1;
+}else{
+
+    $totalrate = count($reviews);
+}
+ $totalrating =  $ratingget/$totalrate;
+ if($totalrating == 0){
+    $totalrating = 5;
+ }
+ 
+ 
  $onerate = count($onerating);
  $zerorate = count($zerorating);
  $tworate = count($tworating);

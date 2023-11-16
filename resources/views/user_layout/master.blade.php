@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $meta_language ?? 'en' }}">
 
 <head>
   <meta charset="utf-8">
@@ -34,9 +34,16 @@
   @if (isset($blog) && isset($blog->banner_img))
   <meta property="og:image" content="{{ asset('blog_images/' . $blog->banner_img) }}" />
   @endif
+  @if(isset($meta_description))
+  <?php  print_r($meta_description); ?>
+  @endif
+  @if(isset($meta_country))
+<?php print_r($meta_country);  ?>
+  @endif
+
 
   <!-- end meta fb -->
-  <title>home page </title>
+  <title>{{ $meta_title ?? 'Logomax' }} </title>
 </head>
 
 <body>

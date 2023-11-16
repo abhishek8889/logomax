@@ -25,9 +25,9 @@ class HomeContentSeeder extends Seeder
             ['id'=>8,'name'=>'customer review title','key'=>'customer-review-title','value'=>'Why our customers love Logomax','type'=>'textarea'],
             ['id'=>9,'name'=>'customer review text','key'=>'customer-review-text','value'=>'<p>Hundreds of customers have trusted Logomax logo maker and Brand Plan as a resource to set up, launch, and grow a brand they love.</p>','type'=>'textarea'],
             ['id'=>10,'name'=>'meta title','key'=>'meta-title','value'=>'test','type'=>'textarea'],
-            ['id'=>11,'name'=>'meta description','key'=>'meta-description','value'=>'test','type'=>'textarea'],
+            ['id'=>11,'name'=>'meta description','key'=>'meta-description','value'=>'','type'=>'textarea'],
             ['id'=>12,'name'=>'meta language','key'=>'meta-language','value'=>'test','type'=>'textarea'],
-            ['id'=>13,'name'=>'meta country','key'=>'meta-country','value'=>'test','type'=>'textarea'],
+            ['id'=>13,'name'=>'meta country','key'=>'meta-country','value'=>'','type'=>'textarea'],
         ];
 
         foreach($homeContent as $content){

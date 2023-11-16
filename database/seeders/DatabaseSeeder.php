@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LoginContent::class);
         $this->call(RegisterContent::class);
         $this->call(ReviewContent::class);
+        $this->call(ShopContent::class);
     }
 }

@@ -260,12 +260,14 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/register-page-setting',[SiteContentController::class,'register'])->name('register-setting');
     Route::get('/admin-dashboard/blogs-page-setting',[SiteContentController::class,'blogs'])->name('blogs-setting');
     Route::get('/admin-dashboard/reviews-page-setting',[SiteContentController::class,'reviews'])->name('reviews-setting');
+    Route::get('/admin-dashboard/shop-page-setting',[SiteContentController::class,'shop'])->name('shop-setting');
 
 
     Route::post('/admin-dashboard/reviews-page-submit',[SiteContentController::class,'reviewsSubmit']);
     Route::post('/admin-dashboard/login-page-submit',[SiteContentController::class,'loginSubmit']);
     Route::post('/admin-dashboard/register-page-submit',[SiteContentController::class,'registerSubmit']);
     Route::post('/admin-dashboard/blogs-page-submit',[SiteContentController::class,'blogsSubmit']);
+    Route::post('/admin-dashboard/shop-page-submit',[SiteContentController::class,'shopSubmit']);
 
     
 

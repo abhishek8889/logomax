@@ -24,7 +24,7 @@ class ReviewContent extends Seeder
             [
                 'name'=>'meta description',
                 'key'=>'meta-description',
-                'value'=>'test',
+                'value'=>'',
                 'type'=>'textarea'
             ],
             [
@@ -36,7 +36,7 @@ class ReviewContent extends Seeder
             [
             'name'=>'meta country',
             'key'=>'meta-country',
-            'value'=>'test',
+            'value'=>'',
             'type'=>'textarea'
         ],
         ];
