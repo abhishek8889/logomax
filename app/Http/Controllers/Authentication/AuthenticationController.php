@@ -81,16 +81,15 @@ class AuthenticationController extends Controller
         return view('authentication.register',compact('request'));
     }
     public function registerProcess(Request $request){
-       
         $remember_token = Str::random(64);
         $validate = $request->validate([
             'g-recaptcha-response' => 'required',
-            'name' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
-            'experience' => 'required',
+            // 'experience' => 'required',
             'country' => 'required',
-            'address' => 'required',
         ]);
          $recaptcha = $_POST['g-recaptcha-response'];
                     $secret_key = env('GCAPTCHA_SECRET_KEY');
@@ -104,25 +103,25 @@ class AuthenticationController extends Controller
             }
 
         $user = new User();
-        $user->name = $validate['name'];
+        $user->first_name = $validate['fname'];
+        $user->last_name = $validate['lname'];
         $user->email = $validate['email'];
         $user->password = Hash::make($validate['password']);
-        $user->experience = $validate['experience'];
+
         $user->country = $validate['country'];
-        $user->address = $validate['address'];
-        $user->role_id = 2;
+        // $user->email_verified = 1;
+        $user->role_id = 1;
         $user->remember_token = $remember_token;
         $user->status = 1;
         $user->save();
 
             
-            if($user->role_id == 2){
+    if($user->role_id == 1){
         $mailData = [
             'title' => 'User Registration',
             'token' => $remember_token,
             'email' => $validate['email'],
         ];
-
         $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
         return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
     }else{
