@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('logo_slug');
             $table->string('media_id');
             $table->string('tags');
+            $table->string('logo_type')->default('low-price');        ////premium or Low-priced
             $table->string('category_id');
             $table->string('style_id');
             $table->float('price_for_customer')->default(199);

@@ -65,4 +65,16 @@ class ReviewsController extends Controller
         $review->delete();
         return redirect()->back()->with('success','Successfully deleted');
     }
+
+    public function reviewsrequest(){
+        $reviews = LogoReview::where('approved',0)->get();
+
+        return view('admin.reviews.reviews_requests',compact('reviews'));
+    }
+    public function reviewsStatus($id){
+        $review = LogoReview::find($id);
+        $review->approved = 1;
+        $review->update();
+        return redirect()->back()->with('success','Successfully updated');
+    }
 }

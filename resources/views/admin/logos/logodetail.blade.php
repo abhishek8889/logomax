@@ -194,6 +194,14 @@
                                         <label class="" for="for-designer">For designer : </label>
                                         <input class="form-control no-resize" name="for-designer" id="for-designer" type="number" />
                                     </div>
+                                    <hr>
+                                    <div class="form-control-wrap">
+                                        <label class="" for="logo_type">Logo Type : </label>
+                                        <select name="logo_type" id="logo_type" class="form-control">
+                                            <option value="low-price">Low Price logo</option>
+                                            <option value="premium">Premium logo</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <!-- <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button> -->
@@ -222,12 +230,14 @@
                                     e.preventDefault();
                                     let customer_price = $("#for-customer").val();
                                     let designer_price = $("#for-designer").val();
+                                    let logo_type = $("#logo_type").val();
+                                    console.log(logo_type);
                                     // console.log(customer_price + ' => ' + designer_price);
                                     $('.spinner-container').show();
                                     $.ajax({
                                         method: 'post',
                                         url: '{{ url('admin-dashboard/updatestatus') }}',
-                                        data: { id:id,action:action,customer_price:customer_price,designer_price:designer_price,approved_status:status,_token:'{{ csrf_token() }}' },
+                                        data: { id:id,action:action,logo_type:logo_type,customer_price:customer_price,designer_price:designer_price,approved_status:status,_token:'{{ csrf_token() }}' },
                                         success: function(response){
                                             NioApp.Toast(response, 'info', {position: 'top-right'}); 
                                             setTimeout(() => {

@@ -265,6 +265,28 @@
       </div>
     </div>
   </section>
+  <section>
+    <form action="{{ url('reviewSubmit') }}" method="post">
+      @csrf
+      <div class="col-lg-6">
+        <input type="hidden" name="logo_id" value="{{ $logo->id ?? '' }}">
+      <div class="form-group p-3">
+        <div class="form-group">
+            <input type="title" class="form-control" name="title">
+        </div>
+        <div class="form-group">
+          <textarea name="description" id="description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="number" name="rating" class="form-control">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">submit</button>
+        </div>
+      </div>
+      </div>
+    </form>
+  </section>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
    $(document).on('click','.add_to_wishlist_button',function(e){

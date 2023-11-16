@@ -87,18 +87,12 @@
                             <div class="slider-box">
                                 <div class="fillter-slider">
                                     <?php $selctedtag = json_decode($filterTags);
-                                    
+                                    $values = ['All logos','Low-priced logos','Premium logos'];
                                     ?>
-                                    @foreach($tags as $tag)
+                                    @foreach($values as $value)
                                        <label for="{{ $tag->slug ?? '' }}">
-                                            <div class="filtr_box <?php  echo 'filter-box'.$tag->slug;
-                                            if(in_array($tag->slug,$selctedtag)){
-                                                echo ' selected';
-                                            }else{
-
-                                            }
-                                            ?>">
-                                                <a id="test" value="{{ $tag->id ?? '' }}"><i class="fa-sharp fa-light fa-magnifying-glass"></i>{{ $tag->name ?? '' }}</a>
+                                            <div class="filtr_box ">
+                                                <a id="test" value="{{ $tag->id ?? '' }}">{{ $value ?? '' }}</a>
                                             </div>
                                         </label>
                                     @endforeach
@@ -185,7 +179,8 @@
 
                     <div class="show_logo">
                         <div class="logo_head">
-                            <h2>Showing All for logo</h2>
+                            <h2 class="text-left"> <span class="logo_search_text"> Find Unique & Exclusive</span> Logos</h2>
+                            <span class="ml-3"> <span class="logos_count">{{ count($logos) ?? 0 }}</span> resultados</span>
                         </div>
                         <div class="row" id="logo_html_row">
                             @foreach($logos as $logo)
@@ -273,6 +268,11 @@
             $('input[name="search_field"]').on('keyup',function(){
                 searchvalue = $(this).val();
                 // console.log(value);
+                $('span.logo_search_text').html(searchvalue);
+                if(searchvalue == ""){
+                    $('span.logo_search_text').html('Find Unique & Exclusive');
+                    
+                }
                 let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
@@ -354,7 +354,7 @@
             url: '{{ url('logo-filter') }}',
             data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
             success: function(response){
-                // console.table(response);
+                $('span.logos_count').html(response['data'].length);
                 // console.table(response[0]['media']);
                 $('.filter-btn').removeClass('d-none');
                 append_html = [];
