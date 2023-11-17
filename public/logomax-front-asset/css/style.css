@@ -3027,6 +3027,82 @@ a.asset-id-link__button {
     width: 100%;
 }
 
+
+ section.banner-sec.banner-new-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select {
+        display: block;
+        width: 70%;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search {
+        padding: 0px!important;
+        /* padding-right: 0; */
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input.form-control {
+        padding-right: unset;
+        width: 100%;
+        /* border: none; */
+        /* outline: none; */
+        /* font-weight: 400; */
+        /* font-size: 12px; */
+        /* line-height: 24px; */
+        /* color: #656F79; */
+        /* padding: 0px; */
+        /* display: block; */
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input::-webkit-input-placeholder {
+        font-size: 20px!important;
+    }
+    section.banner-sec.banner-new-sec .Select-text .Search-bar button#button-addon5 {
+        position: unset;
+        top: 0;
+        right: 0;
+        transition: none;
+        cursor: pointer;
+    }
+    /*  */
+
+    
+    section.banner-sec.banner-new-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select {
+        display: block;
+        width: 70%;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search {
+        padding: 0px!important;
+        /* padding-right: 0; */
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input.form-control {
+        padding-right: unset;
+        width: 100%;
+        /* border: none; */
+        /* outline: none; */
+        /* font-weight: 400; */
+        /* font-size: 12px; */
+        /* line-height: 24px; */
+        /* color: #656F79; */
+        /* padding: 0px; */
+        /* display: block; */
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input::-webkit-input-placeholder {
+        font-size: 20px!important;
+    }
+    section.banner-sec.banner-new-sec .Select-text .Search-bar button#button-addon5 {
+        position: unset;
+        top: 0;
+        right: 0;
+        transition: none;
+        cursor: pointer;
+    }
     
  /*  */
 
@@ -4726,6 +4802,51 @@ a.asset-id-link__button {
         font-size: 14px!important;
     }
     .banner-sec .all-select {
+        display: block;
+        width: 80%;
+    }
+    }
+
+
+    /* Banner Section */
+    
+    
+    @media only screen and (max-width: 1399px){
+    section.banner-sec.banner-new-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input::-webkit-input-placeholder {
+        font-size: 18px!important;
+    }
+    }
+    
+    @media only screen and (max-width: 991px){
+    
+    section.banner-sec.banner-new-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input::-webkit-input-placeholder {
+        font-size: 16px!important;
+    }
+    }
+    
+    @media only screen and (max-width: 575px){
+    section.banner-sec.banner-new-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 10px;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select .search input::-webkit-input-placeholder {
+        font-size: 14px!important;
+    }
+    section.banner-sec.banner-new-sec .Select-text .all-select {
         display: block;
         width: 80%;
     }
