@@ -333,19 +333,19 @@
                         <div class="step_form_content">
                             <h5>Contact information</h5>
                         </div>
-                        
+                        <div class="text text-danger error-text"></div>
                         <div class="form-row form__field mt-3 sm:mt-0 ">
                             <div class="col-md-6 ">
                                 <label for="name">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="first_name" type="text" name="first_name" value="" placeholder="First name"   />
+                                <input id="first_name" class="input-box" type="text" name="first_name" value="" placeholder="First name"   />
                             </div>
                             <div class="col-md-6">
                                 <label for="name">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="name" type="text" name="last_name" value="" placeholder="Last name"   />
+                                <input id="name" type="text" class="input-box" name="last_name" value="" placeholder="Last name"   />
                             </div>
                         </div>
                         <!--  -->
@@ -353,7 +353,7 @@
                             <label for="address">
                                 <span  aria-hidden="true"></span>
                             </label>
-                            <input id="address" type="text" name="address" placeholder="Street, number" />
+                            <input id="address" type="text" class="input-box" name="address" placeholder="Street, number" />
                         </div>
                         
                         <!-- City and zip  -->
@@ -362,13 +362,13 @@
                                 <label for="zip">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="zip" type="text" name="zip_code" placeholder="Zip / Postal Code" />
+                                <input id="zip" type="text" class="input-box" name="zip_code" placeholder="Zip / Postal Code" />
                             </div>
                             <div class="col-md-6">
                                 <label for="city-address">
                                     <span  aria-hidden="true"></span>
                                 </label>
-                                <input id="city-address" type="text" name="city" placeholder="City"/>
+                                <input id="city-address" class="input-box" type="text" name="city" placeholder="City"/>
                             </div>
                         </div>
                         <!--  -->
@@ -376,7 +376,7 @@
                             <label for="state-address">
                             <span  aria-hidden="true"></span>
                             </label>
-                            <input id="state" type="text" name="state" placeholder="State / Province / Region" />
+                            <input id="state" type="text" class="input-box" name="state" placeholder="State / Province / Region" />
                         </div>
                         
                         <div class="form-group" >
@@ -391,7 +391,7 @@
                             <label for="email">
                                 <span aria-hidden="true"></span>
                             </label>
-                            <input id="email" type="text" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                            <input id="email" type="text" class="input-box" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
                         </div>
                         <!--  -->
                         <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
@@ -416,7 +416,7 @@
                                     <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                                 </div>
                             </div>
-                            <div class="additional_content">
+                            <div class="additional_content mt-5">
                             <h6>Additional options:</h6>
                             </div>
                             <!--  -->
@@ -491,7 +491,7 @@
                                 
                             </div>
                             <!-- Subtotal  -->
-                            <div class="total_data">
+                            <div class="total_data subtotal-box">
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
@@ -529,7 +529,7 @@
                                 <div class='form-row row'>
                                     <div class='col-lg-12 form-group'>
                                         <label class='control-label'>Name on Card</label>
-                                         <input class='form-control' id="name_on_card" name="name_on_card" type='text'>
+                                         <input class='form-control'  id="name_on_card" name="name_on_card" type='text'>
                                     </div>
                                 </div>
                                 <!-- ################### Show Card ######################### -->
@@ -585,7 +585,7 @@
                                     <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                                 </div>
                             </div>
-                            <div class="additional_content">
+                            <div class="additional_content mt-5">
                             <h6>Additional options:</h6>
                             </div>
                             <!--  -->
@@ -660,7 +660,7 @@
                                 
                             </div>
                             <!-- Subtotal  -->
-                            <div class="total_data">
+                            <div class="total_data subtotal-box">
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
@@ -734,7 +734,7 @@
                                     <span class="text text-dark"><b>${{ $logo->price_for_customer }}</b></span>
                                 </div>
                             </div>
-                            <div class="additional_content">
+                            <div class="additional_content mt-5">
                             <h6>Additional options:</h6>
                             </div>
                             <!--  -->
@@ -799,8 +799,6 @@
                             <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
-                            
-                            
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
                                 
@@ -809,7 +807,7 @@
                                 
                             </div>
                             <!-- Subtotal  -->
-                            <div class="total_data">
+                            <div class="total_data subtotal-box">
                                 <p>Subtotal</p>
                                 <p>${{ $logo->price_for_customer }}</p>
                             </div>
@@ -842,9 +840,12 @@
         let country = $("#country").val();
         let state = $("#state").val() ; 
         let zip = $("#zip").val();
-        
-        $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city_address} ${state} ${zip},${country}</p><p>${email}</p>`);
-
+        if(address == '' || address ==  undefined || email == "" || email == undefined || city_address == "" || city_address == undefined || country == "" || country == undefined || state == "" || state == undefined || zip == "" || zip == undefined ){
+            $(".error-text").html('All fields are required');
+            return false;
+        }else{
+            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city_address} ${state} ${zip},${country}</p><p>${email}</p>`);
+        }
     });
 </script>
 <script>
@@ -933,12 +934,20 @@
                 // console.log(logo_price_for_customer + '<- totoal price current-> '  +  price + 'gst_prcnt_cut ' + prcnt_cut );
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
                 new_total = logo_price_for_customer + price + prcnt_cut;
+                
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
             }else{
                 prcnt_cut = ((logo_price_for_customer + price + favicon_enabled_price) *  gst_prcnt) / 100; 
                 console.log(prcnt_cut);
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + price + favicon_enabled_price + prcnt_cut;
+
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
             }
             // console.log('new_total'+new_total);
             $('.save-logo-for-future-btn').attr('data-enabled','true');
@@ -946,7 +955,8 @@
             $('.save-logo-for-future-btn').html('Remove');
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
             $(".save-logo-check").attr('checked','checked');
-          
+            
+
         }else{
             let new_total = 0;
             if(favicon_enabled_status == 'false'){
@@ -955,12 +965,20 @@
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + prcnt_cut;
+
+                if($(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").removeClass('subtotal-top-border');
+                }
             }else{
                 prcnt_cut = ((logo_price_for_customer + favicon_enabled_price)  *  gst_prcnt) / 100; 
                 // console.log(prcnt_cut);
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + favicon_enabled_price + prcnt_cut;
+
+                // if($(".subtotal-box").hasClass('subtotal-top-border')){
+                //     $(".subtotal-box").removeClass('subtotal-top-border');
+                // }
             }
             $('.save-logo-for-future-btn').attr('data-enabled','false');
             $(".save-logo-future-box").html('');
@@ -968,6 +986,7 @@
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
             $(".save-logo-check").removeAttr('checked');
 
+            
         }
     });
     $(".get-favicon-btn").on('click',function(e){
@@ -990,12 +1009,22 @@
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + price + prcnt_cut;
+
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
+
             }else{
                 prcnt_cut = ((logo_price_for_customer + price + logo_future_enabled_price) *  gst_prcnt) / 100; 
                 // console.log(prcnt_cut);
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + price + logo_future_enabled_price + prcnt_cut;
+                
+                if(!$(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").addClass('subtotal-top-border');
+                }
+
             }
             $('.get-favicon-btn').attr('data-enabled','true');
             $(".favicon-logo-box").html(`<p>Favicon logo price</p><p>$${price}</p>`);
@@ -1003,6 +1032,8 @@
             $(".total_price_box").html(`<p><b>Total</b></p><p><b>$${new_total}</b></p>`);
 
             $(".get-favicon-check").attr('checked','checked');
+
+            
 
         }else{
             let new_total = 0;
@@ -1012,6 +1043,11 @@
                 $(".gst_cut_val").html(`$${prcnt_cut}`);
 
                 new_total = logo_price_for_customer + prcnt_cut ;
+
+                if($(".subtotal-box").hasClass('subtotal-top-border')){
+                    $(".subtotal-box").removeClass('subtotal-top-border');
+                }
+
             }else{
                 prcnt_cut = ((logo_price_for_customer + logo_future_enabled_price) *  gst_prcnt) / 100; 
                 // console.log(prcnt_cut);

@@ -78,7 +78,7 @@
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox"> <Span class="pl-2 mt-2">Remember me</Span>
                                     </label>
-                                    <p class="small-p"> <a href="{{ url('/account-recovery') }}"> Forget Password? </a></p>
+                                    <p class="small-p"> <a href="{{ url('/account-recovery') }}"> Forgot Password? </a></p>
                                 </div>
                                 <!-- <div class="form-group"> -->
                                     <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
