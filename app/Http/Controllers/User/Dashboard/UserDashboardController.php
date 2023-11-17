@@ -305,7 +305,7 @@ class UserDashboardController extends Controller
     }
    
     public function termsAndConditions(Request $request){
-        return view('users.meta-pages.terms&conditions');
+        return view('users.meta-pages.terms&conditions',compact('request'));
     }
     public function userDashboardIndex(Request $request){
        $wishlist = Wishlist::where('user_id',auth()->user()->id)->take(3)->orderBy('created_at','desc')->get();

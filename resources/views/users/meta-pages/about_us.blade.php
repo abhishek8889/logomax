@@ -1,5 +1,11 @@
 @extends('user_layout.master')
 @section('content')
+<style>
+    .mission_text h2{
+        float: left;
+        display:contents;
+    }
+</style>
     <?php $aboutdata = App\Models\AboutUsContent::Class::all(); ?>
     @if($aboutdata)
     <section class="about_sec">
@@ -21,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mission_text right">
+                        <div class="mission_text left ">
                             @foreach($aboutdata as $data)
                             @if($data->key == 'upper-text-left')
                             <?php echo $data->value; ?>
@@ -30,9 +36,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="mission_text left">
+                        <div class="mission_text right">
                             @foreach($aboutdata as $data)
-                            @if($data->key == 'upper-text-left')
+                            @if($data->key == 'upper-text-right')
                             <?php echo $data->value; ?>
                             @endif
                             @endforeach
@@ -94,30 +100,33 @@
 
         </div>
     </section>
-
+    <?php 
+    $logo = App\Models\Logo::where('status',1)->get();
+    $availableLogo = count($logo);
+    ?>
     <section class="counter">
         <div class="container">
             <div class="counter_wrapp">
                 <div class="counter_dflex">
                     <div class="counter_box">
-                        <h2 data-max="263">M+</h2>
-                        <span>Files</span>
+                        <h2 data-max="{{ $availableLogo }}">+</h2>
+                        <span>Logos available</span>
                     </div>
                     <div class="counter_box">
-                        <h2 data-max="100">K+</h2>
-                        <span>Contributors</span>
+                        <h2 data-max="2000">+</h2>
+                        <span>Designers</span>
                     </div>
                     <div class="counter_box">
-                        <h2 data-max="36">M</h2>
-                        <span>Clients Worldwide</span>
+                        <h2 data-max="20">+</h2>
+                        <span>Countries</span>
                     </div>
-                    <div class="counter_box">
+                    <!-- <div class="counter_box">
                         <h2>24/7</h2>
                         <span>26 Languages Support</span>
-                    </div>
+                    </div> -->
                     <div class="counter_box">
-                        <h2 data-max="450">+</h2>
-                        <span>Professionals</span>
+                        <h2 data-max="100000">+</h2>
+                        <span>Logos sold</span>
                     </div>
                 </div>
             </div>

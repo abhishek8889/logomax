@@ -111,7 +111,7 @@
                     <div class="work_data">
                         <div class="search_style_wrapp">
                             <div class="search_head">
-                                <p>Search by Style</p>
+                                <p>Search by Icons</p>
                                 <i class="fa-solid fa-angle-down"></i>
                             </div>
                             <div class="search_content">

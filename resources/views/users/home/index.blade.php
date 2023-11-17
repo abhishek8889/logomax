@@ -252,8 +252,7 @@
           <div class="join-btn">
             <a class="email-btn" href="{{ url('/register') ?? '' }}"><i class="fa-solid fa-envelope"></i>Register by email</a>
           </div>
-          <p>By clicking "Create Account" or registering using Facebook or
-            Google, you agree to the Membership Agreement *</p>
+          <p>By creating an account, you're agreeing to our Terms and Conditions.</p>
         </div>
       </div>
     </div>
@@ -267,7 +266,7 @@
   <section class="popular-sec p-110">
     <div class="container">
       <div class="popular-text">
-        <h2>Popular search requests:</h2>
+        <h2>Discover What's Trending</h2>
       </div>
       <div class="popular-btn-box">
         <div class="popular-btn">
