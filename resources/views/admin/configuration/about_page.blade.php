@@ -27,8 +27,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                        @if ($data->key == 'upper-text-left')
+                                        @elseif ($data->key == 'upper-text-left')
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -37,9 +36,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
                                        
-                                        @if ($data->key == 'upper-text-right')
+                                        @elseif ($data->key == 'upper-text-right')
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -48,8 +46,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'facebook-link')
+                                        @elseif ($data->key == 'facebook-link')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -60,8 +57,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'instagram-link')
+                                        @elseif ($data->key == 'instagram-link')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -72,8 +68,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'pinterest-link')
+                                        @elseif ($data->key == 'pinterest-link')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -84,8 +79,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                       @if ($data->key == 'linked-in-link')
+                                       @elseif ($data->key == 'linked-in-link')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -96,8 +90,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'video-link')
+                                        @elseif ($data->key == 'video-link')
                                         <div class="col-lg-12 mt-2">
                                             <div class="form-group">
                                                 <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -108,8 +101,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                        @if ($data->key == 'contact-us')
+                                        @elseif ($data->key == 'contact-us')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -118,8 +110,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'join-us')
+                                        @elseif ($data->key == 'join-us')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -128,8 +119,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'video-text-title')
+                                        @elseif ($data->key == 'video-text-title')
                                         <div class="col-lg-12 mt-2">
                                             <div class="form-group">
                                                 <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -138,8 +128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                        @if ($data->key == 'video-text')
+                                        @elseif ($data->key == 'video-text')
                                             <div class="col-lg-12 mt-2">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_name">{{ $data->name }}</label>
@@ -148,8 +137,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if ($data->key == 'video-image')
+                                        @elseif ($data->key == 'video-image')
                                             <br>
                                             <div class="col-lg-12">
                                                 <div class="form-group">
@@ -168,8 +156,7 @@
                                                 </div>
                                             </div>
                                             <br>
-                                        @endif
-                                        @if ($data->key == 'join-us-image')
+                                        @elseif ($data->key == 'join-us-image')
                                         <br>
                                         <div class="col-lg-12">
                                             <div class="form-group">
@@ -188,6 +175,13 @@
                                             </div>
                                         </div>
                                         <br>
+                                    @else
+                                         <div class="form-group">
+                                                    <label class="form-label" for="default-01">{{ $data->name ?? '' }}</label>
+                                                    <div class="form-control-wrap">
+                                                        <textarea type="text" class="form-control" name="{{ $data->id ?? '' }}" id="default-01" >{{ $data->value ?? '' }}</textarea>
+                                                    </div>
+                                                </div>
                                     @endif
                                      @endforeach
                                 @endif

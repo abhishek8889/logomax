@@ -27,7 +27,7 @@ use App\Http\Controllers\User\Dashboard\UserDashboardController;
 use App\Http\Controllers\Admin\Revision\RevisionController;
 use App\Http\Controllers\Admin\Reviews\ReviewsController;
 use App\Http\Controllers\Admin\SiteMeta\SiteMetaController;
-
+use App\Http\Controllers\Admin\Branches\BranchesController;
 use App\Http\Controllers\BasicController;
 
 use App\Events\RegisterNotificationEvent;
@@ -70,7 +70,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
 
     Route::post('blog-search',[BlogController::class,'blogsearch']);
 
-
+    Route::post('reviewSubmit',[MetaPagesController::class,'reviewSubmit']);
     /* term and conditions: */
   
     /** Authentications */
@@ -192,6 +192,11 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::post('admin-dashboard/styles/addProcc',[AdminStyleController::class,'addProcc']);
     Route::get('admin-dashboard/styles/delete/{id}',[AdminStyleController::class,'delete']);
 
+    //branches
+    Route::get('admin-dashboard/branches',[BranchesController::class,'index'])->name('index');
+    Route::post('admin-dashboard/branches/addProcc',[BranchesController::class,'addProcc']);
+    Route::get('admin-dashboard/branches/delete/{id}',[BranchesController::class,'delete']);
+
     // Special Designer 
     Route::get('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesigner'])->name('add-special-desinger');
     Route::post('admin-dashboard/add-special-designer',[SpecialDesignerController::class,'addSpecialDesignerProcess']);
@@ -231,7 +236,9 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/edit-review/{id?}',[ReviewsController::class,'editReview'])->name('update-review');
     Route::post('/admin-dashboard/add-review-process',[ReviewsController::class,'addReviewProcc']);
     Route::get('admin-dashboard/review-list',[ReviewsController::class,'reviewlist'])->name('review-list');
-    Route::post('admin-dashboard/update-review-status',[ReviewsController::class,'updatestatus']);
+    Route::get('admin-dashboard/review-request',[ReviewsController::class,'reviewsrequest'])->name('review-request');
+    Route::get('admin-dashboard/review-status/{id}',[ReviewsController::class,'reviewsStatus']);
+    Route::post('admin-dashboard/update-review-status',[ReviewsController::class,'updateapproved']);
     Route::get('admin-dashboard/review/delete/{id}',[ReviewsController::class,'delete']);
 
 
@@ -255,6 +262,21 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/admin-dashboard/about-page-setting',[SiteContentController::class,'aboutPageSetting'])->name('about-setting');
     Route::post('/admin-dashboard/about-page-update',[SiteContentController::class,'aboutPageupdate']);
     Route::post('/admin-dashboard/update-site-content',[SiteContentController::class,'updateHomeConfiguration']);
+
+    Route::get('/admin-dashboard/login-page-setting',[SiteContentController::class,'login'])->name('login-setting');
+    Route::get('/admin-dashboard/register-page-setting',[SiteContentController::class,'register'])->name('register-setting');
+    Route::get('/admin-dashboard/blogs-page-setting',[SiteContentController::class,'blogs'])->name('blogs-setting');
+    Route::get('/admin-dashboard/reviews-page-setting',[SiteContentController::class,'reviews'])->name('reviews-setting');
+    Route::get('/admin-dashboard/shop-page-setting',[SiteContentController::class,'shop'])->name('shop-setting');
+
+
+    Route::post('/admin-dashboard/reviews-page-submit',[SiteContentController::class,'reviewsSubmit']);
+    Route::post('/admin-dashboard/login-page-submit',[SiteContentController::class,'loginSubmit']);
+    Route::post('/admin-dashboard/register-page-submit',[SiteContentController::class,'registerSubmit']);
+    Route::post('/admin-dashboard/blogs-page-submit',[SiteContentController::class,'blogsSubmit']);
+    Route::post('/admin-dashboard/shop-page-submit',[SiteContentController::class,'shopSubmit']);
+
+    
 
 });
 /////////////////////////// ADMIN ROUTES END ///////////////////////////////

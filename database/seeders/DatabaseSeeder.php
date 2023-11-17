@@ -24,5 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SupportContent::class);
         $this->call(AboutUsContent::class);
         $this->call(HomeContentSeeder::class);
+        $this->call(BlogContent::class);
+        $this->call(LoginContent::class);
+        $this->call(RegisterContent::class);
+        $this->call(ReviewContent::class);
+        $this->call(ShopContent::class);
     }
 }

@@ -8,6 +8,11 @@ use App\Models\HomeContent;
 use Illuminate\Http\Request;
 use App\Models\SiteMeta;
 use App\Models\SupportContent;
+use App\Models\LoginContent;
+use App\Models\RegisterContent;
+use App\Models\BlogContent;
+use App\Models\ReviewContent;
+use App\Models\ShopContent;
 
 class SiteContentController extends Controller
 {
@@ -80,16 +85,23 @@ class SiteContentController extends Controller
     }
 
     public function supportContent(){
-        $support_text =  SupportContent::where('meta_key','support_text')->first();
+        $support_text =  SupportContent::all();
         
 
         return view('admin.configuration.support_page',compact('support_text'));
     }
     public function supportContentSubmit(Request $request){
-        $supportContent = SupportContent::find($request->id);
-        $supportContent->type = $request->meta_type;
-        $supportContent->meta_value = $request->meta_value;
-        $supportContent->update();
+        
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = SupportContent::find($key);
+          
+            $supportContent->meta_value = $value;
+            $supportContent->update();
+        }
+
         return redirect()->back()->with('success','Successfully updated support page content');   
     }     
     public function aboutAddProcess(Request $request)
@@ -185,4 +197,90 @@ class SiteContentController extends Controller
         return redirect()->back()->with('success','Successfully added Site Content');
     }
 
+    public function login(){
+        $content = LoginContent::all();
+        return view('admin.configuration.login_content',compact('content'));
+    }
+    public function register(){
+        $content = RegisterContent::all();
+        return view('admin.configuration.register_content',compact('content'));
+    }
+    public function blogs(){
+        $content = BlogContent::all();
+        return view('admin.configuration.blogs_content',compact('content'));
+    }
+    public function reviews(){
+        $content = ReviewContent::all();
+        return view('admin.configuration.reviews_content',compact('content'));
+    }
+    public function shop(){
+        $content = ShopContent::all();
+        return view('admin.configuration.shop_content',compact('content'));
+    }
+    public function reviewsSubmit(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = ReviewContent::find($key);
+          
+            $supportContent->value = $value;
+            $supportContent->update();
+        }
+
+        return redirect()->back()->with('success','Successfully updated review page content');  
+    }
+    public function loginSubmit(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = LoginContent::find($key);
+          
+            $supportContent->value = $value;
+            $supportContent->update();
+        }
+
+        return redirect()->back()->with('success','Successfully updated login page content');  
+    }
+    public function registerSubmit(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = RegisterContent::find($key);
+          
+            $supportContent->value = $value;
+            $supportContent->update();
+        }
+
+        return redirect()->back()->with('success','Successfully updated register page content');  
+    }
+    public function blogsSubmit(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = BlogContent::find($key);
+          
+            $supportContent->value = $value;
+            $supportContent->update();
+        }
+
+        return redirect()->back()->with('success','Successfully updated blogs page content');  
+    }
+    public function shopSubmit(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($key == '_token'){
+                continue;
+            }
+            $supportContent = ShopContent::find($key);
+          
+            $supportContent->value = $value;
+            $supportContent->update();
+        }
+
+        return redirect()->back()->with('success','Successfully updated blogs page content');
+
+    }
 }

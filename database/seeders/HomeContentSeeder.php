@@ -24,6 +24,10 @@ class HomeContentSeeder extends Seeder
             ['id'=>7,'name'=>'register banner title text desc','key'=>'register-banner-title-text-desc','value'=>"<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.",'type'=>'textarea'],
             ['id'=>8,'name'=>'customer review title','key'=>'customer-review-title','value'=>'Why our customers love Logomax','type'=>'textarea'],
             ['id'=>9,'name'=>'customer review text','key'=>'customer-review-text','value'=>'<p>Hundreds of customers have trusted Logomax logo maker and Brand Plan as a resource to set up, launch, and grow a brand they love.</p>','type'=>'textarea'],
+            ['id'=>10,'name'=>'meta title','key'=>'meta-title','value'=>'test','type'=>'textarea'],
+            ['id'=>11,'name'=>'meta description','key'=>'meta-description','value'=>'','type'=>'textarea'],
+            ['id'=>12,'name'=>'meta language','key'=>'meta-language','value'=>'test','type'=>'textarea'],
+            ['id'=>13,'name'=>'meta country','key'=>'meta-country','value'=>'','type'=>'textarea'],
         ];
 
         foreach($homeContent as $content){

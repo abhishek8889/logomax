@@ -4,19 +4,19 @@
 <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
                                             <div class="nk-block-head-content d-flex justify-content-between">
-                                                <h4 class="title nk-block-title">Support Page Content</h4>
+                                                <h4 class="title nk-block-title">Login Page Content</h4>
                                                 {{ Breadcrumbs::render('support-setting') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
                                             <div class="card-inner">
-                                               <form action="{{ url('admin-dashboard/site-content/support/submit') }}" method="post">
+                                               <form action="{{ url('admin-dashboard/login-page-submit') }}" method="post">
                                                 @csrf
-                                                @foreach($support_text as $support)
+                                                @foreach($content as $data)
                                                 <div class="form-group">
-                                                    <label class="form-label" for="default-01">{{ $support->meta_name ?? '' }}</label>
+                                                    <label class="form-label" for="default-01">{{ $data->name ?? '' }}</label>
                                                     <div class="form-control-wrap">
-                                                        <textarea type="text" class="form-control" name="{{ $support->id ?? '' }}" id="default-01" >{{ $support->meta_value ?? '' }}</textarea>
+                                                        <textarea type="text" class="form-control" name="{{ $data->id ?? '' }}" id="default-01" >{{ $data->value ?? '' }}</textarea>
                                                     </div>
                                                 </div>
                                                 @endforeach
@@ -28,8 +28,5 @@
                                         </div><!-- .card-preview -->
                                     
                                     </div>
-                                    <script>
-                                    ClassicEditor.create(document.querySelector(`#default-01`))
-                                 </script>
 
 @endsection

@@ -101,6 +101,30 @@ class AboutUsContent extends Seeder
                 'value' => '#',
                 'type' => 'link',
             ],
+            [
+            'name'=>'meta title',
+            'key'=>'meta-title',
+            'value'=>'test',
+            'type'=>'textarea'
+             ],
+            [
+                'name'=>'meta description',
+                'key'=>'meta-description',
+                'value'=>'',
+                'type'=>'textarea'
+            ],
+            [
+                'name'=>'meta language',
+                'key'=>'meta-language',
+                'value'=>'test',
+                'type'=>'textarea'
+            ],
+            [
+            'name'=>'meta country',
+            'key'=>'meta-country',
+            'value'=>'',
+            'type'=>'textarea'
+        ],
         ];
         foreach ($about_data as $data) {
             DB::table('about_us_contents')->insert([

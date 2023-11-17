@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $meta_language ?? 'en' }}">
 
 <head>
   <meta charset="utf-8">
@@ -34,9 +34,16 @@
   @if (isset($blog) && isset($blog->banner_img))
   <meta property="og:image" content="{{ asset('blog_images/' . $blog->banner_img) }}" />
   @endif
+  @if(isset($meta_description))
+  <?php  print_r($meta_description); ?>
+  @endif
+  @if(isset($meta_country))
+<?php print_r($meta_country);  ?>
+  @endif
+
 
   <!-- end meta fb -->
-  <title>home page </title>
+  <title>{{ $meta_title ?? 'Logomax' }} </title>
 </head>
 
 <body>
@@ -88,6 +95,7 @@
           </button>
           <?php $categories = App\Models\Categories::all();
                     $styles = App\Models\Style::where('status',1)->get();
+                    $branches = App\Models\Branch::where('status',1)->get();
                     
                 ?>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -112,15 +120,19 @@
                   Branches
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+                @if($branches->isNotEmpty())
+                  @foreach($branches as $branch)
+                  <a class="dropdown-item" href="{{ url('logos/search?categories=%5B"'.$branch->slug.'"%5D') }}">{{
+                    $branch->name ?? '' }}</a>
+                  @endforeach
+                  @endif
                 </div>
               </li>
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  Styles
+                  Icons
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($styles->isNotEmpty())
@@ -136,16 +148,10 @@
             <div class="side-menu">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="{{ route('reviews') }}">Reviews</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('blogs') }}">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('support') }}">Support</a>
                 </li>
               </ul>
             </div>

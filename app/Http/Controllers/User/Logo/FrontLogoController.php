@@ -10,6 +10,7 @@ use App\Models\Logo;
 use App\Models\Style;
 use App\Models\LogoFacilities;
 use App\Models\Wishlist;
+use App\Models\ShopContent;
 use Auth;
 
 class FrontLogoController extends Controller
@@ -67,7 +68,12 @@ class FrontLogoController extends Controller
         }
         $logos = $query->paginate(20);
 
-        return view('users.logos.index',compact('request','categories','tags','logos','styles'));
+        $meta_title = ShopContent::where('key','meta-title')->first()->value;
+        $meta_description = ShopContent::where('key','meta-description')->first()->value;
+        $meta_language = ShopContent::where('key','meta-language')->first()->value;
+        $meta_country = ShopContent::where('key','meta-country')->first()->value;
+
+        return view('users.logos.index',compact('request','categories','tags','logos','styles','meta_title','meta_description','meta_language','meta_country'));
     }
     public function logodetail(Request $request, $slug){
         $logo = Logo::where([['logo_slug',$slug],['approved_status',1],['status',1]])->first();

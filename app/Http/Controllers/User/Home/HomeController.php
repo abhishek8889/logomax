@@ -16,6 +16,13 @@ class HomeController extends Controller
         $categories = Categories::all();
         $review = LogoReview::where([['approved',1],['status',1],['home_page_status',1]])->get();
         $homeContent = HomeContent::all();
-        return view('users.home.index',compact('request','categories','tags','homeContent','review'));
+
+
+        $meta_title = HomeContent::where('key','meta-title')->first()->value;
+        $meta_description = HomeContent::where('key','meta-description')->first()->value;
+        $meta_language = HomeContent::where('key','meta-language')->first()->value;
+        $meta_country = HomeContent::where('key','meta-country')->first()->value;
+
+        return view('users.home.index',compact('request','categories','tags','homeContent','review','meta_title','meta_description','meta_language','meta_country'));
     }
 }

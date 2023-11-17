@@ -28,7 +28,7 @@
                                   <ul class="list-unstyled mb-0">
                                       <li class="recent-chat chat-b acti-chat d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -41,7 +41,7 @@
                                       </li>
                                       <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -54,7 +54,7 @@
                                       </li>
                                       <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -67,7 +67,7 @@
                                       </li>
                                       <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -80,7 +80,7 @@
                                       </li>
                                       <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -93,7 +93,7 @@
                                       </li>
                                       <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -106,7 +106,7 @@
                                       </li>
                                       <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -119,7 +119,7 @@
                                       </li>
                                        <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -132,7 +132,7 @@
                                       </li>
                                        <li class="recent-chat chat-b d-flex">
                                           <div class="chat-content">
-                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
                                                   <P class="b-text">Loren</P>
                                                   <p class="s-text">Lorem Ipsum is simply dummy</p>
@@ -156,7 +156,7 @@
                                <div class="msg-ryt">
                                     <div class="msg-ryt-head">
                                     <div class="lp-info d-flex">
-                                        <div class="lp-img"><img src="./img/lp-img.png" class="img-fluid" alt="..."></div>
+                                        <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-img.png') }}" class="img-fluid" alt="..."></div>
                                         <div class="lp-text">
                                             <h6>Loren</h6>
                                             <span>Online</span>
@@ -164,8 +164,8 @@
                                     </div>
                                     <div class="cntc-i">
                                         <ul class="list-unstyled d-flex">
-                                            <li><img src="./img/phn-img.svg" class="img-fluid" alt=".."></li>
-                                             <li><img src="./img/ingo.svg" class="img-fluid" alt=".."></li>
+                                            <li><img src="{{ asset('logomax_pages/img/phn-img.svg') }}" class="img-fluid" alt=".."></li>
+                                             <li><img src="{{ asset('logomax_pages/img/ingo.svg') }}" class="img-fluid" alt=".."></li>
                                         </ul>
                                     </div>
                                     </div>
@@ -175,7 +175,7 @@
                                           <div class="force-overflow">
                                        <div class="receiver-d">
                                            <div class="lp-info d-flex">
-                                                 <div class="lp-img"><img src="./img/lp-chat.png"  class="img-fluid" alt="...">
+                                                 <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="...">
                                                  </div>
                                                <div class="lp-text">
                                                 <h6>Loren <span>10:00 am</span></h6>
@@ -191,11 +191,11 @@
                                        </div>
                                        <div class="sender-d">
                                         <div class="s-ryt-img">
-                                            <span class="str"><img src="./img/star.svg"  class="img-fluid" alt="..."></span>
-                                            <span><img src="./img/h-dot.svg"  class="img-fluid" alt="..."></span>
+                                            <span class="str"><img src="{{ asset('logomax_pages/img/star.svg') }}"  class="img-fluid" alt="..."></span>
+                                            <span><img src="{{ asset('logomax_pages/img/h-dot.svg') }}"  class="img-fluid" alt="..."></span>
                                         </div>
                                             <div class="lp-info d-flex">
-                                                 <div class="lp-img"><img src="./img/jord.png"  class="img-fluid" alt="...">
+                                                 <div class="lp-img"><img src="{{ asset('logomax_pages/img/jord.png') }}"  class="img-fluid" alt="...">
                                                  </div>
                                                <div class="lp-text">
                                                 <h6>Jordan <span>10:00 am</span></h6>
@@ -209,7 +209,7 @@
                                         </div>
                                         <div class="receiver-d">
                                            <div class="lp-info d-flex">
-                                                 <div class="lp-img"><img src="./img/lp-chat.png"  class="img-fluid" alt="...">
+                                                 <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="...">
                                                  </div>
                                                <div class="lp-text">
                                                 <h6>Loren <span>10:00 am</span></h6>
@@ -232,18 +232,18 @@
                                         <div class="attach-links d-flex">
                                             <div class="atch-file">
                                                 <ul class="list-unstyled">
-                                                    <li><a href=""><img src="./img/b-txt.svg" class="img-fluid" alt="..."></a></li>
-                                                    <li><a href=""><img src="./img/i-txt.svg" class="img-fluid" alt="..."></a></li>
-                                                    <li><a href=""><img src="./img/round-link.svg" class="img-fluid" alt="..."></a></li>
-                                                    <li><a href=""><img src="./img/slash.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/b-txt.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/i-txt.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/round-link.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/slash.svg') }}" class="img-fluid" alt="..."></a></li>
                                                 </ul>
                                             </div>
                                             <div class="atch-file">
                                                 <ul class="list-unstyled">
-                                                    <li><a href=""><img src="./img/atch-f.svg" class="img-fluid" alt="..."></a></li>
-                                                    <li><a href=""><img src="./img/atch-emoji.svg" class="img-fluid" alt="..."></a></li>
-                                                    <li><a href=""><img src="./img/set.svg" class="img-fluid" alt="..."></a></li>
-                                                    <li><a href=""><img src="./img/send.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/atch-f.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/atch-emoji.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/set.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="{{ asset('logomax_pages/img/send.svg') }}" class="img-fluid" alt="..."></a></li>
                                                 </ul>
                                             </div>
                                         </div>
