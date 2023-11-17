@@ -1,6 +1,10 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+html, body {
+    min-height: 100%;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -202,12 +206,6 @@ td.tble-ryt-text {
     min-height: 450px;
 }
 
-#wrapper
-{
-/*    text-align: center;*/
-   /* width: 500px;
-    margin: auto;*/
-}
 
 /*
  *  STYLE 1
@@ -384,8 +382,6 @@ li.chat-b::after {
 }
 
 
-.cntc-i {}
-
 .msg-ryt-head {
     display: flex;
     justify-content: space-between;
@@ -526,7 +522,6 @@ button.sub-butn {
     line-height: normal;
 }
 
-.month-plan {}
 
 .month-plan p {
     font-weight: 600;
@@ -653,7 +648,14 @@ div#collapsibleNavbar {
 .header .main-navbar {
     align-items: center;
     padding: 30px 50px;
-    gap: 54%;
+    /* gap: 47%; */
+    justify-content: space-between;
+}
+.srch-bb {
+    margin-right: 190px;
+}
+.srch-bb {
+    margin-right: 190px;
 }
 .header .hd-logo a {
     display: inline-block;
@@ -857,4 +859,94 @@ span.str {
     position: absolute;
     right: 20px;
     top: 42px;
+}
+
+/* subscripe css */
+
+.right-text.subs-tp {
+    padding-top: 80px!important;
+}
+.left-text.subs-tp {
+    padding-top: 80px!important;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    /* text-align: center; */
+}
+
+
+.cd-product {
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.card {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #FFF;
+    display: inline-block;
+    width: 100%;
+}
+.prduc-detl h6 {
+    font-size: 14px;
+    font-weight: 600;
+}
+.prduc-detl p {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 9px;
+}
+.price-txt {
+    /* display: inline-flex; */
+    gap: 3px;
+}
+.add-dt{
+    gap: 3px;
+}
+
+
+/* USer dashboard fix header footer */
+header.header {
+    position: fixed;
+    left: 0;
+    height: 120px;
+    top: 0;
+    background: #fff;
+    z-index: 3;
+    right: 0;
+    width: 100%;
+}
+
+section.new-sec {
+    /* padding: 80px 0px; */
+    padding-top: 120px;
+}
+section.new-sec .right-text {
+    margin-bottom: 50px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 100px!important;
+    background-color: #fff;
+    right: 0;
+    width: 75%;
+    /* z-index: 1; */
 }

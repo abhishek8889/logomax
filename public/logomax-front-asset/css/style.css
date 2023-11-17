@@ -828,7 +828,7 @@ footer {
 
 .top-footer .business-text ul li {
     width: 100%;
-    max-width: 50%;
+    /* max-width: 50%; */
 }
 
 .top-footer .business-text ul li a:hover {
@@ -2984,6 +2984,49 @@ a.asset-id-link__button {
     transition: 0.5s;
     background-image: radial-gradient( rgba(255, 255, 255, 1), transparent 20%, rgba(0, 0, 0, 0.05));
 }
+
+
+/* Banner Css */
+
+.banner-sec .Select-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.banner-sec .Select-text .all-select {
+    display: block;
+    width: 70%;
+}
+.banner-sec .Select-text .all-select .search {
+    padding: 0px!important;
+    /* padding-right: 0; */
+}
+.banner-sec .Select-text .all-select .search input.form-control {
+    padding-right: unset;
+}
+.banner-sec .Select-text .all-select .search ::-webkit-input-placeholder {
+    font-size: 22px!important;
+}
+.banner-sec .Select-text .Search-bar button {
+    /* position: absolute; */
+    /* top: 8px; */
+    /* right: 10px; */
+    transition: none;
+    cursor: pointer;
+}
+.banner-sec .search input {
+    /* border: none; */
+    /* outline: none; */
+    /* font-weight: 400; */
+    /* font-size: 12px; */
+    /* line-height: 24px; */
+    /* color: #656F79; */
+    /* padding: 0px; */
+    /* display: block; */
+    width: 100%;
+}
+
     
  /*  */
 
@@ -4642,3 +4685,48 @@ a.asset-id-link__button {
     padding: 8px 25px;
 }
 }
+
+
+/* Banner media css */
+
+
+@media only screen and (max-width: 1399px){
+    .banner-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px;
+    }
+    .banner-sec .Select-text .all-select .search ::-webkit-input-placeholder {
+        font-size: 18px!important;
+    }
+    }
+    
+    @media only screen and (max-width: 991px){
+    
+    .banner-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+    }
+    .banner-sec .Select-text .all-select .search ::-webkit-input-placeholder {
+        font-size: 16px!important;
+    }
+    }
+    
+    @media only screen and (max-width: 575px){
+    .banner-sec .Select-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 10px;
+    }
+    .banner-sec .Select-text .all-select .search ::-webkit-input-placeholder {
+        font-size: 14px!important;
+    }
+    .banner-sec .all-select {
+        display: block;
+        width: 80%;
+    }
+    }

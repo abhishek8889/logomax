@@ -247,7 +247,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('/site-content/support',[ReviewsController::class,'addReview']);
 
     // Site configuration page :::
-    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration']);
+    Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration'])->name('site-setting');
     Route::get('/admin-dashboard/site-content',[SiteContentController::class,'homeConfigurationContent']);
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     Route::post('/update-image',[SiteContentController::class,'updateImage']);
