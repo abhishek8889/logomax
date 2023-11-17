@@ -4,7 +4,7 @@
 <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
                                             <div class="nk-block-head-content d-flex justify-content-between">
-                                                <h4 class="nk-block-title">Reviews List </h4>
+                                                <h4 class="nk-block-title">Reviews requests </h4>
                                                 {{ Breadcrumbs::render('reviews') }}
                                             </div>
                                         </div>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('logo_type')->default('low-price');        ////premium or Low-priced
             $table->string('category_id');
             $table->string('style_id');
+            $table->string('branch_id');
             $table->float('price_for_customer')->default(199);
             $table->float('price_for_designer')->default(50);
             $table->string('currency')->default('usd');

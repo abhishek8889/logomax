@@ -122,7 +122,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if($branches->isNotEmpty())
                   @foreach($branches as $branch)
-                  <a class="dropdown-item" href="{{ url('logos/search?categories=%5B"'.$branch->slug.'"%5D') }}">{{
+                  <a class="dropdown-item" href="{{ url('logos/search?branches=%5B"'.$branch->slug.'"%5D') }}">{{
                     $branch->name ?? '' }}</a>
                   @endforeach
                   @endif

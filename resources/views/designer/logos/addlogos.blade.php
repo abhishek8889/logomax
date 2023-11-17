@@ -85,6 +85,21 @@
                                                             @enderror
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                            <label class="form-label">Branches</label>
+                                                            <div class="form-control-wrap">
+                                                                <select class="form-select js-select2" name="branch_id">
+                                                                    @foreach($branches as $branch)
+                                                                    <option value="{{ $branch->id ?? '' }}">{{ $branch->name ?? '' }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            @error('branch_id')
+                                                                            <span class="text text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                         <div class="col-sm-6" id="logodiv">
                                                             <label class="form-label">Upload Logo</label>

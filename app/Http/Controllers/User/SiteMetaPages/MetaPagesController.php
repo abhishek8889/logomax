@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\SupportContent;
 use App\Models\ReviewContent;
 use App\Models\AboutUsContent;
+use App\Models\Logo;
 use Auth;
 
 
@@ -19,7 +20,10 @@ class MetaPagesController extends Controller
         $meta_language = AboutUsContent::where('key','meta-language')->first()->value;
         $meta_country = AboutUsContent::where('key','meta-country')->first()->value;
 
-        return view('users.meta-pages.about_us',compact('request','meta_title','meta_description','meta_language','meta_country'));
+
+        $logos = Logo::where([['approved_status',1],['status',1]])->get();
+
+        return view('users.meta-pages.about_us',compact('request','meta_title','meta_description','meta_language','meta_country','logos'));
     }
     public function reviews(Request $request){
         $reviews = LogoReview::where('approved',1)->get();

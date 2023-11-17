@@ -15,7 +15,7 @@ class ReviewsController extends Controller
         return view('admin.reviews.add_review',compact('soldLogoList','review'));
     }
     public function reviewlist(){
-        $reviews = LogoReview::all();
+        $reviews = LogoReview::where('approved',1)->get();
 
         return view('admin.reviews.reviews_list',compact('reviews'));
     }

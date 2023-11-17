@@ -100,24 +100,24 @@
             <div class="counter_wrapp">
                 <div class="counter_dflex">
                     <div class="counter_box">
-                        <h2 data-max="263">M+</h2>
-                        <span>Files</span>
+                        <h2 data-max="{{ count($logos) ?? 0 }}"></h2>
+                        <span>Logos available</span>
                     </div>
                     <div class="counter_box">
-                        <h2 data-max="100">K+</h2>
-                        <span>Contributors</span>
+                        <h2 data-max="2">.000+</h2>
+                        <span>Designers</span>
                     </div>
                     <div class="counter_box">
-                        <h2 data-max="36">M</h2>
-                        <span>Clients Worldwide</span>
+                        <h2 data-max="20">+</h2>
+                        <span>Designers</span>
                     </div>
-                    <div class="counter_box">
-                        <h2>24/7</h2>
+                    <!-- <div class="counter_box">
+                        <h2>100.000+</h2>
                         <span>26 Languages Support</span>
-                    </div>
+                    </div> -->
                     <div class="counter_box">
-                        <h2 data-max="450">+</h2>
-                        <span>Professionals</span>
+                        <h2 data-max="100">.000+</h2>
+                        <span>Logos sold</span>
                     </div>
                 </div>
             </div>

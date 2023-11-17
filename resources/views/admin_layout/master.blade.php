@@ -187,6 +187,19 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
+                                 <!-- ##########################  -->
+                                 <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-text-rich"></em></span>
+                                        <span class="nk-menu-text">Branches</span>
+                                    </a>
+                                    <ul class="nk-menu-sub" style="display: none;">
+                                        
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/branches') }}" class="nk-menu-link"><span class="nk-menu-text">Branches list</span></a>
+                                        </li>
+                                    </ul><!-- .nk-menu-sub -->
+                                </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
@@ -217,6 +230,9 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('/admin-dashboard/review-list') }}" class="nk-menu-link"><span class="nk-menu-text">Review List</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('/admin-dashboard/review-request') }}" class="nk-menu-link"><span class="nk-menu-text">Review requests</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li>
