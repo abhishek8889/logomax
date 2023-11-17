@@ -15,8 +15,8 @@
             <div class="login-content">
                 <div class="login-form">
                     <div class="login-accnt">
-                        <h2>Log in to your account</h2>
-                        <p>Welcome back! Select method to log in:</p>
+                        <h2>Log in to Logomax</h2>
+                        <p>Welcome back! Please choose a login method:</p>
                     </div>
                     <div class="social-links d-flex">
                         <div class="social-accnt">
@@ -54,7 +54,7 @@
                     </div> -->
                     <!--  -->
                     <div class="continue-we">
-                        <p class="small-p line-text1">or continue with email</p>
+                        <p class="small-p line-text1">or</p>
                     </div>
                     <form action="{{ url('/login-process') }}" method="Post" id="loginForm">
                         @csrf
@@ -78,7 +78,7 @@
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox"> <Span class="pl-2 mt-2">Remember me</Span>
                                     </label>
-                                    <p class="small-p"> <a href="{{ url('/account-recovery') }}"> Forgot Password? </a></p>
+                                    <p class="small-p"> <a href="{{ url('/account-recovery') }}"> Forgot your password? </a></p>
                                 </div>
                                 <!-- <div class="form-group"> -->
                                     <!-- Here we use local host secret key we should change it with 6LetoOIlAAAAAMLtfUjMWwi82O070ZmLJZKk39s_  when our domain name logomax.com is working -->
@@ -88,9 +88,6 @@
                                     @endif
                                 <!-- </div>  -->
                             <div class="btm-buttn">
-
-
-                            
                                 <button class="g-recaptcha cta btn" data-sitekey="{{ env('GCAPTCHA_SITE_KEY') }}" data-callback="onSubmit" data-size="invisible" type="submit" >Log In</button>
                             </div>
                             <div class="login-alert">

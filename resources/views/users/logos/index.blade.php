@@ -143,7 +143,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="search_style_wrapp category">
+                        <!-- <div class="search_style_wrapp category">
                             <div class="search_head">
                                 <p>Search by Colors</p>
                                 <i class="fa-solid fa-angle-down"></i>
@@ -169,7 +169,7 @@
                                     <li style="background: #d50072;"></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="filter-btn <?php  if(!$_GET){
                echo 'd-none';
             } ?>">
