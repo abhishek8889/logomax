@@ -795,12 +795,21 @@ div#collapsibleNavbar {
 }
 .logos {
     display: block!important;
+<<<<<<< HEAD
 }
 
 
 }
 
 
+=======
+}
+
+
+}
+
+
+>>>>>>> f37ff88772dbbe94ba6c85a5612cd530c226d8d1
 /*a.login-btn {
     background: #FFFFFF;
     border-radius: 130px;

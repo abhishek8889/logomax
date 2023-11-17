@@ -201,7 +201,7 @@
           </div>
           @else
           <div class="header-btn">
-            <a class="login-btn cta-btn" href="{{ url('login') }}">Log in</a>
+            <a class="login-btn cta-btn" href="{{ url('login') }}">Log In</a>
             <a class="login-btn cta-register" href="{{ url('register') }}">Sign Up</a>
           </div>
           @endif
@@ -220,40 +220,42 @@
     <div class="container">
       <div class="top-footer p-110">
         <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="footer-text">
               <div class="footer-logo">
                 <img src="{{ $footer_logo }}" alt="">
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="business-text social-media-text">
-              <h6>BUSINESS Logos</h6>
+              <h6>Our company</h6>
               <ul>
-                <li> <a href="#">Restaurant</a></li>
-                <li> <a href="#">Personal Trainer </a></li>
-                <li> <a href="#">Coffee Shop </a></li>
-                <li> <a href="#">Spa</a></li>
-                <li> <a href="#">Real Estate </a></li>
-                <li> <a href="#">Bakery</a></li>
-                <li> <a href="#">Photographer </a></li>
-                <li> <a href="#">Travel Agency</a></li>
-                <li> <a href="#"> Beauty Salon</a></li>
+                <li> <a href="#">Sell your logos</a></li> <!-- Register designer path  -->
+                <li> <a href="#">About us </a></li>
+                <li> <a href="#">Blog </a></li>
+                <li> <a href="#">Affiliates</a></li>
               </ul>
             </div>
           </div>
-          <div class="col-lg-4 col-md-12 col-sm-12">
+          <div class="col-lg-3 col-md-12 col-sm-12">
             <div class="business-text social-media-text">
-              <h6>HELP</h6>
+              <h6>Legal</h6>
               <ul>
-                <li> <a href="#">Support</a></li>
-                <li> <a href="#">About us</a></li>
                 <li> <a href="#">Terms & conditions</a></li>
+                <li> <a href="#">Privacy policy</a></li>
                 <li> <a href="#">Cookie policy</a></li>
-                <li> <a href="#"> Privacy policy</a></li>
-                <li> <a href="#">Cookies Settings</a></li>
-                <li> <a href="#">Digital Services Act</a></li>
+                <li> <a href="#">Cookies Setings</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12">
+            <div class="business-text social-media-text">
+              <h6>Contact us</h6>
+              <ul>
+                <li> <a href="#">Questions & Answers</a></li>
+                <li> <a href="#">Support</a></li>
+                <li> <a href="#">Reviews</a></li>
               </ul>
             </div>
           </div>
