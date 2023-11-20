@@ -13,7 +13,9 @@
   
     <link rel="stylesheet" href="{{ asset('logomax_pages/css/custom.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('logomax_pages/css/responsive.css') }}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>Dashboard</title>
 </head>
 
@@ -42,10 +44,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <div class="col">
+                <div class="col" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
                     <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
                         style="width: 50px;" alt="Avatar" />
-                </div>
+                       
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="margin-right:20px;">
+                            <a class="dropdown-item" href="{{ url('/') }}">Go to Website</a>
+                            <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
+                    </div>
               </li>
               </ul>
          </div>
@@ -75,7 +82,7 @@
                     <div class="left-text">
                         <ul class="list-unstyled dash-tab mb-0" id="menu">
                             <li class="nav-links">
-                                <a href="{{ url('dashboard') }}" class="nav-link @if($request->url() == url('dashboard')) active @endif">
+                                <a href="{{ url('user-dashboard') }}" class="nav-link @if($request->url() == url('user-dashboard')) active @endif">
                                     <div class="side-links">
                                         <span class="icons-links"><i class="fas fa-home"></i></span>
                                         <span class="icons-text">Dashboard</span>
@@ -83,7 +90,7 @@
                                 </a>
                             </li>
                             <li class="nav-links">
-                                <a href="{{ url('favourites') }}" class="nav-link @if($request->url() == url('favourites')) active @endif">
+                                <a href="{{ url('user-dashboard/favourites') }}" class="nav-link @if($request->url() == url('user-dashboard/favourites')) active @endif">
                                     <div class="side-links">
                                         <span class="icons-links"><i class="fas fa-heart"></i></span>
                                         <span class="icons-text">My Favorites</span>
@@ -91,7 +98,7 @@
                                 </a>
                             </li>
                             <li class="nav-links">
-                                <a href="{{ url('logo') }}" class="nav-link @if($request->url() == url('logo')) active @endif">
+                                <a href="{{ url('user-dashboard/logo') }}" class="nav-link @if($request->url() == url('user-dashboard/logo')) active @endif">
                                     <div class="side-links">
                                         <span class="icons-links"><i class="fas fa-shopping-cart"></i></span>
                                         <span class="icons-text">My Logos</span>
@@ -99,7 +106,7 @@
                                 </a>
                             </li>
                             <li class="nav-links">
-                                <a href="{{ url('messages') }}" class="nav-link @if($request->url() == url('messages')) active @endif">
+                                <a href="{{ url('user-dashboard/messages') }}" class="nav-link @if($request->url() == url('user-dashboard/messages')) active @endif">
                                     <div class="side-links">
                                         <span class="icons-links"><i class="fas fa-envelope"></i></span>
                                         <span class="icons-text">Messages</span>
@@ -107,7 +114,7 @@
                                 </a>
                             </li>
                             <li class="nav-links">
-                                <a href="{{ url('configuration') }}" class="nav-link @if($request->url() == url('configuration')) active @endif">
+                                <a href="{{ url('user-dashboard/configuration') }}" class="nav-link @if($request->url() == url('user-dashboard/configuration')) active @endif">
                                     <div class="side-links">
                                         <span class="icons-links"><i class="fas fa-cog"></i></span>
                                         <span class="icons-text">Configuration</span>
@@ -115,7 +122,7 @@
                                 </a>
                             </li>
                             <li class="nav-links">
-                                <a href="{{ url('subscriptions') }}" class="nav-link @if($request->url() == url('subscriptions')) active @endif">
+                                <a href="{{ url('user-dashboard/subscriptions') }}" class="nav-link @if($request->url() == url('user-dashboard/subscriptions')) active @endif">
                                     <div class="side-links">
                                         <span class="icons-links"><i class="fas fa-dollar-sign"></i></span>
                                         <span class="icons-text">Subscriptions</span>
@@ -156,10 +163,10 @@
         </div>
     </div>
   </section>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+ 
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -168,6 +175,25 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.usebootstrap.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
    <script src="{{ asset('logomax_pages/js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+
+   @if(Session::get('error'))
+  <script>
+    iziToast.error({
+      message: "{{ Session::get('error') }}",
+      position: 'topRight'
+    });
+  </script>
+  @endif
+  @if(Session::get('success'))
+  <script>
+    iziToast.success({
+      message: "{{ Session::get('success') }}",
+      position: 'topRight'
+    });
+  </script>
+  @endif
+  
 </body>
 
 </html>

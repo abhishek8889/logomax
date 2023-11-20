@@ -104,7 +104,7 @@ class AboutUsContent extends Seeder
             [
             'name'=>'meta title',
             'key'=>'meta-title',
-            'value'=>'test',
+            'value'=>'Logomax | About Us',
             'type'=>'textarea'
              ],
             [
@@ -116,7 +116,7 @@ class AboutUsContent extends Seeder
             [
                 'name'=>'meta language',
                 'key'=>'meta-language',
-                'value'=>'test',
+                'value'=>'en',
                 'type'=>'textarea'
             ],
             [

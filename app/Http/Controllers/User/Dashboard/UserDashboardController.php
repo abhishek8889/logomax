@@ -17,7 +17,7 @@ use App\Models\User;
 use App\Models\Notifications;
 use App\Models\Wishlist;
 use App\Events\SpecialDesignerNotification;
-
+use App\Models\LogoReview;
 use App\Mail\DesignerAssignedMail;
 use Mail;
 use Carbon\Carbon;
@@ -51,7 +51,7 @@ class UserDashboardController extends Controller
             $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->get();
            
             if($orderDetail){
-                return view('users.dashboard.order_detail',compact('request','orderDetail'));
+                return view('user_dashboard_view.Mylogoslist.order_detail',compact('request','orderDetail'));
             }else{
                 return abort(404);
             }
@@ -78,7 +78,8 @@ class UserDashboardController extends Controller
                 $completedTask = '';
             }
             if($orderDetail){
-                return view('users.dashboard.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount'));
+                // return view('users.dashboard.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount'));
+                return view('user_dashboard_view.Mylogoslist.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount'));
             }else{
                 return abort(404);
             }
@@ -348,5 +349,33 @@ class UserDashboardController extends Controller
         $user->password = $password;
         $user->update();
         return redirect()->back()->with('success','Successfully updated password');
+    }
+    public function reviewSubmit(Request $request){
+    
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'rating' => 'required',
+        ]);
+        $review = new LogoReview;
+        $review->title = $request->title;
+        $review->description = $request->description;
+        $review->logo_id = $request->logo_id;
+        $review->rating = $request->rating;
+        $review->user_id = Auth::user()->id;
+        $review->approved = 0;
+        $review->status = 1;
+        $review->save();
+        return redirect()->back()->with('success','Successfully added review');
+
+    }
+    public function removeWhislist(Request $request){
+        $wishlist = Wishlist::find($request->id);
+        if($wishlist){
+            $wishlist->delete();
+            return response()->json(['success'=>'Successfully removed']);
+        }else{
+            return response()->json(['error'=>"Can't find in your wishlist"]);
+        }
     }
 }

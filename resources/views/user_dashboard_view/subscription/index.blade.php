@@ -1,5 +1,8 @@
 @extends('user_dashboard_layout.master_layout')
 @section('content')
+<div>
+{{ Breadcrumbs::render('subscriptions') }}
+</div>
 <div class="dash-ryt-content">
                              <div style="display: block;" class="subs-text pl-5">
                                   <h3> subscriptions</h3>

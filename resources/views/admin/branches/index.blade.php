@@ -1,13 +1,13 @@
 @extends('admin_layout/master')
 @section('content')
 <div class="d-flex justify-content-end my-4"> 
-    {{ Breadcrumbs::render('styles') }}
+    {{ Breadcrumbs::render('branches') }}
 </div>
         <div class="col-lg-6 d-none" id="add-section">
                  <div class="card card-bordered h-100">
                      <div class="card-inner">
                          <div class="card-head d-flex justify-content-between">
-                             <h5 class="card-title">Add Styles</h5>
+                             <h5 class="card-title">Add Branches</h5>
                              <button class="remove btn btn-link" ><i class="fas fa-times"></i></button>
                          </div>
                          <form action="{{ url('admin-dashboard/branches/addProcc') }}" method="POST">
@@ -47,7 +47,7 @@
         <div class="nk-block nk-block-lg">
                     <div class="nk-block-head">
                         <div class="nk-block-head-content d-flex justify-content-between">
-                            <h4 class="nk-block-title">Styles List</h4>
+                            <h4 class="nk-block-title">Branches List</h4>
                             <button class="btn btn-primary" id="addnewsecitonbutton">Add new</button>
                         </div>
                     </div>

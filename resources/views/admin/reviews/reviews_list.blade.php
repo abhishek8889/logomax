@@ -46,7 +46,7 @@
                                                                 <span class="title">{{ $review->title ?? '' }}</span>
                                                             </div>
                                                             <div class="tb-tnx-date">
-                                                                <span class="date">{{ $review->user_id ?? ''  }}</span>
+                                                                <span class="date">{{ $review->user->first_name ?? 'Admin'  }}{{ $review->user->last_name ?? '' }}</span>
                                                                 <span class="date"><a href="{{ url('admin-dashboard/logo-detail/'.$review->logo->logo_slug ?? '') }}">{{ $review->logo->logo_name ?? '' }}</a></span>
                                                             </div>
                                                         </td>

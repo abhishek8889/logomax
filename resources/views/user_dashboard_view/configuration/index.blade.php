@@ -1,5 +1,8 @@
 @extends('user_dashboard_layout.master_layout')
 @section('content')
+<div class="">
+    {{ Breadcrumbs::render('configurations') }}
+</div>
 <div class="row usr-row">
                            <div class="col-lg-5 col-md-5">
                                <div class="usr-img">
@@ -12,15 +15,15 @@
                                     <ul class="list-unstyled mb-0">
                                         <li>
                                             <h6>Name:</h6>
-                                            <span>TOM XYZ</span>
+                                            <span>{{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }}</span>
                                         </li>
                                         <li>
                                             <h6>Email:</h6>
-                                            <a href="mailto:tom@gmail.com">tom@gmail.com</a>
+                                            <a href="mailto:{{ auth()->user()->email ?? '' }}">{{ auth()->user()->email ?? '' }}</a>
                                         </li>
-                                        <li><h6>Number:</h6>
+                                        <!-- <li><h6>Number:</h6>
                                             <a href="tel:+123-12121213">+123-12121213</a></p>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -47,7 +50,7 @@
                                  @enderror
                              </div>
                              <div class="chng-butn">
-                               <button type="submit" class="buttn">Change</button>
+                               <button type="submit" class="btn btn-primary buttn">Change</button>
                              </div>
                     </form>
                            </div>

@@ -19,7 +19,7 @@ class RegisterContent extends Seeder
             [
             'name'=>'meta title',
             'key'=>'meta-title',
-            'value'=>'test',
+            'value'=>'Logomax | Register',
             'type'=>'textarea'
              ],
             [
@@ -31,7 +31,7 @@ class RegisterContent extends Seeder
             [
                 'name'=>'meta language',
                 'key'=>'meta-language',
-                'value'=>'test',
+                'value'=>'en',
                 'type'=>'textarea'
             ],
             [

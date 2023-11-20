@@ -279,7 +279,6 @@
                 $('span.logo_search_text').html(searchvalue);
                 if(searchvalue == ""){
                     $('span.logo_search_text').html('Find Unique & Exclusive');
-                    
                 }
                 let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));

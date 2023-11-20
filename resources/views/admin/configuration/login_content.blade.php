@@ -5,7 +5,7 @@
                                         <div class="nk-block-head">
                                             <div class="nk-block-head-content d-flex justify-content-between">
                                                 <h4 class="title nk-block-title">Login Page Content</h4>
-                                                {{ Breadcrumbs::render('support-setting') }}
+                                                {{ Breadcrumbs::render('login-setting') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">

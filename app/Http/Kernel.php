@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
         'Admin' => \App\Http\Middleware\AdminAuthenticated::class,
         'Designer' => \App\Http\Middleware\DesignerAuthenticated::class,
         'EnsureUser' => \App\Http\Middleware\EnsureUser::class,
+        'UserLogin' => \App\Http\Middleware\UserCheck::class,
+        'SpecialDesigner' => \App\Http\Middleware\SpecialDesigner::class,
     ];
 }

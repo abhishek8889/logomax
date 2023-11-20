@@ -1,5 +1,8 @@
 @extends('user_dashboard_layout.master_layout')
 @section('content')
+<div class="">
+    {{ Breadcrumbs::render('user-dashboard') }}
+</div>
 <div class="row row2">
                             <div class="col-lg-6 col-md-6">
                                 <div class="wlcm-txt">
@@ -118,7 +121,7 @@
                           </div>
 
                            
-                       
+                       @if($wishlist->isNotEmpty())
                         <div class="my-fav">
                             <h3>My Favorites</h3>
                             <div class="my-fav-hd">
@@ -161,6 +164,9 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
+                        
+                        @if($mylogos->isNotEmpty())
                         <div class="my-fav my-logs">
                             <h3>My Logos</h3>
                             <div class="my-fav-hd">
@@ -203,5 +209,6 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
                        </div>
 @endsection

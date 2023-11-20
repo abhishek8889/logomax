@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
   <!-- meta for fb : -->
   <meta property="og:url" content="{{ url()->current() ?? '' }}" />
   <meta property="og:type" content="article" />
@@ -193,10 +193,11 @@
           <?php } }?>
 
           @if(Auth::user())
-          <div class="header-btn mr-1">
-            <a class="login-btn" href="{{ url('/user-orders') }}">Orders</a>
-          </div>
+          <!-- <div class="header-btn mr-1">
+            
+          </div> -->
           <div class="header-btn">
+              <a class="login-btn" href="{{ url('/user-dashboard') }}">Go To Dashboard</a>
             <a class="login-btn" href="{{ url('logout') }}">Log Out</a>
           </div>
           @else

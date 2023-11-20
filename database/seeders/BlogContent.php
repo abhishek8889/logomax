@@ -19,7 +19,7 @@ class BlogContent extends Seeder
             [
             'name'=>'meta title',
             'key'=>'meta-title',
-            'value'=>'test',
+            'value'=>'Logomax | Blogs',
             'type'=>'textarea'
              ],
             [
@@ -31,7 +31,7 @@ class BlogContent extends Seeder
             [
                 'name'=>'meta language',
                 'key'=>'meta-language',
-                'value'=>'test',
+                'value'=>'en',
                 'type'=>'textarea'
             ],
             [

@@ -1,6 +1,8 @@
 @extends('user_dashboard_layout.master_layout')
 @section('content')
-
+<div class="">
+    {{ Breadcrumbs::render('user-messages') }}
+</div>
 <div class="msg-content ">
                        <div class="row  row1">
                            <div class="col-lg-5 col-md-12" style="background: #fff;">

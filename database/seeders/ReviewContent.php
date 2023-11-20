@@ -18,7 +18,7 @@ class ReviewContent extends Seeder
             [
             'name'=>'meta title',
             'key'=>'meta-title',
-            'value'=>'test',
+            'value'=>'Logomax | Reviews',
             'type'=>'textarea'
              ],
             [
@@ -30,7 +30,7 @@ class ReviewContent extends Seeder
             [
                 'name'=>'meta language',
                 'key'=>'meta-language',
-                'value'=>'test',
+                'value'=>'en',
                 'type'=>'textarea'
             ],
             [

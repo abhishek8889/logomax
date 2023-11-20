@@ -5,7 +5,7 @@
                                         <div class="nk-block-head">
                                             <div class="nk-block-head-content d-flex justify-content-between">
                                                 <h4 class="nk-block-title">Reviews requests </h4>
-                                                {{ Breadcrumbs::render('reviews') }}
+                                                {{ Breadcrumbs::render('review-request') }}
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
@@ -27,7 +27,7 @@
                                                         </th>
                                                         <th class="tb-tnx-amount is-alt">
                                                             <span class="tb-tnx-total">Rating</span>
-                                                            <!-- <span class="tb-tnx-status d-none d-md-inline-block">Show on Home Page</span> -->
+                                                            <span class="tb-tnx-status d-none d-md-inline-block">Description</span>
                                                         </th>
                                                         <th class="tb-tnx-action">
                                                             <span>&nbsp;</span>
@@ -46,7 +46,7 @@
                                                                 <span class="title">{{ $review->title ?? '' }}</span>
                                                             </div>
                                                             <div class="tb-tnx-date">
-                                                                <span class="date">{{ $review->user_id ?? ''  }}</span>
+                                                                <span class="date">{{ $review->user->first_name ?? ''  }} {{ $review->user->last_name ?? ''  }}</span>
                                                                 <span class="date"><a href="{{ url('admin-dashboard/logo-detail/'.$review->logo->logo_slug ?? '') }}">{{ $review->logo->logo_name ?? '' }}</a></span>
                                                             </div>
                                                         </td>
@@ -55,10 +55,7 @@
                                                                 <span class="amount">{{ $review->rating ?? 0 }} Star</span>
                                                             </div>
                                                             <div class="tb-tnx-status text-center">
-                                                            <!-- <div class="custom-control custom-switch checked"> -->
-                                                                <!-- <input type="checkbox" name="checkbox{{ $review->id ?? '' }}" class="custom-control-input checkbox" value="{{ $review->id ?? '' }}" id="customSwitch{{ $review->id ?? '' }}" @if($review->home_page_status == 1) checked @endif> -->
-                                                                <!-- <label class="custom-control-label" for="customSwitch{{ $review->id ?? '' }}"></label> -->
-                                                            <!-- </div> -->
+                                                            {{ $review->description ?? '' }}
                                                                 
                                                             </div>
                                                         </td>

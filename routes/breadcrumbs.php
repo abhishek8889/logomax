@@ -76,6 +76,10 @@ Breadcrumbs::for('styles', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('STYLES', route('styles'));
 });
+Breadcrumbs::for('branches', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('BRANCHES', route('branches'));
+});
 Breadcrumbs::for('special-desingers', function(BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('SPECIAL-DESINGER-LIST', route('special-desinger-list'));
@@ -104,9 +108,37 @@ Breadcrumbs::for('about-setting',function(BreadcrumbTrail $trail){
     $trail->parent('admin-dashboard');
     $trail->push('ABOUT-PAGE-CONTENT',route('about-setting'));
 });
+Breadcrumbs::for('login-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('LOGIN-PAGE-CONTENT',route('login-setting'));
+});
+Breadcrumbs::for('register-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('REGISTER-PAGE-CONTENT',route('register-setting'));
+});
+Breadcrumbs::for('blogs-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('BLOGS-PAGE-CONTENT',route('blogs-setting'));
+});
+Breadcrumbs::for('reviews-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('REVIEWS-PAGE-CONTENT',route('reviews-setting'));
+});
+Breadcrumbs::for('shop-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('SHOP-PAGE-CONTENT',route('shop-setting'));
+});
+Breadcrumbs::for('home-setting',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('HOME-PAGE-CONTENT',route('home-setting'));
+});
 Breadcrumbs::for('reviews',function(BreadcrumbTrail $trail){
     $trail->parent('admin-dashboard');
     $trail->push('REVIEWS',route('review-list'));
+});
+Breadcrumbs::for('review-request',function(BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('REVIEWS-REQUESTS',route('review-request'));
 });
 Breadcrumbs::for('update-review',function(BreadcrumbTrail $trail){
     $trail->parent('reviews');
@@ -178,5 +210,37 @@ Breadcrumbs::for('logos-upload', function (BreadcrumbTrail $trail) {
 });
 
 
+/////user-dashboard
+Breadcrumbs::for('user-dashboard', function (BreadcrumbTrail $trail) {
+    $trail->push('DASHBOARD', route('user-dashboard'));
+});
+Breadcrumbs::for('favourites', function (BreadcrumbTrail $trail) {
+    $trail->parent('user-dashboard');
+    $trail->push('FAVOURITES', route('user-favourites'));
+});
+Breadcrumbs::for('user-orders', function (BreadcrumbTrail $trail) {
+    $trail->parent('user-dashboard');
+    $trail->push('MY LOGOS', route('user-orders'));
+});
+Breadcrumbs::for('configurations', function (BreadcrumbTrail $trail) {
+    $trail->parent('user-dashboard');
+    $trail->push('CONFIGURATIONS', route('user-configurations'));
+});
+Breadcrumbs::for('subscriptions', function (BreadcrumbTrail $trail) {
+    $trail->parent('user-dashboard');
+    $trail->push('SUBSCRIPTIONS', route('user-subscriptions'));
+});
+Breadcrumbs::for('user-messages', function (BreadcrumbTrail $trail) {
+    $trail->parent('user-dashboard');
+    $trail->push('MESSAGES', route('user-messages'));
+});
+Breadcrumbs::for('user-order-detail', function (BreadcrumbTrail $trail,$order_num) {
+    $trail->parent('user-orders');
+    $trail->push($order_num, route('user-order-detail',['order_num'=>$order_num]));
+});
+Breadcrumbs::for('download-logo', function (BreadcrumbTrail $trail,$order_num) {
+    $trail->parent('user-orders');
+    $trail->push($order_num, route('download-logo',['order_num'=>$order_num]));
+});
 
 ?>

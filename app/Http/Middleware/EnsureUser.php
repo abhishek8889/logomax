@@ -24,6 +24,9 @@ class EnsureUser
             if(Auth::user()->role_id == 3){
                 return redirect(url('/admin-dashboard'));
             }
+            if(Auth::user()->role_id == 4){
+                return redirect(url('/special-designer/dashboard/'));
+            }
         }
         return $next($request);
     }

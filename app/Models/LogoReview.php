@@ -12,4 +12,7 @@ class LogoReview extends Model
     public function logo(){
         return $this->hasOne(Logo::class,'id','logo_id');
     }
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
 }

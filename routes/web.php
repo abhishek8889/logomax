@@ -106,16 +106,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::post('/register-process',[AuthenticationController::class,'registerProcess']);
     Route::get('/register-verify/{token}', [AuthenticationController::class,'registerVerify']);
 
-    ///// User Dashboard route :::::::
-    Route::get('/user-orders', [UserDashboardController::class,'userOrders']);
-    Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail']);
-    Route::get('/download-logo/{order_num}', [UserDashboardController::class,'downloadLogo']);
-    Route::get('/request-for-revision', [UserDashboardController::class,'requestForRevision']);
-    Route::get('/approve-logo/{complete_task_id}',[UserDashboardController::class,'approveLogo']);
-    Route::get('/disapprove-logo/{complete_task_id}',[UserDashboardController::class,'disapproveLogo']);
-
-    // Download revised logo 
-    Route::get('/downloadProcess/{complete_task_id}',[UserDashboardController::class,'downloadProcess']);
+   
 
 
     // Route::get('/TermsAndconditions', function () {
@@ -124,15 +115,29 @@ Route::group(['middleware'=>['EnsureUser']],function(){
     Route::get('/terms-and-conditions', [UserDashboardController::class,'termsAndConditions']);
 
     ///////////////////////// Simple user Dashboard Routes /////////////////////////////////
+        Route::group(['middleware'=>['auth','UserLogin']],function(){
     
-        Route::get('/dashboard',[UserDashboardController::class, 'UserDashboardIndex']);
-        Route::get('/favourites',[UserDashboardController::class, 'UserFavouritelist']);
-        Route::get('/logo',[UserDashboardController::class, 'UserLogoslist']);
-        Route::get('/configuration',[UserDashboardController::class, 'UserConfiguration']);
-        Route::get('/subscriptions',[UserDashboardController::class, 'UserSubscription']);
-        Route::get('/messages',[UserDashboardController::class, 'UserMessages']);
-        Route::post('/changePassword',[UserDashboardController::class, 'changePassword']);
+        Route::get('/user-dashboard',[UserDashboardController::class, 'UserDashboardIndex'])->name('user-dashboard');
+        Route::get('user-dashboard/favourites',[UserDashboardController::class, 'UserFavouritelist'])->name('user-favourites');
+        Route::get('user-dashboard/logo',[UserDashboardController::class, 'UserLogoslist'])->name('user-orders');
+        Route::get('user-dashboard/configuration',[UserDashboardController::class, 'UserConfiguration'])->name('user-configurations');
+        Route::get('user-dashboard/subscriptions',[UserDashboardController::class, 'UserSubscription'])->name('user-subscriptions');
+        Route::get('user-dashboard/messages',[UserDashboardController::class, 'UserMessages'])->name('user-messages');
+        Route::post('user-dashboard/changePassword',[UserDashboardController::class, 'changePassword']);
+        Route::post('user-dashboard/reviewSubmit',[UserDashboardController::class, 'reviewSubmit']);
+        Route::post('user-dahsboard/removeWhislist',[UserDashboardController::class,'removeWhislist']);
+ 
+        ///// User Dashboard route :::::::
+        Route::get('/user-orders', [UserDashboardController::class,'userOrders']);
+        Route::get('/order-details/{order_num}', [UserDashboardController::class,'orderDetail'])->name('user-order-detail');
+        Route::get('/download-logo/{order_num}', [UserDashboardController::class,'downloadLogo'])->name('download-logo');
+        Route::get('/request-for-revision', [UserDashboardController::class,'requestForRevision']);
+        Route::get('/approve-logo/{complete_task_id}',[UserDashboardController::class,'approveLogo']);
+        Route::get('/disapprove-logo/{complete_task_id}',[UserDashboardController::class,'disapproveLogo']);
 
+        // Download revised logo 
+        Route::get('/downloadProcess/{complete_task_id}',[UserDashboardController::class,'downloadProcess']);
+        });
     ////////////////////////////////////////////////////////////////////////////////////////
 });
 
@@ -197,7 +202,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
     Route::get('admin-dashboard/styles/delete/{id}',[AdminStyleController::class,'delete']);
 
     //branches
-    Route::get('admin-dashboard/branches',[BranchesController::class,'index'])->name('index');
+    Route::get('admin-dashboard/branches',[BranchesController::class,'index'])->name('branches');
     Route::post('admin-dashboard/branches/addProcc',[BranchesController::class,'addProcc']);
     Route::get('admin-dashboard/branches/delete/{id}',[BranchesController::class,'delete']);
 
@@ -259,7 +264,7 @@ Route::group(['middleware'=>['auth','Admin']],function(){
 
     // Site configuration page :::
     Route::get('/admin-dashboard/site-setting',[SiteContentController::class,'siteConfiguration'])->name('site-setting');
-    Route::get('/admin-dashboard/site-content',[SiteContentController::class,'homeConfigurationContent']);
+    Route::get('/admin-dashboard/site-content',[SiteContentController::class,'homeConfigurationContent'])->name('home-setting');
     Route::post('/admin-dashboard/update-site-setting',[SiteContentController::class,'updateSiteConfiguration']);
     Route::post('/update-image',[SiteContentController::class,'updateImage']);
     //// about page configuration 
@@ -306,7 +311,7 @@ Route::group(['middleware'=>['auth','Designer']],function(){
 });
 
 /////////////////////////// DESIGNER ROUTES END ////////////////////////////////
-
+Route::group(['middleware'=>['auth','SpecialDesigner']],function(){
 /////////////////////////// SPECIAL DESIGNER ROUTES  ///////////////////////////
 Route::get('special-designer/dashboard/',[SpecialDesignerDashboardController::class,'index']);
 Route::get('special-designer/task-list',[TaskController::class,'taskList']);
@@ -324,6 +329,7 @@ Route::post('special-designer/delete-image',[TaskController::class,'deleteimage'
 // Route::post('/store', [TaskController::class,'store'])->name('store');
 // Route::post('uploads', [TaskController::class,'uploads'])->name('uploads');
 
+});
 
 /////////////////////////// SPECIAL DESIGNER END  ///////////////////////////
 

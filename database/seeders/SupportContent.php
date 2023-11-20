@@ -18,13 +18,13 @@ class SupportContent extends Seeder
             [
                 'meta_name' => 'Support Text',
                 'meta_key' => 'support_text' ,
-                 'meta_value' => '',
+                 'meta_value' => "<p>Welcome to Logomax, where exclusivity meets design. In a digital world brimming with repetive and overused logos, we stand out by offering a unique proposition - exclusive, once-in-a-lifetime logos. Established 2012, Logomax has been dedicated to creating and curating a diverse range of logo designs, each sold only once. At Logomax, we understand that a logo is more than just a graphic; it's the face of your brand, a visual story waiting to be told. Our platform brings together skilled designers from across the globe, each contributing to our eclectic mix of styles. Whether you're a budding startup or a seasoned enterprise, our collection has something for every brand personality.</p>",
                  'type' => 'textarea'
                 ],
             [
                 'meta_name'=>'meta title',
                 'meta_key'=>'meta-title',
-                'meta_value'=>'test',
+                'meta_value'=>'Logomax | Support',
                 'type'=>'textarea'
                  ],
                 [
@@ -36,7 +36,7 @@ class SupportContent extends Seeder
                 [
                     'meta_name'=>'meta language',
                     'meta_key'=>'meta-language',
-                    'meta_value'=>'test',
+                    'meta_value'=>'en',
                     'type'=>'textarea'
                 ],
                 [
