@@ -231,7 +231,6 @@
                                     let customer_price = $("#for-customer").val();
                                     let designer_price = $("#for-designer").val();
                                     let logo_type = $("#logo_type").val();
-                                    console.log(logo_type);
                                     // console.log(customer_price + ' => ' + designer_price);
                                     $('.spinner-container').show();
                                     $.ajax({

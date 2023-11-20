@@ -9,6 +9,7 @@ use App\Models\Media;
 use App\Models\Categories;
 use App\Models\Logo;
 use App\Models\Style;
+use App\Models\Branch;
 use App\Events\RegisterNotificationEvent;
 use App\Models\Notifications;
 use File;
@@ -27,8 +28,9 @@ class DesginerLogoController extends Controller
         $categories = Categories::all();
         $tags = Tag::where('status',1)->get();
         $styles = Style::where('status',1)->get();
+        $branches = Branch::where('status',1)->get();
        
-        return view('designer.logos.addlogos',compact('categories','tags','styles'));
+        return view('designer.logos.addlogos',compact('categories','tags','styles','branches'));
     }
    
     public function uploadProc(Request $request){
@@ -77,6 +79,7 @@ class DesginerLogoController extends Controller
                     $logos->tags = json_encode($request->tags);
                     $logos->category_id = $request->categories;
                     $logos->style_id = $request->style;
+                    $logos->branch_id = $request->branch_id;
                     $logos->approved_status = 0;
                     $logos->status = 1;
                     $logos->designer_id = Auth::user()->id;

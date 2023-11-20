@@ -11,6 +11,7 @@ use App\Models\Style;
 use App\Models\LogoFacilities;
 use App\Models\Wishlist;
 use App\Models\ShopContent;
+use App\Models\Branch;
 use Auth;
 
 class FrontLogoController extends Controller
@@ -49,23 +50,45 @@ class FrontLogoController extends Controller
             });
         }
     }
+    if($request->branches){
+        $branchesslug = json_decode($request->branches);
+        // dd($request->categories);
+        if(count($branchesslug) > 0){
+        foreach($branchesslug as $slug){
+            $branches = Branch::where('slug',$slug)->first();
+            $branchesids[] = $branches->id;
+        }
+        $query->whereHas('branches',function($branchQuery) use ($branchesids){
+            $branchQuery->whereIn('id',$branchesids);
+        });
+    }
+}
+    // echo $request->tags;
         if($request->tags){
-            
-            $tagsslug = json_decode($request->tags);
-            if(count($tagsslug) > 0){
-            foreach($tagsslug as $slug){
-                $tag = Tag::where('slug',$slug)->first();
-                $tagsid[] = $tag->id;
-            
-            }
-            // return $tagsid;
-            $query->where(function ($query) use ($tagsid) {
-                foreach ($tagsid as $tid) {
-                    $query->orWhereJsonContains('tags', "$tid");
-                }
-            });
+            $tags = str_replace('"',"",$request->tags);
+        //    echo $tags;
+        if($tags != null){
+            $query->where('logo_type',$tags);
         }
+           
         }
+        
+            
+        //     $tagsslug = json_decode($request->tags);
+        //     if(count($tagsslug) > 0){
+        //     foreach($tagsslug as $slug){
+        //         $tag = Tag::where('slug',$slug)->first();
+        //         $tagsid[] = $tag->id;
+            
+        //     }
+        //     // return $tagsid;
+        //     $query->where(function ($query) use ($tagsid) {
+        //         foreach ($tagsid as $tid) {
+        //             $query->orWhereJsonContains('tags', "$tid");
+        //         }
+        //     });
+        // }
+        // }
         $logos = $query->paginate(20);
 
         $meta_title = ShopContent::where('key','meta-title')->first()->value;
@@ -91,7 +114,7 @@ class FrontLogoController extends Controller
 
     }
     public function logoFilter(Request $request){
-        // return $request->all();
+        // return $request->tags[0];
         if(Auth::check()){
             $query = Logo::with(['media','inWhishlist' => function ($query) {
                 $query->where('user_id', auth()->user()->id);
@@ -127,20 +150,24 @@ class FrontLogoController extends Controller
         });
 
        }
-       if($request->tags){
-        $tagsslug = $request->tags;
-        foreach($tagsslug as $slug){
-            $tag = Tag::where('slug',$slug)->first();
-            $tagsid[] = $tag->id;
-        
-        }
-        // return $tagsid;
-        $query->where(function ($query) use ($tagsid) {
-            foreach ($tagsid as $tid) {
-                $query->orWhereJsonContains('tags', "$tid");
-            }
-        });
+       if($request->tags != ""){
+        $query->where('logo_type',$request->tags);
        }
+    //    if($request->tags){
+    //     $tagsslug = $request->tags;
+    //     foreach($tagsslug as $slug){
+    //         $tag = Tag::where('slug',$slug)->first();
+    //         $tagsid[] = $tag->id;
+        
+    //     }
+
+        // return $tagsid;
+    //     $query->where(function ($query) use ($tagsid) {
+    //         foreach ($tagsid as $tid) {
+    //             $query->orWhereJsonContains('tags', "$tid");
+    //         }
+    //     });
+    //    }
        return response()->json($query->paginate(20));
     }
     

@@ -143,6 +143,64 @@ class AuthenticationController extends Controller
     }
     }
     
+    public function desginerRegister(Request $request){
+
+        return view('authentication.designregister',compact('request'));
+    }
+    public function designerRegisterProcc(Request $request){
+        $remember_token = Str::random(64);
+        $validate = $request->validate([
+            'g-recaptcha-response' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'experience' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'country' => 'required',
+        ]);
+         $recaptcha = $_POST['g-recaptcha-response'];
+                    $secret_key = env('GCAPTCHA_SECRET_KEY');
+                    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
+                    $response_json = file_get_contents($url);
+                    $response = (array)json_decode($response_json);
+            if($response['success'] == 1){
+                
+            }else{
+                return redirect()->back()->with(['error'=>'Google recaptcha is not valid']);
+            }
+
+        $user = new User();
+        $user->first_name = $validate['fname'];
+        $user->last_name = $validate['lname'];
+        $user->email = $validate['email'];
+        $user->password = Hash::make($validate['password']);
+
+        $user->country = $validate['country'];
+        $user->address = $validate['address'];
+        $user->city = $validate['city'];
+        $user->experience = $validate['experience'];
+        // $user->email_verified = 1;
+        $user->role_id = 2;
+        $user->remember_token = $remember_token;
+        $user->status = 1;
+        $user->save();
+
+            
+    if($user->role_id == 1){
+        $mailData = [
+            'title' => 'User Registration',
+            'token' => $remember_token,
+            'email' => $validate['email'],
+        ];
+        $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
+        return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
+    }else{
+        return redirect()->back()->with('success','Your account is successfully registered');
+    }
+
+    }
     public function registerVerify(Request $request ,$token){
         if (!$token) {
             return abort(404); 

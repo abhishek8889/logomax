@@ -33,6 +33,7 @@
             }else{
                 $filterCategories = json_encode([]);
             }
+            
 
             if(isset($_GET['styles'])){
                 $filterStyles = $_GET['styles'];
@@ -46,7 +47,7 @@
                 $filterTags = $_GET['tags'];
 
             }else{
-                $filterTags = json_encode([]);
+                $filterTags = "";
             }
             if(isset($_GET['search'])){
                 $filterSearch = $_GET['search'];
@@ -82,31 +83,38 @@
                     </div>
                     </div>
                     <!--  -->
-                    <div class="fil-slider">
-                        <div class="slider-content">
-                            <div class="slider-box">
-                                <div class="fillter-slider">
+                    <div class="">
+                        <div class="">
+                            <div class="">
+                                <div class="">
                                     <?php $selctedtag = json_decode($filterTags);
                                     $values = ['All logos','Low-priced logos','Premium logos'];
                                     ?>
-                                    @foreach($values as $value)
-                                       <label for="{{ $tag->slug ?? '' }}">
-                                            <div class="filtr_box ">
-                                                <a id="test" value="{{ $tag->id ?? '' }}">{{ $value ?? '' }}</a>
+                                       <label for="alllogos">
+                                            <div class="filtr_box filter-box @if($filterTags == "") selected @endif">
+                                                <a id="test" value="">All Logos</a>
                                             </div>
                                         </label>
-                                    @endforeach
+                                        <label for="low-priced">
+                                            <div class="filtr_box filter-boxlow-price @if($filterTags == '"low-price"') selected @endif">
+                                                <a id="lowpriced" value="low-priced">Low-priced logos</a>
+                                            </div>
+                                        </label>
+                                        
+                                        <label for="premium">
+                                            <div class="filtr_box filter-boxpremium @if($filterTags == '"premium"') selected @endif">
+                                                <a id="test" value="premium">Premium logos</a>
+                                            </div>
+                                        </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                    @foreach($tags as $tag)
-                         <input type="checkbox" name="tags" id="{{ $tag->slug ?? '' }}" class="tags" value="{{ $tag->slug ?? '' }}" style="display:none;" <?php
-                                            if(in_array($tag->slug,$selctedtag)){
-                                                echo 'checked';
-                                            } ?>>
-                    @endforeach
+                         <input type="radio" name="tags" id="alllogos" class="tags" value="" style="display:none;" >
+                        <input type="radio" name="tags" id="low-priced" class="tags" value="low-price" style="display:none;">
+                        <input type="radio" name="tags" id="premium" class="tags" value="premium" style="display:none;" >
+                    
                 <div class="search_sec">
                     <div class="work_data">
                         <div class="search_style_wrapp">
@@ -178,8 +186,8 @@
                     </div>
 
                     <div class="show_logo">
-                        <div class="logo_head">
-                            <h2 class="text-left"> <span class="logo_search_text"> Find Unique & Exclusive</span> Logos</h2>
+                        <div class="logo_head"> 
+                            <h2 class="text-left"> <span class="logo_search_text"> @if($filterSearch == '')Find Unique & Exclusive @else  {{ $filterSearch ?? '' }}  @endif</span> Logos</h2>
                             <span class="ml-3"> <span class="logos_count">{{ count($logos) ?? 0 }}</span> resultados</span>
                         </div>
                         <div class="row" id="logo_html_row">
@@ -263,7 +271,7 @@
         $(document).ready(function(){
             categories = <?php print_r($filterCategories); ?>;
             styles = <?php print_r($filterStyles); ?>;
-            tags = <?php print_r($filterTags); ?>;
+            tags = '<?php print_r($filterTags); ?>';
             searchvalue = $('input[name="search_field"]').val();
             $('input[name="search_field"]').on('keyup',function(){
                 searchvalue = $(this).val();
@@ -320,8 +328,11 @@
             });
             $('input.tags').on('change',function(){
                 tagvalue = $(this).val();
+                // console.log(tagvalue);
+                $('.filtr_box').removeClass('selected');
                  if($(this).prop('checked') == true){
-                    tags.push(tagvalue);  
+                    // tags = [];
+                    tags = tagvalue;  
                     $('.filter-box'+tagvalue).addClass('selected');
                  }else{
                     tags = jQuery.grep(tags, function(value) {

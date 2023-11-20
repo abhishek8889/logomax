@@ -7,7 +7,7 @@
                     <div class="container">
                         <div class="d-flex justify-content-between">
                                 <h4>{{ $designer->name ?? '' }} Details</h4>
-                                {{ Breadcrumbs::render('designer-view',$designer->name) }}
+                                {{ Breadcrumbs::render('designer-view',$designer->first_name.' '.$designer->last_name) }}
                         </div>
                         <div class="nk-content-inner">
                             <div class="nk-block">
@@ -18,7 +18,7 @@
                                                         <!-- <div class="row g-3"> -->
                                                             <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-spaced">
                                                                 <span class="sub-text">Desginer Name:</span>
-                                                                <span>{{ $designer->name ?? '' }}</span>
+                                                                <span>{{ $designer->first_name.' '.$designer->last_name ?? '' }}</span>
                                                             </div>
                                                             <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-spaced">
                                                                 <span class="sub-text">Desginer Email:</span>
