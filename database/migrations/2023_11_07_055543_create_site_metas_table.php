@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('meta_name');
             $table->string('meta_key');
-            $table->string('meta_value');
-            $table->string('meta_type');
+            $table->string('meta_value')->nullable();
+            $table->string('meta_type')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });
