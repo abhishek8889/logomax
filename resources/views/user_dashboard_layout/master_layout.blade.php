@@ -32,13 +32,13 @@
                <li class="nav-item align-content-center">
                  <a class="nav-link" href="#">
                     <i class="fas fa-bell"></i> 
-                    <span class="badge badge-success">6</span>
+                    <span class="badge custom-badge badge-success">6</span>
                  </a>
               </li>
               <li class="nav-item align-content-center">
                 <a class="nav-link" href="#">
                     <i class="fas fa-envelope"></i>
-                    <span class="badge badge-success">6</span> 
+                    <span class="badge custom-badge badge-success">6</span> 
                 </a>
               </li>
               <li class="nav-item">

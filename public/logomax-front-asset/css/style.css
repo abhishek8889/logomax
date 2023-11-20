@@ -471,9 +471,9 @@ a.login-btn.cta-btn:hover {
     width: 50%;
     text-align: start;
     padding-right: 60px;
-    background-image: url(../img/Group\ .png);
-    background-repeat: no-repeat;
-    background-position: 0 32%;
+    /* background-image: url(../img/Group\ .png); */
+    /* background-repeat: no-repeat; */
+    /* background-position: 0 32%; */
 }
 
 .logomax-img {
@@ -511,8 +511,12 @@ a.login-btn.cta-btn:hover {
     font-size: 14px;
     line-height: 20px;
     color: #656F79;
+    /* margin-top: 88px; */
+}
+.quote-img {
     margin-top: 88px;
 }
+
 
 .join-logo-sec .register-text p {
     font-weight: 400;
@@ -4666,7 +4670,7 @@ a.asset-id-link__button {
 
 
 .filtr_box.selected {
-    border: 1px solid red;
+    border: 1px solid rgb(53, 219, 169);
 }
 
 /* .join-btn a {

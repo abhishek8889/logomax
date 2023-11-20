@@ -223,18 +223,22 @@
   @endforeach
     <div class="container">
       <div class="join-logo-text">
-        <div class="download-text"><h6>
+        <div class="download-text">
+          <h6>
           @foreach ($homeContent as $content)
           @if($content->key == 'register-banner-title-desc')
           <?php echo $content->value; ?>
             @endif
-            @endforeach</h6>
+            @endforeach
+          </h6>
+          <div class="quote-img"><img src="{{ asset('logomax-front-asset/img/Group.png') }}" alt=""></div>
             @foreach ($homeContent as $content)
             @if($content->key == 'register-banner-title-text-desc')
-            <p><?php 
-              echo $content->value; ?></p>
-              @endif
-              @endforeach
+            
+            <?php echo  ($content->value) ? $content->value :'' ; ?>
+           
+            @endif
+            @endforeach
         </div>
         <div class="register-text">
           @foreach ($homeContent as $content)
