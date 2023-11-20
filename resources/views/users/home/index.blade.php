@@ -266,7 +266,7 @@
   <section class="popular-sec p-110">
     <div class="container">
       <div class="popular-text">
-        <h2>Discover What's Trending</h2>
+        <h2>Discover what's Trending</h2>
       </div>
       <div class="popular-btn-box">
         <div class="popular-btn">
@@ -393,7 +393,7 @@
                   </div>
                   <div class="opn-rt">
                     <a href="#">
-                      <span>{{ $r->rating }}.0</span> rating
+                      <span>{{ $r->rating }}.0</span>
                       <!-- <span style="text-decoration: underline;">1 opinion</span> -->
                     </a>
                   </div>

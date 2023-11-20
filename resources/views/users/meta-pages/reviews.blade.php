@@ -26,64 +26,408 @@ if(count($reviews) == 0){
  $fourrate = count($fourrating);
  $fiverate = count($fiverating);
 ?>
-<div class="container">
-    <div class="col-lg-6">
-        <img src="https://sagmetic.site/2023/laravel/logomax/public/siteMeta/Other_pages_Site_Logo_1699956563.svg" alt="" height="150px">
-        <div class="reviewsite p-4 d-flex justify-content-between">
-			<p  style="font-size:40px;">
-			<span>{{ number_format(round($totalrating),2) ?? '5.0' }}</span> | <span id="post_rev_btn_opn">{{ count($reviews) ?? 0 }} opinión</span>
-			</p>
-			
-			<div class="str_rate">
-			<img src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-{{ round($totalrating) ?? 5 }}.svg" alt="" height="40px" />
-          </div>
+
+
+<section class="reviews-sec">
+    <div class="container">
+      <div class="review-heading">
+        <div class="review-site-logo">
+            <img src="{{ asset('logomax_pages/img/logomax.png') }}" class="img-fluid" alt="....">
+        </div>
+        <div class="review-site-text">
+                <!-- <h1>Documentos-Legales.mx</h1> -->
+                <p>
+                <span>5.00</span> | <span id="post_rev_btn_opn">12 opinión</span>
+                </p>
+                <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>
+                   <span class="blankstar"></span>
+                   <span class="blankstar"></span>			
+               </div>
             </div>
-		</div>
-    </div>
-</div>
-
-<hr class="px-5">
-
-<div class="container p-5 my-4" style="border: 1px solid black;">
-    <div class="first d-flex justify-content-between">
-        <h3>0 Star</h3>
-        <h3>{{ round($zerorate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</h3>
-    </div>
-    <div class="first d-flex justify-content-between">
-        <h3>1 Star</h3>
-        <h3>{{ round($onerate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</h3>
-    </div>
-    <div class="first d-flex justify-content-between">
-        <h3>2 Star</h3>
-        <h3>{{ round($tworate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</h3>
-    </div>
-    <div class="first d-flex justify-content-between">
-        <h3>3 Star</h3>
-        <h3>{{ round($threerate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</h3>
-    </div>
-    <div class="first d-flex justify-content-between">
-        <h3>4 Star</h3>
-        <h3>{{ round($fourrate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</h3>
-    </div>
-    <div class="first d-flex justify-content-between">
-        <h3>5 Star</h3>
-        <h3>{{ round($fiverate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</h3>
-    </div>
-</div>
-@foreach($reviews as $review)
-<div class="container p-5 my-4" style="border: 1px solid black;">
-    <div class="col-lg-3 d-flex ">
-        <div class="image">
-            <img src="https://user-images.trustpilot.com/653dcb4dc334c7001279dc1c/64x64.png" alt="" />
+      </div>
+      <div class="review-comment-us">
+         <div class="rate-nd-per">
+            <div class="rating-with-perct">
+              <div class="left-side">
+                <div class="round">
+                  <input type="checkbox" checked id="checkbox" />
+                  <label for="checkbox"></label>
+                  <span>5 stars</span>
+                </div>
+              </div>
+              <div class="mid-line">
+                <div class="bar-5"></div>
+              </div>
+              <div class="ryt-side">
+                <div class="per-txt">20%</div>
+              </div>
+            </div>
+            <div class="rating-with-perct">
+              <div class="left-side">
+                <div class="round">
+                  <input type="checkbox" checked id="checkbox4" />
+                  <label for="checkbox4"></label>
+                  <span>4 stars</span>
+                </div>
+              </div>
+              <div class="mid-line">
+                <div class="bar-4"></div>
+              </div>
+             <div class="ryt-side">
+                <div class="per-txt">20%</div>
+             </div>
+            </div>
+            <div class="rating-with-perct">
+              <div class="left-side">
+                <div class="round">
+                  <input type="checkbox" checked id="checkbox3" />
+                  <label for="checkbox3"></label>
+                  <span>3 stars</span>
+                </div>
+              </div>
+              <div class="mid-line">
+                <div class="bar-3"></div>
+              </div>
+             <div class="ryt-side">
+                <div class="per-txt">20%</div>
+             </div>
+            </div>
+            <div class="rating-with-perct">
+              <div class="left-side">
+                <div class="round">
+                  <input type="checkbox" checked id="checkbox2" />
+                  <label for="checkbox2"></label>
+                  <span>2 stars</span>
+                </div>
+              </div>
+              <div class="mid-line">
+                <div class="bar-2"></div>
+              </div>
+             <div class="ryt-side">
+                <div class="per-txt">20%</div>
+             </div>
+            </div>
+            <div class="rating-with-perct">
+              <div class="left-side">
+                <div class="round">
+                  <input type="checkbox" checked id="checkbox1" />
+                  <label for="checkbox1"></label>
+                  <span>1 stars</span>
+                </div>
+              </div>
+              <div class="mid-line">
+                <div class="bar-1"></div>
+              </div>
+             <div class="ryt-side">
+                <div class="per-txt">20%</div>
+             </div>
+            </div>
+          </div>
+        <div class="all-reviews">
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">b</span></div>
+            <div class="al-rw-rating">
+              <h4>Burno</h4>
+              <div class="mp">
+              <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">j</span></div>
+            <div class="al-rw-rating">
+              <h4>Jenny</h4>
+              <div class="mp">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">j</span></div>
+            <div class="al-rw-rating">
+              <h4>Jack</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">b</span></div>
+            <div class="al-rw-rating">
+              <h4>Beverly Gibson</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">m</span></div>
+            <div class="al-rw-rating">
+              <h4>Michael Warren</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">b</span></div>
+            <div class="al-rw-rating">
+              <h4>Barbara Strange</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">rt</span></div>
+            <div class="al-rw-rating">
+              <h4>Rachel Tara</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">hf</span></div>
+            <div class="al-rw-rating">
+              <h4>Hajara Faruk Tukur</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">w</span></div>
+            <div class="al-rw-rating">
+              <h4>Wayne Burrows</h4>
+              <div class="mp">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">j</span></div>
+            <div class="al-rw-rating">
+              <h4>Janet Lytle</h4>
+              <div class="mp">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">ts</span></div>
+            <div class="al-rw-rating">
+              <h4>Tricia Sproles</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">ad</span></div>
+            <div class="al-rw-rating">
+              <h4>Burno</h4>
+              <div class="mp">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
+          <div class="al-rw d-flex">
+            <div class="al-rw-txt"><span class="rw-ad-txt">s</span></div>
+            <div class="al-rw-rating">
+              <h4>Samish murugesan</h4>
+              <div class="mp">
+               <i class="fa-solid fa-location-dot"></i>
+                <span>MX</span>
+              </div>
+              <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="fullstar"></span>
+                   <span class="blankstar"></span>			
+                 </div>
+                  <p>
+                   Hace 22 horas									
+                 </p>
+              </div>
+              <p>test review</p>
+            </div>
+          </div>
         </div>
-        <div class="name px-3">
-            <h3>{{ $review->title ?? '' }}</h3>
-            <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-{{ $review->rating ?? 0 }}.svg" alt="" height="30px" />
-        </div>
-    </div>
-    <div class="col-lg-3 ml-5">
-       <p>{{ $review->description ?? '' }}</p>
-    </div>
-</div>
-@endforeach
+      </div>
+      </div>
+  </section>
 @endsection

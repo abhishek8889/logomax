@@ -15,15 +15,16 @@ use Auth;
 class MetaPagesController extends Controller
 {
     Public function aboutUs(Request $request){
-        $meta_title = AboutUsContent::where('key','meta-title')->first()->value;
-        $meta_description = AboutUsContent::where('key','meta-description')->first()->value;
-        $meta_language = AboutUsContent::where('key','meta-language')->first()->value;
-        $meta_country = AboutUsContent::where('key','meta-country')->first()->value;
-
-
+        $meta_title = $meta_description = '';
+        if(AboutUsContent::where('key','meta-title')->first()){
+            $meta_title = AboutUsContent::where('key','meta-title')->first()->value;
+        }
+        if(AboutUsContent::where('key','meta-description')->first()){
+            $meta_description = AboutUsContent::where('key','meta-description')->first()->value;
+        }
         $logos = Logo::where([['approved_status',1],['status',1]])->get();
 
-        return view('users.meta-pages.about_us',compact('request','meta_title','meta_description','meta_language','meta_country','logos'));
+        return view('users.meta-pages.about_us',compact('request','meta_title','meta_description','logos'));
     }
     public function reviews(Request $request){
         $reviews = LogoReview::where('approved',1)->get();
