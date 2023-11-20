@@ -332,66 +332,65 @@
                 </div> -->
                 <!--  -->
                 <div class="rating-str d-flex">
-                  <div class="rate">
+                <div class="str_rate ">
                    <?php 
                     switch ($r->rating) {
-
                       case 1:
-                        echo '<input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
+                        echo '
+                        <span class="fullstar"></span>
+                        <span class="blankstar"></span>
+                        <span class="blankstar"></span>
+                        <span class="blankstar"></span>
+                        <span class="blankstar"></span>	
+                        ';
                       break;
 
                       case 2:
-                        echo '<input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
+                        echo '
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="blankstar"></span>
+                        <span class="blankstar"></span>
+                        <span class="blankstar"></span>	
+                        ';
                       break;
 
                       case 3:
-                        echo ' <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Average or neutral">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
+                        echo ' 
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="blankstar"></span>
+                        <span class="blankstar"></span>	
+                        ';
                       break;
 
                       case 4:
-                        echo '<input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="Good">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Average or neutral">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
+                        echo '
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="blankstar"></span>	
+                        ';
                       break;
 
                       case 5 :
-                        echo '<input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="Excellent">5 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="Good">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Average or neutral">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
+                        echo '<span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>
+                        <span class="fullstar"></span>';
                       break;
 
                       default:
-                      echo '<input type="radio" id="star5" name="rate" value="5" />
-                      <label for="star5" title="Excellent">5 stars</label>
-                      <input type="radio" id="star4" name="rate" value="4" />
-                      <label for="star4" title="Good">4 stars</label>
-                      <input type="radio" id="star3" name="rate" value="3" />
-                      <label for="star3" title="Average or neutral">3 stars</label>
-                      <input type="radio" id="star2" name="rate" value="2" />
-                      <label for="star2" title="Poor">2 stars</label>
-                      <input type="radio" id="star1" name="rate" value="1" />
-                      <label for="star1" title="Very poor">1 star</label>';
+                      echo '
+                      <span class="fullstar"></span>
+                      <span class="fullstar"></span>
+                      <span class="fullstar"></span>
+                      <span class="fullstar"></span>
+                      <span class="fullstar"></span>
+                      ';
                     }
                    ?>
                   </div>
