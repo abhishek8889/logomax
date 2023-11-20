@@ -17,6 +17,7 @@ class Controller extends BaseController
     public function __construct(Request $request){
         $userIp = $request->ip(); // Get the user's IP address
         $timezone = $this->getTimezoneByIP($userIp);
+       
         $this->siteData['user_timezone'] = $userIp;
 
         if ($timezone !== null) {
@@ -26,6 +27,7 @@ class Controller extends BaseController
             // Config::set('app.timezone', 'America/New_York');
             $this->siteData['user_timezone'] = 'Asia/Kolkata';
         }
+       
     }
     function getTimezoneByIP($ip){
         $client = new Client();

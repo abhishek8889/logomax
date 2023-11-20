@@ -1,3 +1,6 @@
+<?php 
+ dd( $siteData);
+?>
 <!DOCTYPE html>
 <html lang="{{ $meta_language ?? 'en' }}">
 
