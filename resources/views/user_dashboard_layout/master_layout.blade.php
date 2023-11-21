@@ -23,7 +23,7 @@
   <header class="header">
    <nav class="navbar main-navbar navbar-expand-lg navbar-dark">
       <div class="hd-logo">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('logomax_pages/img/logomax.png') }}" class="img-fluid" alt="....">
         </a>
       </div>

@@ -19,6 +19,10 @@ class FrontLogoController extends Controller
     public function index(Request $request){
         $categories = Categories::all();
         $tags = Tag::all();
+
+        $allCategory = Categories::orderBy('name','ASC')->get();
+        $allStyles = Style::where('status',1)->orderBy('name','ASC')->get();
+
         $styles = Style::where('status',1)->get();
         $query = Logo::where([['approved_status',1],['status',1]]);
         if($request->search !== null ){
@@ -70,9 +74,7 @@ class FrontLogoController extends Controller
         if($tags != null){
             $query->where('logo_type',$tags);
         }
-           
         }
-        
             
         //     $tagsslug = json_decode($request->tags);
         //     if(count($tagsslug) > 0){
@@ -96,7 +98,7 @@ class FrontLogoController extends Controller
         $meta_language = ShopContent::where('key','meta-language')->first()->value;
         $meta_country = ShopContent::where('key','meta-country')->first()->value;
 
-        return view('users.logos.index',compact('request','categories','tags','logos','styles','meta_title','meta_description','meta_language','meta_country'));
+        return view('users.logos.index',compact('request','categories','tags','logos','styles','meta_title','meta_description','meta_language','meta_country','allCategory','allStyles'));
     }
     public function logodetail(Request $request, $slug){
         $logo = Logo::where([['logo_slug',$slug],['approved_status',1],['status',1]])->first();

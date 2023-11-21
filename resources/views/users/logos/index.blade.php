@@ -24,6 +24,9 @@
     .filter-title {
         width: 100%;
     }
+    .show_more_modal_box{
+        max-width: 940px;
+    }
 </style>
             <?php 
             if(isset($_GET['categories'])){
@@ -124,11 +127,17 @@
                             </div>
                             <div class="search_content">
                                 <form><?php $styleSelected = json_decode($filterStyles); ?>
-                                    @foreach($styles as $style)
+                                    @foreach($styles as $ind => $style)
                                     <div class="custom_check">
                                         <label for="style{{ $style->slug ?? '' }}">{{ $style->name ?? '' }}</label>
                                         <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles[]" type="checkbox" value="{{ $style->slug ?? '' }}" <?php if(in_array($style->slug,$styleSelected)){ echo 'checked'; } ?> />
                                     </div>
+                                    @if($ind > 9)
+                                        <div class="show-more-btn">
+                                           <a href="javascript:void(0)" class="show_more_btn" type="styles" class="text text-primary pe-auto">Show more</a> 
+                                        </div>
+                                        @break
+                                    @endif
                                     @endforeach
                                 </form>
                             </div>
@@ -142,45 +151,24 @@
                             <div class="search_content">
                                 <form>
                                     <?php $categoriesSlected = json_decode($filterCategories) ?>
-                                    @foreach($categories as $category)
+                                    @foreach($categories as $ind => $category)
                                     <div class="custom_check">
                                         <label for="category{{ $category->slug ?? '' }}">{{ $category->name ?? '' }}</label>
                                         <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" value="{{ $category->slug ?? '' }}" <?php if(in_array($category->slug,$categoriesSlected)){ echo 'checked'; } ?>  />
                                     </div>
+                                    @if($ind > 9)
+                                        <div class="show-more-btn">
+                                           <a href="javascript:void(0)" class="show_more_btn" type="categories" class="text text-primary pe-auto">Show more</a> 
+                                        </div>
+                                        @break
+                                    @endif
                                     @endforeach
                                 </form>
                             </div>
                         </div>
-                        <!-- <div class="search_style_wrapp category">
-                            <div class="search_head">
-                                <p>Search by Colors</p>
-                                <i class="fa-solid fa-angle-down"></i>
-                            </div>
-                            <div class="search_content">
-                                <ul>
-                                    <li style="background: #f5f5dc;"></li>
-                                    <li style="background: #000;"></li>
-                                    <li style="background: #00f;"></li>
-                                    <li style="background: #a52a2a;"></li>
-                                    <li style="background: #611e26;"></li>
-                                    <li style="background: #c19a6b;"></li>
-                                    <li style="background: #811331;"></li>
-                                    <li style="background: #6f4e37;"></li>
-                                    <li style="background: #008000;"></li>
-                                    <li style="background: #808080;"></li>
-                                    <li style="background: #f0e68c;"></li>
-                                    <li style="background: #000080;"></li>
-                                    <li style="background: #ffa500;"></li>
-                                    <li style="background: #f00;"></li>
-                                    <li style="background: #87ceeb;"></li>
-                                    <li style="background: #ffbe00;"></li>
-                                    <li style="background: #d50072;"></li>
-                                </ul>
-                            </div>
-                        </div> -->
                         <div class="filter-btn <?php  if(!$_GET){
-               echo 'd-none';
-            } ?>">
+                            echo 'd-none';
+                            } ?>">
                             <a href="{{ url('logos/search') }}"><button>Clear Filters</button></a>
                         </div>
                     </div>
@@ -263,8 +251,30 @@
                     </div>
                 </div>
             </div>
+     
         </section>
-          
+        
+          <!-- Show more filter option modal  -->
+          <div class="modal fade"  id="show_more_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog show_more_modal_box  modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text text-dark" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                                                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
       
@@ -273,6 +283,7 @@
             styles = <?php print_r($filterStyles); ?>;
             tags = '<?php print_r($filterTags); ?>';
             searchvalue = $('input[name="search_field"]').val();
+            
             $('input[name="search_field"]').on('keyup',function(){
                 searchvalue = $(this).val();
                 // console.log(value);
@@ -284,9 +295,8 @@
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
-                window.history.replaceState(stateObj, 
-                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
-                        search = ajaxRequest(searchvalue,categories,styles,tags);
+                window.history.replaceState(stateObj, "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                search = ajaxRequest(searchvalue,categories,styles,tags);
             });
             $('input.category').on('change',function(){
                 val = $(this).val();
@@ -305,7 +315,6 @@
                         "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
                 ajaxReque = ajaxRequest(searchvalue,categories,styles,tags);
                
-            
             });
             $('input.styles').on('change',function(){
                 // console.log($('input[name="styles[]"]').val());
@@ -329,28 +338,24 @@
                 tagvalue = $(this).val();
                 // console.log(tagvalue);
                 $('.filtr_box').removeClass('selected');
-                 if($(this).prop('checked') == true){
+                if($(this).prop('checked') == true){
                     // tags = [];
                     tags = tagvalue;  
                     $('.filter-box'+tagvalue).addClass('selected');
-                 }else{
+                }else{
                     tags = jQuery.grep(tags, function(value) {
                             return value != tagvalue;
                     });
                     $('.filter-box'+tagvalue).removeClass('selected');
-
-                 }
-                 let stateObj = { id: "100" }; 
+                }
+                let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
                 let tagsstring = encodeURIComponent(JSON.stringify(tags));
 
-                    window.history.replaceState(stateObj, 
-                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+                window.history.replaceState(stateObj,"filter","{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
 
                 ajax = ajaxRequest(searchvalue,categories,styles,tags);
-
-            
             });
         });
 
@@ -425,6 +430,57 @@
             })
         @endif
     });
-   
+    function setHtml(letterCat){
+        console.log(letterCat);
+        // $.each(letterCat,function(ind,val){
+        //     console.log(ind);
+        //     console.log('====================');
+        //     console.log(val);
+        // });
+    }
+
+    $(".show_more_btn").on('click',function(e){
+        e.preventDefault();
+        let thisObj = $(this);
+        let dataType = thisObj.attr('type');
+        let modal = $("#show_more_modal").modal();
+        let modalHeading = $("#show_more_modal .modal-title");
+        let modalBody = $("#show_more_modal .modal-body");
+        modalBody.html('');
+
+        modalHeading.html(`Search by ${dataType}`);
+        let dataToShow = '';
+        let letterCat = {};
+        if(dataType == 'categories'){
+            let categoriesData = <?php echo  json_encode($allCategory);  ?>;
+            dataToShow = categoriesData;
+        }
+        if(dataType ==  'styles'){
+            let stylesData = <?php echo  json_encode($allStyles);  ?>;
+            console.log(stylesData);
+            dataToShow = stylesData;
+        }
+        $.each(dataToShow , function(ind,val){
+            let firstLetter = val.name.charAt(0).toUpperCase();
+            if (!letterCat[firstLetter]) {
+                letterCat[firstLetter] = [];
+                letterCat[firstLetter].push(val);
+            }else{
+                letterCat[firstLetter].push(val);
+            }
+        });
+        // console.log(letterCat);
+        $.each(letterCat,function(ind,val){
+            var newElement = $("<div>");
+            newElement.addClass('lett-cat-box');
+            newElement.append(`<div class="cat-head"> ${ind} </div>`);
+            $.each(val,function(key,value){
+                newElement.append(`<div class="cat-data"><a href="">${value.name}</a></div>`);
+            });
+            modalBody.append(newElement);
+        });
+        modal.show();
+    }); 
     </script> 
 @endsection
+

@@ -1355,6 +1355,7 @@ a.now-btn:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: -9px;
 }
 
 .search_sec {
@@ -2883,7 +2884,7 @@ a.asset-id-link__button {
      width: 1px;
      right: 0;
      top: 0;
-     z-index: 99999;
+     z-index: 9;
  }
  /* Logo detail Accordion css */
  .brand-text .dropdown_data div#accordion .card {
