@@ -132,7 +132,7 @@
                                         <label for="style{{ $style->slug ?? '' }}">{{ $style->name ?? '' }}</label>
                                         <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles[]" type="checkbox" value="{{ $style->slug ?? '' }}" <?php if(in_array($style->slug,$styleSelected)){ echo 'checked'; } ?> />
                                     </div>
-                                    @if($ind > 9)
+                                    @if($ind > 5)
                                         <div class="show-more-btn">
                                            <a href="javascript:void(0)" class="show_more_btn" type="styles" class="text text-primary pe-auto">Show more</a> 
                                         </div>
@@ -156,7 +156,7 @@
                                         <label for="category{{ $category->slug ?? '' }}">{{ $category->name ?? '' }}</label>
                                         <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" value="{{ $category->slug ?? '' }}" <?php if(in_array($category->slug,$categoriesSlected)){ echo 'checked'; } ?>  />
                                     </div>
-                                    @if($ind > 9)
+                                    @if($ind > 5)
                                         <div class="show-more-btn">
                                            <a href="javascript:void(0)" class="show_more_btn" type="categories" class="text text-primary pe-auto">Show more</a> 
                                         </div>
