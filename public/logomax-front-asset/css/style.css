@@ -3109,8 +3109,23 @@ a.asset-id-link__button {
         cursor: pointer;
     }
     
- /*  */
+ /* Search filter  show more button   */
 
+    .cat-wrapper {
+        column-count: 3;
+        border-bottom: 1px solid #dfdfdf;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+    .cat-head {
+        font-weight: 600;
+    }
+
+    .cat-data a {
+        color: #000;
+        cursor: pointer;
+    }
+    /*  */
 @media only screen and (max-width: 767px) {
     .opn-rt {
         margin-bottom: unset!important;
@@ -3120,7 +3135,7 @@ a.asset-id-link__button {
 
 
 
-@media screen and (max-width: 1800px) {
+@media only screen and (max-width: 1800px) {
     .custom-header .banner-content {
         width: 100%;
         max-width: 1310px;
@@ -5259,5 +5274,3 @@ span.blankstar::after {
 }
 
 }
-
-  
