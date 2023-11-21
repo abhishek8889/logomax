@@ -236,8 +236,8 @@ label.form-check-label p {
     border-radius: 5px;
     background: #000;
     display: inline-block;
-    max-width: 100%;
-    padding: 20px 333px;
+    width: 100%;
+    padding: 20px ;
     transition: all 0.4s ease-in-out;
 }
 .cta:hover {
