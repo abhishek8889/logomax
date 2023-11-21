@@ -31,9 +31,9 @@ if(count($reviews) == 0){
 <section class="reviews-sec">
     <div class="container">
       <div class="review-heading">
-        <div class="review-site-logo">
-            <img src="{{ asset('logomax_pages/img/logomax.png') }}" class="img-fluid" alt="....">
-        </div>
+        <!-- <div class="review-site-logo"> -->
+            <!-- <img src="{{-- asset('logomax_pages/img/logomax.png') --}}" class="img-fluid" alt="...."> -->
+        <!-- </div> -->
         <div class="review-site-text">
                 <!-- <h1>Documentos-Legales.mx</h1> -->
                 <p>

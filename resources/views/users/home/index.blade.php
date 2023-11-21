@@ -332,80 +332,66 @@
                 </div> -->
                 <!--  -->
                 <div class="rating-str d-flex">
-                <div class="str_rate ">
-                   <?php 
-                    switch ($r->rating) {
-                      case 1:
-                        echo '
-                        <span class="fullstar"></span>
-                        <span class="blankstar"></span>
-                        <span class="blankstar"></span>
-                        <span class="blankstar"></span>
-                        <span class="blankstar"></span>	
-                        ';
-                      break;
+                  <div class="review-site-text">
+                    <div class="str_rate ">
+                      <?php 
+                        switch ($r->rating) {
+                          case 1:
+                            echo '<span class="fullstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span>	';
+                          break;
 
-                      case 2:
-                        echo '
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="blankstar"></span>
-                        <span class="blankstar"></span>
-                        <span class="blankstar"></span>	
-                        ';
-                      break;
+                          case 2:
+                            echo '
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="blankstar"></span>
+                            <span class="blankstar"></span>
+                            <span class="blankstar"></span>	
+                            ';
+                          break;
 
-                      case 3:
-                        echo ' 
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="blankstar"></span>
-                        <span class="blankstar"></span>	
-                        ';
-                      break;
+                          case 3:
+                            echo ' 
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="blankstar"></span>
+                            <span class="blankstar"></span>	
+                            ';
+                          break;
 
-                      case 4:
-                        echo '
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="blankstar"></span>	
-                        ';
-                      break;
+                          case 4:
+                            echo '
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="blankstar"></span>	
+                            ';
+                          break;
 
-                      case 5 :
-                        echo '<span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>
-                        <span class="fullstar"></span>';
-                      break;
+                          case 5 :
+                            echo '<span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>';
+                          break;
 
-                      default:
-                      echo '
-                      <span class="fullstar"></span>
-                      <span class="fullstar"></span>
-                      <span class="fullstar"></span>
-                      <span class="fullstar"></span>
-                      <span class="fullstar"></span>
-                      ';
-                    }
-                   ?>
+                          default:
+                          echo '<span class="fullstar"></span> <span class="fullstar"></span><span class="fullstar"></span><span class="fullstar"></span> <span class="fullstar"></span>';
+                        }
+                      ?>
+                    </div>
                   </div>
                   <div class="opn-rt">
                     <a href="#">
-                      <span>{{ $r->rating }}.0</span>
+                      <span class="text text-dark">{{ $r->rating }}.0</span>
                       <!-- <span style="text-decoration: underline;">1 opinion</span> -->
                     </a>
                   </div>
                 </div>
                 <!--  -->
-                <!-- <div class="Verified-content">
-                  <i class="fa-solid fa-check"></i>
-                  <p>Verified</p>
-                </div> -->
               </div>
             </div>
           </div>

@@ -73,10 +73,10 @@
                         </div>
                     </div>
                     <!--  -->
-                    <div class="filter-main-button">
-                        <button class="filter-collapse">
+                    <div class="filter-main-button" style="cursor:pointer;">
+                        <button class="filter-collapse" style="cursor:pointer;">
                             <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="">
-                            <span>
+                            <span style="cursor:pointer;">
                                 Filters <span class="badge badge--blue">1</span>
                             </span>
                         </button>
@@ -92,7 +92,7 @@
                                     ?>
                                        <label for="alllogos">
                                             <div class="filtr_box filter-box @if($filterTags == "") selected @endif">
-                                                <a id="test" value="">All Logos</a>
+                                                <a id="test" value="">All logos</a>
                                             </div>
                                         </label>
                                         <label for="low-priced">
