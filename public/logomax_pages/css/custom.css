@@ -556,7 +556,7 @@ nav.main-hd {
     position: relative;
 }
 
-.badge {
+.custom-badge {
     position: absolute;
     top: 0;
     right: 0px;
@@ -985,9 +985,10 @@ section.new-sec {
 section.new-sec .left-text {
     position: fixed;
     left: 0;
-    right: 0;
+    top: 100px;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
 }
 section.new-sec .right-text {
     margin-bottom: 50px;
@@ -1033,4 +1034,42 @@ a.request-btn:hover {
     padding-top: 22px;
     margin-top: 30px;
    
+
+/* REmove extra space from bottom  */
+.new-main-content>.row {
+    min-height: 100vh;
+}
+
+/* Add scroll */
+section.new-sec .left-text {
+    position: fixed;
+    left: 0;
+    top: 100px;
+    /* width: 100%; */
+    height: 100%;
+    overflow-y: scroll;
+    right: 0;
+}
+@media only screen and (max-width: 1199px) {
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 90px!important;
+    background-color: #fff;
+    right: 0;
+    width: 0%;
+    /* z-index: 1; */
+}
+}
+@media only screen and (max-width: 991px) {
+   .footer {
+    position: fixed;
+    bottom: 0;
+    height: 90px!important;
+    background-color: #fff;
+    right: 0;
+    width: 100%!important;
+    /* z-index: 1; */
+}
+
 }

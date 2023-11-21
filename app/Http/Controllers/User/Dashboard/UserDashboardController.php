@@ -335,9 +335,9 @@ class UserDashboardController extends Controller
         return view('user_dashboard_view.subscription.index',compact('request'));
     }
 
-    public function UserMessages(Request $request){
-        return view('user_dashboard_view.Message.index',compact('request'));
-    }
+    // public function UserMessages(Request $request){
+    //     return view('user_dashboard_view.Message.index',compact('request'));
+    // }
     public function changePassword(Request $request){
         $request->validate([
             'password' => 'required|confirmed|min:6',

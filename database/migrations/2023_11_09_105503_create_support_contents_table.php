@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('meta_name');
             $table->string('meta_key');
             $table->text('meta_value')->nullable();
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

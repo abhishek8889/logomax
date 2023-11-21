@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $meta_language ?? 'en' }}">
-
+<html lang="en-{{ $userIPDetails['countryCode'] }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -93,17 +92,17 @@
               <div class="bars bar3"></div>
             </div>
           </button>
-          <?php $categories = App\Models\Categories::all();
-                    $styles = App\Models\Style::where('status',1)->get();
-                    $branches = App\Models\Branch::where('status',1)->get();
-                    
-                ?>
+          <?php 
+            $categories = App\Models\Categories::orderBy('name','ASC')->get();
+            $styles = App\Models\Style::where('status',1)->orderBy('name','ASC')->get();
+            $branches = App\Models\Branch::where('status',1)->orderBy('name','ASC')->get();
+          ?>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  Categories
+                  Category
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($categories->isNotEmpty())
@@ -117,7 +116,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  Branches
+                  Branch
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if($branches->isNotEmpty())
@@ -132,7 +131,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  Icons
+                  Logomark
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($styles->isNotEmpty())

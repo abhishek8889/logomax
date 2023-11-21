@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Blog\BlogCategoryController;
 use App\Http\Controllers\Admin\SpecialDesigner\SpecialDesignerController;
 use App\Http\Controllers\User\Checkout\CheckoutController;
 use App\Http\Controllers\User\Dashboard\UserDashboardController;
+use App\Http\Controllers\User\Dashboard\UserMessageController;
 use App\Http\Controllers\Admin\Revision\RevisionController;
 use App\Http\Controllers\Admin\Reviews\ReviewsController;
 use App\Http\Controllers\Admin\SiteMeta\SiteMetaController;
@@ -122,7 +123,6 @@ Route::group(['middleware'=>['EnsureUser']],function(){
         Route::get('user-dashboard/logo',[UserDashboardController::class, 'UserLogoslist'])->name('user-orders');
         Route::get('user-dashboard/configuration',[UserDashboardController::class, 'UserConfiguration'])->name('user-configurations');
         Route::get('user-dashboard/subscriptions',[UserDashboardController::class, 'UserSubscription'])->name('user-subscriptions');
-        Route::get('user-dashboard/messages',[UserDashboardController::class, 'UserMessages'])->name('user-messages');
         Route::post('user-dashboard/changePassword',[UserDashboardController::class, 'changePassword']);
         Route::post('user-dashboard/reviewSubmit',[UserDashboardController::class, 'reviewSubmit']);
         Route::post('user-dahsboard/removeWhislist',[UserDashboardController::class,'removeWhislist']);
@@ -137,6 +137,11 @@ Route::group(['middleware'=>['EnsureUser']],function(){
 
         // Download revised logo 
         Route::get('/downloadProcess/{complete_task_id}',[UserDashboardController::class,'downloadProcess']);
+
+
+        ////messages
+
+        Route::get('user-dashboard/messages',[UserMessageController::class, 'index'])->name('user-messages');
         });
     ////////////////////////////////////////////////////////////////////////////////////////
 });

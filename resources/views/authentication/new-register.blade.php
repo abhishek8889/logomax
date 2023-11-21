@@ -1,5 +1,6 @@
 @extends('user_layout.master')
 @section('content')
+<!-- $userIPDetails -->
 <style>
     .top-header li.nav-item.dropdown:before{
         top: 18px !important;
@@ -336,9 +337,12 @@
                             <div class="col-lg-12 col-sm-12 col-12">
                                 <div class="form-group">
                                 <!--  -->
+                                <?php  $userIPDetails; ?>
                                 <select name="country" class="form-control form-inp-box" id="country" style="cursor:pointer;">
                                     @foreach($countries as $k => $v)
-                                    <option value="{{$k}}">{{ $v }}</option>
+                                   
+                                    <option value="{{$k}}" <?= ($userIPDetails['country'] == $v)?'selected':''; ?>>{{ $v }}</option>
+                                    
                                     @endforeach
                                 </select>
                                 <!--  -->

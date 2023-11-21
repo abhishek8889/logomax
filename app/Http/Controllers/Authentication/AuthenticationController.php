@@ -24,13 +24,18 @@ class AuthenticationController extends Controller
         return view('authentication.login');
     }
     public function loginNew(Request $request){
+        $meta_title = '';
+        $meta_description = '';
+        if(LoginContent::where('key','meta-title')->first()){
+            $meta_title = LoginContent::where('key','meta-title')->first()->value;
+        }
+        if(LoginContent::where('key','meta-description')->first()){
+            $meta_description = LoginContent::where('key','meta-description')->first()->value;
+        }
+        // $meta_language = LoginContent::where('key','meta-language')->first()->value;
+        // $meta_country = LoginContent::where('key','meta-country')->first()->value;
 
-        $meta_title = LoginContent::where('key','meta-title')->first()->value;
-        $meta_description = LoginContent::where('key','meta-description')->first()->value;
-        $meta_language = LoginContent::where('key','meta-language')->first()->value;
-        $meta_country = LoginContent::where('key','meta-country')->first()->value;
-
-        return view('authentication.new_login',compact('request','meta_title','meta_description','meta_language','meta_country'));
+        return view('authentication.new_login',compact('request','meta_title','meta_description'));
     }
     public function registerNew(Request $request){
 

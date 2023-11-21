@@ -223,18 +223,22 @@
   @endforeach
     <div class="container">
       <div class="join-logo-text">
-        <div class="download-text"><h6>
+        <div class="download-text">
+          <h6>
           @foreach ($homeContent as $content)
           @if($content->key == 'register-banner-title-desc')
           <?php echo $content->value; ?>
             @endif
-            @endforeach</h6>
+            @endforeach
+          </h6>
+          <div class="quote-img"><img src="{{ asset('logomax-front-asset/img/Group.png') }}" alt=""></div>
             @foreach ($homeContent as $content)
             @if($content->key == 'register-banner-title-text-desc')
-            <p><?php 
-              echo $content->value; ?></p>
-              @endif
-              @endforeach
+            
+            <?php echo  ($content->value) ? $content->value :'' ; ?>
+           
+            @endif
+            @endforeach
         </div>
         <div class="register-text">
           @foreach ($homeContent as $content)
@@ -266,7 +270,7 @@
   <section class="popular-sec p-110">
     <div class="container">
       <div class="popular-text">
-        <h2>Discover What's Trending</h2>
+        <h2>Discover what's Trending</h2>
       </div>
       <div class="popular-btn-box">
         <div class="popular-btn">
@@ -328,81 +332,66 @@
                 </div> -->
                 <!--  -->
                 <div class="rating-str d-flex">
-                  <div class="rate">
-                   <?php 
-                    switch ($r->rating) {
+                  <div class="review-site-text">
+                    <div class="str_rate ">
+                      <?php 
+                        switch ($r->rating) {
+                          case 1:
+                            echo '<span class="fullstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span>	';
+                          break;
 
-                      case 1:
-                        echo '<input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
-                      break;
+                          case 2:
+                            echo '
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="blankstar"></span>
+                            <span class="blankstar"></span>
+                            <span class="blankstar"></span>	
+                            ';
+                          break;
 
-                      case 2:
-                        echo '<input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
-                      break;
+                          case 3:
+                            echo ' 
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="blankstar"></span>
+                            <span class="blankstar"></span>	
+                            ';
+                          break;
 
-                      case 3:
-                        echo ' <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Average or neutral">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
-                      break;
+                          case 4:
+                            echo '
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="blankstar"></span>	
+                            ';
+                          break;
 
-                      case 4:
-                        echo '<input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="Good">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Average or neutral">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
-                      break;
+                          case 5 :
+                            echo '<span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>
+                            <span class="fullstar"></span>';
+                          break;
 
-                      case 5 :
-                        echo '<input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="Excellent">5 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="Good">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Average or neutral">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="Poor">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Very poor">1 star</label>';
-                      break;
-
-                      default:
-                      echo '<input type="radio" id="star5" name="rate" value="5" />
-                      <label for="star5" title="Excellent">5 stars</label>
-                      <input type="radio" id="star4" name="rate" value="4" />
-                      <label for="star4" title="Good">4 stars</label>
-                      <input type="radio" id="star3" name="rate" value="3" />
-                      <label for="star3" title="Average or neutral">3 stars</label>
-                      <input type="radio" id="star2" name="rate" value="2" />
-                      <label for="star2" title="Poor">2 stars</label>
-                      <input type="radio" id="star1" name="rate" value="1" />
-                      <label for="star1" title="Very poor">1 star</label>';
-                    }
-                   ?>
+                          default:
+                          echo '<span class="fullstar"></span> <span class="fullstar"></span><span class="fullstar"></span><span class="fullstar"></span> <span class="fullstar"></span>';
+                        }
+                      ?>
+                    </div>
                   </div>
                   <div class="opn-rt">
                     <a href="#">
-                      <span>{{ $r->rating }}.0</span> rating
+                      <span class="text text-dark">{{ $r->rating }}.0</span>
                       <!-- <span style="text-decoration: underline;">1 opinion</span> -->
                     </a>
                   </div>
                 </div>
                 <!--  -->
-                <!-- <div class="Verified-content">
-                  <i class="fa-solid fa-check"></i>
-                  <p>Verified</p>
-                </div> -->
               </div>
             </div>
           </div>

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shop_contents', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('key');
-            $table->longText('value')->nullable();
-            $table->string('type')->nullable();
+            $table->integer('sender_id');
+            $table->integer('reciever_id');
+            $table->longText('message');
+            $table->integer('seen_status');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shop_contents');
+        Schema::dropIfExists('messages');
     }
 };
