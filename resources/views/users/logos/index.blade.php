@@ -474,9 +474,12 @@
             var newElement = $("<div>");
             newElement.addClass('lett-cat-box');
             newElement.append(`<div class="cat-head"> ${ind} </div>`);
+            var newElementCatData = $("<div>");
+            newElementCatData.addClass('cat-wrapper');
             $.each(val,function(key,value){
-                newElement.append(`<div class="cat-data"><a href="">${value.name}</a></div>`);
+                newElementCatData.append(`<div class="cat-data"><a href="">${value.name}</a></div>`);
             });
+            newElement.append(newElementCatData);
             modalBody.append(newElement);
         });
         modal.show();
