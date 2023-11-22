@@ -353,15 +353,16 @@
 
   <script>
     /////////////////// Show More Button code  //////////////////////
-    function ajaxRequest(searchvalue,categories,styles,tags){
+    function ajaxRequest(searchvalue,categories,styles,tags,branches){
         let categoriesString = encodeURIComponent(JSON.stringify(categories));
         let stylestring = encodeURIComponent(JSON.stringify(styles));
         let tagsstring = encodeURIComponent(JSON.stringify(tags));
+        let branchstring = encodeURIComponent(JSON.stringify(branches));
 
         $.ajax({
             method: 'post',
             url: '{{ url('logo-filter') }}',
-            data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
+            data: { categories:categories,branches:branches,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
             success: function(response){
                 $('span.logos_count').html(response['data'].length);
                 // console.table(response[0]['media']);

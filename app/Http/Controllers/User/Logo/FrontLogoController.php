@@ -23,6 +23,7 @@ class FrontLogoController extends Controller
         $allCategory = Categories::orderBy('name','ASC')->get();
         $allStyles = Style::where('status',1)->orderBy('name','ASC')->get();
 
+        $allbranches = Branch::all();
         $styles = Style::where('status',1)->get();
         $query = Logo::where([['approved_status',1],['status',1]]);
         if($request->search !== null ){
@@ -58,22 +59,22 @@ class FrontLogoController extends Controller
         $branchesslug = json_decode($request->branches);
         // dd($request->categories);
         if(count($branchesslug) > 0){
-        foreach($branchesslug as $slug){
-            $branches = Branch::where('slug',$slug)->first();
-            $branchesids[] = $branches->id;
+            foreach($branchesslug as $slug){
+                $branches = Branch::where('slug',$slug)->first();
+                $branchesids[] = $branches->id;
+            }
+            $query->whereHas('branches',function($branchQuery) use ($branchesids){
+                $branchQuery->whereIn('id',$branchesids);
+            });
         }
-        $query->whereHas('branches',function($branchQuery) use ($branchesids){
-            $branchQuery->whereIn('id',$branchesids);
-        });
     }
-}
-    // echo $request->tags;
+        // echo $request->tags;
         if($request->tags){
             $tags = str_replace('"',"",$request->tags);
-        //    echo $tags;
-        if($tags != null){
-            $query->where('logo_type',$tags);
-        }
+            //    echo $tags;
+            if($tags != null){
+                $query->where('logo_type',$tags);
+            }
         }
             
         //     $tagsslug = json_decode($request->tags);
@@ -91,14 +92,15 @@ class FrontLogoController extends Controller
         //     });
         // }
         // }
+
         $logos = $query->paginate(20);
 
         $meta_title = ShopContent::where('key','meta-title')->first()->value;
         $meta_description = ShopContent::where('key','meta-description')->first()->value;
         $meta_language = ShopContent::where('key','meta-language')->first()->value;
         $meta_country = ShopContent::where('key','meta-country')->first()->value;
-
-        return view('users.logos.index',compact('request','categories','tags','logos','styles','meta_title','meta_description','meta_language','meta_country','allCategory','allStyles'));
+            
+        return view('users.logos.index',compact('request','categories','tags','logos','styles','meta_title','meta_description','meta_language','meta_country','allCategory','allStyles','allbranches'));
     }
     public function logodetail(Request $request, $slug){
         $logo = Logo::where([['logo_slug',$slug],['approved_status',1],['status',1]])->first();
@@ -116,6 +118,8 @@ class FrontLogoController extends Controller
 
     }
     public function logoFilter(Request $request){
+     
+
         // return $request->tags[0];
         if(Auth::check()){
             $query = Logo::with(['media','inWhishlist' => function ($query) {
@@ -141,35 +145,44 @@ class FrontLogoController extends Controller
         });
        
        }
-       if($request->categories){
-        $categoryslug = $request->categories;
-        foreach($categoryslug as $slug){
-            $category = Categories::where('slug',$slug)->first();
-            $categoryids[] = $category->id;
+        if($request->categories){
+            $categoryslug = $request->categories;
+            foreach($categoryslug as $slug){
+                $category = Categories::where('slug',$slug)->first();
+                $categoryids[] = $category->id;
+            }
+            $query->whereHas('category',function($categoryQuery) use ($categoryids){
+                $categoryQuery->whereIn('id',$categoryids);
+            });
         }
-        $query->whereHas('category',function($categoryQuery) use ($categoryids){
-            $categoryQuery->whereIn('id',$categoryids);
-        });
-
-       }
+        if($request->branches){
+            $branchesslug = $request->branches;
+            foreach($branchesslug as $slug){
+                $branch = Branch::where('slug',$slug)->first();
+                $branchids[] = $branch->id;
+            }
+            $query->whereHas('branches',function($branchQuery) use ($branchids){
+                $branchQuery->whereIn('id',$branchids);
+            });
+        }
        if($request->tags != ""){
         $query->where('logo_type',$request->tags);
        }
-    //    if($request->tags){
-    //     $tagsslug = $request->tags;
-    //     foreach($tagsslug as $slug){
-    //         $tag = Tag::where('slug',$slug)->first();
-    //         $tagsid[] = $tag->id;
-        
-    //     }
+        //    if($request->tags){
+        //     $tagsslug = $request->tags;
+        //     foreach($tagsslug as $slug){
+        //         $tag = Tag::where('slug',$slug)->first();
+        //         $tagsid[] = $tag->id;
+            
+        //     }
 
-        // return $tagsid;
-    //     $query->where(function ($query) use ($tagsid) {
-    //         foreach ($tagsid as $tid) {
-    //             $query->orWhereJsonContains('tags', "$tid");
-    //         }
-    //     });
-    //    }
+            // return $tagsid;
+        //     $query->where(function ($query) use ($tagsid) {
+        //         foreach ($tagsid as $tid) {
+        //             $query->orWhereJsonContains('tags', "$tid");
+        //         }
+        //     });
+        //    }
        return response()->json($query->paginate(20));
     }
     
