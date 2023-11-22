@@ -1152,6 +1152,7 @@
         <div class="form-group col-md-8">
             <label for="inputEmail">Email</label>
             <input type="email" class="form-control" id="inputEmail" name='email' value='${email}' placeholder="Email">
+            <p id='emailError' style='display:none; color:red;'> Enter a Valid Email  </p>
         </div>
         </div>
         <div class="add_btn">
@@ -1167,24 +1168,33 @@
 <script>
     // On clicking the update button it updates the values of the address
     $(document).on('click', '#updateChanges', function(e) {
-    address = $('#inputAddress').val();
-    city = $('#inputCity').val();
-    zip = $('#inputZip').val();
-    state = $('#inputState').val();
-    country = $('#inputCountry').val();
-    email = $('#inputEmail').val();
+        email = $('#inputEmail').val();
+        //   Check for Valid Email Address
+      var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if(isValidEmail){
+            $('#emailError').hide();
+            address = $('#inputAddress').val();
+            city = $('#inputCity').val();
+            zip = $('#inputZip').val();
+            state = $('#inputState').val();
+            country = $('#inputCountry').val();
+    
    
         // update the values of the fields in first page
-    $('#address').val(address);
-    $('#city-address').val(city);
-    $('#zip').val(zip);
-    $('#state').val(state);
-    $('#country').val(country);
-    $('#email').val(email);
-   
-    $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city} ${state} ${zip},${country}</p><p>${email}</p>`);
+            $('#address').val(address);
+            $('#city-address').val(city);
+            $('#zip').val(zip);
+            $('#state').val(state);
+            $('#country').val(country);
+            $('#email').val(email);
+        
+            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city} ${state} ${zip},${country}</p><p>${email}</p>`);
 
-});
+        }
+        else{
+            $('#emailError').show();
+        }
+        });
 </script>
     <script>    
         $('#backButton1').on('click', function() {
