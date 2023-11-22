@@ -282,6 +282,7 @@
             categories = <?php print_r($filterCategories); ?>;
             styles = <?php print_r($filterStyles); ?>;
             tags = '<?php print_r($filterTags); ?>';
+           
             searchvalue = $('input[name="search_field"]').val();
             
             $('input[name="search_field"]').on('keyup',function(){
@@ -477,13 +478,59 @@
             var newElementCatData = $("<div>");
             newElementCatData.addClass('cat-wrapper');
             $.each(val,function(key,value){
-                newElementCatData.append(`<div class="cat-data"><a href="">${value.name}</a></div>`);
+                newElementCatData.append(`<div class="cat-data"><a href="" type="${dataType}" slug="${value.slug}" >${value.name}</a></div>`);
             });
             newElement.append(newElementCatData);
             modalBody.append(newElement);
         });
         modal.show();
     }); 
+    $(document).on('click','.cat-data a',function(e){
+        e.preventDefault();
+        let thisObj = $(this);
+        let thisType = thisObj.attr('type');
+        let thisSlug = thisObj.attr('slug');
+       
+
+        let categoriesString = [];
+        let stylestring = [];
+        let tagsstring = [];
+        let stateObj = { id: "100" }; 
+        let categories = [];
+        let styles = [];
+        let tags = [];
+        let searchvalue = [];
+
+        if(thisType == 'categories'){
+            categoriesString.push(thisSlug);
+            categories = categoriesString;
+            categoriesString = encodeURIComponent(JSON.stringify(categories));
+        }else{
+            categoriesString = encodeURIComponent(JSON.stringify(categoriesString));
+        }
+
+        if(thisType == 'styles'){
+            stylestring.push(thisSlug);
+            styles = stylestring;
+            stylestring = encodeURIComponent(JSON.stringify(stylestring));
+        }else{
+            stylestring = encodeURIComponent(JSON.stringify(stylestring));
+        }
+
+        if(thisType == 'tags'){
+            tagsstring.push(thisSlug);
+            tags = tagsstring;
+            tagsstring = encodeURIComponent(JSON.stringify(tags));
+            
+        }else{
+            tagsstring = encodeURIComponent(JSON.stringify(tagsstring));
+        }
+        window.history.replaceState(stateObj,"filter","{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring);
+        console.log(styles);
+        ajax = ajaxRequest(searchvalue,categories,styles,tags);
+        $("#show_more_modal").modal('hide');
+    })
     </script> 
 @endsection
+
 

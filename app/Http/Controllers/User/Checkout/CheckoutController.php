@@ -31,6 +31,7 @@ class CheckoutController extends Controller
         return view('users.logos.checkout',compact('request','logo','intent'));
     }
     public function checkoutProcess(Request $req){
+        
         $validated = $req->validate([
             // 'name' => 'required',
             'email' => 'required',
@@ -80,6 +81,7 @@ class CheckoutController extends Controller
         // $order->discount_coupon_code = // condition
         // $order->discount_amount
         $total_price =  0;
+
         ////////////// LOGO FOR FUTURE STATUS /////////////////////
         if($req->save_logo_for_future_status == 'on' && $req->get_favicon_status == 'on'){
             $order->logo_for_future_status = 1;
@@ -97,6 +99,7 @@ class CheckoutController extends Controller
             }else{
                 $order->logo_for_future_status = 0;
                 $order->logo_for_future_price = null; 
+                $total_price = (float)$req->logo_price;
             } 
             ////////////// LOGO FOR FUTURE STATUS END /////////////////////
 
@@ -104,18 +107,19 @@ class CheckoutController extends Controller
             if($req->get_favicon_status == 'on'){
                 $order->get_favicon_status = 1;
                 $order->get_favicon_price = $req->get_favicon_price; 
-                $total_price = (float)$req->logo_price + $total_price + (float)$req->get_favicon_price;
+                $total_price = $total_price + (float)$req->get_favicon_price;
             }else{
                 $order->get_favicon_status = 0;
                 $order->get_favicon_price = null; 
+                $total_price = $total_price ;
             }
             ////////////// GET FAVICON STATUS END /////////////////////////
         }
+
         $gst_cut = ($total_price * (float)$req->taxe_percent ) / 100;
         $order->taxes = $gst_cut; // all tax cut 
         $new_total_price = $gst_cut + $total_price;
         $order->total_payment_amount = $new_total_price;
-
         ////////////////////////// Stripe Integration ///////////////////////////
         $stripe = new \Stripe\StripeClient(env('STRIPE_SEC_KEY'));
         $stripeCustomer = $stripe->customers->create([
