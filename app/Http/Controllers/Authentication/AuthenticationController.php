@@ -153,6 +153,7 @@ class AuthenticationController extends Controller
         return view('authentication.designregister',compact('request'));
     }
     public function designerRegisterProcc(Request $request){
+        
         $remember_token = Str::random(64);
         $validate = $request->validate([
             'g-recaptcha-response' => 'required',
@@ -186,25 +187,19 @@ class AuthenticationController extends Controller
         $user->address = $validate['address'];
         $user->city = $validate['city'];
         $user->experience = $validate['experience'];
-        // $user->email_verified = 1;
+        $user->email_verified = 0;
         $user->role_id = 2;
         $user->remember_token = $remember_token;
         $user->status = 1;
         $user->save();
 
-            
-    if($user->role_id == 1){
         $mailData = [
             'title' => 'User Registration',
             'token' => $remember_token,
             'email' => $validate['email'],
         ];
         $mail = Mail::to($validate['email'])->send(new RegisterConfirmationMail($mailData));
-        return redirect()->back()->with('success', 'A varification email has been sent to your email address please verify your email');
-    }else{
-        return redirect()->back()->with('success','Your account is successfully registered');
-    }
-
+        return redirect()->back()->with('success', 'A verification email has been sent to your email address please verify your email');
     }
     public function registerVerify(Request $request ,$token){
         if (!$token) {

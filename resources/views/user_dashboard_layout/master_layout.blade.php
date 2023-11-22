@@ -12,12 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playball&family=Roboto:ital,wght@0,100;0,300;1,100;1,300&display=swap" rel="stylesheet">
 
   
-    <link rel="stylesheet" href="{{ asset('logomax_pages/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('logomax_pages/css/custom.css?sadfasdddf') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('logomax_pages/css/responsive.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css' , 'resources/js/usermessage.js'])
+    <!-- vite(['resources/css/app.css' , 'resources/js/usermessage.js']) -->
     <title>Dashboard</title>
 </head>
 
@@ -86,7 +86,7 @@
     <div class="container-fluid">
         <div class="new-main-content">
             <div class="row">
-                <div class="col-lg-3 bg-b pr-0" id="target">
+                <div class="col-lg-3 bg-b pr-0 sidebar" id="target">
                     <div class="left-text">
                         <ul class="list-unstyled dash-tab mb-0" id="menu">
                             <li class="nav-links">
@@ -140,7 +140,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-9 p-0">
+                <div class="col-lg-9 p-0 content">
                     <div class="right-text">
                        @yield('content')
                      <div class="footer">

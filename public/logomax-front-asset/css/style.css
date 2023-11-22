@@ -2213,7 +2213,7 @@ a.login.password::after {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 600;
-    color: #dfff;
+    color: white;
     border: 2px solid #000;
     transition: 0.4s;
     cursor: pointer;

@@ -283,7 +283,17 @@
         "AX" => "Åland Islands",
         );
 ?>
-
+<style>
+    #backButton2:hover {
+        color: white;
+    }
+    #backButton1:hover {
+        color: white;
+    }
+    #updateChanges:hover {
+        color: white;
+    }
+</style>
 <section class="banner-sec checkout_banner" style="background-image: url('{{ asset('logomax-front-asset/img/check_banner.png') }}');">
     <div class="container-fluid"></div>
   </section>
@@ -294,7 +304,7 @@
             <input type="hidden" name="logo_id" value="{{ $logo->id }}"/>
             <div class="step_form_head" role="tablist">
                 <div class="box_step">
-                    <button id="progress-form__tab-1" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-1" aria-selected="true">
+                    <button id="progress-form__tab-1" style="outline:none" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-1" aria-selected="true">
                         <div class="box_studio">
                             <span class="true_num" aria-hidden="true"> 1 </span>
                             <span class="true_img">
@@ -305,7 +315,7 @@
                     </button>
                 </div>
                 <div class="box_step">
-                    <button id="progress-form__tab-2" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-2" aria-selected="false" tabindex="-1" aria-disabled="true">
+                    <button id="progress-form__tab-2" style="outline:none" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-2" aria-selected="false" tabindex="-1" aria-disabled="true">
                         <div class="box_studio">
                             <span class="true_num" aria-hidden="true"> 2 </span>
                             <span class="true_img">
@@ -316,7 +326,7 @@
                     </button>
                 </div>
                 <div class="box_step border_last">
-                    <button id="progress-form__tab-3" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-3" aria-selected="false" tabindex="-1" aria-disabled="true">
+                    <button id="progress-form__tab-3" style="outline:none" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab" aria-controls="progress-form__panel-3" aria-selected="false" tabindex="-1" aria-disabled="true">
                         <div class="box_studio">
                             <span class="true_num" aria-hidden="true"> 3 </span>
                             <span class="true_img">
@@ -516,7 +526,7 @@
                     <div class="step_form">
                     <h5>Payment method</h5>
                         <div class="pay_form_data">
-                            <div class="card_wrapper">
+                            <div class="card_wrapper" id="cardPayment">
                                 <div class="form-group">
                                     <span></span>
                                     <p>Credit card</p>
@@ -538,7 +548,7 @@
                             </div>
                         </div>
                     <div class="pay_form_data">
-                        <div class="card_wrapper">
+                        <div class="card_wrapper" id="paypalPayment">
                         <div class="form-group">
                             <span></span>
                             <p>PayPal</p>
@@ -564,7 +574,8 @@
                             </div> -->
                         </div>
                         </div>
-                    <div class="chk_btn">
+                    <div class="chk_btn add_btn">
+                        <a type="button" id="backButton1"  >Back</a>
                         <button type="button" data-action="next" class="continue_btn">
                         Continue
                         </button>
@@ -686,35 +697,42 @@
                     <h5>Order Confirmation</h5>
                     <div class="billing_content">
                         <div class="billing_wrapper">
-                        <div class="billing_text" id="billing_address_box">
+                        <div class="billing_text col-10" id="billing_address_box">
                             <!-- <h6>Billing Address</h6>
                             <p>80191 Blaise Street Apt. 110 Boganland, Arkansas USA 893804</p> -->
                         </div>
-                        <!-- <div class="bill-icon">
-                            <i class="fa-solid fa-pen"></i>
-                        </div> -->
-                        </div>
+                         <div class="bill-icon">
+                            <i id="editAddress" class="fa-solid fa-pen"></i>
+                        </div> 
+
+                    </div>
+
                         <div class="billing_wrapper">
                         <div class="billing_text" id="payment_method_box">
                             <h6>Payment Method</h6>
                             <div class="img_visa">
-                            <img src="{{ asset('logomax-front-asset/img/visa.png') }}" alt="" />
+                                <p id="nopaymethod">No Payment Method Selected</p>
+                                <img id="cardImage" src='' style="display: none"  />
                             </div>
-                            <p>Visa card ending in 1234</p>
+                            {{-- <p>Visa card ending in 1234</p> --}}
                         </div>
-                        <!-- <div class="bill-icon">
-                            <i class="fa-solid fa-pen"></i>
-                        </div> -->
+                        <div class="bill-icon">
+                            <i id="editPayment" class="fa-solid fa-pen"></i>
+                        </div> 
                         </div>
                     </div>
                     <div>
                         <div class="form-group">
                         <div class="text text-warning mt-2" id="card-error-message"></div>
-                        <div class="checkout_btn">
+                        <p style="font-size: 83%;"><b>Note:</b> To get free logo customization, simply request it on the logo's download page in your Logomax
+                            account, within 7 days after buying</p>
+                        <div class="checkout_btn  add_btn">
                             <!-- <a href="logo-download-page.html" class="continue_btn">
                             Continue & Download
                             </a> -->
-                            <button type="button" class="formSubmitBtn continue_btn" id="card-button" data-secret="{{ $intent->client_secret }}">Continue & Download</button>
+
+                            <a  id="backButton2"   >Back</a>
+                            <button type="button" class="formSubmitBtn continue_btn" id="card-button" data-secret="{{ $intent->client_secret }}" >Continue & Download</button>
                         </div>
                         </div>
                     </div>
@@ -832,6 +850,7 @@
   </section>
   
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
     $("#add_billing_address").on('click',function(){
         let address = $("#address").val() ;    
@@ -848,27 +867,47 @@
         }
     });
 </script>
+
 <script>
     const stripe = Stripe('{{ env("STRIPE_PUB_KEY") }}');
     const elements= stripe.elements();
     const cardElement= elements.create('card');
     cardElement.mount('#card-elements');
- 
-    // const form = document.getElementById('progress-form');
     
+    //////##################################//////////
+    //When Clicked on card button//     
+    $('#cardPayment').on('click',function(){
+            $('#cardImage').hide();
+            $('#nopaymethod').show();
+             // Show Entered Card icons on the confirmation page
+            cardElement.on('change', function (event) {
+            const card = event.brand === 'Unknown' ? (event.complete ? event : null) : event;
+            
+            if (card) {
+                let brand = card.brand;
+                if(brand ==='unknown' || brand.length === 0 )
+                {
+                    $('#cardImage').hide();
+                    $('#nopaymethod').show();          
+                }
+                else{
+                    $('#nopaymethod').hide();
+                    $('#cardImage').show();
+                    $('#cardImage').attr('src', `{{ asset('logomax-front-asset/img/card-images/') }}/${brand}.png`);
+                    
+                }
+            }
+            }); 
+        })
+        // When Clicked on Paypal Button
+            $('#paypalPayment').on('click',function(){
+                $('#cardImage').show();
+                $('#nopaymethod').hide();
+                // Show Paypal Icon on the Confirmation page
+                $('#cardImage').attr('src', `{{ asset('logomax-front-asset/img/card-images/paypal.png') }}`);
+            })
+    //////##################################//////////
     const formSubmitBtn = document.querySelector('.formSubmitBtn');
-    // let brand = '';
-    // let postalCode = '';
-    // cardElement.on('change', function(event) {
-    //     const card = event.brand === 'Unknown' ? event.complete ? event : null : event;
-    //     if (card) {
-    //         brand = card.brand;
-    //         postalCode = card.value.postalCode;
-    //         console.log(brand + ' _>' + postalCode);
-    //     }
-    // });
-    
-
     formSubmitBtn.addEventListener('click', async (e) => {
            
         const form = document.getElementById('progress-form');
@@ -1066,4 +1105,132 @@
     });
     
 </script>
+
+<script>
+    // Edit Address form fields 
+
+        $('#editAddress').on('click',function(){
+
+            let address = $("#address").val() ;    
+            let email = $("#email").val();
+            let city_address = $("#city-address").val();
+            let country = $("#country").val();
+            let state = $("#state").val() ; 
+            let zip = $("#zip").val();
+
+            $("#billing_address_box").html(`
+    <h6>Billing Address</h6>
+        <div class="form-row">
+        <div class="form-group col-md-10">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" name="address" value='${address}' placeholder="123 Main St">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity" name="city" value='${city_address}' placeholder="City">
+        </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" id="inputZip" name="zip_code" value='${zip}' placeholder="Zip">
+            </div>
+        <div class="form-group col-md-6">
+            <label for="inputState">State</label>
+            <input type="text" class="form-control" id="inputState" name="state" value='${state}' placeholder="State">
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inputCountry">Country</label>
+            <select name="country" id="inputCountry" style="cursor:pointer;">
+                                @foreach($countries as $k => $v ) 
+                                <option value='{{$k}}' ${country === '{{$k}}' ? 'selected' : ''} >{{ $v }}</option>
+                                @endforeach
+             </select>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name='email' value='${email}' placeholder="Email">
+            <p id='emailError' style='display:none; color:red;'> Enter a Valid Email  </p>
+        </div>
+        </div>
+        <div class="add_btn">
+
+        <a id='updateChanges' class=''>Update</a>
+        </div>
+    `);
+       
+
+        })
+        
+</script>
+<script>
+    // On clicking the update button it updates the values of the address
+    $(document).on('click', '#updateChanges', function(e) {
+        email = $('#inputEmail').val();
+        //   Check for Valid Email Address
+      var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if(isValidEmail){
+            $('#emailError').hide();
+            address = $('#inputAddress').val();
+            city = $('#inputCity').val();
+            zip = $('#inputZip').val();
+            state = $('#inputState').val();
+            country = $('#inputCountry').val();
+    
+   
+        // update the values of the fields in first page
+            $('#address').val(address);
+            $('#city-address').val(city);
+            $('#zip').val(zip);
+            $('#state').val(state);
+            $('#country').val(country);
+            $('#email').val(email);
+        
+            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city} ${state} ${zip},${country}</p><p>${email}</p>`);
+
+        }
+        else{
+            $('#emailError').show();
+        }
+        });
+</script>
+    <script>    
+        $('#backButton1').on('click', function() {
+            $('#progress-form__tab-1').click();
+        });
+        $('#backButton2').on('click', function() {
+            $('#progress-form__tab-2').click();
+        });
+    </script>
+
+    <script>
+    $('#editPayment').on('click', function () {
+        $('#progress-form__tab-2').click();
+        // nameOnCard = $('#name_on_card').val();
+        // let cardNumber = $('#card-elements input[name="cardnumber"]').val();
+
+        // console.log(cardNumber)
+        // $('#payment_method_box').html(`
+        //     <h6>Payment Method</h6>
+        //     <div class='form-row row'>
+        //         <div class='col-lg-12 form-group'>
+        //             <label class='control-label'>Name on Card</label>
+        //             <input class='form-control' id="name_on_edit_card" value='${nameOnCard}' name="name_on_card" type='text'>
+        //         </div>
+        //     </div>
+        //     <!-- ################### Show Card ######################### -->
+        //     <div id="edit-card-elements"></div>
+        //     <!-- ################### ######### ######################### -->
+        // `);
+
+        // // Mount the Stripe card element 
+        // const stripe = Stripe('{{ env("STRIPE_PUB_KEY") }}');
+        // const elements = stripe.elements();
+        // const cardElement = elements.create('card');
+        // cardElement.mount('#edit-card-elements');
+    });
+</script>
+
 @endsection

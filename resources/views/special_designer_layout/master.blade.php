@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css' ,'resources/js/designer_notification.js','resources/js/specialdDsignerNotification.js'])
+    <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js','resources/js/specialdDsignerNotification.js']) -->
     <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
     <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script> 
     <script type="module" src="{{ asset('/build/assets/specialdDsignerNotification-8e67a84a.js') }}"></script>  -->

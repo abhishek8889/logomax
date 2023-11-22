@@ -16,8 +16,10 @@
   <!-- <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}"> -->
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/custom.css')}}">
-
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{{-- Bootstrap files --}}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 

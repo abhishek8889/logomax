@@ -44,6 +44,7 @@ class CheckoutController extends Controller
             // 'token'
         ]);
         $user_id = '';
+        
         if(Auth::check() && (auth()->user()->role_id == 1)){
             ////////////////////   Already user is logged in //////////////////
             $user_id = auth()->user()->id ; 
@@ -56,7 +57,8 @@ class CheckoutController extends Controller
             }else{
                 ////////////////// Create new user   /////////////////////////
                 $new_user = new User;
-                $new_user->name = $req->first_name . ' ' . $req->last_name;
+                $new_user->first_name = $req->first_name; 
+                $new_user->last_name = $req->last_name;
                 $new_user->email = $req->email;
                 $new_user->role_id = 1; // Simple  user role id = 1 
                 $new_user->password = Hash::make($req->email);
@@ -91,6 +93,7 @@ class CheckoutController extends Controller
             $order->get_favicon_price = $req->get_favicon_price; 
 
             $total_price = (float)$req->logo_price + (float)$req->save_logo_for_future_price + (float)$req->get_favicon_price;
+
         }else{
             if($req->save_logo_for_future_status == 'on'){
                 $order->logo_for_future_status = 1;
@@ -117,6 +120,8 @@ class CheckoutController extends Controller
         }
 
         $gst_cut = ($total_price * (float)$req->taxe_percent ) / 100;
+       
+
         $order->taxes = $gst_cut; // all tax cut 
         $new_total_price = $gst_cut + $total_price;
         $order->total_payment_amount = $new_total_price;

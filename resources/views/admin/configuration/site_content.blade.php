@@ -112,6 +112,16 @@
                                         </div>
                                     </div>
                                     @endif
+                                    @if($meta->key == 'discover-trending-title')
+                                    <div class="col-lg-10 mt-2">
+                                        <div class="form-group">
+                                            <label class="form-label" for="meta_name">{{ $meta->name }}</label>
+                                            <div class="form-control-wrap">
+                                                <textarea type="text" class="form-control" name="{{ $meta->id }}" id="textEditor3" >{{ $meta->value }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                     @if($meta->key == 'meta-title')
                                     <div class="col-lg-10 mt-2">
                                         <div class="form-group">

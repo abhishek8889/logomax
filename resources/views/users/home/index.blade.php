@@ -270,7 +270,11 @@
   <section class="popular-sec p-110">
     <div class="container">
       <div class="popular-text">
-        <h2>Discover what's Trending</h2>
+        @foreach ($homeContent as $content)
+        @if($content->key == 'discover-trending-title')
+        <h2><?php echo $content->value ?></h2>
+        @endif
+        @endforeach
       </div>
       <div class="popular-btn-box">
         <div class="popular-btn">
