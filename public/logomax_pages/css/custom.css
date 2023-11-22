@@ -194,27 +194,10 @@ td.tble-ryt-text {
     margin-left: 0;
     float: right;
     height: 340px;
-    /* background: #F5F5F5; */
     overflow-y: scroll;
-    /* margin-bottom: 25px; */
     width: 100%;
     text-align: start;
 }
-
-.force-overflow
-{
-    min-height: 450px;
-}
-
-
-/*
- *  STYLE 1
- */
-
-
-
-
-
 
 #style-15::-webkit-scrollbar-track
 {
@@ -234,12 +217,6 @@ td.tble-ryt-text {
 {
    border-radius: 150px;
 background: rgba(76, 206, 95, 0.29);
-   /* background-image: -webkit-gradient(linear,
-                                       40% 0%,
-                                       75% 84%,
-                                       from(#4D9C41),
-                                       to(#19911D),
-                                       color-stop(.6,#54DE5D));*/
 }
 .ptl {
     padding-top: 80px;
@@ -316,7 +293,7 @@ li.recent-chat .chat-t span.num-chat {
 }
 
 .msg-content .msg-box .msg-search {
-    max-width: 435px;
+    max-width: 100%;
     margin-bottom: 30px;
 }
 .ryt-dots span i {
@@ -437,7 +414,7 @@ line-height: 20px; /* 125% */
 }
 .write-msg {
     background: #fff;
-    padding: 60px 35px;
+    padding: 20px 15px;
 }
 .attach-links {
     justify-content: space-between;
@@ -1041,6 +1018,12 @@ a.request-btn:hover {
     -ms-flex: 0 0 75%;
     flex: 0 0 100% !important;
     max-width: 100% !important;
+}
+.msg-live-chat .scrollbar {
+    float: none;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
 }
 
 
