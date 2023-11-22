@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\SiteContent\SiteContentController;
 //  ::::::::::::::::::: Special Designer :::::::::::::::::
 use App\Http\Controllers\SpecialDesigner\Dashboard\SpecialDesignerDashboardController;
 use App\Http\Controllers\SpecialDesigner\Task\TaskController;
+use App\Http\Controllers\SpecialDesigner\Messages\SpecialDesginerMessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -141,7 +142,9 @@ Route::group(['middleware'=>['EnsureUser']],function(){
 
         ////messages
 
-        Route::get('user-dashboard/messages',[UserMessageController::class, 'index'])->name('user-messages');
+        Route::get('user-dashboard/messages/{id?}',[UserMessageController::class, 'index'])->name('user-messages');
+        Route::post('user-dashboard/messagesProcc',[UserMessageController::class,'sendMessage']);
+        Route::post('user-dahsboard/seenMessage',[UserMessageController::class,'seenMessage']);
         });
     ////////////////////////////////////////////////////////////////////////////////////////
 });
@@ -333,6 +336,9 @@ Route::post('special-designer/delete-image',[TaskController::class,'deleteimage'
 
 // Route::post('/store', [TaskController::class,'store'])->name('store');
 // Route::post('uploads', [TaskController::class,'uploads'])->name('uploads');
+Route::get('special-designer/messages/{id?}',[SpecialDesginerMessageController::class,'index']);
+Route::post('special-designer/messagesProcc',[SpecialDesginerMessageController::class,'messageProcc']);
+Route::post('special-designer/seenMessage',[SpecialDesginerMessageController::class,'seenMessage']);
 
 });
 

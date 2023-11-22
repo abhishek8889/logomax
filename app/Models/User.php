@@ -50,4 +50,10 @@ class User extends Authenticatable
     public function notifications(){
         return $this->hasMany(Notifications::class);
     }
+    public function messages(){
+        return $this->hasMany(Message::class,'sender_id','id');
+    }
+    public function unseenmessages(){
+        return $this->hasMany(Message::class,'sender_id','id')->where('seen_status',0);
+    }
 }

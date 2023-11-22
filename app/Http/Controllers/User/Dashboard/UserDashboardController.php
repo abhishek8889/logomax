@@ -65,7 +65,7 @@ class UserDashboardController extends Controller
         if(Auth::check()){
             $orderDetail = Order::with('logodetail')->where([['user_id','=',auth()->user()->id],['order_num','=',$order_num]])->first();
             $completeTask = CompletedTask::where([['client_id','=',auth()->user()->id],['logo_id','=',$orderDetail->logo_id]])->latest('created_at')->first();
-            // dd($completeTask);
+           
             $previousRevision = LogoRevision::where('order_id',$orderDetail->id)->get();
             $previousRevisionCount = 0;
             if(isset($previousRevision)){
@@ -78,8 +78,10 @@ class UserDashboardController extends Controller
                 $completedTask = '';
             }
             if($orderDetail){
+                $assigneDesginer = SpecialDesignerTask::where('logo_id',$orderDetail->logo_id)->latest('created_at')->first();
+                
                 // return view('users.dashboard.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount'));
-                return view('user_dashboard_view.Mylogoslist.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount'));
+                return view('user_dashboard_view.Mylogoslist.download_logo',compact('request','orderDetail','completedTask','previousRevisionCount','assigneDesginer'));
             }else{
                 return abort(404);
             }

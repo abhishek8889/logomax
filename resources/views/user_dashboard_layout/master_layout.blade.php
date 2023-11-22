@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    @vite(['resources/css/app.css' , 'resources/js/usermessage.js'])
     <title>Dashboard</title>
 </head>
 
@@ -27,6 +29,12 @@
             <img src="{{ asset('logomax_pages/img/logomax.png') }}" class="img-fluid" alt="....">
         </a>
       </div>
+      <input type="hidden" name="user_id" id="userid" value="{{ auth()->user()->id ?? '' }}">
+      <input type="hidden" id="base_url" value="{{ url('') }}">
+      <?php 
+      $unseen_messages = App\Models\Message::where([['reciever_id',auth()->user()->id],['seen_status',0]])->get();
+      
+      ?>
      <!-- <div class="d-flex hd-ryt-b"> -->
        <div class="srch-bb">
         <div class="notify-icons">
@@ -40,7 +48,7 @@
               <li class="nav-item align-content-center">
                 <a class="nav-link" href="#">
                     <i class="fas fa-envelope"></i>
-                    <span class="badge custom-badge badge-success">6</span> 
+                    <span class="badge custom-badge badge-success" id="totalMessages{{ auth()->user()->id ?? '' }}">{{ count($unseen_messages) ?? 0 }}</span> 
                 </a>
               </li>
               <li class="nav-item">

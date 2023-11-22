@@ -71,6 +71,9 @@
                                 </div><br>
                                 <div class="load-btn free">
                                     <a href="{{ url('/request-for-revision/'.$orderDetail->order_num) }}" class="request-btn">Request Free Customization</a>
+                                </div><br>
+                                <div class="load-btn free">
+                                    <a data-toggle="modal" data-target="#messageModal" class="message-btn">Message</a>
                                 </div>
                             </div>
                             @if($orderDetail->on_revision == 1)
@@ -155,6 +158,31 @@
   </div>
 </div>
 <!-- End -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url('user-dashboard/messagesProcc') }}" method="post">
+            @csrf
+            <input type="hidden" name="sender_id" value="{{ auth()->user()->id ?? '' }}">
+            <input type="hidden" name="reciever_id" value="{{ $assigneDesginer->assigned_designer_id ?? '' }}">
+            <div class="form-group">
+                <textarea name="message" id="message" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
