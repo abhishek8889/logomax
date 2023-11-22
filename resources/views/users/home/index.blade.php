@@ -311,7 +311,7 @@
           @endif
           @endforeach
         <div class="logomax-img">
-          <img src="img/trustpilot.png" alt="">
+          <!-- <img src="img/trustpilot.png" alt="">aakjdhfk -->
         </div>
       </div>
       @if($review->IsNotEmpty())

@@ -3125,6 +3125,9 @@ a.asset-id-link__button {
         color: #000;
         cursor: pointer;
     }
+    .show_more_modal_box{
+        max-width: 940px;
+    }
     /*  */
 @media only screen and (max-width: 767px) {
     .opn-rt {

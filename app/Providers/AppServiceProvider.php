@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
 use App\Services\AllServices;
+use App\Models\Categories;
+use App\Models\Style;
+use App\Models\Branch;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,7 +45,16 @@ class AppServiceProvider extends ServiceProvider
                     'countryCode' => 'IN',
                 );
             }
+
+            // $allCategory = Categories::all();
+            // $allStyles = Style::all();
+            // $allBranches = Branch::all();
+            
             $view->with('userIPDetails', $userIPDetails);
+
+            // $view->with('allCategory', $allCategory);
+            // $view->with('allStyles', $allStyles);
+            // $view->with('allBranches', $allBranches);
         });
     }
 }

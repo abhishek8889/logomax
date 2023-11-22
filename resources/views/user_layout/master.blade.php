@@ -107,9 +107,15 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($categories->isNotEmpty())
-                  @foreach($categories as $cat)
+                  @foreach($categories as $ind =>  $cat)
                   <a class="dropdown-item" href="{{ url('logos/search?categories=%5B"'.$cat->slug.'"%5D') }}">{{
                     $cat->name ?? '' }}</a>
+                    @if($ind > 5)
+                        <div class="show-more-btn">
+                            <a href="javascript:void(0)" class="show_more_btn dropdown-item" type="categories" class="text text-primary pe-auto">Show more</a> 
+                        </div>
+                        @break
+                    @endif
                   @endforeach
                   @endif
                 </div>
@@ -121,9 +127,15 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if($branches->isNotEmpty())
-                  @foreach($branches as $branch)
+                  @foreach($branches as $ind => $branch)
                   <a class="dropdown-item" href="{{ url('logos/search?branches=%5B"'.$branch->slug.'"%5D') }}">{{
                     $branch->name ?? '' }}</a>
+                    @if($ind > 5)
+                    <div class="show-more-btn">
+                      <a href="" class="show_more_btn dropdown-item" type="branches" class="text text-primary pe-auto">Show more</a> 
+                    </div>
+                        @break
+                    @endif
                   @endforeach
                   @endif
                 </div>
@@ -136,9 +148,15 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($styles->isNotEmpty())
-                  @foreach($styles as $style)
+                  @foreach($styles as $ind => $style)
                   <a class="dropdown-item" href="{{ url('logos/search?styles=%5B"'.$style->slug.'"%5D') }}">{{
                     $style->name ?? '' }}</a>
+                    @if($ind > 5)
+                        <div class="show-more-btn">
+                            <a href="javascript:void(0)" class="show_more_btn dropdown-item" type="styles" class="text text-primary pe-auto">Show more</a> 
+                        </div>
+                        @break
+                    @endif
                   @endforeach
                   @endif
                 </div>
@@ -278,6 +296,27 @@
       </div>
     </div>
   </footer>
+  <!-- Show more filter option modal  -->
+  <div class="modal fade"  id="show_more_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog show_more_modal_box  modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title text text-dark" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+                                        
+        </div>
+        <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+        </div> -->
+        </div>
+    </div>
+  </div>
+  <!--  -->
   <script>
     $(document).ready(function () {
 
@@ -312,6 +351,154 @@
 
   <script src="{{ asset('logomax-front-asset/js/script.js') }}"></script>
 
+  <script>
+    /////////////////// Show More Button code  //////////////////////
+    function ajaxRequest(searchvalue,categories,styles,tags){
+        let categoriesString = encodeURIComponent(JSON.stringify(categories));
+        let stylestring = encodeURIComponent(JSON.stringify(styles));
+        let tagsstring = encodeURIComponent(JSON.stringify(tags));
+
+        $.ajax({
+            method: 'post',
+            url: '{{ url('logo-filter') }}',
+            data: { categories:categories,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
+            success: function(response){
+                $('span.logos_count').html(response['data'].length);
+                // console.table(response[0]['media']);
+                $('.filter-btn').removeClass('d-none');
+                append_html = [];
+                $.each(response['data'], function(key,value){
+                    let logoIdsInWishlist = [];
+                    @if(isset($logoIdsInWishlist))
+                    logoIdsInWishlist = <?php echo json_encode($logoIdsInWishlist); ?>;
+                    @endif
+                    
+                    let heartIconClass = '';
+                    heartIconClass = 'fa-regular';
+                    $.each(logoIdsInWishlist,function(ind,val){
+                        if(value.id == val){
+                            heartIconClass = 'fa-solid';
+                        }
+                    });
+                    if(value.in_whishlist !== undefined && value.in_whishlist !== null){
+                        heartIconClass = 'fa-solid';
+                    }else{
+                        heartIconClass = 'fa-regular';
+                    }
+                    html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon add_to_wishlist" id="logo_wish_'+value.id+'" logo_id="'+value.id+'"><i class="'+ heartIconClass +' fa-heart"></i></div></div></div>';
+                    // console.log(html);
+                    append_html.push(html);
+                })
+                $('#logo_html_row').html(append_html);
+                if(response['last_page'] > 1){
+                    paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
+                    $('.next-button').html(paginationhtml);
+                }else{
+                    $('.next-button').html('');
+                }
+            }
+        });
+    }    
+
+    $(document).on('click','.show_more_btn',function(e){
+        e.preventDefault();
+        let thisObj = $(this);
+        let dataType = thisObj.attr('type');
+        let modal = $("#show_more_modal").modal();
+        let modalHeading = $("#show_more_modal .modal-title");
+        let modalBody = $("#show_more_modal .modal-body");
+        modalBody.html('');
+
+        modalHeading.html(`Search by ${dataType}`);
+        let dataToShow = '';
+        let letterCat = {};
+        if(dataType == 'categories'){
+            let categoriesData = <?php echo  json_encode($categories);  ?>;
+            dataToShow = categoriesData;
+        }
+        if(dataType ==  'styles'){
+            let stylesData = <?php echo  json_encode($styles);  ?>;
+            // console.log(stylesData);
+            dataToShow = stylesData;
+        }
+        if(dataType ==  'branches'){
+            let branchData = <?php echo  json_encode($branches);  ?>;
+            // console.log(stylesData);
+            dataToShow = branchData;
+        }
+        $.each(dataToShow , function(ind,val){
+            let firstLetter = val.name.charAt(0).toUpperCase();
+            if (!letterCat[firstLetter]) {
+                letterCat[firstLetter] = [];
+                letterCat[firstLetter].push(val);
+            }else{
+                letterCat[firstLetter].push(val);
+            }
+        });
+        // console.log(letterCat);
+        $.each(letterCat,function(ind,val){
+            var newElement = $("<div>");
+            newElement.addClass('lett-cat-box');
+            newElement.append(`<div class="cat-head"> ${ind} </div>`);
+            var newElementCatData = $("<div>");
+            newElementCatData.addClass('cat-wrapper');
+            $.each(val,function(key,value){
+                newElementCatData.append(`<div class="cat-data"><a href="" type="${dataType}" slug="${value.slug}" >${value.name}</a></div>`);
+            });
+            newElement.append(newElementCatData);
+            modalBody.append(newElement);
+        });
+        modal.show();
+    }); 
+    $(document).on('click','.cat-data a',function(e){
+        e.preventDefault();
+        let thisObj = $(this);
+        let thisType = thisObj.attr('type');
+        let thisSlug = thisObj.attr('slug');
+       
+
+        let categoriesString = [];
+        let stylestring = [];
+        let tagsstring = [];
+        let branchString = [];
+        let stateObj = { id: "100" }; 
+        let categories = [];
+        let styles = [];
+        let tags = [];
+        let searchvalue = [];
+        let search_slug = '';
+
+        // console.log(thisSlug);
+
+        if(thisType == 'categories'){
+          categoriesString.push(thisSlug);
+          // categories = categoriesString;
+          search_slug = encodeURIComponent(JSON.stringify(categoriesString));
+        }
+        if(thisType == 'styles'){
+          stylestring.push(thisSlug);
+          // styles = stylestring;
+          search_slug = encodeURIComponent(JSON.stringify(stylestring));
+        }
+
+        if(thisType == 'tags'){
+          tagsstring.push(thisSlug);
+          // tags = tagsstring;
+          search_slug = encodeURIComponent(JSON.stringify(tagsstring));
+        }
+        if(thisType == 'branches'){
+          branchString.push(thisSlug);
+          // branch = branchString;
+          search_slug = encodeURIComponent(JSON.stringify(branchString));
+        }
+
+        window.location.href= "{{ url('/logos/search') }}?"+ thisType +"="+search_slug;
+        
+    })
+
+    //////////////// Show more button code end //////////////
+
+  </script>
 
   <!-- facebook code : -->
   <!-- show login model on email or password error -->
@@ -347,6 +534,8 @@
   @endif
 
   <!-- session error end : -->
+
+  
 </body>
 
 </html>
