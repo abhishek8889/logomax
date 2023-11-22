@@ -27,124 +27,26 @@
                                  <div class="scrollbar" id="style-15">
                                   <div class="force-overflow">
                                   
-                                  <ul class="list-unstyled mb-0">
-                                      <li class="recent-chat chat-b acti-chat d-flex">
+                                  <ul class="list-unstyled mb-0" id="chatboxuserslist{{ auth()->user()->id ?? '' }}">
+                                    @foreach($users as $user) 
+                                    <a href="{{ url('user-dashboard/messages/'.base64_encode($user->email) ?? '') }}">
+                                    <li class="recent-chat chat-b acti-chat d-flex" userid = "{{ $user->id ?? '' }}">
+                                        
                                           <div class="chat-content">
                                               <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
                                               <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                                  <P class="b-text">{{ $user->first_name ?? '' }} {{ $user->last_name ?? '' }}</P>
+                                                  <p class="s-text">{{ $user->messages[0]->message ?? '' }}</p>
                                               </div>
                                           </div>
                                           <div class="chat-t">
                                               <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
+                                              <span class="num-chat" id="unseen_count{{ $user->id ?? '' }}">{{ count($user->unseenmessages) ?? 0 }}</span>
                                           </div>
+                                         
                                       </li>
-                                      <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                      <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                      <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                      <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                      <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                      <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                       <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
-                                       <li class="recent-chat chat-b d-flex">
-                                          <div class="chat-content">
-                                              <div class="p-img"><img src="{{ asset('logomax_pages/img/p-img.png') }}" class="img-fluid" alt="..."></div>
-                                              <div class="p-chat">
-                                                  <P class="b-text">Loren</P>
-                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
-                                              </div>
-                                          </div>
-                                          <div class="chat-t">
-                                              <span>11:00 am</span>
-                                              <span class="num-chat">6</span>
-                                          </div>
-                                      </li>
+                                     </a>
+                                    @endforeach
                                   </ul>
                                 </div>
                                 </div>
@@ -153,85 +55,78 @@
                               </div> 
                            </div>
                          </div>
-
-                           <div class="col-lg-7 col-md-12 pl-0">
-                               <div class="msg-ryt">
-                                    <div class="msg-ryt-head">
-                                    <div class="lp-info d-flex">
-                                        <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-img.png') }}" class="img-fluid" alt="..."></div>
-                                        <div class="lp-text">
-                                            <h6>Loren</h6>
-                                            <span>Online</span>
-                                        </div>
-                                    </div>
-                                    <div class="cntc-i">
-                                        <ul class="list-unstyled d-flex">
-                                            <li><img src="{{ asset('logomax_pages/img/phn-img.svg') }}" class="img-fluid" alt=".."></li>
-                                             <li><img src="{{ asset('logomax_pages/img/ingo.svg') }}" class="img-fluid" alt=".."></li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                    <div class="msg-live-chat">
-                                         <div id="wrapper">
-                                        <div class="scrollbar" id="style-15">
-                                          <div class="force-overflow">
-                                       <div class="receiver-d">
-                                           <div class="lp-info d-flex">
-                                                 <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="...">
-                                                 </div>
-                                               <div class="lp-text">
-                                                <h6>Loren <span>10:00 am</span></h6>
-                                                <div class="lv-chat">
-                                                    <p class="b-text">Hlo.
-                                                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
-
-                                                    <p class="b-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+                         @if($userdata)
+                                    <div class="col-lg-7 col-md-12 pl-0 userbox user{{ $userdata->id ?? '' }} ">
+                                      
+                                        <div class="msg-ryt">
+                                                <div class="msg-ryt-head">
+                                                <div class="lp-info d-flex">
+                                                    <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-img.png') }}" class="img-fluid" alt="..."></div>
+                                                    <div class="lp-text">
+                                                        <h6>{{ $userdata->first_name ?? '' }} {{ $userdata->last_name ?? '' }}</h6>
+                                                        <span>Online</span>
+                                                    </div>
                                                 </div>
-                                           </div>
-                                       </div>
-                                       
-                                       </div>
-                                       <div class="sender-d">
-                                        <div class="s-ryt-img">
-                                            <span class="str"><img src="{{ asset('logomax_pages/img/star.svg') }}"  class="img-fluid" alt="..."></span>
-                                            <span><img src="{{ asset('logomax_pages/img/h-dot.svg') }}"  class="img-fluid" alt="..."></span>
-                                        </div>
-                                            <div class="lp-info d-flex">
-                                                 <div class="lp-img"><img src="{{ asset('logomax_pages/img/jord.png') }}"  class="img-fluid" alt="...">
-                                                 </div>
-                                               <div class="lp-text">
-                                                <h6>Jordan <span>10:00 am</span></h6>
-                                                <div class="lv-chat">
-                                                    <p class="b-text">Hlo.
-                                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
-                                                 </div>
-                                           </div>
-                                       </div>
-
-                                        </div>
-                                        <div class="receiver-d">
-                                           <div class="lp-info d-flex">
-                                                 <div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="...">
-                                                 </div>
-                                               <div class="lp-text">
-                                                <h6>Loren <span>10:00 am</span></h6>
-                                                <div class="lv-chat">
-                                                    <p class="b-text">Hlo.
-                                                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
-
-                                                    <p class="b-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+                                                <div class="cntc-i">
+                                                    <ul class="list-unstyled d-flex">
+                                                        <li><img src="{{ asset('logomax_pages/img/phn-img.svg') }}" class="img-fluid" alt=".."></li>
+                                                        <li><img src="{{ asset('logomax_pages/img/ingo.svg') }}" class="img-fluid" alt=".."></li>
+                                                    </ul>
                                                 </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
+                                                </div>
+                                                <div class="msg-live-chat">
+                                                    <div id="wrapper">
+                                                    <div class="scrollbar" id="style-15" >
+                                                    <div class="force-overflow" id="messagebox{{ $userdata->id ?? '' }}" >
+                                                        @foreach($message as $m)
+                                                        @if($m->sender_id == auth()->user()->id)
+                                                        <div class="receiver-d">
+                                                            <div class="lp-info d-flex">
+                                                                <div class="lp-img">
+                                                                    <img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="...">
+                                                                </div>
+                                                                <div class="lp-text">
+                                                                    <h6>{{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span>10:00 am</span></h6>
+                                                                    <div class="lv-chat">
+                                                                        <p class="b-text">{{ $m->message ?? '' }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @else
+                                                        <div class="sender-d">
+                                                            <div class="s-ryt-img">
+                                                                <span class="str"><img src="{{ asset('logomax_pages/img/star.svg') }}"  class="img-fluid" alt="..."></span>
+                                                                <span><img src="{{ asset('logomax_pages/img/h-dot.svg') }}"  class="img-fluid" alt="..."></span>
+                                                            </div>
+                                                                <div class="lp-info d-flex">
+                                                                    <div class="lp-img"><img src="{{ asset('logomax_pages/img/jord.png') }}"  class="img-fluid" alt="...">
+                                                                    </div>
+                                                                    <div class="lp-text">
+                                                                        <h6>{{ $userdata->first_name ?? '' }} {{ $userdata->last_name ?? '' }} <span>10:00 am</span></h6>
+                                                                        <div class="lv-chat">
+                                                                            <p class="b-text">{{ $m->message ?? '' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                 </div>
+                                                    </div>
+                                                    @endif
+                                                    @endforeach
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="write-msg">
+                                    </div>
+                                    <input type="hidden" id="active_user" value="{{ $userdata->id ?? '' }}">
+                                    <div class="write-msg d-flex justify-content-between">
                                         <div class="wrt-msg">
-                                           <textarea placeholder="Write a messages....."></textarea>
+                                           <textarea id="message" placeholder="Write a messages....."></textarea>
                                         </div>
-                                        <div class="attach-links d-flex">
+                                        <div class="atch-file">
+                                                <ul class="list-unstyled">
+                                                    <li><a class="sendmessage"><img src="{{ asset('logomax_pages/img/send.svg') }}" class="img-fluid" alt="..."></a></li>
+                                                </ul>
+                                        </div>
+                                      <!--   <div class="attach-links d-flex">
                                             <div class="atch-file">
                                                 <ul class="list-unstyled">
                                                     <li><a href=""><img src="{{ asset('logomax_pages/img/b-txt.svg') }}" class="img-fluid" alt="..."></a></li>
@@ -248,15 +143,41 @@
                                                     <li><a href=""><img src="{{ asset('logomax_pages/img/send.svg') }}" class="img-fluid" alt="..."></a></li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
 
                                  </div>
+                                
                            </div>
+                        @endif
                        </div>
                      </div>
                    </div>
-                        
+                   
                        </div>
+                       <script>
+                        $('.sendmessage').on('click',function(e){
+                            e.preventDefault();
+                            message = $('#message').val();
+                            if(message == '' || message == null){
+                               
+                                return false;
+                            }
+                            senderid = "{{ auth()->user()->id }}";
+                            recieverid = "{{ $userdata->id ?? '' }}";
+                            $('#message').val('');
+                            $.ajax({
+                                method: 'post',
+                                data: { message:message,sender_id:senderid,reciever_id:recieverid,_token:"{{ csrf_token() }}" },
+                                url: "{{ url('user-dashboard/messagesProcc') }}",
+                                success: function(response){
+                                    message = '<div class="receiver-d"><div class="lp-info d-flex"><div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="..."></div><div class="lp-text"><h6>{{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span>10:00 am</span></h6><div class="lv-chat"><p class="b-text">'+message+'</p></div></div></div></div>';
+                                    $('#messagebox'+recieverid).append(message);
+                                    
+                                }
+                            })
+
+                        }); 
+                       </script>
 @endsection

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <!-- vite(['resources/css/app.css' ,'resources/js/designer_notification.js','resources/js/specialdDsignerNotification.js']) -->
+    @vite(['resources/css/app.css' ,'resources/js/designer_notification.js','resources/js/specialdDsignerNotification.js'])
     <!-- <script type="module" src="{{ asset('/build/assets/app-4ed993c7.js') }}"></script>
     <script type="module" src="{{ asset('/build/assets/designer_notification-8e67a84a.js') }}"></script> 
     <script type="module" src="{{ asset('/build/assets/specialdDsignerNotification-8e67a84a.js') }}"></script>  -->
@@ -39,6 +39,7 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
 ?>
 <body class="nk-body bg-lighter npc-general has-sidebar ">
     <input type="hidden" id="page_id" value="{{ auth()->user()->id }}">
+    <input type="hidden" id="base_url" value="{{ url('') }}">
 <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
@@ -159,18 +160,31 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
                                         if(isset($notifictations)){
                                             $newNotifications = $notifictations::where([['is_read','=',0],['reciever_id','=',auth()->user()->id]])->get();
                                         }
+                                        $messages = App\Models\Message::class;
+                                        $newMessages = '';
+                                        if(isset($messages)){
+                                            $newMessages = $messages::where([['reciever_id',auth()->user()->id],['seen_status',0]])->get();
+                                            
+                                        }
+                                       
                                     ?>
                                     <li class="dropdown notification-dropdown me-n1">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                                             <div class="icon-status icon-status-info" id="admin-icon-status">
                                                 <?php if(isset($newNotifications) && !empty($newNotifications) && count($newNotifications) > 0){ ?>   
                                                     <em class="icon ni ni-bell"></em> <span class="icon-active"></span>
-                                                <?php }else{?>
+                                                <?php }elseif(isset($newMessages) && !empty($newMessages) && count($newMessages) > 0){?>
+                                                    <em class="icon ni ni-bell"></em> <span class="icon-active"></span>
+                                                <?php }else{ ?>
                                                     <em class="icon ni ni-bell"></em> <span class="icon-active" style="display:none;"></span>
-                                                <?php } ?>
+                                              <?php  } ?>
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
+                                            <div class="dropdown-head">
+                                                <span class="sub-title nk-dropdown-title">You have <span id="counttotal_message{{ auth()->user()->id ?? '' }}">{{ count($newMessages) }}</span> new messages.</span>
+                                                <a href="{{ url('special-designer/messages/') }}">View</a>
+                                            </div>
                                             <div class="dropdown-head">
                                                 <span class="sub-title nk-dropdown-title">Notifications</span>
                                                 <a href="{{ url('read-notification/all-read') }}">Mark All as Read</a>
@@ -210,6 +224,7 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
                                                     <?php }} ?>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </li> 
 
@@ -242,6 +257,8 @@ $taskList = $specialDesignerTask::where([['assigned_designer_id','=',auth()->use
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
+
+    <script src="{{ asset('admin-theme/assets/js/apps/chats.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
     @if(Session::get('error'))
