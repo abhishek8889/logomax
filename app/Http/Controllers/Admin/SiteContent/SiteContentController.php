@@ -27,7 +27,7 @@ class SiteContentController extends Controller
     }
     public function updateSiteConfiguration(Request $req)
     {
-        dd($req);
+        // dd($req);
     }
     public function updateImage(Request $req){
         if($req->hasFile('image') && !empty($req->fileID)){

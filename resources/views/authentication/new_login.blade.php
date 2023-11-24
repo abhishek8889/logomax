@@ -5,7 +5,7 @@
         top: 18px !important;
     }
 </style>
-    <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?khbkhsdfsdghgvgh') }}">
+    <link rel="stylesheet" href="{{ asset('/logomax-front-asset/css/style-auth.css?hsdfsdghgvgh') }}">
     <section class="bann-sec p-100" style=" background-image: url(' {{ asset('logomax-front-asset/img/login-ban.png')}} '); ">
         <div>
         </div>
@@ -24,7 +24,7 @@
                                 <span><img src="{{-- asset('logomax-front-asset/img/google.svg') --}}" class="img-fluid" alt=".."></span>
                                 <span class="txt">Google</span>
                             </a> -->
-                            <a class="g-btn login-gg gs-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i> <strong>Google</strong> </a>
+                            <a class="g-btn login-gg gs-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i> Register with <strong>Google</strong> </a>
 
                         </div>
                         <div class="social-accnt">
@@ -32,7 +32,7 @@
                                 <span><img src="{{-- asset('logomax-front-asset/img/fb.svg') --}}" class="img-fluid" alt=".."></span>
                                 <span class="txt">Facebook</span>
                             </a> -->
-                            <a class="fb-btn login-gg fb-btn" href="{{ url('authorized/facebook') }}"> <i class="fa-brands fa-facebook"></i> <strong>Facebook</strong></a>
+                            <a class="fb-btn login-gg fb-btn" href="{{ url('authorized/facebook') }}"> <i class="fa-brands fa-facebook"></i> Register with <strong>Facebook</strong></a>
 
                         </div>
                     </div>

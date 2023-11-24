@@ -17,7 +17,7 @@
                 <div class="login-form">
                     <div class="login-accnt">
                         <!-- <h2></h2> -->
-                        <p>Recover your password</p>
+                        <h2>Recover your password</h2>
                     </div>
                     <form action="{{ url('/send-recovery-email') }}" method="Post">
                         @csrf

@@ -17,14 +17,15 @@ use Auth;
 class FrontLogoController extends Controller
 {
     public function index(Request $request){
-        $categories = Categories::all();
-        $tags = Tag::all();
+        $categories = Categories::orderBy('name','ASC')->get();
+        $tags = Tag::orderBy('name','ASC')->get();
 
         $allCategory = Categories::orderBy('name','ASC')->get();
         $allStyles = Style::where('status',1)->orderBy('name','ASC')->get();
 
-        $allbranches = Branch::all();
-        $styles = Style::where('status',1)->get();
+        $allbranches = Branch::orderBy('name','ASC')->get();
+        $styles = Style::where('status',1)->orderBy('name','ASC')->get();
+        
         $query = Logo::where([['approved_status',1],['status',1]]);
         if($request->search !== null ){
             $search_lower = strtolower(str_replace(" ","-",$request->search));
@@ -76,22 +77,23 @@ class FrontLogoController extends Controller
                 $query->where('logo_type',$tags);
             }
         }
-            
-        //     $tagsslug = json_decode($request->tags);
-        //     if(count($tagsslug) > 0){
-        //     foreach($tagsslug as $slug){
-        //         $tag = Tag::where('slug',$slug)->first();
-        //         $tagsid[] = $tag->id;
-            
-        //     }
-        //     // return $tagsid;
-        //     $query->where(function ($query) use ($tagsid) {
-        //         foreach ($tagsid as $tid) {
-        //             $query->orWhereJsonContains('tags', "$tid");
-        //         }
-        //     });
-        // }
-        // }
+            if($request->realtags){
+                $tagsslug = json_decode($request->realtags);
+                if(count($tagsslug) > 0){
+                foreach($tagsslug as $slug){
+                    $tag = Tag::where('slug',$slug)->first();
+                    $tagsid[] = $tag->id;
+                
+                }
+                // return $tagsid;
+                $query->where(function ($query) use ($tagsid) {
+                    foreach ($tagsid as $tid) {
+                        $query->orWhereJsonContains('tags', "$tid");
+                    }
+                });
+                }
+            }
+        
 
         $logos = $query->paginate(20);
 
@@ -108,7 +110,11 @@ class FrontLogoController extends Controller
         if(empty($logo)){
             abort(404);
         }
-        $category_slug = Categories::find($logo->category_id)->slug;
+        $category_slug = '';
+        if(isset(Categories::find($logo->category_id)->slug)){
+            $category_slug =  Categories::find($logo->category_id)->slug;
+        }
+        
         $logoFacilities = LogoFacilities::all();
 
         $similar_logos = Logo::where([['category_id',$logo->category_id],['approved_status',1],['status',1],['id','!=',$logo->id]])->take(4)->get();

@@ -60,134 +60,142 @@
             }else{
                 $filterSearch = '';
             }
+            if(isset($_GET['realtags'])){
+                $filterRealTags = $_GET['realtags'];
+            }else{
+                $filterRealTags = '';
+            }
+
           
             ?>
 
 <section class="filter-sec">
             <div class="container-fluid">
-                <div class="filter-content">
-                    <div class="new_div ">
-                    <div class="filter-title">
-                        <div class="filter-img">
-                            <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="" />
-                            <p>Filters</p>
-                        </div>
-                        <div class="filtter-button">
-                            <button>
-                                <img src="{{ asset('logomax-front-asset/img/Vector (14).png') }}" alt="" />
-                            </button>
-                        </div>
-                    </div>
-                    <!--  -->
-                    <div class="filter-main-button" style="cursor:pointer;">
-                        <button class="filter-collapse" style="cursor:pointer;">
-                            <img src="{{ asset('logomax-front-asset/img/filtter-img.png') }}" alt="">
-                            <span style="cursor:pointer;">
-                                Filters <span class="badge badge--blue">1</span>
-                            </span>
-                        </button>
-                    </div>
-                    </div>
-                    <!--  -->
-                    <div class="">
-                        <div class="">
-                            <div class="">
-                                <div class="">
-                                    <?php $selctedtag = json_decode($filterTags);
-                                    $values = ['All logos','Low-priced logos','Premium logos'];
-                                    ?>
-                                       <label for="alllogos">
-                                            <div class="filtr_box filter-box @if($filterTags == "") selected @endif">
-                                                <a id="test" value="">All logos</a>
-                                            </div>
-                                        </label>
-                                        <label for="low-priced">
-                                            <div class="filtr_box filter-boxlow-price @if($filterTags == '"low-price"') selected @endif">
-                                                <a id="lowpriced" value="low-priced">Low-priced logos</a>
-                                            </div>
-                                        </label>
-                                        
-                                        <label for="premium">
-                                            <div class="filtr_box filter-boxpremium @if($filterTags == '"premium"') selected @endif">
-                                                <a id="test" value="premium">Premium logos</a>
-                                            </div>
-                                        </label>
+                <input type="radio" name="tags" id="alllogos" class="tags" value="" style="display:none;" >
+                <input type="radio" name="tags" id="low-priced" class="tags" value="low-price" style="display:none;">
+                <input type="radio" name="tags" id="premium" class="tags" value="premium" style="display:none;" >   
+                <div class="search_sec">
+                        <div class="work_data">
+                            <!--  -->
+                            <div class="new_div_new ">
+                                <div class="filter-title">
+                                    <div class="filter-img">
+                                        <img src="{{ asset('logomax-front-asset/img/filter.svg') }}" alt="" />
+                                        <p>Filters</p>
+                                    </div>
+                                    <div class="filtter-button">
+                                        <button>
+                                            <img src="{{ asset('logomax-front-asset/img/filter-image-2.svg') }}" alt="" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                         <input type="radio" name="tags" id="alllogos" class="tags" value="" style="display:none;" >
-                        <input type="radio" name="tags" id="low-priced" class="tags" value="low-price" style="display:none;">
-                        <input type="radio" name="tags" id="premium" class="tags" value="premium" style="display:none;" >
-                    
-                <div class="search_sec">
-                    <div class="work_data">
+                            <!--  -->
+                            <!-- Filter seclect section -->
+                            <div id="filtered_attr" class="selected-filter-wrap">
+                                <?php $decodefiltercategories = json_decode($filterCategories); ?>
+                                @foreach($decodefiltercategories as $cat)
+                                <?php 
+                                    $categorymodal = App\Models\Categories::class;
+                                    if($categorymodal){
+                                        $categ = $categorymodal::where('slug',$cat)->first();
+                                    }
+                                ?>
+                                @if(isset($categ))
+                                    <label id="selectedcat{{ $categ->slug ?? '' }}">
+                                        <div class="filtr_box ">
+                                            <a slug="{{ $categ->slug ?? '' }}" >{{ $categ->name ?? '' }} </a><a class="removecat" slug="{{ $categ->slug }}" ><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </label>
+                                @endif
+                                @endforeach
+
+                                <?php $decodefilterbranch = json_decode($filterBranches); ?>
+                                @foreach($decodefilterbranch as $branchfiltered)
+                                <?php 
+                                $categorymodal = App\Models\Branch::class;
+                                if($categorymodal){
+                                    $branchhhh = $categorymodal::where('slug',$branchfiltered)->first();
+                                }
+                                ?>
+                                @if(isset($branchhhh))
+                                    <label id="selectedbranch{{ $branchhhh->slug ?? '' }}">
+                                        <div class="filtr_box filter-box">
+                                            <a slug="{{ $branchhhh->slug ?? '' }}" >{{ $branchhhh->name ?? '' }} </a><a class="removebranch" slug="{{ $branchhhh->slug }}" ><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </label>
+                                @endif
+                                @endforeach
+
+                                <?php $decodefilterstyle = json_decode($filterStyles); ?>
+                                @foreach($decodefilterstyle as $filteredstyle)
+                                <?php 
+                                $stylemodal = App\Models\Style::class;
+                                if($stylemodal){
+                                    $styleeee = $stylemodal::where('slug',$filteredstyle)->first();
+                                }
+                                ?>
+                                @if(isset($styleeee))
+                                    <label id="selectedstyle{{ $styleeee->slug ?? '' }}">
+                                        <div class="filtr_box filter-box">
+                                            <a slug="{{ $styleeee->slug ?? '' }}" >{{ $styleeee->name ?? '' }} </a><a class="removestyle" slug="{{ $styleeee->slug }}" ><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </label>
+                                @endif
+                                @endforeach
+                            </div>
+                        <!-- End -->
                         <div class="search_style_wrapp category">
                             <div class="search_head">
                                 <p>Filter by Category</p>
                                 <i class="fa-solid fa-angle-down"></i>
                             </div>
-                            <div class="search_content">
+                            <div class="search_content search-list-container " id="search-cat-list">
                                 <form>
                                     <?php $categoriesSlected = json_decode($filterCategories) ?>
                                     @foreach($categories as $ind => $category)
-                                    <div class="custom_check">
+                                    <div class="custom_check search-list-item">
                                         <label for="category{{ $category->slug ?? '' }}">{{ $category->name ?? '' }}</label>
-                                        <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" value="{{ $category->slug ?? '' }}" <?php if(in_array($category->slug,$categoriesSlected)){ echo 'checked'; } ?>  />
+                                        <input id="category{{ $category->slug ?? '' }}" class="category" name="categories" type="checkbox" categoryname = "{{ $category->name ?? '' }}" value="{{ $category->slug ?? '' }}" <?php if(in_array($category->slug,$categoriesSlected)){ echo 'checked'; } ?>  />
                                     </div>
-                                    @if($ind > 5)
-                                        <div class="show-more-btn">
-                                           <a href="javascript:void(0)" class="show_more_btn" type="categories" class="text text-primary pe-auto">Show more</a> 
-                                        </div>
-                                        @break
-                                    @endif
                                     @endforeach
+                                    <a href="javascript:void(0)" class="show-more-btn close-list" for="cat">Show more <span><i class="fa-solid fa-angle-down"></i></span></a> 
                                 </form>
                             </div>
                         </div>
-                        <div class="search_style_wrapp branches">
+                        <div class="search_style_wrapp branches ">
                             <div class="search_head">
                                 <p>Filter by Branch</p>
                                 <i class="fa-solid fa-angle-down"></i>
                             </div>
-                            <div class="search_content">
+                            <div class="search_content search-list-container" id="search-branch-list">
                                 <form><?php $branchesSelected = json_decode($filterBranches); ?>
                                     @foreach($allbranches as $ind => $branch)
-                                    <div class="custom_check">
+                                    <div class="custom_check search-list-item">
                                         <label for="branch{{ $branch->slug ?? '' }}">{{ $branch->name ?? '' }}</label>
-                                        <input class="branches" id="branch{{ $branch->slug ?? '' }}" name="branch[]" type="checkbox" value="{{ $branch->slug ?? '' }}" <?php  if(in_array($branch->slug,$branchesSelected)){ echo 'checked'; } ?> />
+                                        <input class="branches" id="branch{{ $branch->slug ?? '' }}" name="branch[]" branchname="{{ $branch->name ?? '' }}" type="checkbox" value="{{ $branch->slug ?? '' }}" <?php  if(in_array($branch->slug,$branchesSelected)){ echo 'checked'; } ?> />
                                     </div>
-                                    @if($ind > 5)
-                                        <div class="show-more-btn">
-                                           <a href="javascript:void(0)" class="show_more_btn" type="branches" class="text text-primary pe-auto">Show more</a> 
-                                        </div>
-                                        @break
-                                    @endif
                                     @endforeach
+                                    <a href="javascript:void(0)" class="show-more-btn close-list" for="branch">Show more <span><i class="fa-solid fa-angle-down"></i></span></a>
                                 </form>
                             </div>
                         </div>
-                        <div class="search_style_wrapp">
+                        <div class="search_style_wrapp ">
                             <div class="search_head">
                                 <p>Filter by Logomark</p>
                                 <i class="fa-solid fa-angle-down"></i>
                             </div>
-                            <div class="search_content">
+                            <div class="search_content search-list-container"  id="search-logomark-list">
                                 <form><?php $styleSelected = json_decode($filterStyles); ?>
                                     @foreach($styles as $ind => $style)
-                                    <div class="custom_check">
+                                    <div class="custom_check search-list-item">
                                         <label for="style{{ $style->slug ?? '' }}">{{ $style->name ?? '' }}</label>
-                                        <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles[]" type="checkbox" value="{{ $style->slug ?? '' }}" <?php if(in_array($style->slug,$styleSelected)){ echo 'checked'; } ?> />
+                                        <input class="styles" id="style{{ $style->slug ?? '' }}" name="styles[]" type="checkbox" stylename="{{ $style->name ?? '' }}" value="{{ $style->slug ?? '' }}" <?php if(in_array($style->slug,$styleSelected)){ echo 'checked'; } ?> />
                                     </div>
-                                    @if($ind > 5)
-                                        <div class="show-more-btn">
-                                           <a href="javascript:void(0)" class="show_more_btn" type="styles" class="text text-primary pe-auto">Show more</a> 
-                                        </div>
-                                        @break
-                                    @endif
                                     @endforeach
+                                    <a href="javascript:void(0)" class="show-more-btn close-list" for="logomark">Show more <span><i class="fa-solid fa-angle-down"></i></span></a>
                                 </form>
+
                             </div>
                         </div>
                         <div class="filter-btn <?php  if(!$_GET){
@@ -196,8 +204,61 @@
                             <a href="{{ url('logos/search') }}"><button>Clear Filters</button></a>
                         </div>
                     </div>
-
+                        <?php 
+                        $totalFiltercount = 0;
+                        if($_GET){ 
+                            $categoriesCount = $stylesCount = $tagsCount = $branchCount = 0;
+                            if(isset($_GET['categories'])){
+                                $categoriesCount  =  count(json_decode($_GET['categories']));
+                            }
+                            if(isset($_GET['styles'])){
+                                $stylesCount = count(json_decode($_GET['styles']));
+                            }
+                            if(isset($_GET['realtags'])){
+                                $tagsCount = count(json_decode($_GET['realtags']));
+                            }
+                            if(isset($_GET['branches'])){
+                                $branchCount = count(json_decode($_GET['branches']));
+                            }
+                            $totalFiltercount = $categoriesCount + $stylesCount + $tagsCount + $branchCount;
+                        }
+                        ?>
                     <div class="show_logo">
+                        <!-- Filter bar -->
+                        <!--  -->
+                        
+                        <div class="closed-filter-wrap">
+                            <div class="filter-main-button" style="cursor:pointer;">
+                                <button class="filter-collapse" style="cursor:pointer;">
+                                    <img src="{{ asset('logomax-front-asset/img/filter.svg') }}" alt="">
+                                    <span style="cursor:pointer;">
+                                        Filters <span class="badge badge--blue">{{ $totalFiltercount }}</span>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="filter-bar">
+                                <?php $selctedtag = json_decode($filterTags);
+                                $values = ['All logos','Low-priced logos','Premium logos'];
+                                ?>
+                                <label for="alllogos">
+                                    <div class="filtr_box filter-box @if($filterTags == "") selected @endif">
+                                        <a id="test" value="">All logos</a>
+                                    </div>
+                                </label>
+                                <label for="low-priced">
+                                    <div class="filtr_box filter-boxlow-price @if($filterTags == '"low-price"') selected @endif">
+                                        <a id="lowpriced" value="low-priced">Low-priced logos</a>
+                                    </div>
+                                </label>
+                                
+                                <label for="premium">
+                                    <div class="filtr_box filter-boxpremium @if($filterTags == '"premium"') selected @endif">
+                                        <a id="test" value="premium">Premium logos</a>
+                                    </div>
+                                </label>
+                            </div> 
+                        </div>
+                        <!-- End -->
                         <div class="logo_head"> 
                             <h2 class="text-left"> <span class="logo_search_text"> @if($filterSearch == '')Find Unique & Exclusive @else  {{ $filterSearch ?? '' }}  @endif</span> Logos</h2>
                             <span class="ml-3"> <span class="logos_count">{{ count($logos) ?? 0 }}</span> resultados</span>
@@ -282,9 +343,9 @@
         $(document).ready(function(){
             categories = <?php print_r($filterCategories); ?>;
             styles = <?php print_r($filterStyles); ?>;
-            tags = '<?php print_r($filterTags); ?>';
+            tags = '<?php print_r(str_replace('"',"",$filterTags)); ?>';
             branches = <?php print_r($filterBranches); ?>; 
-           
+          
             searchvalue = $('input[name="search_field"]').val();
             
             $('input[name="search_field"]').on('keyup',function(){
@@ -298,7 +359,7 @@
                 let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
                 let stylestring = encodeURIComponent(JSON.stringify(styles));
-                let tagsstring = encodeURIComponent(JSON.stringify(tags));
+                let tagsstring = encodeURIComponent(tags);
                 let branchstring = encodeURIComponent(JSON.stringify(branches));
 
                 window.history.replaceState(stateObj, "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&branches="+branchstring);
@@ -306,9 +367,15 @@
             });
             $('input.category').on('change',function(){
                 val = $(this).val();
+                name = $(this).attr('categoryname');
+                htmlappend = '<label id="selectedcat'+val+'"><div class="filtr_box filter-box"><a slug="'+val+'" >'+name+' </a><a class="removecat" slug="'+val+'" ><i class="fas fa-times"></i></a></div></label>';
+               
+                
                 if($(this).prop('checked') == true){
                     categories.push(val);
+                    $('#filtered_attr').append(htmlappend);
                 }else{
+                    $('#selectedcat'+val).remove();
                     categories = jQuery.grep(categories, function(value) {
                             return value != val;
                             }); 
@@ -320,19 +387,47 @@
                 let branchstring = encodeURIComponent(JSON.stringify(branches));
 
                 window.history.replaceState(stateObj, 
-                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&banches="+branchstring);
+                        "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&branches="+branchstring);
                 ajaxReque = ajaxRequest(searchvalue,categories,styles,tags,branches);
                
             });
+
+                ///remove category
+                $("body").delegate('.removecat','click',function(e){
+                        e.preventDefault();
+                        slug = $(this).attr('slug');
+                        console.log(categories);
+                        categories = jQuery.grep(categories, function(value) {
+                                            return value != slug;
+                                    });
+                                    let stateObj = { id: "100" }; 
+                        let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                        let stylestring = encodeURIComponent(JSON.stringify(styles));
+                        let tagsstring = encodeURIComponent(JSON.stringify(tags));
+                        let branchstring = encodeURIComponent(JSON.stringify(branches));
+
+                        window.history.replaceState(stateObj, 
+                                "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&branches="+branchstring);
+                        ajaxReque = ajaxRequest(searchvalue,categories,styles,tags,branches);
+                        $('#selectedcat'+slug).remove();
+                        $('input.category[value="'+slug+'"]').prop('checked',false);
+                    });
+
             $('input.styles').on('change',function(){
                 // console.log($('input[name="styles[]"]').val());
                 styleval = $(this).val();
+                stylename = $(this).attr('stylename');
+                stylehtml = '<label id="selectedstyle'+styleval+'"><div class="filtr_box filter-box"><a slug="'+styleval+'" >'+stylename+' </a><a class="removestyle" slug="'+styleval+'" ><i class="fas fa-times"></i></a></div></label>';
                 if($(this).prop('checked') == true){
                     styles.push(styleval);  
+                    $('#filtered_attr').append(stylehtml);
+
                 }else{
                     styles = jQuery.grep(styles, function(value) {
                             return value != styleval;
-                    });  
+                    });
+                    $('#selectedstyle'+styleval).remove();
+                    
                 }
                 let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
@@ -344,6 +439,27 @@
                         "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&branches="+branchstring);
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags,branches);
             });
+
+            ///removestyle
+            $("body").delegate('.removestyle','click',function(e){
+                        e.preventDefault();
+                        slug = $(this).attr('slug');
+                        styles = jQuery.grep(styles, function(value) {
+                                            return value != slug;
+                                    });
+                                    let stateObj = { id: "100" }; 
+                        let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                        let stylestring = encodeURIComponent(JSON.stringify(styles));
+                        let tagsstring = encodeURIComponent(JSON.stringify(tags));
+                        let branchstring = encodeURIComponent(JSON.stringify(branches));
+
+                        window.history.replaceState(stateObj, 
+                                "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&branches="+branchstring);
+                        ajaxReque = ajaxRequest(searchvalue,categories,styles,tags,branches);
+                        $('#selectedstyle'+slug).remove();
+                        $('input.styles[value="'+slug+'"]').prop('checked',false);
+                    });
+
             $('input.tags').on('change',function(){
                 tagvalue = $(this).val();
                 // console.log(tagvalue);
@@ -369,32 +485,17 @@
                 ajax = ajaxRequest(searchvalue,categories,styles,tags,branches);
             });
             $('input.branches').on('change',function(){
-                // val = $(this).val();
-                // if($(this).prop('checked') == true){
-                //     categories.push(val);
-                // }else{
-                //     categories = jQuery.grep(categories, function(value) {
-                //             return value != val;
-                //             }); 
-                // }
-                // let stateObj = { id: "100" }; 
-                // let categoriesString = encodeURIComponent(JSON.stringify(categories));
-                // let stylestring = encodeURIComponent(JSON.stringify(styles));
-                // let tagsstring = encodeURIComponent(JSON.stringify(tags));
-                // let branchstring = encodeURIComponent(JSON.stringify(branches));
-
-                // window.history.replaceState(stateObj, 
-                //         "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&banches="+branchstring);
-                // ajaxReque = ajaxRequest(searchvalue,categories,styles,tags,branches);
-                // 
                 branchvalue = $(this).val();
-                console.log(branchvalue);
+                branchname = $(this).attr('branchname');
+                branchhtml = '<label id="selectedbranch'+branchvalue+'"><div class="filtr_box filter-box"><a slug="'+branchvalue+'" >'+branchname+' </a><a class="removebranch" slug="'+branchvalue+'" ><i class="fas fa-times"></i></a></div></label>';
                 if($(this).prop('checked') == true){
-                    branches.push(branchvalue);  
+                    branches.push(branchvalue);
+                    $('#filtered_attr').append(branchhtml);  
                 }else{
                     branches = jQuery.grep(branches, function(value) {
                             return value != branchvalue;
                     });  
+                    $('#selectedbranch'+branchvalue).remove();
                 }
                 let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
@@ -406,6 +507,27 @@
                 ajaxReques = ajaxRequest(searchvalue,categories,styles,tags,branches);
             
             });
+                ////removebranch
+                         $("body").delegate('.removebranch','click',function(e){
+                                    e.preventDefault();
+                                    slug = $(this).attr('slug');
+                                    
+                                    branches = jQuery.grep(branches, function(value) {
+                                                        return value != slug;
+                                                });
+                                                let stateObj = { id: "100" }; 
+                                    let categoriesString = encodeURIComponent(JSON.stringify(categories));
+                                    let stylestring = encodeURIComponent(JSON.stringify(styles));
+                                    let tagsstring = encodeURIComponent(JSON.stringify(tags));
+                                    let branchstring = encodeURIComponent(JSON.stringify(branches));
+
+                                    window.history.replaceState(stateObj, 
+                                            "filter", "{{ url('/logos/search') }}?search="+searchvalue+"&categories="+categoriesString+"&styles="+stylestring+"&tags="+tagsstring+"&branches="+branchstring);
+                                    ajaxReque = ajaxRequest(searchvalue,categories,styles,tags,branches);
+                                    $('#selectedbranch'+slug).remove();
+                                    $('input.branches[value="'+slug+'"]').prop('checked',false);
+                                });
+
         });
 
       
@@ -420,13 +542,13 @@
             addToWishlist(logo_id,user_id,url,$(this));
         @else
             Swal.fire({
-                title: 'Please Login',
-                text: "You have to Login to save this in your wishlist !",
+                title: 'Please Log in',
+                text: "You have to Log in to save this in your wishlist !",
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Login'
+                confirmButtonText: 'Log in'
                 }).then((result) => {
                 if (result.isConfirmed) {
                     $('#exampleloginModal').modal('show');
@@ -443,6 +565,98 @@
         // });
     }
 
+    /////////////////// Show More Button code  //////////////////////
+    function ajaxRequest(searchvalue,categories,styles,tags,branches){
+        let categoriesString = encodeURIComponent(JSON.stringify(categories));
+        let stylestring = encodeURIComponent(JSON.stringify(styles));
+        let tagsstring = encodeURIComponent(JSON.stringify(tags));
+        let branchstring = encodeURIComponent(JSON.stringify(branches));
+
+        $.ajax({
+            method: 'post',
+            url: '{{ url('logo-filter') }}',
+            data: { categories:categories,branches:branches,styles:styles,tags:tags,searchvalue:searchvalue,_token:'{{ csrf_token() }}' },
+            success: function(response){
+                $('span.logos_count').html(response['data'].length);
+                // console.table(response[0]['media']);
+                $('.filter-btn').removeClass('d-none');
+                append_html = [];
+                $.each(response['data'], function(key,value){
+                    let logoIdsInWishlist = [];
+                    @if(isset($logoIdsInWishlist))
+                    logoIdsInWishlist = <?php echo json_encode($logoIdsInWishlist); ?>;
+                    @endif
+                    
+                    let heartIconClass = '';
+                    heartIconClass = 'fa-regular';
+                    $.each(logoIdsInWishlist,function(ind,val){
+                        if(value.id == val){
+                            heartIconClass = 'fa-solid';
+                        }
+                    });
+                    if(value.in_whishlist !== undefined && value.in_whishlist !== null){
+                        heartIconClass = 'fa-solid';
+                    }else{
+                        heartIconClass = 'fa-regular';
+                    }
+                    html = '<div class="col-xl-3 col-lg-4 col-md-6"><div class="logo_img"><a href="{{ url('logo/') }}/'+value.logo_slug+'"> <img src="{{ asset('logos/') }}/'+value['media'].image_name+'" alt="" /></a><div class="heart_icon add_to_wishlist" id="logo_wish_'+value.id+'" logo_id="'+value.id+'"><i class="'+ heartIconClass +' fa-heart"></i></div></div></div>';
+                    // console.log(html);
+                    append_html.push(html);
+                })
+                $('#logo_html_row').html(append_html);
+                if(response['last_page'] > 1){
+                    paginationhtml = '<div class="page-btn"><div class="arrow-bt"><a><i class="fa-solid fa-arrow-left"></i> Prev Page </a></div><div class="arrow-bt black"><a href="{{ url('logos/search') }}?search='+searchvalue+'&categories='+categoriesString+'&styles='+stylestring+'&tags='+tagsstring+'&page='+(response['current_page']+1)+'">Next Page <i class="fa-solid fa-arrow-right"></i></a></div></div><div class="page_next"><nav aria-label="Page navigation example"><ul class="pagination"><li class="page-item"><a class="page-link" href="#">Page</a></li><li class="page-item"><a class="page-link one" href="#">'+response['current_page']+'</a></li><li class="page-item"><a class="page-link" href="#">of '+response['last_page']+'</a></li></ul></nav></div>';
+                    $('.next-button').html(paginationhtml);
+                }else{
+                    $('.next-button').html('');
+                }
+                // $("#filtered_attr").load(location.href + " #filtered_attr");
+            }
+        });
+    }    
+
+    $(document).ready(function(){
+        var catListContainer = $('#search-cat-list');
+        var branchListContainer = $('#search-branch-list');
+        var logomarkListContainer = $('#search-logomark-list');
+        var initialItemsToShow = 7;
+        var showMoreBtn = $(".show-more-btn");
+
+        $('.search-list-item:gt(' + (initialItemsToShow - 1) + ')', catListContainer).hide();
+        $('.search-list-item:gt(' + (initialItemsToShow - 1) + ')', branchListContainer).hide();
+        $('.search-list-item:gt(' + (initialItemsToShow - 1) + ')', logomarkListContainer).hide();
+
+        showMoreBtn.click(function (e) {
+            e.preventDefault();
+            var thisBtn = $(this);
+            var showFor = $(this).attr('for');
+            // Toggle the height of the container to show/hide items
+            listContainer = $(`#search-${showFor}-list`);
+            listContainer.toggleClass('expanded');
+
+            // Change the button text based on the container height
+            var buttonText = listContainer.hasClass('expanded') ? 'Show less <span><i class="fa-solid fa-angle-up"></i></span>' : 'Show more <span><i class="fa-solid fa-angle-down"></i></span>';
+            thisBtn.html(buttonText);
+
+            if(thisBtn.hasClass('close-list')){
+                thisBtn.removeClass('close-list');
+                thisBtn.addClass('open-list');
+            }else{
+                thisBtn.removeClass('open-list');
+                thisBtn.addClass('close-list');
+            }
+
+            // Show or hide items based on the container height
+            if (listContainer.hasClass('expanded')) {
+                $('.search-list-item', listContainer).show();
+            } else {
+                $('.search-list-item:gt(' + (initialItemsToShow - 1) + ')', listContainer).hide();
+            }
+        });
+    });
+    //////////////// Show more button code end //////////////
+
+    
    
     </script> 
 @endsection

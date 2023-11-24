@@ -2,6 +2,15 @@
 @section('content')
 
 <?php 
+  if(isset($_GET['ratingsearch'])){
+      $filterRating = $_GET['ratingsearch'];
+  }else{
+      $filterRating = json_encode([]);
+  }
+  $filterratingdecode =json_decode($filterRating);
+  
+
+
 $ratingget = 0;
 foreach($reviews as $review){
     $ratingget += $review->rating;
@@ -17,6 +26,7 @@ if(count($reviews) == 0){
  if($totalrating == 0){
     $totalrating = 5;
  }
+ $ratingnumber = number_format($totalrating,0);
  
  
  $onerate = count($onerating);
@@ -31,20 +41,20 @@ if(count($reviews) == 0){
 <section class="reviews-sec">
     <div class="container">
       <div class="review-heading">
-        <!-- <div class="review-site-logo"> -->
-            <!-- <img src="{{-- asset('logomax_pages/img/logomax.png') --}}" class="img-fluid" alt="...."> -->
-        <!-- </div> -->
+        <div class="review-site-logo">
+            <img src="{{ asset('logomax-front-asset/img/logomax-icon.svg') }}" class="img-fluid" alt="....">
+        </div>
         <div class="review-site-text">
                 <!-- <h1>Documentos-Legales.mx</h1> -->
                 <p>
-                <span>5.00</span> | <span id="post_rev_btn_opn">12 opinión</span>
+                <span>{{ number_format($totalrating,2) ?? '' }}</span> | <span id="post_rev_btn_opn">{{ count($reviews) ?? 0 }} opinión</span>
                 </p>
                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>
-                   <span class="blankstar"></span>
-                   <span class="blankstar"></span>			
+                   <span class="@if($totalrating >= 1) fullstar @else blankstar @endif"></span>
+                   <span class="@if($totalrating >= 2) fullstar @else blankstar @endif"></span>
+                   <span class="@if($totalrating >= 3) fullstar @else blankstar @endif"></span>
+                   <span class="@if($totalrating >= 4) fullstar @else blankstar @endif"></span>
+                   <span class="@if($totalrating >= 5) fullstar @else blankstar @endif"></span>			
                </div>
             </div>
       </div>
@@ -53,381 +63,252 @@ if(count($reviews) == 0){
             <div class="rating-with-perct">
               <div class="left-side">
                 <div class="round">
-                  <input type="checkbox" checked id="checkbox" />
-                  <label for="checkbox"></label>
-                  <span>5 stars</span>
+                  <input type="checkbox" name="rating" @if(in_array(5,$filterratingdecode)) checked @endif id="checkbox5" value="5"/>
+                  <label for="checkbox5"></label>
+                  <div class="star_Av review-site-text">
+                  <div class="str_rate ">
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>			
+                  </div>
+                </div>
                 </div>
               </div>
               <div class="mid-line">
-                <div class="bar-5"></div>
+                <div class="bar-5" style="width:{{ round($fiverate/$totalrate*100,0,PHP_ROUND_HALF_DOWN) ?? 0 }}%;"></div>
               </div>
               <div class="ryt-side">
-                <div class="per-txt">20%</div>
+                <div class="per-txt">{{ round($fiverate/$totalrate*100,0,PHP_ROUND_HALF_DOWN) ?? 0 }}%</div>
               </div>
             </div>
             <div class="rating-with-perct">
               <div class="left-side">
                 <div class="round">
-                  <input type="checkbox" checked id="checkbox4" />
+                  <input type="checkbox" name="rating" @if(in_array(4,$filterratingdecode)) checked @endif id="checkbox4" value="4" />
                   <label for="checkbox4"></label>
-                  <span>4 stars</span>
+                  <div class="star_Av review-site-text">
+                  <div class="str_rate ">
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#ccc;"></span>			
+                  </div>
+                </div>
                 </div>
               </div>
               <div class="mid-line">
-                <div class="bar-4"></div>
+                <div class="bar-4" style="width:{{ round($fourrate/$totalrate*100,0,PHP_ROUND_HALF_DOWN) ?? 0 }}%;"></div>
               </div>
              <div class="ryt-side">
-                <div class="per-txt">20%</div>
+                <div class="per-txt">{{ round($fourrate/$totalrate*100,0,PHP_ROUND_HALF_DOWN) ?? 0 }}%</div>
              </div>
             </div>
             <div class="rating-with-perct">
               <div class="left-side">
                 <div class="round">
-                  <input type="checkbox" checked id="checkbox3" />
+                  <input type="checkbox" name="rating" @if(in_array(3,$filterratingdecode)) checked @endif id="checkbox3" value="3" />
                   <label for="checkbox3"></label>
-                  <span>3 stars</span>
+                  <div class="star_Av review-site-text">
+                  <div class="str_rate ">
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#ccc;"></span>
+                    <span class="blankstar" style="color:#ccc;"></span>			
+                  </div>
+                </div>
                 </div>
               </div>
               <div class="mid-line">
-                <div class="bar-3"></div>
+                <div class="bar-3" style="width:{{ round($threerate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%;"></div>
               </div>
              <div class="ryt-side">
-                <div class="per-txt">20%</div>
+                <div class="per-txt">{{ round($threerate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</div>
              </div>
             </div>
             <div class="rating-with-perct">
               <div class="left-side">
                 <div class="round">
-                  <input type="checkbox" checked id="checkbox2" />
+                  <input type="checkbox" name="rating" @if(in_array(2,$filterratingdecode)) checked @endif id="checkbox2" value="2" />
                   <label for="checkbox2"></label>
-                  <span>2 stars</span>
+                  <div class="star_Av review-site-text">
+                  <div class="str_rate ">
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="blankstar" style="color:#ccc;"></span>
+                    <span class="blankstar" style="color:#ccc;"></span>
+                    <span class="blankstar" style="color:#ccc;"></span>			
+                  </div>
+                </div>
                 </div>
               </div>
               <div class="mid-line">
-                <div class="bar-2"></div>
+                <div class="bar-2" style="width:{{ round($tworate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%;"></div>
               </div>
              <div class="ryt-side">
-                <div class="per-txt">20%</div>
+                <div class="per-txt">{{ round($tworate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</div>
              </div>
             </div>
             <div class="rating-with-perct">
               <div class="left-side">
                 <div class="round">
-                  <input type="checkbox" checked id="checkbox1" />
+                  <input type="checkbox" name="rating" @if(in_array(1,$filterratingdecode)) checked @endif id="checkbox1" value="1" />
                   <label for="checkbox1"></label>
-                  <span>1 stars</span>
+                  <div class="star_Av review-site-text">
+                 <div class="str_rate ">
+                   <span class="fullstar" style="color:#FBBC04;"></span>
+                   <span class="blankstar" style="color:#ccc;"></span>
+                   <span class="blankstar" style="color:#ccc;"></span>
+                   <span class="blankstar" style="color:#ccc;"></span>
+                   <span class="blankstar" style="color:#ccc;"></span>			
+                 </div>
+              </div>
                 </div>
               </div>
               <div class="mid-line">
-                <div class="bar-1"></div>
+                <div class="bar-1" style="width:{{ round($onerate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%;"></div>
               </div>
              <div class="ryt-side">
-                <div class="per-txt">20%</div>
+                <div class="per-txt">{{ round($onerate/$totalrate*100,PHP_ROUND_HALF_DOWN) ?? 0 }}%</div>
              </div>
             </div>
           </div>
         <div class="all-reviews">
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">b</span></div>
+          @foreach($reviews_real as $review)
+          <?php
+             if(isset($review->user)){
+              $name = $review->user->first_name.' '.$review->user->last_name;
+            }else{
+              $name = $review->title;
+            }
+
+            $reviewtime = strtotime($review->created_at);
+            $currentime = strtotime(date('m/d/Y h:i:s a', time()));
+            $diffrence = abs($currentime - $reviewtime);
+            $years = floor($diffrence / (365*60*60*24)); 
+            $months = floor(($diffrence - $years * 365*60*60*24) / (30*60*60*24));
+            $days = floor(($diffrence - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+            $hours = floor(($diffrence - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));
+            $minutes = floor(($diffrence - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60);
+
+            
+            ?>
+          <div class="review-box al-rw d-flex" rating="{{ $review->rating ?? '' }}">
+            <div class="al-rw-txt"><span class="rw-ad-txt">{{ substr(strtoupper($name), 0, 1) }}</span></div>
+            
             <div class="al-rw-rating">
-              <h4>Burno</h4>
+              <h4>{{ $name ?? '' }}</h4>
               <div class="mp">
               <i class="fa-solid fa-location-dot"></i>
                 <span>MX</span>
               </div>
               <div class="star_Av review-site-text">
                  <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
+                   <span class="@if($review->rating >= 1) fullstar @else blankstar @endif"></span>
+                   <span class="@if($review->rating >= 2) fullstar @else blankstar @endif"></span>
+                   <span class="@if($review->rating >= 3) fullstar @else blankstar @endif"></span>
+                   <span class="@if($review->rating >= 4) fullstar @else blankstar @endif"></span>
+                   <span class="@if($review->rating >= 5) fullstar @else blankstar @endif"></span>			
                  </div>
                   <p>
-                   Hace 22 horas									
+                   @if($years > 0) {{ $years }} years ago @elseif($months > 0) {{ $months }} months ago @elseif($days > 0) {{ $days }} days ago @elseif($hours > 0) {{ $hours }} hours ago @elseif($minutes > 0) {{ $minutes }} minutes ago @else Just Now @endif									
                  </p>
               </div>
-              <p>test review</p>
+              <p>{{ $review->description ?? '' }}</p>
             </div>
           </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">j</span></div>
-            <div class="al-rw-rating">
-              <h4>Jenny</h4>
-              <div class="mp">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">j</span></div>
-            <div class="al-rw-rating">
-              <h4>Jack</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">b</span></div>
-            <div class="al-rw-rating">
-              <h4>Beverly Gibson</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">m</span></div>
-            <div class="al-rw-rating">
-              <h4>Michael Warren</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">b</span></div>
-            <div class="al-rw-rating">
-              <h4>Barbara Strange</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">rt</span></div>
-            <div class="al-rw-rating">
-              <h4>Rachel Tara</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">hf</span></div>
-            <div class="al-rw-rating">
-              <h4>Hajara Faruk Tukur</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">w</span></div>
-            <div class="al-rw-rating">
-              <h4>Wayne Burrows</h4>
-              <div class="mp">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">j</span></div>
-            <div class="al-rw-rating">
-              <h4>Janet Lytle</h4>
-              <div class="mp">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">ts</span></div>
-            <div class="al-rw-rating">
-              <h4>Tricia Sproles</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">ad</span></div>
-            <div class="al-rw-rating">
-              <h4>Burno</h4>
-              <div class="mp">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
-          <div class="al-rw d-flex">
-            <div class="al-rw-txt"><span class="rw-ad-txt">s</span></div>
-            <div class="al-rw-rating">
-              <h4>Samish murugesan</h4>
-              <div class="mp">
-               <i class="fa-solid fa-location-dot"></i>
-                <span>MX</span>
-              </div>
-              <div class="star_Av review-site-text">
-                 <div class="str_rate ">
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="fullstar"></span>
-                   <span class="blankstar"></span>			
-                 </div>
-                  <p>
-                   Hace 22 horas									
-                 </p>
-              </div>
-              <p>test review</p>
-            </div>
-          </div>
+          @endforeach
+          @if ($reviews_real->hasPages())
+                    <div class="pro_navigation">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                               
+                                <li class="page-item arrow_wreap">
+                                @if($reviews_real->previousPageUrl() !== null)
+                                    <a class="page-link" href="?page={{ $reviews_real->currentPage()-1 }}&ratingsearch={{ urlencode($filterRating) ?? '' }}" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                                    </a>
+                                @else
+                                    <a class="page-link" aria-label="Previous" disabled>
+                                        <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                                    </a>
+                                @endif
+                                </li>
+                               <?php $count = 0; ?>
+                                @for($i = $reviews_real->currentPage()-2; $i < $reviews_real->currentPage(); $i++)
+                                <?php 
+                                $count = $count+1;
+                                ?>
+                                @if($i > 0)
+                                @if($count < 3)
+                                <li class="page-item @if($i == $reviews_real->currentPage()) active @endif"><a class="page-link" href="?page={{ $i }}&ratingsearch={{ urlencode($filterRating) ?? '' }}">{{ $i }}</a></li>
+                                @endif
+                                @endif
+                                @endfor
+                                <?php  
+                                $num = 0;
+                                ?>                                
+                                @for($x = $reviews_real->currentPage(); $x <= $reviews_real->lastPage(); $x++)
+                                <?php 
+                                $num = $num+1;
+                                ?>
+                                @if($num < 4)
+                                <li class="page-item @if($x == $reviews_real->currentPage()) active @endif"><a class="page-link" href="?page={{ $x }}&ratingsearch={{ urlencode($filterRating) ?? '' }}">{{ $x }}</a></li>
+                                @endif
+                                @endfor
+                                <li class="page-item arrow_wreap">
+                                    @if($reviews_real->nextPageUrl() !== null)
+                                    <a class="page-link" href="?page={{ $reviews_real->currentPage()+1 }}&ratingsearch={{ urlencode($filterRating) ?? '' }}" aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                                    </a>
+                                    @else
+                                    <a class="page-link" aria-label="Next" Disabled>
+                                        <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                                    </a>
+                                    @endif
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    @endif
+      <!-- {{ $reviews_real->links('pagination::bootstrap-4') }} -->
         </div>
       </div>
       </div>
   </section>
+  <script>
+    $(document).ready(function(){
+
+      ratingsearch = <?php print_r($filterRating); ?>;
+      console.log(ratingsearch);
+      $('input[name="rating"]').on('change',function(){
+        // $('#checkbox'+value).prop('checked',true);
+        value = $(this).val();
+        if($(this).prop('checked')){
+          ratingsearch.push(value);
+          let ratinglink = encodeURIComponent(JSON.stringify(ratingsearch));
+         
+          location.href = "{{ url('/reviews') }}?ratingsearch="+ratinglink;
+          // $('div.review-box').addClass('d-none');
+          // $('div.review-box').removeClass('d-flex');
+          
+          // $('div[rating="'+value+'"]').addClass('d-flex');
+          // $('div[rating="'+value+'"]').removeClass('d-none');
+        }else{
+          ratingsearch = jQuery.grep(ratingsearch, function(value1) {
+                            return value1 != value;
+                            }); 
+          let ratinglink = encodeURIComponent(JSON.stringify(ratingsearch));
+         
+          location.href = "{{ url('/reviews') }}?ratingsearch="+ratinglink;
+
+          // $('div.review-box').removeClass('d-none');
+          // $('div.review-box').addClass('d-flex');
+        }
+      });
+    });
+  </script>
 @endsection

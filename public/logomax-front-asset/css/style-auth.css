@@ -130,15 +130,7 @@ line-height: normal;
 .btm-buttn {
     margin-bottom: 35px;
 }
-::placeholder{
-	color: #656F79;
-text-align: left;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-}
+
 
 .form-group {
     margin-bottom: 20px;
@@ -307,7 +299,7 @@ a.login-gg.fb-btn:hover{
 .line-text1::before {
     position: absolute;
     content: '';
-    width: 265px;
+    width: 330px;
     height: 1px;
     top: 10px;
     right: 0;
@@ -317,7 +309,7 @@ a.login-gg.fb-btn:hover{
 .line-text1::after {
     position: absolute;
     content: '';
-    width: 265px;
+    width: 330px;
     height: 1px;
     top: 10px;
     left: 0;

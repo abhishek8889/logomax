@@ -295,10 +295,10 @@
                 </div>
                 <div class="social-links d-flex">
                     <div class="social-accnt">
-                        <a class="g-btn login-gg gs-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i> <strong>Google</strong> </a>
+                        <a class="g-btn login-gg gs-btn" href="{{ url('authorized/google') }}"><i class="fa-solid fa-g"></i> Register with <strong>Google</strong> </a>
                     </div>
                     <div class="social-accnt">
-                        <a class="fb-btn login-gg fb-btn" href="{{ url('authorized/facebook') }}"> <i class="fa-brands fa-facebook"></i> <strong>Facebook</strong></a>
+                        <a class="fb-btn login-gg fb-btn" href="{{ url('authorized/facebook') }}"> <i class="fa-brands fa-facebook"></i> Register with <strong>Facebook</strong></a>
                     </div>
                 </div>
                 <div class="continue-we">

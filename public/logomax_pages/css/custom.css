@@ -1023,7 +1023,8 @@ a.request-btn:hover {
     float: none;
     display: flex;
     flex-direction: column-reverse;
-    overflow: auto;
+    height: 100%;
+    height: 774px;
 }
 
 

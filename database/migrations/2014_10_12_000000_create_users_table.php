@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('experience')->nullable();
             $table->string('address')->nullable();
+            $table->string('organization')->nullable();
+            $table->string('additional_address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();

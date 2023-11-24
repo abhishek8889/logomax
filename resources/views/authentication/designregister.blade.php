@@ -289,13 +289,10 @@
         <div class="login-content">
             <div class="login-form">
                 <div class="login-accnt">
-                    <h2>Register to Logomax</h2>
+                    <h2>Register as Designer</h2>
                     <p>Create an account</p>
                 </div>
                 
-                <div class="continue-we">
-                    <p class="small-p line-text"> or </p>
-                </div>
                 <form action="{{ url('/desgingerRegisterprocc') }}" method="POST" id="registerForm">
                     @csrf
                     <div class="mail-info">
@@ -330,8 +327,9 @@
                                 <div class="form-group">
                                 <!--  -->
                                 <select name="country" class="form-control form-inp-box" id="country" style="cursor:pointer;">
+                                    
                                     @foreach($countries as $k => $v)
-                                    <option value="{{$k}}">{{ $v }}</option>
+                                        <option value="{{$k}}" <?= ($userIPDetails['country'] == $v)?'selected':''; ?>>{{ $v }}</option>
                                     @endforeach
                                 </select>
                                 <!--  -->
@@ -356,16 +354,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-lg-12 col-sm-12 col-12">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-inp-box" name="experience" placeholder="Experience" />
-                                    @error('experience')
-                                        <span class="text text-danger">{{ $message }}</span>
-                                    @enderror
+                                    error('experience')
+                                        <span class="text text-danger">{{-- $message --}}</span>
+                                    enderror
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-lg-6 col-sm-12 col-12">
                                 <div class="form-group  ">

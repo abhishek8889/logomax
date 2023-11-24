@@ -19,10 +19,13 @@ return new class extends Migration
             $table->string('user_email');
             $table->string('name_on_card');
             $table->string('street_num');
+            $table->string('additional_address');
+            $table->string('organization');
             $table->string('city');
             $table->string('state');
             $table->string('zip');
             $table->string('country');
+            $table->string('taxid')->nullable();
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });

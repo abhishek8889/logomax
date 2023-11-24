@@ -1,5 +1,16 @@
 @extends('admin_layout/master')
 @section('content')
+<style>
+  .unselectable {
+    color: gray; /* Set text color to gray to indicate it's unselectable */
+    cursor: not-allowed; /* Set cursor to not-allowed to indicate it's not selectable */
+    background-color: #f0f0f0; /* Optional: add a background color for visual indication */
+  }
+
+  .unselectable option {
+    color: black; /* Reset text color for options, as it may inherit from the parent */
+  }
+</style>
 <?php 
 $option_type_arr = array( 
                     'save-logo-for-future',
@@ -36,9 +47,9 @@ $option_type_arr = array(
                 <div class="form-group">
                     <label class="form-label" for="option_type">Option Type</label>
                     <div class="form-control-wrap">
-                         <select class="form-control" name="option_type" id="option_type">
+                         <select class="form-control" name="option_type" id="option_type" >
                             @foreach($option_type_arr as $option)
-                            <option value="{{ $option }}" <?php if(isset($editoption->option_type)){if($option == $editoption->option_type ){ echo 'selected';}}?>>{{ $option }}</option>
+                            <option value="{{ $option }}" <?php if(isset($editoption->option_type)){if($option == $editoption->option_type ){ echo 'selected';}else{ echo "disabled"; } }?>>{{ $option }}</option>
                             @endforeach
                         </select>
                     </div>

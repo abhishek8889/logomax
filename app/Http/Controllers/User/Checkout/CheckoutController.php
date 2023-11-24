@@ -31,18 +31,55 @@ class CheckoutController extends Controller
         return view('users.logos.checkout',compact('request','logo','intent'));
     }
     public function checkoutProcess(Request $req){
-        
-        $validated = $req->validate([
-            // 'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'zip_code' => 'required',
-            // 'name_on_card' => 
-            // 'token'
-        ]);
+        if($req->billing_address_confirm == 'on'){
+            $validated = $req->validate([
+                // 'name' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'organization' => 'required',
+                'additional_address' => 'required',
+                'city' => 'required',
+                'country' => 'required',
+                'state' => 'required',
+                'zip_code' => 'required',
+                // 'name_on_card' => 
+                // 'token'
+            ]);
+
+            $address = $req->address;
+            $organization = $req->organization;
+            $additionaladdress = $req->additional_address;
+            $city = $req->city;
+            $country = $req->country;
+            $state = $req->state;
+            $zipcodes = $req->zip_code;
+       
+            
+        }else{ 
+          
+
+            $validated = $req->validate([
+                // 'name' => 'required',
+                'email' => 'required',
+                'billing_address' => 'required',
+                'billing_organization' => 'required',
+                'billing_additional_address' => 'required',
+                'billing_city' => 'required',
+                'billing_country' => 'required',
+                'billing_state' => 'required',
+                'billing_zip_code' => 'required',
+                'taxid' => 'required',
+                // 'token'
+            ]);
+            $address = $req->billing_address;
+            $organization = $req->billing_organization;
+            $additionaladdress = $req->billing_additional_address;
+            $city = $req->billing_city;
+            $country = $req->billing_country;
+            $state = $req->billing_state;
+            $zipcodes = $req->billing_zip_code;
+            
+        }
         $user_id = '';
         
         if(Auth::check() && (auth()->user()->role_id == 1)){
@@ -131,11 +168,11 @@ class CheckoutController extends Controller
             'name' => $req->name_on_card, 
             'email' => $req->email,
             'address' => [
-                'line1' => $req->address,
-                'city' => $req->city,
-                'postal_code' => $req->zip_code,
-                'state' => $req->state,
-                'country' => $req->country
+                'line1' => $address,
+                'city' => $city,
+                'postal_code' => $zipcodes,
+                'state' => $state,
+                'country' => $country
             ],
             'payment_method' => $req->token,
         ]);
@@ -176,14 +213,29 @@ class CheckoutController extends Controller
         $order_meta->user_last_name = $req->last_name;
         $order_meta->user_email = $req->email;
         $order_meta->name_on_card = $req->name_on_card;
-        $order_meta->street_num = $req->address;
-        $order_meta->city = $req->city;
-        $order_meta->state = $req->state;
-        $order_meta->zip = $req->zip_code;
-        $order_meta->country = $req->country;
+        $order_meta->street_num = $address;
+        $order_meta->additional_address = $additionaladdress;
+        $order_meta->organization = $organization;
+        $order_meta->city = $city;
+        $order_meta->state = $state;
+        $order_meta->zip = $zipcodes;
+        $order_meta->country = $country;
+        $order_meta->taxid = $req->taxid;
         
         $order_meta->save();
 
+        //////update user addresss
+
+            $user = User::find($user_id);
+            $user->address = $req->address;
+            $user->organization = $req->organization;
+            $user->additional_address = $req->additional_address;
+            $user->city = $req->city;
+            $user->state = $req->state;
+            $user->zip_code = $req->zip_code;
+            $user->country = $req->country;
+            $user->update();
+        
         //////////////////////// Save in payment table //////////////////////////////
 
         $payment = new Payment;

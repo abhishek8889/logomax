@@ -42,13 +42,13 @@
 
                             <div class="dropdown_data">
                                 <div id="accordion">
-                                  @foreach($logoFacilities as $facility)
+                                  @foreach($logoFacilities as $ind =>  $facility)
                                   <div class="card">
                                       <div class="card-header pointer" data-toggle="collapse"
                                           data-target="#collapse-{{ $facility->id }}">
                                           <h5 class="text text-dark">{{ $facility->facilities_name ?? '' }}</h5>
                                       </div>
-                                      <div id="collapse-{{ $facility->id }}" class="collapse " data-parent="#accordion">
+                                      <div id="collapse-{{ $facility->id }}" class="collapse <?php if($ind == 0){ echo "show";} ?>" data-parent="#accordion">
                                           <div class="card-body">
                                             {{ $facility->description ?? '' }}
                                           </div>
@@ -73,7 +73,7 @@
                           </button>
                         </span>
                         <a class="asset-id-link__button" href="#" id="tooltip-copy-box" data-toggle="tooltip" title="Copy to clipboard!">
-                          <strong class="text-up">File #:&nbsp;</strong>
+                          <strong class="text-up">File :&nbsp;</strong>
                           <span>{{ $logo->logo_unique_id }}</span>
                         </a>
                       </div>
@@ -122,22 +122,26 @@
                     <div class="similar_text">
                         <h5>Similar Logos</h5>
                     </div>
-                    <div class="similar_wrapper">
-                        @foreach($similar_logos as $similar)
-                        <a href="{{ url('logo/'.$similar->logo_slug) }}">
-                          <div class="similar_img_box">
-                              <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
+                    <div class=" row">
+                        @foreach($similar_logos as $ind => $similar)
+                        <div class="col-md-3 mb-2">
+                            <div class="logo_img">
+                              <a href="{{ url('logo/'.$similar->logo_slug) }}">
+                                <img src="{{ asset('logos/'.$similar->media['image_name']) }}" alt="">
+                              </a>
+                            </div>
+                        </div>
+                        @if($ind == 2)
+                          <div class="col-md-3 mb-2">
+                            <a href="{{ url('/logos/search?categories=%5B"'.$category_slug.'"%5D') }}">
+                              <div class=" logo_img white logo-img-simi">
+                                  <img src="{{ asset('logomax-front-asset/img/see-more.svg') }}" alt="">
+                              </div>
+                            </a>
                           </div>
-                        </a>
-                        @endforeach
-                        @if(count($similar_logos) == 4)
-                        <a href="{{ url('/logos/search?categories=%5B"'.$category_slug.'"%5D') }}">
-                          <div class="similar_img_box white">
-                              <img src="{{ asset('logomax-front-asset/img/similar5.png') }}" alt="">
-                          </div>
-                        </a>
+                          @break;
                         @endif
-
+                        @endforeach
                     </div>
 
                 </div>

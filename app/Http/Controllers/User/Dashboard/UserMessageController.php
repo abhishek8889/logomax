@@ -54,8 +54,27 @@ class UserMessageController extends Controller
     $savmessage->seen_status = 0;
     $savmessage->save();
     return 'done';
+   }
+   public function sendMessageDirect(Request $request){
+    
+    $userdata = User::find($request->reciever_id);
+    $date = date('m/d/Y h:i:s a', time());
+    $message = array(
+        'sender_id' => $request->sender_id,
+        'reciever_id' => $request->reciever_id,
+        'message' => $request->message,
+        'userdata' => $userdata,
+        'current_time' => $date,
+    );
+    event(new SendMessages($message));
 
-
+    $savmessage = new Message;
+    $savmessage->sender_id = $request->sender_id;
+    $savmessage->reciever_id = $request->reciever_id;
+    $savmessage->message = $request->message;
+    $savmessage->seen_status = 0;
+    $savmessage->save();
+    return redirect()->back()->with('success','succcesfully sent message');
    }
    public function seenMessage(Request $request){
     $message = Message::where([['sender_id',$request->sender_id],['reciever_id',$request->reciever_id]])->update(['seen_status'=>1]);

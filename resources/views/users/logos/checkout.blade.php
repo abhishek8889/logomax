@@ -13,6 +13,9 @@
     .img-box {
         background: #80808057;
     }
+    .address-confirm-check {
+        width: auto !important;
+    }
 
 </style>
 <?php 
@@ -301,6 +304,7 @@
     <div class="container">
         <form id="progress-form" action="{{ url('logo-checkout') }}" method="post">
             @csrf
+            
             <input type="hidden" name="logo_id" value="{{ $logo->id }}"/>
             <div class="step_form_head" role="tablist">
                 <div class="box_step">
@@ -308,7 +312,7 @@
                         <div class="box_studio">
                             <span class="true_num" aria-hidden="true"> 1 </span>
                             <span class="true_img">
-                            <img src="{{ asset('logomax-front-asset/img/checkout.png') }}" alt="">
+                            <img src="{{ asset('logomax-front-asset/img/check-mark-checkout.svg') }}" alt="">
                             </span>
                         </div>
                         <p> Information</p>
@@ -319,7 +323,7 @@
                         <div class="box_studio">
                             <span class="true_num" aria-hidden="true"> 2 </span>
                             <span class="true_img">
-                            <img src="{{ asset('logomax-front-asset/img/checkout.png') }}" alt="">
+                            <img src="{{ asset('logomax-front-asset/img/check-mark-checkout.svg') }}" alt="">
                             </span>
                         </div>
                         <p> Payment</p>
@@ -330,7 +334,7 @@
                         <div class="box_studio">
                             <span class="true_num" aria-hidden="true"> 3 </span>
                             <span class="true_img">
-                            <img src="{{ asset('logomax-front-asset/img/checkout.png') }}" alt="">
+                            <img src="{{ asset('logomax-front-asset/img/check-mark-checkout.svg') }}" alt="">
                             </span>
                         </div>
                         <p> Confirmation</p>
@@ -344,6 +348,15 @@
                             <h5>Contact information</h5>
                         </div>
                         <div class="text text-danger error-text"></div>
+                        <!-- Email -->      
+                        <div class="form__field form-row form__field ">
+                            <div class="col-md-12 ">
+                                <label for="email">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="email" type="text" class="input-box" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                            </div>
+                        </div>
                         <div class="form-row form__field mt-3 sm:mt-0 ">
                             <div class="col-md-6 ">
                                 <label for="name">
@@ -358,12 +371,31 @@
                                 <input id="name" type="text" class="input-box" name="last_name" value="" placeholder="Last name"   />
                             </div>
                         </div>
+                        <div class="form-row form__field mt-3 sm:mt-0 ">
+                            <div class="col-md-12 ">
+                                <label for="organization">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="organization" class="input-box" type="text" name="organization" value="" placeholder="Organization"   />
+                            </div>
+                        </div>
                         <!--  -->
-                        <div class="mt-3 sm:mt-0 form__field">
-                            <label for="address">
-                                <span  aria-hidden="true"></span>
-                            </label>
-                            <input id="address" type="text" class="input-box" name="address" placeholder="Street, number" />
+                        <div class="form-row mt-3 sm:mt-0 form__field">
+                            <div class="col-md-12 ">
+                                <label for="address">
+                                    <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="address" type="text" class="input-box" name="address" placeholder="Street, number" />
+                            </div>
+                        </div>
+                        <!-- address line 1 -->
+                        <div class="form-row mt-3 sm:mt-0 form__field">
+                            <div class="col-md-12 ">
+                                <label for="additional-address">
+                                    <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="additional-address" type="text" class="input-box" name="additional_address" placeholder="Additional address line" />
+                            </div>
                         </div>
                         
                         <!-- City and zip  -->
@@ -382,32 +414,122 @@
                             </div>
                         </div>
                         <!--  -->
-                        <div class="mt-3 form__field">
-                            <label for="state-address">
-                            <span  aria-hidden="true"></span>
-                            </label>
-                            <input id="state" type="text" class="input-box" name="state" placeholder="State / Province / Region" />
+                        <div class="form-row form__field mt-3 sm:mt-0">
+                            <div class="col-md-12 ">
+                                <label for="state-address">
+                                <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="state" type="text" class="input-box" name="state" placeholder="State / Province / Region" />
+                            </div>
                         </div>
                         
-                        <div class="form-group" >
-                            <select name="country" id="country" style="cursor:pointer;">
-                                @foreach($countries as $k => $v)
-                                <option value="{{$k}}">{{ $v }}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-row form__field mt-3 sm:mt-0" >
+                            <div class="col-md-12 ">
+                                <select name="country"  id="country" style="cursor:pointer;">
+                                    @foreach($countries as $k => $v)
+                                    <option value="{{$k}}">{{ $v }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-12 ">
+                                <input type="checkbox" class="address-confirm-check" id="address-confirm" name="billing_address_confirm" checked>
+                                <label for="address-confirm" class="address-confirm-label" >Use contact address as billing address</label>
+                            </div>
                         </div>
-                        <!-- Email -->
-                        <div class="mt-3 form__field">
-                            <label for="email">
-                                <span aria-hidden="true"></span>
-                            </label>
-                            <input id="email" type="text" class="input-box" name="email" value="{{ auth()->user()->email ?? ''; }}" placeholder="Email" <?php if(isset(auth()->user()->id)){ echo 'readonly'; }  ?>  />
+                    <div id="billing-address" style="display:none;">
+                            <h5>Billing Address</h5>
+                        <div class="form-row form__field mt-3 sm:mt-0 ">
+                            <div class="col-md-6 ">
+                                <label for="name">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_first_name" class="input-box" type="text" name="billing_first_name" value="" placeholder="First name"   />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="name">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_last_name" type="text" class="input-box" name="billing_last_name" value="" placeholder="Last name"   />
+                            </div>
+                        </div>
+                        <div class="form-row form__field mt-3 sm:mt-0 ">
+                            <div class="col-md-12 ">
+                                <label for="organization">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_organization" class="input-box" type="text" name="billing_organization" value="" placeholder="Organization"   />
+                            </div>
                         </div>
                         <!--  -->
+                        <div class="form-row mt-3 sm:mt-0 form__field">
+                            <div class="col-md-12 ">
+                                <label for="address">
+                                    <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_address" type="text" class="input-box" name="billing_address" placeholder="Street, number" />
+                            </div>
+                        </div>
+                        <!-- address line 1 -->
+                        <div class="form-row mt-3 sm:mt-0 form__field">
+                            <div class="col-md-12 ">
+                                <label for="additional-address">
+                                    <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_additional_address" type="text" class="input-box" name="billing_additional_address" placeholder="Additional address line" />
+                            </div>
+                        </div>
+                        
+                        <!-- City and zip  -->
+                        <div class="form-row form__field mt-3 sm:mt-0 ">
+                            <div class="col-md-6 ">
+                                <label for="zip">
+                                    <span aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_zip_code" type="text" class="input-box" name="billing_zip_code" placeholder="Zip / Postal Code" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="city-address">
+                                    <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_city" class="input-box" type="text" name="billing_city" placeholder="City"/>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="form-row form__field mt-3 sm:mt-0">
+                            <div class="col-md-12 ">
+                                <label for="state-address">
+                                <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="billing_state" type="text" class="input-box" name="billing_state" placeholder="State / Province / Region" />
+                            </div>
+                        </div>
+                        <div class="form-row form__field mt-3 sm:mt-0">
+                            <div class="col-md-12 ">
+                                <label for="taxid">
+                                <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="taxid" type="text" class="input-box" name="taxid" placeholder="Tax Id" />
+                            </div>
+                        </div>
+                        <div class="form-row form__field mt-3 sm:mt-0" >
+                            <div class="col-md-12 ">
+                                <select name="billing_country"  id="billing_country" style="cursor:pointer;">
+                                    @foreach($countries as $k => $v)
+                                    <option value="{{$k}}">{{ $v }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                        <!--  -->
                         <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
-                            <button type="button" data-action="next" class="continue_btn" id="add_billing_address">
-                                Continue
-                            </button>
+                            <div class="chk_btn add_btn">
+                                <a href="{{ url('logo/'.$logo->logo_slug) }}" type="button" class="check-back-btn" id="backButton0"  >Back</a>
+                                <button type="button" data-action="next" class="continue_btn" id="add_billing_address">
+                                    Continue
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -419,7 +541,13 @@
                                     <div class="img-box">
                                         <img src="{{ asset($logo->media->image_path) }}" alt="" />
                                     </div>
-                                    <p>{{ $logo->logo_name }}</p>
+                                </div>
+                                <div class="img-text-list">
+                                    <ul>
+                                        <li>Exclusive License</li>
+                                        <li>Rapid, Free Customization</li>
+                                        <li>Immediate Use</li>
+                                    </ul>
                                 </div>
                                 <!-- Logo Price -->
                                 <div class="drawn_data">
@@ -511,7 +639,7 @@
                                 <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- END -->
-                            <div class="total_data num total_price_box">
+                            <div class="total_data num total_price_box subtotal-top-border">
                                 <p><b>Total</b></p>
                                 <p><b>${{ $total_price }}</b></p>
                             </div>
@@ -554,7 +682,7 @@
                             <p>PayPal</p>
                         </div>
                         <div class="crad_img">
-                            <img src="{{ asset('logomax-front-asset/img/pay.png') }}" alt="">
+                            <img src="{{ asset('logomax-front-asset/img/paypal-svg.svg') }}" alt="">
                         </div>
                         </div>
                         <div class="card_detail">
@@ -575,7 +703,7 @@
                         </div>
                         </div>
                     <div class="chk_btn add_btn">
-                        <a type="button" id="backButton1"  >Back</a>
+                        <a type="button" class="check-back-btn" id="backButton1"  >Back</a>
                         <button type="button" data-action="next" class="continue_btn">
                         Continue
                         </button>
@@ -731,7 +859,7 @@
                             Continue & Download
                             </a> -->
 
-                            <a  id="backButton2"   >Back</a>
+                            <a  id="backButton2"  class="check-back-btn" >Back</a>
                             <button type="button" class="formSubmitBtn continue_btn" id="card-button" data-secret="{{ $intent->client_secret }}" >Continue & Download</button>
                         </div>
                         </div>
@@ -855,16 +983,36 @@
     $("#add_billing_address").on('click',function(){
         let address = $("#address").val() ;    
         let email = $("#email").val();
+        let organization = $('#organization').val();
+        let additional_address = $('#additional-address').val();
         let city_address = $("#city-address").val();
         let country = $("#country").val();
         let state = $("#state").val() ; 
         let zip = $("#zip").val();
-        if(address == '' || address ==  undefined || email == "" || email == undefined || city_address == "" || city_address == undefined || country == "" || country == undefined || state == "" || state == undefined || zip == "" || zip == undefined ){
+        if($('input#address-confirm').prop('checked')){
+         console.log('done');
+        if(address == '' || address ==  undefined || email == "" || email == undefined || city_address == "" || city_address == undefined || country == "" || country == undefined || state == "" || state == undefined || zip == "" || zip == undefined || additional_address =="" || additional_address == undefined || organization == "" || organization == undefined){
             $(".error-text").html('All fields are required');
             return false;
         }else{
             $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city_address} ${state} ${zip},${country}</p><p>${email}</p>`);
         }
+    }else{
+        let billing_address = $("#billing_address").val() ;
+        let billing_organization = $('#billing_organization').val();
+        let billing_additional_address = $('#billing_additional_address').val();
+        let billing_city = $("#billing_city").val();
+        let billing_country = $("#billing_country").val();
+        let billing_state = $("#billing_state").val() ; 
+        let billing_zip_code = $("#billing_zip_code").val();
+        let taxid = $('#taxid').val();
+        if(taxid == '' || taxid ==  undefined || billing_zip_code == '' || billing_zip_code ==  undefined || billing_state == '' || billing_state ==  undefined || billing_country == '' || billing_country ==  undefined || billing_city == '' || billing_city ==  undefined || billing_additional_address == '' || billing_additional_address ==  undefined || billing_organization == '' || billing_organization ==  undefined || billing_address == '' || billing_address ==  undefined || address == '' || address ==  undefined || email == "" || email == undefined || city_address == "" || city_address == undefined || country == "" || country == undefined || state == "" || state == undefined || zip == "" || zip == undefined || additional_address =="" || additional_address == undefined || organization == "" || organization == undefined){
+        $(".error-text").html('All fields are required');
+        return false;
+        }else{
+            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${billing_address} ,${billing_city} ${billing_state} ${billing_zip_code},${billing_country}</p><p>${email}</p><p>Additional address:${billing_additional_address}<p><p>Tax id: ${taxid}<p>`);
+        }
+    }
     });
 </script>
 
@@ -1113,11 +1261,23 @@
 
             let address = $("#address").val() ;    
             let email = $("#email").val();
+            let organization = $('#organization').val();
+            let additional_address = $('#additional-address').val();
             let city_address = $("#city-address").val();
             let country = $("#country").val();
             let state = $("#state").val() ; 
             let zip = $("#zip").val();
 
+            let billing_address = $("#billing_address").val() ;
+            let billing_organization = $('#billing_organization').val();
+            let billing_additional_address = $('#billing_additional_address').val();
+            let billing_city = $("#billing_city").val();
+            let billing_country = $("#billing_country").val();
+            let billing_state = $("#billing_state").val() ; 
+            let billing_zip_code = $("#billing_zip_code").val();
+            let taxid = $('#taxid').val();
+
+        if($('#address-confirm').prop('checked')){
             $("#billing_address_box").html(`
     <h6>Billing Address</h6>
         <div class="form-row">
@@ -1125,9 +1285,17 @@
             <label for="inputAddress">Address</label>
             <input type="text" class="form-control" id="inputAddress" name="address" value='${address}' placeholder="123 Main St">
         </div>
+        <div class="form-group col-md-10">
+            <label for="inputAdditionalAddress">Additional Address</label>
+            <input type="text" class="form-control" id="inputAdditionalAddress" name="additionaladdress" value='${additional_address}' placeholder="123 Main St">
+        </div>
         <div class="form-group col-md-6">
             <label for="inputCity">City</label>
             <input type="text" class="form-control" id="inputCity" name="city" value='${city_address}' placeholder="City">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputOrganization">Organization</label>
+            <input type="text" class="form-control" id="inputOrganization" name="organization" value='${organization}' placeholder="organization">
         </div>
         </div>
         <div class="form-row">
@@ -1160,24 +1328,120 @@
         <a id='updateChanges' class=''>Update</a>
         </div>
     `);
-       
+        }else{
+
+            $("#billing_address_box").html(`
+                    <h6>Billing Address</h6>
+                        <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" name="address" value='${billing_address}' placeholder="123 Main St">
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label for="inputAdditionalAddress">Additional Address</label>
+                            <input type="text" class="form-control" id="inputAdditionalAddress" name="additionaladdress" value='${billing_additional_address}' placeholder="123 Main St">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="inputCity" name="city" value='${billing_city}' placeholder="City">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputOrganization">Organization</label>
+                            <input type="text" class="form-control" id="inputOrganization" name="organization" value='${billing_organization}' placeholder="organization">
+                        </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="inputZip">Zip</label>
+                            <input type="text" class="form-control" id="inputZip" name="zip_code" value='${billing_zip_code}' placeholder="Zip">
+                            </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">State</label>
+                            <input type="text" class="form-control" id="inputState" name="state" value='${billing_state}' placeholder="State">
+                        </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputCountry">Country</label>
+                            <select name="country" id="inputCountry" style="cursor:pointer;">
+                                                @foreach($countries as $k => $v ) 
+                                                <option value='{{$k}}' ${billing_country === '{{$k}}' ? 'selected' : ''} >{{ $v }}</option>
+                                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" name='email' value='${email}' placeholder="Email">
+                            <p id='emailError' style='display:none; color:red;'> Enter a Valid Email  </p>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="inputTaxid">Tax Id</label>
+                            <input type="text" class="form-control" id="inputTaxid" name='inputTaxid' value='${taxid}' placeholder="taxid">
+                           
+                        </div>
+                        </div>
+                        <div class="add_btn">
+
+                        <a id='updateChangesBilling' class=''>Update</a>
+                        </div>
+                    `);
+            
+        }
 
         })
         
 </script>
 <script>
     // On clicking the update button it updates the values of the address
-    $(document).on('click', '#updateChanges', function(e) {
+    $(document).on('click', '#updateChangesBilling', function(e) {
         email = $('#inputEmail').val();
         //   Check for Valid Email Address
       var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         if(isValidEmail){
             $('#emailError').hide();
             address = $('#inputAddress').val();
+            additionaladdress = $('#inputAdditionalAddress').val();
+            organization = $('#inputOrganization').val();
             city = $('#inputCity').val();
             zip = $('#inputZip').val();
             state = $('#inputState').val();
             country = $('#inputCountry').val();
+            taxid = $('#inputTaxid').val();
+
+    
+   
+        // update the values of the fields in first page
+            $('#billing_address').val(address);
+            $('#billing_city').val(city);
+            $('#billing_zip_code').val(zip);
+            $('#billing_state').val(state);
+            $('#billing_country').val(country);
+            $('#email').val(email);
+            $('#billing_organization').val(organization);
+            $('#billing_additional_address').val(additionaladdress);
+            $('#taxid').val(taxid);
+        
+            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address},${organization} ,${city} ${state} ${zip},${country}</p><p>${email}</p><p>Additional address:${additionaladdress}<p><p>Tax Id: ${taxid}</p>`);
+
+        }
+        else{
+            $('#emailError').show();
+        }
+        });
+        $(document).on('click', '#updateChanges', function(e) {
+        email = $('#inputEmail').val();
+        //   Check for Valid Email Address
+      var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if(isValidEmail){
+            $('#emailError').hide();
+            address = $('#inputAddress').val();
+            additionaladdress = $('#inputAdditionalAddress').val();
+            organization = $('#inputOrganization').val();
+            city = $('#inputCity').val();
+            zip = $('#inputZip').val();
+            state = $('#inputState').val();
+            country = $('#inputCountry').val();
+
     
    
         // update the values of the fields in first page
@@ -1187,8 +1451,10 @@
             $('#state').val(state);
             $('#country').val(country);
             $('#email').val(email);
+            $('#organization').val(organization);
+            $('#additional-address').val(additionaladdress);
         
-            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address} ,${city} ${state} ${zip},${country}</p><p>${email}</p>`);
+            $("#billing_address_box").html(`<h6>Billing Address</h6><p>${address},${organization} ,${city} ${state} ${zip},${country}</p><p>${email}</p><p>Additional address:${additionaladdress}<p>`);
 
         }
         else{
@@ -1232,5 +1498,22 @@
         // cardElement.mount('#edit-card-elements');
     });
 </script>
-
+<script>
+    $('#address-confirm').on('change',function(){
+        if($(this).prop('checked')){
+            $('#billing-address').hide();
+        }else{
+           $('#billing-address').show();
+           $('input[name="billing_first_name"]').val($('input[name="first_name"]').val());
+           $('input[name="billing_last_name"]').val($('input[name="last_name"]').val());
+           $('input[name="billing_organization"]').val($('input[name="organization"]').val());
+           $('input[name="billing_address"]').val($('input[name="address"]').val());
+           $('input[name="billing_additional_address"]').val($('input[name="additional_address"]').val());
+           $('input[name="billing_zip_code"]').val($('input[name="zip_code"]').val());
+           $('input[name="billing_city"]').val($('input[name="city"]').val());
+           $('input[name="billing_state"]').val($('input[name="state"]').val());
+            $('select[name="billing_country"]').val($('select[name="country"]').val()).change();
+        }
+    });
+</script>
 @endsection

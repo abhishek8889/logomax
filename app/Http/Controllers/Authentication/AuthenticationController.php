@@ -161,7 +161,7 @@ class AuthenticationController extends Controller
             'lname' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
-            'experience' => 'required',
+            // 'experience' => 'required',
             'city' => 'required',
             'address' => 'required',
             'country' => 'required',
@@ -186,7 +186,7 @@ class AuthenticationController extends Controller
         $user->country = $validate['country'];
         $user->address = $validate['address'];
         $user->city = $validate['city'];
-        $user->experience = $validate['experience'];
+        // $user->experience = $validate['experience'];
         $user->email_verified = 0;
         $user->role_id = 2;
         $user->remember_token = $remember_token;

@@ -174,6 +174,7 @@
                                 success: function(response){
                                     message = '<div class="receiver-d"><div class="lp-info d-flex"><div class="lp-img"><img src="{{ asset('logomax_pages/img/lp-chat.png') }}"  class="img-fluid" alt="..."></div><div class="lp-text"><h6>{{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span>10:00 am</span></h6><div class="lv-chat"><p class="b-text">'+message+'</p></div></div></div></div>';
                                     $('#messagebox'+recieverid).append(message);
+                                    console.log('done');
                                     
                                 }
                             })

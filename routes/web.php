@@ -144,6 +144,7 @@ Route::group(['middleware'=>['EnsureUser']],function(){
 
         Route::get('user-dashboard/messages/{id?}',[UserMessageController::class, 'index'])->name('user-messages');
         Route::post('user-dashboard/messagesProcc',[UserMessageController::class,'sendMessage']);
+        Route::post('user-dashboard/directmessagesProcc',[UserMessageController::class,'sendMessageDirect']);
         Route::post('user-dahsboard/seenMessage',[UserMessageController::class,'seenMessage']);
         });
     ////////////////////////////////////////////////////////////////////////////////////////

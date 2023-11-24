@@ -27,7 +27,18 @@ class MetaPagesController extends Controller
         return view('users.meta-pages.about_us',compact('request','meta_title','meta_description','logos'));
     }
     public function reviews(Request $request){
-        $reviews = LogoReview::where('approved',1)->get();
+        $reviews = LogoReview::where('approved',1)->get();           //for count reviews percentage
+        if($request->ratingsearch){
+            if(count(json_decode($request->ratingsearch)) != 0){
+            $reviews_real = LogoReview::whereIn('rating',json_decode($request->ratingsearch))->paginate(3);
+            }else{
+                $reviews_real = LogoReview::where('approved',1)->paginate(3);
+            }
+        }else{
+           
+            $reviews_real = LogoReview::where('approved',1)->paginate(3);   ///for showing reviews in pagination
+        }
+        
         $zerorating = LogoReview::where([['rating',0],['approved',1]])->get();
         $onerating = LogoReview::where([['rating',1],['approved',1]])->get();
         $tworating = LogoReview::where([['rating',2],['approved',1]])->get();
@@ -42,7 +53,7 @@ class MetaPagesController extends Controller
         $meta_language = ReviewContent::where('key','meta-language')->first()->value;
         $meta_country = ReviewContent::where('key','meta-country')->first()->value;
 
-        return view('users.meta-pages.reviews',compact('request','reviews','zerorating','onerating','tworating','threerating','fourrating','fiverating','meta_title','meta_description','meta_language','meta_country'));
+        return view('users.meta-pages.reviews',compact('request','reviews','zerorating','onerating','tworating','threerating','fourrating','fiverating','meta_title','meta_description','meta_language','meta_country','reviews_real'));
     }
     public function support(Request $request){
         $support_text = SupportContent::where('meta_key','support_text')->first();

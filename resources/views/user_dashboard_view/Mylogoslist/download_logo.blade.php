@@ -72,9 +72,11 @@
                                 <div class="load-btn free">
                                     <a href="{{ url('/request-for-revision/'.$orderDetail->order_num) }}" class="request-btn">Request Free Customization</a>
                                 </div><br>
+                                @if(isset($assigneDesginer))
                                 <div class="load-btn free">
                                     <a data-toggle="modal" data-target="#messageModal" class="message-btn">Message</a>
                                 </div>
+                                @endif
                             </div>
                             @if($orderDetail->on_revision == 1)
                                 <div class="alert alert-danger mt-5">
@@ -168,7 +170,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('user-dashboard/messagesProcc') }}" method="post">
+        <form action="{{ url('user-dashboard/directmessagesProcc') }}" method="post">
             @csrf
             <input type="hidden" name="sender_id" value="{{ auth()->user()->id ?? '' }}">
             <input type="hidden" name="reciever_id" value="{{ $assigneDesginer->assigned_designer_id ?? '' }}">

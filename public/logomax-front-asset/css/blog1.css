@@ -370,7 +370,6 @@ ol.breadcrumb {
 .custom-header .main-header input.form-control::placeholder {
     color: #656F79;
     font-family: Montserrat;
-    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -547,15 +546,8 @@ a.asset-id-link__button {
     .similar-logos {
         padding-top: 50px;
     }
-    .similar_img_box.white {
-        height: 200px;
-        width: 100%;
-        max-width: 206px;
-    }
-    .similar_img_box.white  img {
-        max-width: 80px;
-        margin: auto;
-    }
+   
+  
     .vita-img {
         padding-bottom: 170px;
     }
@@ -611,15 +603,7 @@ a.asset-id-link__button {
         font-size: 24px;
         line-height: normal;
     }
-    .similar_img_box.white {
-        height: 172px;
-        width: 100%;
-        max-width: 170px;
-    }
-    .similar_img_box.white  img {
-        max-width: 70px;
-        margin: auto;
-    }
+  
     .slider-sec .logomax-content {
         max-width: 660px;
     }
@@ -732,14 +716,7 @@ a.asset-id-link__button {
         flex-wrap: wrap;
         justify-content: center;
     }
-    .similar_img_box.white {
-        height: 256px;
-        width: 100%;
-        max-width: 254px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+   
     .similar-logos {
         padding-top: 30px;
     }
@@ -773,10 +750,7 @@ a.asset-id-link__button {
     .top-header .side-menu {
         padding-top: 0;
     }
-    .similar_img_box.white {
-        height: 229px;
-        max-width: 244px;
-    }
+   
     .similar_img_box {
         width: 48%;
     }
@@ -840,10 +814,7 @@ a.asset-id-link__button {
     .similar_img_box {
         width: 100%;
     }
-    .similar_img_box.white {
-        height: 229px;
-        max-width: 100%;
-    }
+   
     h4 {
         font-size: 22px;
         line-height: normal;

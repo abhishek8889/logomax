@@ -3,9 +3,9 @@ $('.slick-test').slick({
   dots: false,
   infinite: true,
   speed: 500,
-  slidesToShow: 2,
+  slidesToShow: 3,
   slidesToScroll: 1,
-  arrows: true,
+  arrows: false,
   prevArrow: '<button class="slide-arrow prev-arrow"><i class="fa-solid fa-arrow-left"></i></button>',
   nextArrow: '<button class="slide-arrow next-arrow"><i class="fa-solid fa-arrow-right"></i></button>',
   responsive: [
@@ -955,16 +955,23 @@ $('a#confirm-password').click(function(){
 
 $(document).ready(function(){
   $(".filter-title").click(function(){
+    $(this).parents(".filter-content").addClass("filter_opn")
     $(this).parent().addClass("filter_full")
     $(".search_sec").addClass("search_open")
     $(this).hide()
+    $(".closed-filter-wrap").addClass("fill-wrap")
     $(this).next(".filter-main-button").show()
+    $(".filter-main-button").show()
+    
   })
   $(".filter-collapse").click(function(){
     $(".search_sec").removeClass("search_open")
+    $(".closed-filter-wrap").removeClass("fill-wrap")
     $(this).parent().hide()
     $(".filter-title").show()
-    $(this).parents(".filter-content").removeClass("filter_full")
+    $(this).parents(".filter-content").children(".new_div").removeClass("filter_full")
+    $(this).parents(".filter-content").removeClass("filter_opn")
+
 
   })
 })

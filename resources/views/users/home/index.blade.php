@@ -1,11 +1,7 @@
 @extends('user_layout/master')
 @section('content')
   <!-- ================= banner section start ====================== -->
-<style>
-  input.form-control.search-box::placeholder {
-      font-size: 15px;
-  }
-</style>
+
 <?php $home_banner = \App\Models\SiteMeta::where('meta_key','home-banner')->first();
 
 ?>
@@ -41,7 +37,7 @@
               @foreach ($tags as $t => $tag)
               @if($t < 6)
                 <li>
-                  <a class="design-btn" href="{{ url('logos/search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
+                  <a class="design-btn" href="{{ url('logos/search?realtags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
                 </li>
               @endif
               @endforeach
@@ -282,7 +278,7 @@
             @if($tags->IsNotEmpty())
               @foreach ($tags as $t => $tag)
                 <li class="{{ $t >= 10 ? 'tags-data d-none' : '' }}">
-                  <a href="{{ url('logos/search?tags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
+                  <a href="{{ url('logos/search?realtags=%5B"'.$tag->slug.'"%5D') }}">{{ $tag->name ?? '' }}</a>
                 </li>
               @endforeach
             @else
@@ -322,82 +318,97 @@
       <div class="slick-wrapper">
         <div class="slick-test">
         @foreach($review as $r)
+        <!-- $r->created_at -->
+        <?php 
+          $review_created_at = date('F j, Y', strtotime($r->created_at));
+          $myTitle = $r->title;
+          $firstLetter = substr($myTitle, 0, 2);
+
+        ?>
+
           <div class="slider-box">
-            <div class="slider-content">
-              <p>
-                {{ $r->description ?? '' }}
-              </p>
-            </div>
-            <div class="choice_star">
-              <h6> {{ $r->title ?? ''}} </h6>
-              <div class="choice-text">
-                <!-- <div class="slick-img">
-                  <img src="{{-- asset('logomax-front-asset/img/review-images/stars-'.$r->rating.'.svg') --}}" alt="stars-{{-- $r->rating --}}" width="50%">
-                </div> -->
-                <!--  -->
-                <div class="rating-str d-flex">
-                  <div class="review-site-text">
-                    <div class="str_rate ">
-                      <?php 
-                        switch ($r->rating) {
-                          case 1:
-                            echo '<span class="fullstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span>	';
-                          break;
+            <div class="slider-content ">
+              <div class="review-head">
+                <div class="img-box-head">
+                  {{ strtoupper($firstLetter) }}
+                </div>
+                <div class="title">
+                  <h6> {{ $r->title ?? ''}} </h6>
+                  <p>{{ $review_created_at }}</p>
+                </div>
+              </div>
+              <div class="rating-star">
+                <!-- rating -->
+                <div class="choice_star">
+                  <div class="choice-text">
+                    <div class="rating-str d-flex">
+                      <div class="review-site-text">
+                        <div class="str_rate ">
+                          <?php 
+                            switch ($r->rating) {
+                              case 1:
+                                echo '<span class="fullstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span><span class="blankstar"></span>	';
+                              break;
 
-                          case 2:
-                            echo '
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="blankstar"></span>
-                            <span class="blankstar"></span>
-                            <span class="blankstar"></span>	
-                            ';
-                          break;
+                              case 2:
+                                echo '
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="blankstar"></span>
+                                <span class="blankstar"></span>
+                                <span class="blankstar"></span>	
+                                ';
+                              break;
 
-                          case 3:
-                            echo ' 
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="blankstar"></span>
-                            <span class="blankstar"></span>	
-                            ';
-                          break;
+                              case 3:
+                                echo ' 
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="blankstar"></span>
+                                <span class="blankstar"></span>	
+                                ';
+                              break;
 
-                          case 4:
-                            echo '
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="blankstar"></span>	
-                            ';
-                          break;
+                              case 4:
+                                echo '
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="blankstar"></span>	
+                                ';
+                              break;
 
-                          case 5 :
-                            echo '<span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>
-                            <span class="fullstar"></span>';
-                          break;
+                              case 5 :
+                                echo '<span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>
+                                <span class="fullstar"></span>';
+                              break;
 
-                          default:
-                          echo '<span class="fullstar"></span> <span class="fullstar"></span><span class="fullstar"></span><span class="fullstar"></span> <span class="fullstar"></span>';
-                        }
-                      ?>
+                              default:
+                              echo '<span class="fullstar"></span> <span class="fullstar"></span><span class="fullstar"></span><span class="fullstar"></span> <span class="fullstar"></span>';
+                            }
+                          ?>
+                        </div>
+                      </div>
+                      <div class="opn-rt">
+                        <a href="#">
+                          <span class="text text-dark">{{ $r->rating }}.0</span>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div class="opn-rt">
-                    <a href="#">
-                      <span class="text text-dark">{{ $r->rating }}.0</span>
-                      <!-- <span style="text-decoration: underline;">1 opinion</span> -->
-                    </a>
                   </div>
                 </div>
                 <!--  -->
               </div>
+              <div class="review-text">
+                <p>{{ $r->description ?? '' }}</p>
+              </div>
             </div>
+            
           </div>
       @endforeach
         </div>

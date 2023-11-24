@@ -29,7 +29,7 @@
                                             <select class=" form-control" name="" id="select_designer">
                                                 @if(isset($specialDesigners) && (count($specialDesigners) > 0))
                                                 @foreach($specialDesigners as $special_designer)   
-                                                    <option value="{{ $special_designer->id }}">{{ $special_designer->name }} </option>
+                                                    <option value="{{ $special_designer->id }}">{{ $special_designer->first_name ?? '' }} {{ $special_designer->last_name ?? '' }}</option>
                                                 @endforeach
                                                 @else
                                                     <option value="">No Special designer in list</option>
@@ -82,7 +82,7 @@
                         <tr id="designer_{{ $backup_designer->id }}_row" class="backup_designer_class">
                             <th scope="row">{{ $count }}</th>
                             <td>                      
-                                <input type="checkbox" class="backup_designer_list" name="backup_designer_id[]" value="{{ $backup_designer->id }}" id="designer_{{ $backup_designer->id }}"/> <label for="designer_{{ $backup_designer->id }}">{{ $backup_designer->name }}</label> <br>
+                                <input type="checkbox" class="backup_designer_list" name="backup_designer_id[]" value="{{ $backup_designer->id }}" id="designer_{{ $backup_designer->id }}"/> <label for="designer_{{ $backup_designer->id }}">{{ $backup_designer->first_name ?? '' }} {{ $backup_designer->last_name ?? '' }}</label> <br>
                             </td>
                             <!-- <td> $backup_designer->experience </td> -->
                         </tr>

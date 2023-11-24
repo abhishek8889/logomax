@@ -18,19 +18,19 @@ class AboutUsContent extends Seeder
             [
                 'name' => 'Upper Text Title',
                 'key' => 'upper-text-title',
-                'value' => '<h2>Our mission&nbsp;</h2>',
+                'value' => '',
                 'type' => 'textarea',
             ],
             [
                 'name' => 'Upper Text Left',
                 'key' => 'upper-text-left',
-                'value' => '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>',
+                'value' => "<h2>About Logomax</h2><p><em>Unveiling Unique Identities, One Logo at a Time</em></p><p>Welcome to Logomax, where exclusivity meets design. In a digital world brimming with repetitive and overused logos, we stand out by oﬀering a unique proposition - exclusive, once-in-a-lifetime logos. Established 2012, Logomax has been dedicated to creating and curating a diverse range of logo designs, each sold only once. At Logomax, we understand that a logo is more than just a graphic; it's the face of your brand, a visual story waiting to be told. Our platform brings together skilled designers from across the globe, each contributing to our eclectic mix of styles. Whether you're a budding startup or a seasoned enterprise, our collection has something for every brand personality.</p>",
                 'type' => 'textarea',
             ],
             [
                 'name' => 'Upper Text Right',
                 'key' => 'upper-text-right',
-                'value' => '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>',
+                'value' => "<h2>Our Vision</h2><p><em>Crafting Distinctive Brands with Exclusive Designs</em></p><p>Our vision at Logomax is simple yet profound - to empower businesses with the ability to own a distinctive piece of art that sets them apart. With Logomax, when you buy a logo, you're not just making a purchase; you're claiming exclusivity. You become the sole owner of a design that can deﬁne your brand for years to come.</p><p>We specialize in two tiers of logos - Low-priced Logos and Premium Logos, catering to a wide range of budgets without compromising on the uniqueness and quality of designs. Our categories, including Leter Mark Logos, Pictorial Mark Logos, Abstract Logos, Emblem Logos, Dynamic Logos, Minimalistic Logos, Geometric Logos and Combination Logos, ensure that you ﬁnd a logo that resonates with your brand's ethos eﬀortlessly.</p>",
                 'type' => 'textarea',
             ],
             [
@@ -62,7 +62,7 @@ class AboutUsContent extends Seeder
             [
                 'name' => 'video Text',
                 'key' => 'video-text',
-                'value' => '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>',
+                'value' => '<h2>Our Commitment</h2><p>Ensuring Satisfaction with Every Logo Story</p>',
                 'type' => 'textarea',
             ],
             [
@@ -74,7 +74,7 @@ class AboutUsContent extends Seeder
             [
                 'name' => 'Join Us',
                 'key' => 'join-us',
-                'value' => '<h2>Want to work with us?</h2><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.</p>',
+                'value' => "<h2>Want to work with us?</h2><p>Choosing Logomax means opening for originality, exclusivity, and a commitment to quality. Join us in redeﬁning the way the world sees logos. With Logomax, embark on a journey to a distinctive brand identity that's truly your own.</p>",
                 'type' => 'textarea',
             ],
             [

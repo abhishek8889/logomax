@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     
-  <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?khbkhsdfsdghgvgh')}}">
+  <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?k12112nh?5?14511112??12??12??1HG421212gvgh')}}">
   <!-- <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}"> -->
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/custom.css')}}">
@@ -53,30 +53,25 @@
   <!-- ================= header section start ====================== -->
 <?php 
   $siteMeta = App\Models\SiteMeta::all();
-  $homePageSiteLogo =  asset('logomax-front-asset/img/logo.png'); 
-  $otherPageSiteLogo =    asset('logomax-front-asset/img/custom-logo.png');
-  $footer_logo = asset('logomax-front-asset/img/Group 15.png');
+
+  $homePageSiteLogo =  asset('logomax-front-asset/img/logomax-logo-white.svg'); 
+  $otherPageSiteLogo =    asset('logomax-front-asset/img/logomax-logo-colored.svg');
+  $footer_logo = asset('logomax-front-asset/img/logomax-logo-white.svg');
+
   foreach($siteMeta as $metaData){
     if($metaData->meta_key == 'home-page-site-logo'){
       if(!empty($metaData->meta_value)){
         $homePageSiteLogo = asset('/siteMeta/'.$metaData->meta_value); 
-      }else{
-        $homePageSiteLogo =  asset('logomax-front-asset/img/logo.png'); 
       }
     }
     if($metaData->meta_key == 'other-pages-site-logo'){
       if(!empty($metaData->meta_value)){
         $otherPageSiteLogo = asset('/siteMeta/'.$metaData->meta_value);
-      }else{
-        $otherPageSiteLogo = asset('logomax-front-asset/img/custom-logo.png'); 
       }
-      
     }
     if($metaData->meta_key == 'footer-logo'){
       if(!empty($metaData->meta_value)){
         $footer_logo = asset('/siteMeta/'.$metaData->meta_value);
-      }else{
-        $footer_logo = asset('logomax-front-asset/img/Group 15.png'); 
       }
     }
   }
@@ -84,7 +79,7 @@
 ?>
   <header class="header <?php if(isset($request)){if($request->url() != url('/')){ echo " custom-header"; }} ?> {{
     $request }}">
-    <div class="top-header">
+    <div class="top-header <?php if(isset($request)){if($request->url() == url('/')){ echo " home-page-se"; }} ?>">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -107,17 +102,13 @@
                   aria-haspopup="true" aria-expanded="false">
                   Category
                 </a>
+                <span class="cus-drop"><i class="fa-thin fa-angle-down"></i></span>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($categories->isNotEmpty())
                   @foreach($categories as $ind =>  $cat)
                   <a class="dropdown-item" href="{{ url('logos/search?categories=%5B"'.$cat->slug.'"%5D') }}">{{
                     $cat->name ?? '' }}</a>
-                    @if($ind > 5)
-                        <div class="show-more-btn">
-                            <a href="javascript:void(0)" class="show_more_btn dropdown-item" type="categories" class="text text-primary pe-auto">Show more</a> 
-                        </div>
-                        @break
-                    @endif
+                    
                   @endforeach
                   @endif
                 </div>
@@ -127,17 +118,13 @@
                   aria-haspopup="true" aria-expanded="false">
                   Branch
                 </a>
+                <span class="cus-drop"><i class="fa-thin fa-angle-down"></i></span>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if($branches->isNotEmpty())
                   @foreach($branches as $ind => $branch)
                   <a class="dropdown-item" href="{{ url('logos/search?branches=%5B"'.$branch->slug.'"%5D') }}">{{
                     $branch->name ?? '' }}</a>
-                    @if($ind > 5)
-                    <div class="show-more-btn">
-                      <a href="" class="show_more_btn dropdown-item" type="branches" class="text text-primary pe-auto">Show more</a> 
-                    </div>
-                        @break
-                    @endif
+                    
                   @endforeach
                   @endif
                 </div>
@@ -148,17 +135,12 @@
                   aria-haspopup="true" aria-expanded="false">
                   Logomark
                 </a>
+                <span class="cus-drop"><i class="fa-thin fa-angle-down"></i></span>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if($styles->isNotEmpty())
                   @foreach($styles as $ind => $style)
                   <a class="dropdown-item" href="{{ url('logos/search?styles=%5B"'.$style->slug.'"%5D') }}">{{
                     $style->name ?? '' }}</a>
-                    @if($ind > 5)
-                        <div class="show-more-btn">
-                            <a href="javascript:void(0)" class="show_more_btn dropdown-item" type="styles" class="text text-primary pe-auto">Show more</a> 
-                        </div>
-                        @break
-                    @endif
                   @endforeach
                   @endif
                 </div>
