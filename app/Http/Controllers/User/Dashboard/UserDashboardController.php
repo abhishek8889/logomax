@@ -26,10 +26,6 @@ use ZipArchive;
 use Hash;
 
 
-
-
-
-
 class UserDashboardController extends Controller
 {
     public function userOrders(Request $request){

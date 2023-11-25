@@ -2265,7 +2265,7 @@ a.login.password::after {
 .continue_btn {
     border-radius: 130px;
     background: #000;
-    padding: 20px 50px;
+    padding: 15px 32px !important;
     display: inline-block;
     margin-top: 30px;
     font-size: 16px;
@@ -3387,15 +3387,15 @@ span.blankstar {
 }
 
 .review-site-text span.fullstar::after {
-    content: "٭";
-    font-family: 'fontAwesome';
-    font-size: 35px;
-    margin: 0;
+    content: "\f155";
 }
-
+.review-site-text span::after {
+    font-family: 'dashicons';
+    margin: 0;
+        font-size: 20px;
+}
 .review-site-text span.blankstar::after {
-    content: "٭";
-    font-size: 35px;
+    content: "\f154";
 }
 
 .review-text {
@@ -3436,12 +3436,6 @@ span.blankstar {
 
 .review-text::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
-
-span.blankstar::after {
-    content: "\f005";
-    font-family: 'fontAwesome';
-    font-size: 24px;
 }
 
 /* span.blankstar::after {
@@ -3609,15 +3603,17 @@ span.blankstar::after {
 }
 
 .round label {
-    background-color: #002655;
+    background-color: #ffffff;
     border: 1px solid #002655;
     border-radius: 50%;
     cursor: pointer;
-    height: 15px;
+    height: 20px;
     left: 0px;
     position: absolute;
     top: 0px;
-    width: 15px;
+        width: 20px;
+    min-width: 20px;
+    border-radius: 5px;
 }
 
 .round span {
@@ -3625,7 +3621,28 @@ span.blankstar::after {
     font-size: 18px;
     line-height: 0px;
 }
+.round label:before {
+    content: "";
+    height: 6px;
+    width: 12px;
+    border: 2px solid #002655;
+    position: absolute;
+    top: 5px;
+    transform: rotate(-45deg) scale(0);
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    display: block;
+    border-width: 0px 0px 2px 2px;
+    left: 1px;
+    transition: all 0.3s linear;
+    opacity: 0;
+}
 
+.round input[type="checkbox"]:checked+label:before {
+    opacity: 1;
+    transform: scale(1) rotate(-45deg);
+}
 .ryt-side .per-txt {
     color: #002655;
     font-size: 18px;

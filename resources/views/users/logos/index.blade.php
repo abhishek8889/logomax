@@ -232,7 +232,7 @@
                                 <button class="filter-collapse" style="cursor:pointer;">
                                     <img src="{{ asset('logomax-front-asset/img/filter.svg') }}" alt="">
                                     <span style="cursor:pointer;">
-                                        Filters <span class="badge badge--blue">{{ $totalFiltercount }}</span>
+                                        Filters <span class="badge badge--blue" id="counttotalfilter">{{ $totalFiltercount }}</span>
                                     </span>
                                 </button>
                             </div>
@@ -370,11 +370,14 @@
                 name = $(this).attr('categoryname');
                 htmlappend = '<label id="selectedcat'+val+'"><div class="filtr_box filter-box"><a slug="'+val+'" >'+name+' </a><a class="removecat" slug="'+val+'" ><i class="fas fa-times"></i></a></div></label>';
                
+                totalfiltersvalues = parseInt($('#counttotalfilter').html());
                 
                 if($(this).prop('checked') == true){
                     categories.push(val);
                     $('#filtered_attr').append(htmlappend);
+                    $('#counttotalfilter').html(totalfiltersvalues+1);
                 }else{
+                    $('#counttotalfilter').html(totalfiltersvalues-1);
                     $('#selectedcat'+val).remove();
                     categories = jQuery.grep(categories, function(value) {
                             return value != val;
@@ -396,7 +399,8 @@
                 $("body").delegate('.removecat','click',function(e){
                         e.preventDefault();
                         slug = $(this).attr('slug');
-                        console.log(categories);
+                        totalfiltersvalues = parseInt($('#counttotalfilter').html());
+                        $('#counttotalfilter').html(totalfiltersvalues-1);
                         categories = jQuery.grep(categories, function(value) {
                                             return value != slug;
                                     });
@@ -418,16 +422,17 @@
                 styleval = $(this).val();
                 stylename = $(this).attr('stylename');
                 stylehtml = '<label id="selectedstyle'+styleval+'"><div class="filtr_box filter-box"><a slug="'+styleval+'" >'+stylename+' </a><a class="removestyle" slug="'+styleval+'" ><i class="fas fa-times"></i></a></div></label>';
+                totalfiltersvalues = parseInt($('#counttotalfilter').html());
                 if($(this).prop('checked') == true){
                     styles.push(styleval);  
                     $('#filtered_attr').append(stylehtml);
-
+                    $('#counttotalfilter').html(totalfiltersvalues+1);
                 }else{
                     styles = jQuery.grep(styles, function(value) {
                             return value != styleval;
                     });
                     $('#selectedstyle'+styleval).remove();
-                    
+                    $('#counttotalfilter').html(totalfiltersvalues-1);
                 }
                 let stateObj = { id: "100" }; 
                 let categoriesString = encodeURIComponent(JSON.stringify(categories));
@@ -443,6 +448,8 @@
             ///removestyle
             $("body").delegate('.removestyle','click',function(e){
                         e.preventDefault();
+                        totalfiltersvalues = parseInt($('#counttotalfilter').html());
+                        $('#counttotalfilter').html(totalfiltersvalues-1);
                         slug = $(this).attr('slug');
                         styles = jQuery.grep(styles, function(value) {
                                             return value != slug;
@@ -488,10 +495,13 @@
                 branchvalue = $(this).val();
                 branchname = $(this).attr('branchname');
                 branchhtml = '<label id="selectedbranch'+branchvalue+'"><div class="filtr_box filter-box"><a slug="'+branchvalue+'" >'+branchname+' </a><a class="removebranch" slug="'+branchvalue+'" ><i class="fas fa-times"></i></a></div></label>';
+                totalfiltersvalues = parseInt($('#counttotalfilter').html());
                 if($(this).prop('checked') == true){
+                    $('#counttotalfilter').html(totalfiltersvalues+1);
                     branches.push(branchvalue);
                     $('#filtered_attr').append(branchhtml);  
                 }else{
+                    $('#counttotalfilter').html(totalfiltersvalues-1);
                     branches = jQuery.grep(branches, function(value) {
                             return value != branchvalue;
                     });  
@@ -511,7 +521,8 @@
                          $("body").delegate('.removebranch','click',function(e){
                                     e.preventDefault();
                                     slug = $(this).attr('slug');
-                                    
+                                    totalfiltersvalues = parseInt($('#counttotalfilter').html());
+                                    $('#counttotalfilter').html(totalfiltersvalues-1)
                                     branches = jQuery.grep(branches, function(value) {
                                                         return value != slug;
                                                 });
@@ -548,10 +559,10 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Log in'
+                confirmButtonText: 'Log In'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#exampleloginModal').modal('show');
+                    location.href="{{ url('login') }}";
                 }
             })
         @endif

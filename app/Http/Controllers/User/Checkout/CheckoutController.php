@@ -33,7 +33,8 @@ class CheckoutController extends Controller
     public function checkoutProcess(Request $req){
         if($req->billing_address_confirm == 'on'){
             $validated = $req->validate([
-                // 'name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
                 'email' => 'required',
                 'address' => 'required',
                 'organization' => 'required',
@@ -59,7 +60,8 @@ class CheckoutController extends Controller
           
 
             $validated = $req->validate([
-                // 'name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
                 'email' => 'required',
                 'billing_address' => 'required',
                 'billing_organization' => 'required',

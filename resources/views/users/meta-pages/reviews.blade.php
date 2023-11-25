@@ -68,10 +68,10 @@ if(count($reviews) == 0){
                   <div class="star_Av review-site-text">
                   <div class="str_rate ">
                     <span class="fullstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>			
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>			
                   </div>
                 </div>
                 </div>
@@ -91,9 +91,9 @@ if(count($reviews) == 0){
                   <div class="star_Av review-site-text">
                   <div class="str_rate ">
                     <span class="fullstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
                     <span class="blankstar" style="color:#ccc;"></span>			
                   </div>
                 </div>
@@ -114,8 +114,8 @@ if(count($reviews) == 0){
                   <div class="star_Av review-site-text">
                   <div class="str_rate ">
                     <span class="fullstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
                     <span class="blankstar" style="color:#ccc;"></span>
                     <span class="blankstar" style="color:#ccc;"></span>			
                   </div>
@@ -137,7 +137,7 @@ if(count($reviews) == 0){
                   <div class="star_Av review-site-text">
                   <div class="str_rate ">
                     <span class="fullstar" style="color:#FBBC04;"></span>
-                    <span class="blankstar" style="color:#FBBC04;"></span>
+                    <span class="fullstar" style="color:#FBBC04;"></span>
                     <span class="blankstar" style="color:#ccc;"></span>
                     <span class="blankstar" style="color:#ccc;"></span>
                     <span class="blankstar" style="color:#ccc;"></span>			

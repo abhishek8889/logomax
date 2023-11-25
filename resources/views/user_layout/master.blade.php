@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    
+  <link rel='stylesheet' id='dashicons-css' href='https://documentos-legales.mx/wp-includes/css/dashicons.min.css?ver=6.4.1' media='all' />
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/style.css?k12112nh?5?14511112??12??12??1HG421212gvgh')}}">
   <!-- <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/filter.css')}}"> -->
   <link rel="stylesheet" href="{{asset('/logomax-front-asset/css/blog1.css')}}">

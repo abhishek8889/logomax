@@ -305,10 +305,10 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Login'
+                confirmButtonText: 'Log In'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#exampleloginModal').modal('show');
+                   location.href="{{ url('login') }}";
                 }
             })
         @endif

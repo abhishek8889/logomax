@@ -18,6 +18,7 @@
     }
 
 </style>
+
 <?php 
     $countries = array(
         "AF" => "Afghanistan",
@@ -362,13 +363,13 @@
                                 <label for="name">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="first_name" class="input-box" type="text" name="first_name" value="" placeholder="First name"   />
+                                <input id="first_name" class="input-box" type="text" name="first_name" value="{{ auth()->user()->first_name ?? '' }}" placeholder="First name"  />
                             </div>
                             <div class="col-md-6">
                                 <label for="name">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="name" type="text" class="input-box" name="last_name" value="" placeholder="Last name"   />
+                                <input id="name" type="text" class="input-box" name="last_name" value="{{ auth()->user()->last_name ?? '' }}" placeholder="Last name"   />
                             </div>
                         </div>
                         <div class="form-row form__field mt-3 sm:mt-0 ">
@@ -376,7 +377,7 @@
                                 <label for="organization">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="organization" class="input-box" type="text" name="organization" value="" placeholder="Organization"   />
+                                <input id="organization" class="input-box" type="text" name="organization" value="{{ auth()->user()->organization ?? '' }}" placeholder="Organization"   />
                             </div>
                         </div>
                         <!--  -->
@@ -385,7 +386,7 @@
                                 <label for="address">
                                     <span  aria-hidden="true"></span>
                                 </label>
-                                <input id="address" type="text" class="input-box" name="address" placeholder="Street, number" />
+                                <input id="address" type="text" class="input-box" name="address" value="{{ auth()->user()->address ?? '' }}" placeholder="Street, number" />
                             </div>
                         </div>
                         <!-- address line 1 -->
@@ -394,7 +395,7 @@
                                 <label for="additional-address">
                                     <span  aria-hidden="true"></span>
                                 </label>
-                                <input id="additional-address" type="text" class="input-box" name="additional_address" placeholder="Additional address line" />
+                                <input id="additional-address" type="text" class="input-box" name="additional_address" value="{{ auth()->user()->additional_address ?? '' }}" placeholder="Additional address line" />
                             </div>
                         </div>
                         
@@ -404,13 +405,13 @@
                                 <label for="zip">
                                     <span aria-hidden="true"></span>
                                 </label>
-                                <input id="zip" type="text" class="input-box" name="zip_code" placeholder="Zip / Postal Code" />
+                                <input id="zip" type="text" class="input-box" name="zip_code" value="{{ auth()->user()->zip_code ?? '' }}" placeholder="Zip / Postal Code" />
                             </div>
                             <div class="col-md-6">
                                 <label for="city-address">
                                     <span  aria-hidden="true"></span>
                                 </label>
-                                <input id="city-address" class="input-box" type="text" name="city" placeholder="City"/>
+                                <input id="city-address" class="input-box" type="text" name="city" value="{{ auth()->user()->city ?? '' }}" placeholder="City"/>
                             </div>
                         </div>
                         <!--  -->
@@ -419,7 +420,7 @@
                                 <label for="state-address">
                                 <span  aria-hidden="true"></span>
                                 </label>
-                                <input id="state" type="text" class="input-box" name="state" placeholder="State / Province / Region" />
+                                <input id="state" type="text" class="input-box" name="state" value="{{ auth()->user()->state ?? '' }}" placeholder="State / Province / Region" />
                             </div>
                         </div>
                         
@@ -427,7 +428,7 @@
                             <div class="col-md-12 ">
                                 <select name="country"  id="country" style="cursor:pointer;">
                                     @foreach($countries as $k => $v)
-                                    <option value="{{$k}}">{{ $v }}</option>
+                                    <option @if(auth()->check()) @if(auth()->user()->country == $k) selected  @endif @endif value="{{$k}}">{{ $v }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -503,14 +504,7 @@
                                 <input id="billing_state" type="text" class="input-box" name="billing_state" placeholder="State / Province / Region" />
                             </div>
                         </div>
-                        <div class="form-row form__field mt-3 sm:mt-0">
-                            <div class="col-md-12 ">
-                                <label for="taxid">
-                                <span  aria-hidden="true"></span>
-                                </label>
-                                <input id="taxid" type="text" class="input-box" name="taxid" placeholder="Tax Id" />
-                            </div>
-                        </div>
+                        
                         <div class="form-row form__field mt-3 sm:mt-0" >
                             <div class="col-md-12 ">
                                 <select name="billing_country"  id="billing_country" style="cursor:pointer;">
@@ -518,6 +512,14 @@
                                     <option value="{{$k}}">{{ $v }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-row form__field mt-3 sm:mt-0">
+                            <div class="col-md-12 ">
+                                <label for="taxid">
+                                <span  aria-hidden="true"></span>
+                                </label>
+                                <input id="taxid" type="text" class="input-box" name="taxid" placeholder="Tax Id" />
                             </div>
                         </div>
                     </div>
@@ -717,7 +719,13 @@
                                     <div class="img-box">
                                         <img src="{{ asset($logo->media->image_path) }}" alt="" />
                                     </div>
-                                    <p>{{ $logo->logo_name }}</p>
+                                </div>
+                                <div class="img-text-list">
+                                    <ul>
+                                        <li>Exclusive License</li>
+                                        <li>Rapid, Free Customization</li>
+                                        <li>Immediate Use</li>
+                                    </ul>
                                 </div>
                                 <!-- Logo Price -->
                                 <div class="drawn_data">
@@ -809,7 +817,7 @@
                                 <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- END -->
-                            <div class="total_data num total_price_box">
+                            <div class="total_data num total_price_box subtotal-top-border">
                                 <p><b>Total</b></p>
                                 <p><b>${{ $total_price }}</b></p>
                             </div>
@@ -873,7 +881,13 @@
                                     <div class="img-box">
                                         <img src="{{ asset($logo->media->image_path) }}" alt="" />
                                     </div>
-                                    <p>{{ $logo->logo_name }}</p>
+                                </div>
+                                <div class="img-text-list">
+                                    <ul>
+                                        <li>Exclusive License</li>
+                                        <li>Rapid, Free Customization</li>
+                                        <li>Immediate Use</li>
+                                    </ul>
                                 </div>
                                 <!-- Logo Price -->
                                 <div class="drawn_data">
@@ -945,6 +959,8 @@
                             <input type="hidden" name="total_price" value="{{ $total_price }}" />
                             <!-- End -->
                             <div class="table_data">
+                            
+                            
                             <!-- Selected additional options value are here  -->
                             <div class="total_data save-logo-future-box">
                                 
@@ -963,7 +979,7 @@
                                 <p class="gst_cut_val">${{ $gst_cut }}</p>
                             </div>
                             <!-- END -->
-                            <div class="total_data num total_price_box">
+                            <div class="total_data num total_price_box subtotal-top-border">
                                 <p><b>Total</b></p>
                                 <p><b>${{ $total_price }}</b></p>
                             </div>
@@ -1407,7 +1423,9 @@
             state = $('#inputState').val();
             country = $('#inputCountry').val();
             taxid = $('#inputTaxid').val();
-
+            if(address == "" || address == null || additionaladdress == "" || additionaladdress == null || organization == null || organization == "" || city == null || city == "" || zip == null || zip == "" || state == null || state == "" || country == null || country == "" || taxid == "" || taxid == null){
+                return false;
+            }
     
    
         // update the values of the fields in first page
@@ -1442,7 +1460,9 @@
             state = $('#inputState').val();
             country = $('#inputCountry').val();
 
-    
+            if(address == "" || address == null || additionaladdress == "" || additionaladdress == null || organization == null || organization == "" || city == null || city == "" || zip == null || zip == "" || state == null || state == "" || country == null || country == ""){
+                return false;
+            }
    
         // update the values of the fields in first page
             $('#address').val(address);
