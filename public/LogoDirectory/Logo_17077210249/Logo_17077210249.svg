@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="1066.6667"
+   height="800"
+   viewBox="0 0 1066.6667 800"
+   sodipodi:docname="Logo_17077210249.eps"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="ink_ext_XXXXXX"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,800)">
+    <g
+       id="g10"
+       transform="scale(0.1)">
+      <path
+         d="M 8000,0 H 0 V 6000 H 8000 V 0"
+         style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path12" />
+      <path
+         d="m 5757.56,5139.5 -2248.08,-2427.05 -1348.85,-95.74 1021.85,936.65 -974.18,54.7 -633.53,1264.81 2288.94,-464.91 1893.85,731.54"
+         style="fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path14" />
+      <path
+         d="m 6765.82,2664.58 v 246.12 l -1103.59,1763.91 95.33,170.91 1355.7,-2180.94 h -347.44"
+         style="fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path16" />
+      <path
+         d="m 1724.62,4291.73 -211.14,-1005 h -306.57 l 306.57,1387.88 211.14,-382.88"
+         style="fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path18" />
+      <path
+         d="M 1513.48,3033.75 V 2500.5 H 886.746 Z"
+         style="fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path20" />
+      <g
+         id="g22"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,275.333,96.5512)"
+           style="font-variant:normal;font-weight:normal;font-size:36.303px;font-family:'Courier New';-inkscape-font-specification:Courier;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text26"><tspan
+             x="0 31.945696 54.163654 73.803093 98.126526 104.7691 123.86479 146.33589 161.65544 190.77069 210.80977 224.85939"
+             y="0"
+             sodipodi:role="line"
+             id="tspan24">Move Forward</tspan></text>
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,77.997,149.3598)"
+           style="font-variant:normal;font-weight:normal;font-size:96.808px;font-family:'Courier New';-inkscape-font-specification:Courier;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text30"><tspan
+             x="0 54.114838 112.19964 198.64696 242.01723 301.26334 364.28519"
+             y="0"
+             sodipodi:role="line"
+             id="tspan28">COMPANY</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

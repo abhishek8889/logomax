@@ -1,0 +1,63 @@
+[04-Dec-2023 08:27:10 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/customer/www/logomax.com/public_html/vendor/composer/platform_check.php on line 24
+[04-Dec-2023 08:27:47 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/customer/www/logomax.com/public_html/vendor/composer/platform_check.php on line 24
+[06-Dec-2023 05:44:16 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/app/Http/Middleware/SetLocale.php on line 19
+[06-Dec-2023 05:44:18 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/app/Http/Middleware/SetLocale.php on line 19
+[06-Dec-2023 13:02:17 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "App\Http\Kernel" does not exist in /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('App\\Http\\Kernel')
+#1 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('App\\Http\\Kernel')
+#2 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(955): Illuminate\Container\Container->resolve('App\\Http\\Kernel', Array, false)
+#3 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(297): Illuminate\Foundation\Application->resolve('App\\Http\\Kernel', Array, false)
+#4 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(908): Illuminate\Container\Container->Illuminate\Container\{closure}(Object(Illuminate\Foundation\Application), Array)
+#5 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build(Object(Closure))
+#6 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(955): Illuminate\Container\Container->resolve('Illuminate\\Cont...', Array, true)
+#7 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array)
+#8 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(940): Illuminate\Container\Container->make('Illuminate\\Cont...', Array)
+#9 /home/customer/www/logomax.com/public_html/public/index.php(49): Illuminate\Foundation\Application->make('Illuminate\\Cont...')
+#10 /home/customer/www/logomax.com/public_html/index.php(2): require_once('/home/customer/...')
+#11 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [App\Http\Kernel] does not exist. in /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('App\\Http\\Kernel')
+#1 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(955): Illuminate\Container\Container->resolve('App\\Http\\Kernel', Array, false)
+#2 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(297): Illuminate\Foundation\Application->resolve('App\\Http\\Kernel', Array, false)
+#3 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(908): Illuminate\Container\Container->Illuminate\Container\{closure}(Object(Illuminate\Foundation\Application), Array)
+#4 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build(Object(Closure))
+#5 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(955): Illuminate\Container\Container->resolve('Illuminate\\Cont...', Array, true)
+#6 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array)
+#7 /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(940): Illuminate\Container\Container->make('Illuminate\\Cont...', Array)
+#8 /home/customer/www/logomax.com/public_html/public/index.php(49): Illuminate\Foundation\Application->make('Illuminate\\Cont...')
+#9 /home/customer/www/logomax.com/public_html/index.php(2): require_once('/home/customer/...')
+#10 {main}
+  thrown in /home/customer/www/logomax.com/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[07-Dec-2023 08:31:20 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:31:22 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:31:28 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:31:30 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:31:32 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:32:37 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:32:39 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:33:23 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:33:25 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:36:31 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:38:11 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:39:27 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/database/seeders/HomeContentSeeder.php on line 10
+[07-Dec-2023 08:39:32 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/database/seeders/HomeContentSeeder.php on line 10
+[07-Dec-2023 08:40:17 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[07-Dec-2023 08:40:21 UTC] PHP Fatal error:  Trait "App\Models\HasTranslations" not found in /home/customer/www/logomax.com/public_html/app/Models/HomeContent.php on line 8
+[19-Dec-2023 06:52:20 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/customer/www/logomax.com/public_html/vendor/composer/platform_check.php on line 24
+[22-Dec-2023 07:20:20 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/app/Http/Controllers/User/Dashboard/UserDashboardController.php on line 235
+[27-Dec-2023 12:26:42 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/storage/framework/views/85b351d25e69557dbbe7a598edfe0b6c.php on line 421
+[27-Dec-2023 12:31:27 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/storage/framework/views/85b351d25e69557dbbe7a598edfe0b6c.php on line 421
+[01-Jan-2024 10:12:21 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/storage/framework/views/85b351d25e69557dbbe7a598edfe0b6c.php on line 154
+[04-Jan-2024 05:33:03 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/customer/www/logomax.com/public_html/vendor/composer/platform_check.php on line 24
+[10-Jan-2024 06:45:32 UTC] Stripe Notice: Undefined property of Stripe\Customer instance: payment_methods
+[10-Jan-2024 08:07:08 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/customer/www/logomax.com/public_html/storage/framework/views/34998bfd645d35ffa702fcef9713e7a9.php on line 210
+[15-Jan-2024 07:09:32 UTC] PHP Fatal error:  Cannot use App\Models\Order as Order because the name is already in use in /home/customer/www/logomax.com/public_html/app/Http/Controllers/TestController.php on line 25
+[01-Feb-2024 11:21:57 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/customer/www/logomax.com/public_html/vendor/composer/platform_check.php on line 24
+[01-Feb-2024 11:46:37 UTC] PHP Fatal error:  A void function must not return a value in /home/customer/www/logomax.com/public_html/app/Listeners/ListenStripRequest.php on line 24
+[05-Feb-2024 14:01:01 UTC] PHP Fatal error:  Cannot redeclare App\Services\AllServices::createProduct() in /home/customer/www/logomax.com/public_html/app/Services/AllServices.php on line 57
+[05-Feb-2024 14:01:03 UTC] PHP Fatal error:  Cannot redeclare App\Services\AllServices::createProduct() in /home/customer/www/logomax.com/public_html/app/Services/AllServices.php on line 57
+[07-Feb-2024 07:13:35 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /home/customer/www/logomax.com/public_html/app/Services/AllServices.php on line 237
+[07-Feb-2024 07:13:38 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /home/customer/www/logomax.com/public_html/app/Services/AllServices.php on line 237

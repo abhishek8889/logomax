@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>checkout page</title>
+</head>
+
+<body>
+  <!-- ================= header section start ====================== -->
+
+  <header class="header">
+    <div class="top-header">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="ham">
+              <div class="bars bar1"></div>
+              <div class="bars bar2"></div>
+              <div class="bars bar3"></div>
+            </div>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a href="tel:+91-00-800-100-94-17">+91-00-800-100-94-17</a>
+              </li>
+            </ul>
+
+            <div class="side-menu">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Support</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="main-header">
+      <div class="container-fluid">
+        <div class="navbar navbar-expand-lg">
+          <div class="logo">
+            <a href="#">
+              <img src="img/logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= header section end ====================== -->
+
+  <section class="banner-sec checkout_banner" style="background-image: url('./img/check_banner.png');">
+    <div class="container-fluid"></div>
+  </section>
+
+  <section class="checkout_sec p-110">
+    <div class="container">
+      <form id="progress-form" class="p-4 progress-form" action="https://httpbin.org/post" lang="en" novalidate>
+        <div class="step_form_head" role="tablist">
+          <div class="box_step">
+            <button id="progress-form__tab-1" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab"
+              aria-controls="progress-form__panel-1" aria-selected="true">
+
+              <div class="box_studio">
+                <span class="true_num" aria-hidden="true"> 1 </span>
+                <span class="true_img">
+                  <img src="img/checkout.png" alt="">
+                </span>
+              </div>
+              <p> Information</p>
+            </button>
+          </div>
+          <div class="box_step">
+
+            <button id="progress-form__tab-2" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab"
+              aria-controls="progress-form__panel-2" aria-selected="false" tabindex="-1" aria-disabled="true">
+              <div class="box_studio">
+                <span class="true_num" aria-hidden="true"> 2 </span>
+                <span class="true_img">
+                  <img src="img/checkout.png" alt="">
+                </span>
+              </div>
+              <p> Payment</p>
+            </button>
+          </div>
+          <div class="box_step border_last">
+            <button id="progress-form__tab-3" class="flex-1 px-0 pt-2 progress-form__tabs-item" type="button" role="tab"
+              aria-controls="progress-form__panel-3" aria-selected="false" tabindex="-1" aria-disabled="true">
+              <div class="box_studio">
+                <span class="true_num" aria-hidden="true"> 3 </span>
+                <span class="true_img">
+                  <img src="img/checkout.png" alt="">
+                </span>
+              </div>
+              <p> Confirmation</p>
+            </button>
+          </div>
+        </div>
+
+        <section id="progress-form__panel-1" class="data_wrapper one" role="tabpanel"
+          aria-labelledby="progress-form__tab-1" tabindex="0">
+          <div class="custom_step_form">
+            <div class="step_form">
+              <div class="step_form_content">
+                <h5>Billing address</h5>
+                <div class="form-group">
+                  <select>
+                    <option>Country</option>
+                    <option>Country</option>
+                    <option>Country</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mt-3 sm:mt-0 form__field">
+                <label for="last-name">
+                  <span data-required="true" aria-hidden="true"></span>
+                </label>
+                <input id="last-name" type="text" name="last-name" autocomplete="family-name" required
+                  placeholder="Address Line 1" />
+              </div>
+              <div class="mt-3 sm:mt-0 form__field">
+                <label for="last-name">
+                  <span data-required="true" aria-hidden="true"></span>
+                </label>
+                <input id="last-name" type="text" name="last-name" autocomplete="family-name" required
+                  placeholder="Address Line 2" />
+              </div>
+
+              <div class="mt-3 form__field">
+                <label for="city-address">
+                  <span data-required="true" aria-hidden="true"></span>
+                </label>
+                <input id="city-address" type="text" name="city" autocomplete="email" inputmode="email" required
+                  placeholder="City" />
+              </div>
+
+              <div class="mt-3 form__field">
+                <label for="state-address">
+                  <span data-required="true" aria-hidden="true"></span>
+                </label>
+                <input id="state" type="text" name="city" autocomplete="state" inputmode="state" required
+                  placeholder="State / Province / Region" />
+              </div>
+              <div class="mt-3 form__field">
+                <label for="state-address">
+                  <span data-required="true" aria-hidden="true"></span>
+                </label>
+                <input id="state" type="text" name="city" autocomplete="state" inputmode="state" required
+                  placeholder="Zip / Postal Code" />
+              </div>
+
+              <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
+                <button type="button" data-action="next" class="continue_btn">
+                  Continue
+                </button>
+              </div>
+            </div>
+
+            <div class="checkout_summary">
+              <h5>Order summary</h5>
+              <div class="templete_wrapper">
+                <div class="summary_wrapp">
+                  <div class="img">
+                    <img src="img/one.png" alt="" />
+                  </div>
+                  <div class="drawn_data">
+                    <p>Hand-drawn Minimalist Environment Brand Logo template</p>
+                    <span><b>$149</b></span>
+                  </div>
+                </div>
+                <div class="additional_content">
+                  <h6>Additional options:</h6>
+                </div>
+                <div class="add_account_wrapp">
+                  <div class="save_data">
+                    <p>Save your logo for later in account.</p>
+                    <span><b>$5 /month</b></span>
+                  </div>
+                  <div class="add_btn">
+                    <a href="" class="add_btn">Add</a>
+                  </div>
+                </div>
+                <div class="add_account_wrapp">
+                  <div class="save_data">
+                    <p>Get favicon of logo</p>
+                    <span><b>$29</b></span>
+                  </div>
+                  <div class="add_btn">
+                    <a href="" class="add_btn">Add</a>
+                  </div>
+                </div>
+
+                <div class="table_data">
+                  <div class="total_data">
+                    <p>Subtotal</p>
+                    <p>$149</p>
+                  </div>
+                  <div class="total_data">
+                    <p>VAT/GST/Sales taxes (18%)</p>
+                    <p>$19.44</p>
+                  </div>
+                  <div class="total_data num">
+                    <p><b>Total</b></p>
+                    <p><b>$168.44 </b></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="progress-form__panel-2" class="data_wrapper one" role="tabpanel"
+          aria-labelledby="progress-form__tab-2" tabindex="0" hidden>
+          <div class="custom_step_form">
+            <div class="step_form">
+              <h5>Payment method</h5>
+              <div class="pay_form_data">
+                <div class="card_wrapper">
+                  <div class="form-group">
+                    <span></span>
+                    <p>Credit card</p>
+                  </div>
+                  <div class="crad_img">
+                    <img src="img/payment.png" alt="">
+                  </div>
+                </div>
+                <div class="card_detail">
+
+                  <div class="mt-3 form__field">
+                    <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                      placeholder="Card Number">
+                  </div>
+                  <div class="mt-3 form__field">
+                    <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                      placeholder="Name On Card">
+                  </div>
+                  <div class="row address_data">
+                    <div class="col-md-6">
+                      <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                        placeholder="Expiration Date(MM/YY)">
+                    </div>
+                    <div class=" col-md-6 code">
+                      <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                        placeholder="Security Code">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pay_form_data">
+                <div class="card_wrapper">
+                  <div class="form-group">
+                    <span></span>
+                    <p>PayPal</p>
+                  </div>
+                  <div class="crad_img">
+                    <img src="img/pay.png" alt="">
+                  </div>
+                </div>
+                <div class="card_detail">
+
+                  <div class="mt-3 form__field">
+                    <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                      placeholder="Card Number">
+                  </div>
+                  <div class="mt-3 form__field">
+                    <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                      placeholder="Name On Card">
+                  </div>
+                  <div class="row address_data">
+                    <div class="col-md-6">
+                      <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                        placeholder="Expiration Date(MM/YY)">
+                    </div>
+                    <div class=" col-md-6 code">
+                      <input id="address-2" type="text" name="address-2" autocomplete="shipping address-line2"
+                        placeholder="Security Code">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chk_btn">
+                <button type="button" data-action="next" class="continue_btn">
+                  Continue
+                </button>
+              </div>
+            </div>
+            <div class="checkout_summary">
+              <h5>Order summary</h5>
+              <div class="templete_wrapper">
+                <div class="summary_wrapp">
+                  <div class="img">
+                    <img src="img/one.png" alt="" />
+                  </div>
+                  <div class="drawn_data">
+                    <p>Hand-drawn Minimalist Environment Brand Logo template</p>
+                    <span><b>$149</b></span>
+                  </div>
+                </div>
+
+                <div class="additional_content">
+                  <h6>Additional options:</h6>
+                </div>
+
+                <div class="add_account_wrapp">
+                  <div class="save_data">
+                    <p>Save your logo for later in account.</p>
+                    <span><b>$5 /month</b></span>
+                  </div>
+                  <div class="add_btn">
+                    <a href="" class="add_btn">Add</a>
+                  </div>
+                </div>
+
+                <div class="add_account_wrapp">
+                  <div class="save_data">
+                    <p>Get favicon of logo</p>
+                    <span><b>$29</b></span>
+                  </div>
+                  <div class="add_btn">
+                    <a href="" class="add_btn">Add</a>
+                  </div>
+                </div>
+                <div class="table_data">
+                  <div class="total_data">
+                    <p>Subtotal</p>
+                    <p>$149</p>
+                  </div>
+                  <div class="total_data">
+                    <p>VAT/GST/Sales taxes (18%)</p>
+                    <p>$19.44</p>
+                  </div>
+                  <div class="total_data num">
+                    <p><b>Total</b></p>
+                    <p><b>$168.44 </b></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="progress-form__panel-3" role="tabpanel" aria-labelledby="progress-form__tab-3" tabindex="0" hidden>
+          <div class="custom_step_form">
+            <div class="billing_address step_form">
+              <h5>Order Confirmation</h5>
+
+              <div class="billing_content">
+                <div class="billing_wrapper">
+                  <div class="billing_text">
+                    <h6>Billing Address</h6>
+                    <p>80191 Blaise Street Apt. 110 Boganland, Arkansas USA 893804</p>
+                  </div>
+                  <div class="bill-icon">
+                    <i class="fa-solid fa-pen"></i>
+                  </div>
+                </div>
+                <div class="billing_wrapper">
+                  <div class="billing_text">
+                    <h6>Payment Method</h6>
+                    <div class="img_visa">
+                      <img src="img/visa.png" alt="" />
+                    </div>
+                    <p>Visa card ending in 1234</p>
+                  </div>
+                  <div class="bill-icon">
+                    <i class="fa-solid fa-pen"></i>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group">
+                  <div class="checkout_btn">
+                    <a href="logo-download-page.html" class="continue_btn">
+                      Continue & Download
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout_summary">
+              <h5>Order summary</h5>
+              <div class="templete_wrapper">
+                <div class="summary_wrapp">
+                  <div class="img">
+                    <img src="img/one.png" alt="" />
+                  </div>
+                  <div class="drawn_data">
+                    <p>Hand-drawn Minimalist Environment Brand Logo template</p>
+                    <span><b>$149</b></span>
+                  </div>
+                </div>
+
+                <div class="additional_content">
+                  <h6>Additional options:</h6>
+                </div>
+
+                <div class="add_account_wrapp">
+                  <div class="save_data">
+                    <p>Save your logo for later in account.</p>
+                    <span><b>$5 /month</b></span>
+                  </div>
+                  <div class="add_btn">
+                    <a href="" class="add_btn">Add</a>
+                  </div>
+                </div>
+
+                <div class="add_account_wrapp">
+                  <div class="save_data">
+                    <p>Get favicon of logo</p>
+                    <span><b>$29</b></span>
+                  </div>
+                  <div class="add_btn">
+                    <a href="" class="add_btn">Add</a>
+                  </div>
+                </div>
+
+                <div class="table_data">
+                  <div class="total_data">
+                    <p>Subtotal</p>
+                    <p>$149</p>
+                  </div>
+                  <div class="total_data">
+                    <p>VAT/GST/Sales taxes (18%)</p>
+                    <p>$19.44</p>
+                  </div>
+                  <div class="total_data num">
+                    <p><b>Total</b></p>
+                    <p><b>$168.44 </b></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </section>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= footer section start ====================== -->
+
+  <footer>
+    <div class="container">
+      <div class="top-footer p-110">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="footer-text">
+              <div class="footer-logo">
+                <img src="img/Group 15.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="business-text social-media-text">
+              <h6>BUSINESS Logos</h6>
+              <ul>
+                <li><a href="#">Restaurant</a></li>
+                <li><a href="#">Personal Trainer </a></li>
+                <li><a href="#">Coffee Shop </a></li>
+                <li><a href="#">Spa</a></li>
+                <li><a href="#">Real Estate </a></li>
+                <li><a href="#">Bakery</a></li>
+                <li><a href="#">Photographer </a></li>
+                <li><a href="#">Travel Agency</a></li>
+                <li><a href="#"> Beauty Salon</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="business-text social-media-text">
+              <h6>HELP</h6>
+              <ul>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Terms & conditions</a></li>
+                <li><a href="#">Cookie policy</a></li>
+                <li><a href="#"> Privacy policy</a></li>
+                <li><a href="#">Cookies Settings</a></li>
+                <li><a href="#">Digital Services Act</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer">
+        <div class="Copyright-text">
+          <p>Copyright ©2023 Logomax. All rights reserved.</p>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            US English
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">English</a>
+            <a class="dropdown-item" href="#">US English</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= footer section start ====================== -->
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+    integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://alexandrebuffet.fr/codepen/slider/slick-animation.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

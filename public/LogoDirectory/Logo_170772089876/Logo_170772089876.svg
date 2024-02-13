@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="1333.3333"
+   height="1066.6667"
+   viewBox="0 0 1333.3333 1066.6667"
+   sodipodi:docname="Logo_170772089876.eps"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath24">
+      <path
+         d="m 7892.85,3387.02 c 0,0 -566.05,916.14 -1821.08,493.56 -967.4,-325.74 -1999.03,-1249.13 -2801.55,-453.71 0,0 384.36,-771.9 1598.28,-366.54 1197.31,399.81 2028.23,1004.46 3024.35,326.69 z"
+         id="path22" />
+    </clipPath>
+    <linearGradient
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-3948.66,-894.841,-894.841,3948.66,7966.34,3947.38)"
+       spreadMethod="pad"
+       id="linearGradient30">
+      <stop
+         style="stop-opacity:1;stop-color:#50aae3"
+         offset="0"
+         id="stop26" />
+      <stop
+         style="stop-opacity:1;stop-color:#2d3c92"
+         offset="1"
+         id="stop28" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="ink_ext_XXXXXX"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,1066.6667)">
+    <g
+       id="g10"
+       transform="scale(0.1)">
+      <path
+         d="m 6402.05,3178.48 c -299.45,-587.24 -909.83,-989.44 -1614.22,-989.44 -1000.16,0 -1810.96,810.79 -1810.96,1810.96 0,1000.16 810.8,1810.96 1810.96,1810.96 944.04,0 1719.22,-722.38 1803.27,-1644.51 111.94,10.73 216.53,10.17 313.93,0.89 -85.34,1094.68 -1000.62,1956.4 -2117.2,1956.4 -1172.91,0 -2123.74,-950.83 -2123.74,-2123.74 0,-1172.91 950.83,-2123.74 2123.74,-2123.74 951.34,0 1756.39,625.6 2026.65,1487.8 -136.85,-55.14 -274.59,-119.11 -412.43,-185.58"
+         style="fill:#51ace4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path12" />
+      <path
+         d="m 6581.24,3502.56 c 187.18,63.03 359.03,96.26 515.98,107.21 -215.29,15.64 -464.62,-11.31 -749.45,-107.21 -647.89,-218.15 -1324.58,-704.33 -1941.96,-762.78 677.53,-70.1 1444.79,516.77 2175.43,762.78"
+         style="fill:#51ace4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path14" />
+      <path
+         d="m 7000.59,3433.25 c 187.19,63.02 359.04,96.26 515.98,107.2 -215.29,15.64 -464.62,-11.3 -749.44,-107.2 -647.89,-218.16 -1324.58,-704.34 -1941.97,-762.78 677.54,-70.11 1444.8,516.76 2175.43,762.78"
+         style="fill:#51ace4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path16" />
+      <g
+         id="g18">
+        <g
+           id="g20"
+           clip-path="url(#clipPath24)">
+          <path
+             d="m 7892.85,3387.02 c 0,0 -566.05,916.14 -1821.08,493.56 -967.4,-325.74 -1999.03,-1249.13 -2801.55,-453.71 0,0 384.36,-771.9 1598.28,-366.54 1197.31,399.81 2028.23,1004.46 3024.35,326.69"
+             style="fill:url(#linearGradient30);fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path32" />
+        </g>
+      </g>
+      <path
+         d="m 3970.17,3262.25 c -364.55,153.52 -620.5,514.11 -620.5,934.5 0,192.15 53.48,371.8 146.35,524.91 -199.48,-185.11 -324.35,-449.49 -324.35,-743.08 0,-1.63 0,-3.26 0.01,-4.89 1.39,-292.42 188.24,-553.7 464.59,-649.31 108.99,-37.71 220.43,-57.3 333.9,-62.13"
+         style="fill:#51ace4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path34" />
+      <path
+         d="m 4520.72,3394.32 c -433.63,182.61 -738.07,611.54 -738.07,1111.58 0,228.56 63.61,442.26 174.08,624.37 -237.28,-220.17 -385.81,-534.65 -385.81,-883.87 0,-1.95 0,-3.88 0.01,-5.82 1.65,-347.83 223.91,-658.63 552.62,-772.36 129.65,-44.85 262.21,-68.15 397.17,-73.9"
+         style="fill:#51ace4;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path36" />
+    </g>
+  </g>
+</svg>

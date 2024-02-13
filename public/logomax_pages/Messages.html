@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playball&family=Roboto:ital,wght@0,100;0,300;1,100;1,300&display=swap" rel="stylesheet">
+
+  
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+    <title>Messages page</title>
+</head>
+
+<body>
+  <header class="header">
+   <nav class="navbar main-navbar navbar-expand-lg navbar-dark">
+      <div class="hd-logo">
+        <a class="navbar-brand" href="#"><img src="./img/logomax.png" class="img-fluid" alt="...."></a>
+      </div>
+     <!-- <div class="d-flex hd-ryt-b"> -->
+       <div class="srch-bb">
+         <div class="notify-icons">
+           <ul class="navbar-nav">
+               <li class="nav-item align-content-center">
+                 <a class="nav-link" href="#">
+                    <i class="fas fa-bell"></i> 
+                    <span class="badge badge-success">6</span>
+                 </a>
+              </li>
+              <li class="nav-item align-content-center">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-envelope"></i>
+                    <span class="badge badge-success">6</span> 
+                </a>
+              </li>
+              <li class="nav-item">
+                <div class="col">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
+                        style="width: 50px;" alt="Avatar" />
+                </div>
+              </li>
+              </ul>
+         </div>
+          <button class="navbar-toggler toggle" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+           <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+             <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="collapsibleNavbar">
+           <div class="search-bar">
+             <div class="form-group fg--search">
+               <input type="text" class="input" placeholder="Search for anything...">
+               <a href="#" class="sg"><i class="fa fa-search"></i></a>
+             </div>
+          </div>
+          <!-- <div class="notify-icons">
+           <ul class="navbar-nav">
+               <li class="nav-item align-content-center">
+                 <a class="nav-link" href="#">
+                    <i class="fas fa-bell"></i> 
+                    <span class="badge badge-success">6</span>
+                 </a>
+              </li>
+              <li class="nav-item align-content-center">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-envelope"></i>
+                    <span class="badge badge-success">6</span> 
+                </a>
+              </li>
+              <li class="nav-item">
+                <div class="col">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
+                        style="width: 50px;" alt="Avatar" />
+                </div>
+              </li>
+              </ul>
+         </div>   -->
+      </div>
+         </div>
+      </div>
+    </nav>
+  </header>
+  <section class="new-sec">
+    <div class="container-fluid">
+        <div class="new-main-content">
+            <div class="row">
+                <div class="col-lg-3 bg-b pr-0" id="target">
+                    <div class="left-text">
+                        <ul class="list-unstyled dash-tab mb-0" id="menu">
+                            <li class="nav-links">
+                                <a href="index.html" class="nav-link">
+                                    <div class="side-links">
+                                        <span class="icons-links"><i class="fas fa-home"></i></span>
+                                        <span class="icons-text">Dashboard</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-links">
+                                <a href="MyFavorites.html" class="nav-link">
+                                    <div class="side-links">
+                                        <span class="icons-links"><i class="fas fa-heart"></i></span>
+                                        <span class="icons-text">My Favorites</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-links">
+                                <a href="MyLogos.html" class="nav-link">
+                                    <div class="side-links">
+                                        <span class="icons-links"><i class="fas fa-shopping-cart"></i></span>
+                                        <span class="icons-text">My Logos</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-links">
+                                <a href="Messages.html" class="nav-link active">
+                                    <div class="side-links">
+                                        <span class="icons-links"><i class="fas fa-envelope"></i></span>
+                                        <span class="icons-text">Messages</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-links">
+                                <a href="configuration.html" class="nav-link">
+                                    <div class="side-links">
+                                        <span class="icons-links"><i class="fas fa-cog"></i></span>
+                                        <span class="icons-text">Configuration</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-links">
+                                <a href="subscription.html" class="nav-link">
+                                    <div class="side-links">
+                                        <span class="icons-links"><i class="fas fa-dollar-sign"></i></span>
+                                        <span class="icons-text">Subscriptions</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9 p-0">
+                    <div class="right-text">
+                        <div class="msg-content ">
+                       <div class="row  row1">
+                           <div class="col-lg-5 col-md-12" style="background: #fff;">
+                            <div class="msg-box-lft-chat">
+                              <div class="msg-box">
+                                   <div class="d-block pt-3">
+                                <div class="msg-search">
+                                    <div class="msgs-sbar">
+                                        <div>
+                                        <form class="d-flex">
+                                          <button class="btn " type="submit"><i style="color: #656F79;" class="fas fa-search"></i></button>
+                                              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> 
+                                        </form>
+                                      </div>
+                                        <div class="ryt-dots"><span><i class="fas fa-ellipsis-v"></i></span></div>
+                                    </div>
+                                    <!-- <div>
+                                        <span></span>
+                                    </div> -->
+                                </div>
+                                <div id="wrapper">
+                                 <div class="scrollbar" id="style-15">
+                                  <div class="force-overflow">
+                                  
+                                  <ul class="list-unstyled mb-0">
+                                      <li class="recent-chat chat-b acti-chat d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                      <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                      <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                      <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                      <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                      <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                      <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                       <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                       <li class="recent-chat chat-b d-flex">
+                                          <div class="chat-content">
+                                              <div class="p-img"><img src="./img/p-img.png" class="img-fluid" alt="..."></div>
+                                              <div class="p-chat">
+                                                  <P class="b-text">Loren</P>
+                                                  <p class="s-text">Lorem Ipsum is simply dummy</p>
+                                              </div>
+                                          </div>
+                                          <div class="chat-t">
+                                              <span>11:00 am</span>
+                                              <span class="num-chat">6</span>
+                                          </div>
+                                      </li>
+                                  </ul>
+                                </div>
+                                </div>
+                            </div>
+                           </div>
+                              </div> 
+                           </div>
+                         </div>
+
+                           <div class="col-lg-7 col-md-12 pl-0">
+                               <div class="msg-ryt">
+                                    <div class="msg-ryt-head">
+                                    <div class="lp-info d-flex">
+                                        <div class="lp-img"><img src="./img/lp-img.png" class="img-fluid" alt="..."></div>
+                                        <div class="lp-text">
+                                            <h6>Loren</h6>
+                                            <span>Online</span>
+                                        </div>
+                                    </div>
+                                    <div class="cntc-i">
+                                        <ul class="list-unstyled d-flex">
+                                            <li><img src="./img/phn-img.svg" class="img-fluid" alt=".."></li>
+                                             <li><img src="./img/ingo.svg" class="img-fluid" alt=".."></li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                    <div class="msg-live-chat">
+                                         <div id="wrapper">
+                                        <div class="scrollbar" id="style-15">
+                                          <div class="force-overflow">
+                                       <div class="receiver-d">
+                                           <div class="lp-info d-flex">
+                                                 <div class="lp-img"><img src="./img/lp-chat.png"  class="img-fluid" alt="...">
+                                                 </div>
+                                               <div class="lp-text">
+                                                <h6>Loren <span>10:00 am</span></h6>
+                                                <div class="lv-chat">
+                                                    <p class="b-text">Hlo.
+                                                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
+
+                                                    <p class="b-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+                                                </div>
+                                           </div>
+                                       </div>
+                                       
+                                       </div>
+                                       <div class="sender-d">
+                                        <div class="s-ryt-img">
+                                            <span class="str"><img src="./img/star.svg"  class="img-fluid" alt="..."></span>
+                                            <span><img src="./img/h-dot.svg"  class="img-fluid" alt="..."></span>
+                                        </div>
+                                            <div class="lp-info d-flex">
+                                                 <div class="lp-img"><img src="./img/jord.png"  class="img-fluid" alt="...">
+                                                 </div>
+                                               <div class="lp-text">
+                                                <h6>Jordan <span>10:00 am</span></h6>
+                                                <div class="lv-chat">
+                                                    <p class="b-text">Hlo.
+                                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
+                                                 </div>
+                                           </div>
+                                       </div>
+
+                                        </div>
+                                        <div class="receiver-d">
+                                           <div class="lp-info d-flex">
+                                                 <div class="lp-img"><img src="./img/lp-chat.png"  class="img-fluid" alt="...">
+                                                 </div>
+                                               <div class="lp-text">
+                                                <h6>Loren <span>10:00 am</span></h6>
+                                                <div class="lv-chat">
+                                                    <p class="b-text">Hlo.
+                                                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
+
+                                                    <p class="b-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+                                                </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                                    </div>
+                                    <div class="write-msg">
+                                        <div class="wrt-msg">
+                                           <textarea placeholder="Write a messages....."></textarea>
+                                        </div>
+                                        <div class="attach-links d-flex">
+                                            <div class="atch-file">
+                                                <ul class="list-unstyled">
+                                                    <li><a href=""><img src="./img/b-txt.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="./img/i-txt.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="./img/round-link.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="./img/slash.svg" class="img-fluid" alt="..."></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="atch-file">
+                                                <ul class="list-unstyled">
+                                                    <li><a href=""><img src="./img/atch-f.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="./img/atch-emoji.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="./img/set.svg" class="img-fluid" alt="..."></a></li>
+                                                    <li><a href=""><img src="./img/send.svg" class="img-fluid" alt="..."></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                 </div>
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                        
+                       </div>
+                     <div class="footer">
+                          <div class="ftr-content d-flex">
+                             <div class="ftr-lft-txt">
+                               <ul class="list-unstyled mb-0">
+                                  <li>Copyright ©2023 Logomax. All rights reserved.</li>
+                               </ul> 
+                             </div>
+                             <div class="ftr-ryt">
+                                  <select class="lang-selector" id="languages" name="languages">
+                                    <option>US - English</option>
+                                    <option value="af">US - English</option>
+                                    <option value="af">US - English</option>
+                                    <option value="af">US - English</option>
+                                    <option value="af">US - English</option>
+                                    <option value="af">US - English</option>
+                                    <option value="af">US - English</option>
+                                    <option value="af">US - English</option>
+                                  </select>
+                              </div>
+                          </div> 
+                       </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.usebootstrap.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+   <script src="js/script.js"></script>
+</body>
+
+</html>
